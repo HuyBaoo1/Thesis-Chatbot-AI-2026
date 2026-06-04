@@ -1,0 +1,18 @@
+{
+  "backToHome": "Quay lại trang chủ",
+  "adminZone": "Khu vực quản trị nội bộ",
+  "title": "Quản lý lead và hội thoại admissions.",
+  "description": "Hệ thống dành cho admin và counselor. Access token giữ trong memory, refresh token lưu trong cookie httpOnly.",
+  "infoCards": {
+    "session": { "label": "Session", "value": "JWT", "description": "Access token trên frontend, refresh cookie từ backend." },
+    "role": { "label": "Role", "value": "Staff", "description": "Hỗ trợ counselor và admin theo payload backend trả về." },
+    "store": { "label": "Store", "value": "Memory", "description": "Session khôi phục sau F5 bằng refresh-token từ backend." }
+  },
+  "loginTitle": "Đăng nhập quản trị",
+  "loginSubtitle": "Sử dụng email và mật khẩu được cấp để truy cập.",
+  "emailLabel": "Email",
+  "passwordLabel": "Mật khẩu",
+  "passwordPlaceholder": "Nhập mật khẩu",
+  "loggingIn": "Đang đăng nhập...",
+  "loginButton": "Đăng nhập"
+}

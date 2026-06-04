@@ -1,0 +1,11 @@
+{
+  "sections": {
+    "home": "Trang chủ",
+    "programs": "Chương trình đào tạo",
+    "scholarship": "Cơ hội học bổng",
+    "admissionConditions": "Điều kiện tuyển sinh",
+    "admissionProcess": "Quy trình tuyển sinh"
+  },
+  "loginButton": "Đăng nhập quản trị",
+  "toggleMenu": "Toggle menu"
+}

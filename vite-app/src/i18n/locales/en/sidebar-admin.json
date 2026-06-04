@@ -1,0 +1,23 @@
+{
+  "adminLabel": "Admissions Admin",
+  "adminDescription": "Admissions Management",
+  "sections": {
+    "overview": "Overview",
+    "admissionsOperations": "Admissions Operations",
+    "contentAndPolicy": "Content & Policy",
+    "systemAdmin": "System Admin",
+    "chat": "Chat"
+  },
+  "nav": {
+    "dashboard": "Dashboard",
+    "hotQuestions": "Hot Questions",
+    "leads": "Leads",
+    "webCrawler": "Web Crawler",
+    "quickProcessing": "Quick Processing",
+    "knowledgeChunks": "Knowledge Chunks",
+    "majors": "Majors",
+    "tuitionPolicies": "Tuition Policies",
+    "staffs": "Staffs",
+    "chat": "Chat"
+  }
+}

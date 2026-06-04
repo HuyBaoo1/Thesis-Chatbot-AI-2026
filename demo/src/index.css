@@ -1,0 +1,149 @@
+@import 'tailwindcss';
+@import 'tw-animate-css';
+
+@custom-variant dark (&:is(.dark *));
+
+/* Light mode first - these are the PRIMARY values */
+:root {
+  --background: #F6F9FC;
+  --foreground: #0A2540;
+  --card: #FFFFFF;
+  --card-foreground: #0A2540;
+  --popover: #FFFFFF;
+  --popover-foreground: #0A2540;
+  --primary: #C8102E;
+  --primary-foreground: #FFFFFF;
+  --secondary: #F6F9FC;
+  --secondary-foreground: #0A2540;
+  --muted: #F6F9FC;
+  --muted-foreground: #64748b;
+  --accent: #D4AF37;
+  --accent-foreground: #0A2540;
+  --destructive: #C8102E;
+  --destructive-foreground: #FFFFFF;
+  --success: oklch(0.58 0.17 145);
+  --success-foreground: #FFFFFF;
+  --warning: oklch(0.75 0.18 85);
+  --warning-foreground: #0A2540;
+  --border: #e2e8f0;
+  --input: #e2e8f0;
+  --ring: #C8102E;
+  --radius: 0.75rem;
+
+  /* VinUniversity Custom Colors */
+  --vinuni-navy: #0A2540;
+  --vinuni-red: #C8102E;
+  --vinuni-gold: #D4AF37;
+  --vinuni-light-gray: #F6F9FC;
+  --vinuni-gold-light: #F5D78E;
+  --vinuni-body: #425466;
+  --vinuni-muted: #8895A7;
+  --vinuni-line: #E3E8EE;
+  --vinuni-hover: #C1CCD6;
+  --vinuni-navy-deep: #070F2B;
+  --vinuni-error-dark: #8B0A1F;
+  --vinuni-red-dark: #A50D26;
+  --vinuni-red-light: #FEF2F4;
+  --vinuni-telegram: #229ED9;
+  --vinuni-amber: #A36B00;
+}
+
+/* Dark mode override */
+.dark {
+  --background: oklch(0.145 0 0);
+  --foreground: oklch(0.985 0 0);
+  --card: oklch(0.145 0 0);
+  --card-foreground: oklch(0.985 0 0);
+  --popover: oklch(0.145 0 0);
+  --popover-foreground: oklch(0.985 0 0);
+  --primary: oklch(0.985 0 0);
+  --primary-foreground: oklch(0.205 0 0);
+  --secondary: oklch(0.269 0 0);
+  --secondary-foreground: oklch(0.985 0 0);
+  --muted: oklch(0.269 0 0);
+  --muted-foreground: oklch(0.708 0 0);
+  --accent: oklch(0.269 0 0);
+  --accent-foreground: oklch(0.985 0 0);
+  --destructive: oklch(0.396 0.141 25.723);
+  --destructive-foreground: oklch(0.637 0.237 25.331);
+  --border: oklch(0.269 0 0);
+  --input: oklch(0.269 0 0);
+  --ring: oklch(0.439 0 0);
+}
+
+@theme inline {
+  --font-sans: 'Inter', system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+  --font-serif: 'Georgia', 'Times New Roman', serif;
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-success: var(--success);
+  --color-success-foreground: var(--success-foreground);
+  --color-warning: var(--warning);
+  --color-warning-foreground: var(--warning-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-vinuni-navy: var(--vinuni-navy);
+  --color-vinuni-red: var(--vinuni-red);
+  --color-vinuni-gold: var(--vinuni-gold);
+  --color-vinuni-gold-light: var(--vinuni-gold-light);
+  --color-vinuni-light-gray: var(--vinuni-light-gray);
+  --color-vinuni-body: var(--vinuni-body);
+  --color-vinuni-muted: var(--vinuni-muted);
+  --color-vinuni-line: var(--vinuni-line);
+  --color-vinuni-hover: var(--vinuni-hover);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --color-vinuni-navy-deep: var(--vinuni-navy-deep);
+  --color-vinuni-error-dark: var(--vinuni-error-dark);
+  --color-vinuni-red-dark: var(--vinuni-red-dark);
+  --color-vinuni-red-light: var(--vinuni-red-light);
+  --color-vinuni-amber: var(--vinuni-amber);
+  --color-vinuni-telegram: var(--vinuni-telegram);
+  --radius-xl: calc(var(--radius) + 4px);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground antialiased;
+  }
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--muted);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--border);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--muted-foreground);
+}

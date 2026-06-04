@@ -1,0 +1,25 @@
+.language-toggle {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 12px;
+  border-radius: 8px;
+  border: 1px solid var(--color-border, #E3E8EE);
+  background: white;
+  color: var(--color-text-secondary, #425466);
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.language-toggle:hover {
+  border-color: var(--color-primary, #C8102E);
+  color: var(--color-primary, #C8102E);
+  background: var(--color-primary-light, #FEF2F4);
+}
+
+.language-toggle .lang-code {
+  font-size: 11px;
+  letter-spacing: 0.5px;
+}

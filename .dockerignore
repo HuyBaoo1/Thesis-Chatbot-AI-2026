@@ -1,0 +1,58 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.py[cod]
+
+# Virtual env (QUAN TRỌNG)
+venv/
+.venv/
+
+# Env
+.env
+
+# Git
+.git
+.gitignore
+
+# Node (frontend nếu có)
+node_modules/
+frontend/node_modules/
+demo/node_modules/
+
+# Build
+dist/
+build/
+
+# Database volumes
+postgres_data/
+qdrant_storage/
+redis_data/
+
+# Upload / data (CỰC QUAN TRỌNG)
+uploads/
+data/
+outputs/
+
+# Cache
+.cache/
+.pytest_cache/
+.mypy_cache/
+
+# Logs
+.ai-log/
+*.log
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+
+# Frontend
+demo/
+vite-app/
+scripts/
+vinuni_admissions_import/

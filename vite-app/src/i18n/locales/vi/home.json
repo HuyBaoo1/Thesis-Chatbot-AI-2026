@@ -1,0 +1,264 @@
+{
+  "hero": {
+    "badge": "Trợ lý tư vấn tuyển sinh thông minh VinUni",
+    "headline": "Chatbot tuyển sinh — ",
+    "headlineHighlight": "hỏi bất cứ điều gì.",
+    "description": "Nhận thông tin chính xác về chương trình học, học phí, học bổng và quy trình nộp hồ sơ — bất kỳ lúc nào.",
+    "highlights": [
+      {
+        "label": "Phản hồi",
+        "value": "~30 giây",
+        "description": "Trả lời nhanh các câu hỏi tuyển sinh phổ biến."
+      },
+      {
+        "label": "Nội dung",
+        "value": "24/7",
+        "description": "Sẵn sàng hỗ trợ thông tin chương trình, học phí và hồ sơ."
+      },
+      {
+        "label": "Tư vấn",
+        "value": "1:1",
+        "description": "Gợi ý lộ trình hỏi đáp trước khi liên hệ bộ phận admissions."
+      }
+    ],
+    "telegramButton": "Chat trên Telegram",
+    "orUseChatbox": "hoặc dùng chatbox bên phải"
+  },
+  "leadForm": {
+    "title": "Hoàn tất thông tin để bắt đầu",
+    "description": "Cần ít nhất một cách liên hệ — email hoặc số điện thoại.",
+    "fullName": "Họ và tên",
+    "fullNamePlaceholder": "Nguyễn Văn A",
+    "email": "Email",
+    "emailPlaceholder": "ban@email.com",
+    "phone": "Số điện thoại",
+    "phonePlaceholder": "0901 234 567",
+    "submitting": "Đang tạo...",
+    "submit": "Tiếp tục vào chat"
+  },
+  "chat": {
+    "title": "VinUni Admissions Assistant",
+    "subtitle": "Luôn sẵn sàng hỗ trợ",
+    "welcomeMessage": "Xin chào! Tôi có thể hỗ trợ thông tin về {{highlight1}}, {{highlight2}}, {{highlight3}} và {{highlight4}}.",
+    "welcomeHighlights": {
+      "admissions": "tuyển sinh",
+      "tuition": "học phí",
+      "scholarship": "học bổng",
+      "process": "quy trình nộp hồ sơ"
+    },
+    "readyLabel": "Sẵn sàng trả lời",
+    "thinking": "Đang suy nghĩ",
+    "sending": "Đang gửi...",
+    "send": "Gửi",
+    "placeholder": "Nhập câu hỏi của bạn tại đây...",
+    "enterToSend": "Enter để gửi · Shift+Enter xuống dòng",
+    "chatWithCounselor": "Chat với cố vấn",
+    "counselorRequested": "Yêu cầu kết nối với cố vấn đã được ghi nhận. Team sẽ phản hồi sớm.",
+    "counselorRequestSent": "Yêu cầu kết nối với cố vấn đã được gửi. Team sẽ phản hồi sớm.",
+    "you": "Bạn",
+    "counselor": "Tư vấn viên",
+    "loadingConversation": "Đang tải conversation...",
+    "conversationSaved": "Conversation đã lưu",
+    "loadingOlder": "Đang tải thêm tin nhắn cũ...",
+    "loadingHistory": "Đang tải lịch sử chat...",
+    "errorSend": "Không thể gửi tin nhắn lúc này. Vui lòng thử lại sau.",
+    "errorCreateLead": "Không thể tạo lead lúc này. Vui lòng kiểm tra lại thông tin.",
+    "errorCounselor": "Không thể gửi yêu cầu kết nối cố vấn lúc này. Vui lòng thử lại sau.",
+    "counselorChattingWith": "Đang chat với {{name}}",
+    "aiWithCounselorInvited": "AI đang hỗ trợ, cố vấn đã được mời",
+    "chattingWithAI": "Đang chat với VinUni AI",
+    "counselorMessageBanner": "Tin nhắn từ cố vấn sẽ hiển thị nổi bật trong cuộc trò chuyện.",
+    "aiSupportPendingCounselor": "Trong lúc chờ cố vấn phản hồi, VinUni AI vẫn tiếp tục hỗ trợ bạn.",
+    "aiDirectlySupporting": "VinUni AI đang là người trực tiếp hỗ trợ cuộc trò chuyện này.",
+    "counselorMonitoring": "{{name}} đang theo dõi và trả lời trực tiếp trong cuộc trò chuyện này.",
+    "counselorInvitedNotice": "{{name}} đã được mời vào cuộc trò chuyện. Trong lúc chờ phản hồi, AI vẫn có thể hỗ trợ bạn.",
+    "counselorAlreadyChattingWith": "Bạn đang được {{name}} hỗ trợ trong cuộc trò chuyện này.",
+    "counselorAlreadyInvitedToChat": "{{name}} đã được mời vào cuộc trò chuyện. AI vẫn hỗ trợ bạn trong lúc chờ phản hồi.",
+    "counselorRequestSuccessToast": "Đã gửi yêu cầu kết nối với cố vấn.",
+    "counselorRequestFailedToast": "Chưa thể kết nối với cố vấn lúc này. Vui lòng thử lại sau.",
+    "counselorInvited": "Đã mời cố vấn",
+    "requestCounselor": "Yêu cầu kết nối với cố vấn",
+    "counselorLabel": "Cố vấn",
+    "aiAndCounselorLabel": "AI + Cố vấn",
+    "aiLabel": "AI",
+    "messagesCount": "{{count}} tin nhắn",
+    "aiName": "VinUni AI",
+    "fallbackCounselorName": "cố vấn tuyển sinh",
+    "welcomeIntro": "Xin chào! Tôi có thể hỗ trợ thông tin về ",
+    "welcomeAnd": " và "
+  },
+  "telegram": {
+    "title": "Gửi tin nhắn Telegram",
+    "description": "Gửi tin nhắn trực tiếp đến chat Telegram qua Bot API.",
+    "chatIdLabel": "Telegram Chat ID",
+    "chatIdDescription": "Chat ID của người nhận trên Telegram.",
+    "messageLabel": "Nội dung tin nhắn",
+    "messagePlaceholder": "Nội dung tin nhắn...",
+    "sendButton": "Gửi tin nhắn",
+    "error": "Không thể gửi tin nhắn. Vui lòng kiểm tra Chat ID và thử lại.",
+    "chatIdValidation": "Chat ID không được bằng 0",
+    "messageRequired": "Tin nhắn không được để trống",
+    "messageTooLong": "Tin nhắn quá dài"
+  },
+  "programsTitle": "Chương trình học",
+  "programsSubtitle": "Khám phá các chương trình đào tạo được thiết kế để phát triển những nhà lãnh đạo tương lai.",
+  "learnMore": "Tìm hiểu thêm",
+  "readyToApply": "Sẵn sàng nộp hồ sơ?",
+  "applyCtaText": "Gia nhập hàng ngàn sinh viên đã chọn VinUniversity cho hành trình học tập của mình.",
+  "applyNow": "Nộp hồ sơ ngay",
+  "contactUs": "Liên hệ",
+  "noPrograms": "Chưa có chương trình nào.",
+  "credits": "tín chỉ",
+  "years": "năm",
+  "scholarshipTitle": "Học bổng",
+  "scholarshipSubtitle": "Khám phá các chương trình học bổng hấp dẫn tại VinUniversity.",
+  "noScholarships": "Chưa có học bổng nào.",
+  "scopeGlobal": "Áp dụng toàn trường",
+  "scopeMajorSpecific": "Theo ngành cụ thể",
+  "viewPrograms": "Xem chương trình",
+  "scholarshipMerit": "Học bổng theo thành tích",
+  "scholarshipNeedBased": "Học bổng theo nhu cầu",
+  "scholarshipTalent": "Học bổng tài năng",
+  "scholarshipSpecial": "Học bổng đặc biệt",
+  "admissionSections": {
+    "programs": {
+      "badge": "Học thuật",
+      "title": "Chương trình đào tạo cho năng lực lãnh đạo thực tế",
+      "description": "Sinh viên học qua các học phần liên ngành, dự án trải nghiệm và cố vấn học thuật từ giảng viên, đối tác doanh nghiệp.",
+      "learningModelTitle": "Mô hình học tập",
+      "learningModelItems": [
+        "Nền tảng cốt lõi + chuyên ngành chuyên sâu",
+        "Sớm tiếp cận nghiên cứu và đổi mới",
+        "Sẵn sàng nghề nghiệp trong từng học kỳ"
+      ],
+      "tracks": {
+        "business": {
+          "title": "Kinh doanh và Quản trị",
+          "description": "Học theo dự án thực tế, case study và cố vấn khởi nghiệp."
+        },
+        "engineering": {
+          "title": "Khoa học và Kỹ thuật",
+          "description": "Nền tảng STEM vững chắc với phòng thí nghiệm, nghiên cứu và đồ án doanh nghiệp."
+        },
+        "health": {
+          "title": "Khoa học Sức khỏe",
+          "description": "Kết hợp tư duy lâm sàng, tác động cộng đồng và hợp tác liên ngành."
+        },
+        "law": {
+          "title": "Luật và Chính sách công",
+          "description": "Rèn luyện tư duy pháp lý, phân tích chính sách và năng lực lãnh đạo xã hội."
+        },
+        "arts": {
+          "title": "Nghệ thuật và Thiết kế",
+          "description": "Phát triển năng lực sáng tạo qua portfolio và hợp tác đa lĩnh vực."
+        },
+        "digital": {
+          "title": "Dữ liệu và Công nghệ số",
+          "description": "Trang bị tư duy dữ liệu, năng lực AI và kỹ năng giải quyết vấn đề."
+        }
+      }
+    },
+    "scholarship": {
+      "badge": "Học bổng",
+      "title": "Đầu tư vào tiềm năng, không chỉ thành tích",
+      "description": "Kết quả học bổng được công bố cùng kết quả tuyển sinh, giúp ứng viên chủ động lập kế hoạch tài chính sớm.",
+      "stats": {
+        "coverage": {
+          "label": "Mức hỗ trợ",
+          "value": "Tối đa toàn bộ học phí"
+        },
+        "approach": {
+          "label": "Cách đánh giá",
+          "value": "Đánh giá toàn diện"
+        },
+        "decision": {
+          "label": "Thông báo",
+          "value": "Công bố cùng thư mời"
+        }
+      },
+      "types": {
+        "merit": {
+          "title": "Học bổng thành tích",
+          "value": "25% - 100%",
+          "description": "Dành cho ứng viên có thành tích học tập nổi bật."
+        },
+        "needBased": {
+          "title": "Hỗ trợ theo nhu cầu",
+          "value": "Linh hoạt",
+          "description": "Hỗ trợ thêm dựa trên điều kiện tài chính gia đình."
+        },
+        "talent": {
+          "title": "Học bổng tài năng",
+          "value": "Tối đa 75%",
+          "description": "Dành cho ứng viên có thành tích đặc biệt về lãnh đạo, nghệ thuật, thể thao hoặc đổi mới."
+        }
+      },
+      "timelineTitle": "Tiến độ hỗ trợ",
+      "timeline": [
+        "Nộp hồ sơ và tài liệu bổ sung",
+        "Đánh giá toàn diện học bổng và tuyển sinh",
+        "Phỏng vấn với ứng viên được chọn",
+        "Nhận kết quả học bổng cùng thư mời nhập học"
+      ]
+    },
+    "conditions": {
+      "badge": "Điều kiện tuyển sinh",
+      "title": "Tiêu chí đánh giá ứng viên",
+      "description": "Quyết định tuyển sinh được đưa ra dựa trên đánh giá toàn diện về học lực, tiềm năng cá nhân và sự phù hợp với chương trình.",
+      "criteria": {
+        "academic": {
+          "title": "Năng lực học thuật",
+          "items": [
+            "Kết quả học tập THPT hoặc tương đương tốt",
+            "Tính ổn định ở nhóm môn liên quan"
+          ]
+        },
+        "language": {
+          "title": "Năng lực ngôn ngữ",
+          "items": [
+            "Tiếng Anh đáp ứng yêu cầu của chương trình",
+            "Thể hiện kỹ năng giao tiếp trong môi trường học tập quốc tế"
+          ]
+        },
+        "leadership": {
+          "title": "Lãnh đạo và đóng góp",
+          "items": [
+            "Hoạt động ngoại khóa có ý nghĩa",
+            "Tham gia cộng đồng, dự án hoặc sáng kiến cá nhân"
+          ]
+        },
+        "statement": {
+          "title": "Bài luận cá nhân",
+          "items": [
+            "Mục tiêu học tập và động lực rõ ràng",
+            "Thể hiện giá trị cá nhân, tác động và tư duy phát triển"
+          ]
+        }
+      }
+    },
+    "process": {
+      "badge": "Lộ trình ứng tuyển",
+      "title": "Quy trình tuyển sinh rõ ràng theo từng bước",
+      "description": "Quy trình được thiết kế minh bạch để ứng viên dễ dàng theo dõi và chuẩn bị theo đúng mốc thời gian.",
+      "stepLabel": "BƯỚC {{number}}",
+      "steps": {
+        "application": {
+          "title": "Hoàn tất hồ sơ",
+          "text": "Điền thông tin ứng viên và tải bảng điểm, chứng chỉ, tài liệu cần thiết."
+        },
+        "review": {
+          "title": "Đánh giá toàn diện",
+          "text": "Hội đồng tuyển sinh xem xét học lực, mức độ phù hợp và tiềm năng phát triển."
+        },
+        "interview": {
+          "title": "Vòng phỏng vấn",
+          "text": "Ứng viên phù hợp được mời phỏng vấn online hoặc trực tiếp."
+        },
+        "decision": {
+          "title": "Kết quả cuối cùng",
+          "text": "Nhận kết quả tuyển sinh và hướng dẫn các bước nhập học tiếp theo."
+        }
+      }
+    }
+  }
+}

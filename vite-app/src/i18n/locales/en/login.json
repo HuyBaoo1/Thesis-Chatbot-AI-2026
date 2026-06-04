@@ -1,0 +1,18 @@
+{
+  "backToHome": "Back to home",
+  "adminZone": "Internal Admin Portal",
+  "title": "Manage leads and admissions conversations.",
+  "description": "System for admin and counselor. Access token in memory, refresh token in httpOnly cookie.",
+  "infoCards": {
+    "session": { "label": "Session", "value": "JWT", "description": "Access token on frontend, refresh cookie from backend." },
+    "role": { "label": "Role", "value": "Staff", "description": "Supports counselor and admin roles from backend payload." },
+    "store": { "label": "Store", "value": "Memory", "description": "Session restored after F5 via refresh-token from backend." }
+  },
+  "loginTitle": "Admin Login",
+  "loginSubtitle": "Use the email and password provided to access.",
+  "emailLabel": "Email",
+  "passwordLabel": "Password",
+  "passwordPlaceholder": "Enter password",
+  "loggingIn": "Logging in...",
+  "loginButton": "Log in"
+}

@@ -1,0 +1,11 @@
+{
+  "adminLabel": "Admissions Admin",
+  "adminDescription": "Quản lý tuyển sinh",
+  "sections": {
+    "overview": "Tổng quan",
+    "admissionsOperations": "Vận hành tuyển sinh",
+    "contentAndPolicy": "Nội dung và chính sách",
+    "systemAdmin": "Quản trị hệ thống",
+    "chat": "Chat"
+  }
+}

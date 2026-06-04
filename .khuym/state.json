@@ -1,0 +1,38 @@
+{
+  "schema_version": "1.0",
+  "feature_slug": "ocr-quick-processing",
+  "mode": "standard_feature",
+  "active_skill": "validating",
+  "phase": "Phase 2 validated",
+  "phase_number": 2,
+  "epic_id": "A20-App-165-5c5",
+  "approved_gates": {
+    "context": true,
+    "phase_plan": true,
+    "execution": false,
+    "review": false
+  },
+  "active_beads": [
+    "A20-App-165-tqu",
+    "A20-App-165-4xp",
+    "A20-App-165-4on",
+    "A20-App-165-ozv",
+    "A20-App-165-n7e",
+    "A20-App-165-a37",
+    "A20-App-165-use"
+  ],
+  "active_workers": [],
+  "blockers": [],
+  "phase_1_complete": true,
+  "phase_2_artifacts": [
+    "history/ocr-quick-processing/phase-2-contract.md",
+    "history/ocr-quick-processing/phase-2-story-map.md"
+  ],
+  "validation": {
+    "iterations": 0,
+    "all_8_dimensions_pass": false,
+    "high_risk_spikes": 0,
+    "validated_at": null
+  },
+  "last_updated": "2026-04-27T10:35:00.000Z"
+}

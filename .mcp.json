@@ -1,0 +1,16 @@
+{
+  "mcpServers": {
+    "v0": {
+      "command": "npx",
+      "args": ["mcp-remote", "https://mcp.v0.dev", "--header", "Authorization: Bearer ${V0_API_KEY}"]
+    },
+    "agent_mail": {
+      "command": "cd",
+      "args": ["/tmp/mcp_agent_mail && source .venv/bin/activate && uv run python -m mcp_agent_mail.cli serve-stdio"]
+    },
+    "morph-mcp": {
+      "command": "npx",
+      "args": ["-y", "@morphllm/morphmcp"]
+    }
+  }
+}

@@ -1,0 +1,2073 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <title>A20 App — Hệ thống Tư vấn Tuyển sinh VinUni</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --bg: #05101e;
+        --bg2: #081624;
+        --bg3: #0c1e30;
+        --s1: rgba(255, 255, 255, 0.04);
+        --s2: rgba(255, 255, 255, 0.07);
+        --s3: rgba(255, 255, 255, 0.11);
+        --b1: rgba(255, 255, 255, 0.08);
+        --b2: rgba(255, 255, 255, 0.15);
+        --b3: rgba(255, 255, 255, 0.22);
+        --cyan: #00c8ef;
+        --cyan-dim: rgba(0, 200, 239, 0.15);
+        --blue: #3d7df5;
+        --violet: #7c5ce8;
+        --green: #0dba7a;
+        --amber: #f0a020;
+        --red: #e84b4b;
+        --tx: #ecf4ff;
+        --tm: rgba(236, 244, 255, 0.58);
+        --td: rgba(236, 244, 255, 0.34);
+        --font: "Outfit", system-ui, sans-serif;
+        --mono: "JetBrains Mono", monospace;
+      }
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      html,
+      body {
+        width: 100%;
+        height: 100%;
+        background: var(--bg);
+        color: var(--tx);
+        font-family: var(--font);
+        overflow: hidden;
+        -webkit-font-smoothing: antialiased;
+      }
+
+      /* grid texture */
+      body::before {
+        content: "";
+        position: fixed;
+        inset: 0;
+        pointer-events: none;
+        z-index: 0;
+        background:
+          linear-gradient(var(--b1) 1px, transparent 1px),
+          linear-gradient(90deg, var(--b1) 1px, transparent 1px);
+        background-size: 52px 52px;
+        mask-image: radial-gradient(
+          ellipse 70% 70% at 50% 0%,
+          black 20%,
+          transparent 80%
+        );
+        opacity: 0.4;
+      }
+
+      /* NAV */
+      .nav {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 100;
+        height: 52px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0 clamp(16px, 3vw, 40px);
+        background: rgba(5, 16, 30, 0.82);
+        backdrop-filter: blur(16px) saturate(180%);
+        border-bottom: 1px solid var(--b1);
+      }
+      .nav-brand {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-size: 14px;
+        font-weight: 800;
+        letter-spacing: 0.5px;
+      }
+      .brand-dot {
+        width: 7px;
+        height: 7px;
+        border-radius: 50%;
+        background: var(--cyan);
+        box-shadow: 0 0 10px var(--cyan);
+        animation: blink 2.4s ease-in-out infinite;
+      }
+      @keyframes blink {
+        0%,
+        100% {
+          opacity: 1;
+          transform: scale(1);
+        }
+        50% {
+          opacity: 0.5;
+          transform: scale(1.4);
+        }
+      }
+
+      .nav-tabs {
+        display: flex;
+        gap: 2px;
+        overflow-x: auto;
+        scrollbar-width: none;
+      }
+      .nav-tabs::-webkit-scrollbar {
+        display: none;
+      }
+      .nav-tab {
+        padding: 5px 11px;
+        border-radius: 6px;
+        border: none;
+        background: transparent;
+        font-size: 12.5px;
+        font-weight: 600;
+        font-family: var(--font);
+        color: var(--td);
+        cursor: pointer;
+        white-space: nowrap;
+        transition: all 0.18s;
+      }
+      .nav-tab:hover {
+        color: var(--tm);
+        background: var(--s2);
+      }
+      .nav-tab.on {
+        color: var(--cyan);
+        background: rgba(0, 200, 239, 0.1);
+      }
+
+      .nav-ctrl {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        font-size: 12px;
+        font-family: var(--mono);
+        color: var(--td);
+      }
+      .nav-ctrl button {
+        width: 28px;
+        height: 28px;
+        border-radius: 6px;
+        border: 1px solid var(--b2);
+        background: var(--s1);
+        color: var(--tm);
+        cursor: pointer;
+        font-size: 14px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.15s;
+      }
+      .nav-ctrl button:hover {
+        border-color: var(--cyan);
+        color: var(--cyan);
+        background: var(--cyan-dim);
+      }
+      #slide-num {
+        min-width: 42px;
+        text-align: center;
+        font-size: 11px;
+      }
+
+      /* PROGRESS */
+      .prog {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        height: 2px;
+        background: var(--s2);
+        z-index: 100;
+      }
+      .prog-fill {
+        height: 100%;
+        background: linear-gradient(90deg, var(--cyan), var(--blue));
+        transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        box-shadow: 0 0 6px rgba(0, 200, 239, 0.6);
+      }
+
+      /* DECK */
+      .deck {
+        width: 100vw;
+        height: 100dvh;
+        position: relative;
+      }
+      .slide {
+        position: absolute;
+        inset: 0;
+        top: 52px;
+        display: flex;
+        flex-direction: column;
+        opacity: 0;
+        pointer-events: none;
+        transform: translateY(20px);
+        transition:
+          opacity 0.42s cubic-bezier(0.4, 0, 0.2, 1),
+          transform 0.42s cubic-bezier(0.4, 0, 0.2, 1);
+        overflow-y: auto;
+        overflow-x: hidden;
+        scrollbar-width: thin;
+        scrollbar-color: rgba(0, 200, 239, 0.2) transparent;
+      }
+      .slide::-webkit-scrollbar {
+        width: 3px;
+      }
+      .slide::-webkit-scrollbar-thumb {
+        background: rgba(0, 200, 239, 0.2);
+        border-radius: 99px;
+      }
+      .slide.on {
+        opacity: 1;
+        transform: translateY(0);
+        pointer-events: auto;
+      }
+
+      /* INNER WRAPPER */
+      .inner {
+        flex: 1;
+        width: min(1200px, 100%);
+        margin: 0 auto;
+        padding: clamp(14px, 2.5vh, 28px) clamp(18px, 3vw, 48px)
+          clamp(12px, 2vh, 20px);
+        display: flex;
+        flex-direction: column;
+        gap: clamp(8px, 1.2vh, 16px);
+      }
+      .inner.center {
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+      }
+
+      /* SLIDE FOOTER */
+      .sfooter {
+        width: min(1200px, 100%);
+        margin: 0 auto;
+        padding: 6px clamp(20px, 4vw, 60px);
+        border-top: 1px solid var(--b1);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-size: 11px;
+        color: var(--td);
+        font-family: var(--mono);
+        flex-shrink: 0;
+      }
+      .sfooter strong {
+        font-weight: 700;
+        letter-spacing: 1.5px;
+        color: rgba(0, 200, 239, 0.6);
+      }
+
+      /* BADGE */
+      .badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        padding: 5px 14px;
+        border-radius: 99px;
+        border: 1px solid rgba(0, 200, 239, 0.28);
+        background: rgba(0, 200, 239, 0.08);
+        font-size: 12px;
+        font-weight: 700;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        color: var(--cyan);
+        width: fit-content;
+      }
+      .badge.green {
+        border-color: rgba(13, 186, 122, 0.28);
+        background: rgba(13, 186, 122, 0.08);
+        color: #86efac;
+      }
+      .badge.violet {
+        border-color: rgba(124, 92, 232, 0.28);
+        background: rgba(124, 92, 232, 0.08);
+        color: #c4b5fd;
+      }
+
+      /* HEADINGS */
+      .h1 {
+        font-size: clamp(48px, 8vw, 108px);
+        font-weight: 900;
+        line-height: 0.9;
+        letter-spacing: -0.04em;
+      }
+      .h2 {
+        font-size: clamp(34px, 5.5vw, 64px);
+        font-weight: 800;
+        line-height: 1.08;
+        letter-spacing: -0.025em;
+      }
+      .h2 .hl {
+        color: var(--cyan);
+      }
+      .h2 .hl-v {
+        color: #c4b5fd;
+      }
+      .h2 .hl-g {
+        color: #86efac;
+      }
+      .lead {
+        color: var(--tm);
+        font-size: clamp(16px, 1.8vw, 21px);
+        line-height: 1.5;
+        max-width: 760px;
+      }
+
+      /* ── SLIDE BACKGROUNDS ── */
+      .s-hero {
+        background:
+          radial-gradient(ellipse 90% 70% at 15% -5%, rgba(0, 200, 239, 0.16) 0%, transparent 55%),
+          radial-gradient(ellipse 60% 50% at 88% 110%, rgba(61, 125, 245, 0.14) 0%, transparent 50%),
+          var(--bg);
+      }
+      .s-transform {
+        background:
+          radial-gradient(ellipse 55% 45% at 5% 50%, rgba(232, 75, 75, 0.1) 0%, transparent 55%),
+          radial-gradient(ellipse 55% 45% at 95% 50%, rgba(13, 186, 122, 0.1) 0%, transparent 55%),
+          var(--bg2);
+      }
+      .s-different {
+        background:
+          radial-gradient(ellipse 65% 55% at 50% 105%, rgba(124, 92, 232, 0.12) 0%, transparent 58%),
+          radial-gradient(ellipse 55% 45% at 95% 5%, rgba(0, 200, 239, 0.09) 0%, transparent 55%),
+          var(--bg3);
+      }
+      .s-arch {
+        background:
+          radial-gradient(ellipse 75% 55% at 50% -5%, rgba(61, 125, 245, 0.13) 0%, transparent 60%),
+          var(--bg3);
+      }
+      .s-demo {
+        background:
+          radial-gradient(ellipse 55% 45% at 5% 55%, rgba(0, 200, 239, 0.09) 0%, transparent 55%),
+          var(--bg2);
+      }
+      .s-trust {
+        background:
+          radial-gradient(ellipse 65% 55% at 50% 105%, rgba(13, 186, 122, 0.11) 0%, transparent 58%),
+          radial-gradient(ellipse 55% 45% at 95% 5%, rgba(61, 125, 245, 0.09) 0%, transparent 55%),
+          var(--bg3);
+      }
+      .s-dash {
+        background:
+          radial-gradient(ellipse 65% 45% at 92% 55%, rgba(61, 125, 245, 0.12) 0%, transparent 55%),
+          var(--bg2);
+      }
+      .s-metric {
+        background:
+          radial-gradient(ellipse 80% 65% at 50% -15%, rgba(0, 200, 239, 0.14) 0%, transparent 65%),
+          var(--bg2);
+      }
+      .s-vision {
+        background:
+          radial-gradient(ellipse 65% 55% at 50% 105%, rgba(124, 92, 232, 0.14) 0%, transparent 55%),
+          radial-gradient(ellipse 50% 40% at 10% -5%, rgba(0, 200, 239, 0.09) 0%, transparent 55%),
+          var(--bg3);
+      }
+      .s-thanks {
+        background:
+          radial-gradient(ellipse 80% 65% at 50% 50%, rgba(0, 200, 239, 0.12) 0%, transparent 65%),
+          var(--bg);
+      }
+
+      /* ── AI IMAGE VISUAL ── */
+      .img-visual {
+        position: relative;
+        border-radius: 14px;
+        overflow: hidden;
+        border: 1px solid var(--b2);
+        background: var(--s1);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 180px;
+      }
+      .img-visual img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+      }
+      .img-visual .img-overlay {
+        position: absolute;
+        inset: 0;
+        pointer-events: none;
+        background: linear-gradient(180deg, transparent 60%, rgba(5, 16, 30, 0.6) 100%);
+      }
+      .img-prompt {
+        position: absolute;
+        bottom: 8px;
+        right: 10px;
+        font-size: 9px;
+        font-family: var(--mono);
+        color: var(--td);
+        opacity: 0;
+        transition: opacity 0.25s;
+        pointer-events: none;
+        background: rgba(5, 16, 30, 0.8);
+        padding: 3px 7px;
+        border-radius: 4px;
+      }
+      .img-visual:hover .img-prompt {
+        opacity: 1;
+      }
+
+      /* ── HERO ── */
+      .hero-wrap {
+        flex: 1;
+        display: grid;
+        grid-template-columns: 1.2fr 0.8fr;
+        gap: clamp(20px, 4vw, 48px);
+        align-items: center;
+      }
+      .hero-left {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+      }
+      .hero-title {
+        font-size: clamp(54px, 9vw, 110px);
+        font-weight: 900;
+        line-height: 0.86;
+        letter-spacing: -0.045em;
+        margin-bottom: 16px;
+      }
+      .hero-title em {
+        color: var(--cyan);
+        font-style: normal;
+      }
+      .hero-sub {
+        font-size: clamp(15px, 1.8vw, 20px);
+        color: var(--tm);
+        max-width: 540px;
+        line-height: 1.5;
+        margin-bottom: 20px;
+      }
+      .hero-stat-row {
+        display: flex;
+        gap: clamp(16px, 3vw, 32px);
+        margin-bottom: 20px;
+      }
+      .hero-stat b {
+        display: block;
+        font-size: clamp(28px, 4vw, 46px);
+        font-weight: 900;
+        font-family: var(--mono);
+        color: var(--cyan);
+        letter-spacing: -0.02em;
+      }
+      .hero-stat span {
+        font-size: 12px;
+        color: var(--td);
+        text-transform: uppercase;
+        letter-spacing: 1px;
+      }
+      .hero-tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 9px;
+      }
+      .hero-tag {
+        display: inline-flex;
+        align-items: center;
+        gap: 7px;
+        padding: 7px 14px;
+        border-radius: 99px;
+        border: 1px solid var(--b2);
+        background: var(--s2);
+        font-size: 12.5px;
+        font-weight: 600;
+        color: var(--tm);
+      }
+      .hero-right {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .hero-right .img-visual {
+        width: 100%;
+        max-width: 420px;
+        aspect-ratio: 1 / 1;
+        border-radius: 20px;
+        background:
+          radial-gradient(circle at 30% 40%, rgba(0, 200, 239, 0.15) 0%, transparent 50%),
+          radial-gradient(circle at 70% 60%, rgba(61, 125, 245, 0.12) 0%, transparent 50%),
+          var(--s1);
+        border: 1px solid rgba(0, 200, 239, 0.2);
+        box-shadow: 0 0 80px rgba(0, 200, 239, 0.06);
+      }
+
+      /* ── BEFORE / AFTER ── */
+      .ba-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: clamp(16px, 3vw, 32px);
+        flex: 1;
+        align-content: start;
+      }
+      .ba-col {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+      }
+      .ba-label {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        font-size: 13px;
+        font-weight: 900;
+        letter-spacing: 1.5px;
+        text-transform: uppercase;
+        margin-bottom: 4px;
+      }
+      .ba-label.before {
+        color: #fca5a5;
+      }
+      .ba-label.after {
+        color: #86efac;
+      }
+      .ba-label .ba-icon {
+        width: 24px;
+        height: 24px;
+        border-radius: 6px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 12px;
+      }
+      .ba-label.before .ba-icon {
+        background: rgba(232, 75, 75, 0.15);
+      }
+      .ba-label.after .ba-icon {
+        background: rgba(13, 186, 122, 0.15);
+      }
+      .ba-card {
+        padding: 11px 14px;
+        border-radius: 10px;
+        border: 1px solid var(--b1);
+        background: var(--s1);
+        display: flex;
+        gap: 11px;
+        align-items: flex-start;
+        font-size: 14px;
+        line-height: 1.45;
+        color: var(--tm);
+      }
+      .ba-col.before .ba-card {
+        border-left: 2.5px solid rgba(232, 75, 75, 0.4);
+      }
+      .ba-col.after .ba-card {
+        border-left: 2.5px solid rgba(13, 186, 122, 0.4);
+      }
+      .ba-card strong {
+        color: var(--tx);
+        display: block;
+        margin-bottom: 3px;
+        font-size: 13.5px;
+      }
+      .ba-dot {
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        flex-shrink: 0;
+        margin-top: 6px;
+      }
+      .ba-col.before .ba-dot {
+        background: #fca5a5;
+      }
+      .ba-col.after .ba-dot {
+        background: #86efac;
+      }
+
+      /* center divider */
+      .ba-divider {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .ba-arrow {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        background: rgba(0, 200, 239, 0.12);
+        border: 1px solid rgba(0, 200, 239, 0.3);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 16px;
+        color: var(--cyan);
+        animation: baPulse 2s ease-in-out infinite;
+      }
+      @keyframes baPulse {
+        0%,
+        100% {
+          box-shadow: 0 0 0 0 rgba(0, 200, 239, 0.3);
+        }
+        50% {
+          box-shadow: 0 0 0 12px rgba(0, 200, 239, 0);
+        }
+      }
+
+      /* ── COMPARISON TABLE ── */
+      .cmp-table {
+        width: 100%;
+        max-width: 980px;
+        border-collapse: separate;
+        border-spacing: 0;
+        font-size: 13px;
+        border-radius: 12px;
+        overflow: hidden;
+        border: 1px solid var(--b1);
+      }
+      .cmp-table thead th {
+        padding: 10px 14px;
+        text-align: left;
+        font-size: 12px;
+        font-weight: 700;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        color: var(--td);
+        background: var(--s1);
+        border-bottom: 1px solid var(--b1);
+      }
+      .cmp-table thead th:first-child {
+        color: var(--tm);
+      }
+      .cmp-table thead th.win {
+        color: var(--cyan);
+        background: rgba(0, 200, 239, 0.06);
+      }
+      .cmp-table tbody td {
+        padding: 8px 14px;
+        border-bottom: 1px solid var(--b1);
+        color: var(--tm);
+        line-height: 1.45;
+        background: rgba(255, 255, 255, 0.015);
+        font-size: 13px;
+      }
+      .cmp-table tbody td:first-child {
+        font-weight: 700;
+        color: var(--tx);
+        font-size: 12.5px;
+      }
+      .cmp-table tbody td.win {
+        background: rgba(0, 200, 239, 0.04);
+        color: var(--tx);
+      }
+      .cmp-table tbody tr:last-child td {
+        border-bottom: none;
+      }
+      .cmp-check {
+        color: var(--green);
+        font-weight: 700;
+      }
+      .cmp-dash {
+        color: var(--td);
+      }
+      .cmp-partial {
+        color: var(--amber);
+      }
+
+      /* Moat callout */
+      .moat {
+        display: flex;
+        gap: 10px;
+        align-items: flex-start;
+        padding: 12px 16px;
+        border-radius: 10px;
+        background: rgba(0, 200, 239, 0.06);
+        border: 1px solid rgba(0, 200, 239, 0.2);
+        font-size: 13.5px;
+        line-height: 1.5;
+        color: var(--tm);
+      }
+      .moat-icon {
+        font-size: 20px;
+        flex-shrink: 0;
+      }
+      .moat strong {
+        color: var(--cyan);
+      }
+
+      /* ── ARCHITECTURE CONSOLIDATED ── */
+      .arch-flow-wrap {
+        display: grid;
+        grid-template-columns: 1fr 0.9fr;
+        gap: clamp(16px, 3vw, 28px);
+        flex: 1;
+        align-items: start;
+      }
+      .arch-stack {
+        display: grid;
+        gap: 8px;
+      }
+      .arch-layer {
+        display: grid;
+        grid-template-columns: 150px 1fr;
+        gap: 0;
+        background: var(--s1);
+        border: 1px solid var(--b1);
+        border-radius: 10px;
+        overflow: hidden;
+        transition: border-color 0.2s, background 0.2s;
+      }
+      .arch-layer:hover {
+        border-color: rgba(0, 200, 239, 0.32);
+        background: var(--s2);
+      }
+      .arch-layer-side {
+        padding: 9px 12px 8px;
+        background: rgba(0, 200, 239, 0.06);
+        border-right: 1px solid rgba(0, 200, 239, 0.14);
+        display: flex;
+        flex-direction: column;
+        gap: 3px;
+        justify-content: center;
+      }
+      .arch-layer-kicker {
+        font-family: var(--mono);
+        font-size: 10px;
+        letter-spacing: 1.7px;
+        text-transform: uppercase;
+        color: rgba(0, 200, 239, 0.7);
+      }
+      .arch-layer-title {
+        font-size: 13.5px;
+        font-weight: 800;
+        line-height: 1.2;
+      }
+      .arch-layer-main {
+        padding: 8px 11px;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 5px;
+        align-items: center;
+      }
+      .arch-pill {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        padding: 5px 9px;
+        border-radius: 999px;
+        border: 1px solid var(--b1);
+        background: rgba(255, 255, 255, 0.04);
+        font-size: 11.5px;
+        color: var(--tm);
+        line-height: 1.35;
+      }
+      .arch-pill strong {
+        color: var(--tx);
+        font-weight: 700;
+      }
+      .arch-flow-right {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+      }
+      .arch-key-point {
+        padding: 10px 14px;
+        border-radius: 10px;
+        background: var(--s1);
+        border: 1px solid var(--b1);
+        border-left: 3px solid rgba(0, 200, 239, 0.5);
+        font-size: 12.5px;
+        line-height: 1.5;
+        color: var(--tm);
+      }
+      .arch-key-point strong {
+        color: var(--cyan);
+      }
+
+      /* ── CARD BASICS ── */
+      .card {
+        background: var(--s1);
+        border: 1px solid var(--b1);
+        border-radius: 10px;
+        padding: 14px 16px;
+        transition: border-color 0.2s, background 0.2s;
+      }
+      .card:hover {
+        border-color: rgba(0, 200, 239, 0.28);
+        background: var(--s2);
+      }
+      .card-icon {
+        font-size: 24px;
+        margin-bottom: 10px;
+        line-height: 1;
+      }
+      .card-title {
+        font-size: 16px;
+        font-weight: 700;
+        margin-bottom: 6px;
+      }
+      .card-body {
+        font-size: 14px;
+        color: var(--tm);
+        line-height: 1.5;
+      }
+      .g3 {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 10px;
+      }
+      .g4 {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 10px;
+      }
+
+      /* ── DEMO STORY ── */
+      .story-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: clamp(18px, 3vw, 28px);
+        flex: 1;
+        align-items: start;
+      }
+      .story-steps {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      }
+      .story-step {
+        display: grid;
+        grid-template-columns: 38px 1fr;
+        gap: 12px;
+        align-items: start;
+        padding: 11px 14px;
+        border-radius: 10px;
+        background: var(--s1);
+        border: 1px solid var(--b1);
+        transition: border-color 0.2s;
+        cursor: default;
+      }
+      .story-step:hover {
+        border-color: rgba(0, 200, 239, 0.28);
+      }
+      .story-num {
+        width: 38px;
+        height: 38px;
+        border-radius: 10px;
+        background: rgba(0, 200, 239, 0.12);
+        border: 1px solid rgba(0, 200, 239, 0.3);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-family: var(--mono);
+        font-size: 12px;
+        font-weight: 800;
+        color: var(--cyan);
+        flex-shrink: 0;
+      }
+      .story-step-title {
+        font-size: 15px;
+        font-weight: 700;
+        margin-bottom: 3px;
+      }
+      .story-step-body {
+        font-size: 13.5px;
+        line-height: 1.45;
+        color: var(--tm);
+      }
+      .story-visual {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+      }
+      .story-cta {
+        padding: 10px 14px;
+        border-radius: 10px;
+        border: 1px solid rgba(13, 186, 122, 0.25);
+        background: rgba(13, 186, 122, 0.08);
+        font-size: 13px;
+        line-height: 1.5;
+        color: var(--tm);
+      }
+      .story-cta strong {
+        color: #86efac;
+      }
+
+      /* ── TRUST ── */
+      .trust-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 12px;
+      }
+      .trust-card {
+        padding: 14px 15px;
+        border-radius: 12px;
+        background: var(--s1);
+        border: 1px solid var(--b1);
+        transition: border-color 0.2s, background 0.2s;
+      }
+      .trust-card:hover {
+        border-color: rgba(13, 186, 122, 0.3);
+        background: var(--s2);
+      }
+      .trust-kicker {
+        font-family: var(--mono);
+        font-size: 11px;
+        letter-spacing: 1.5px;
+        text-transform: uppercase;
+        color: rgba(13, 186, 122, 0.72);
+        margin-bottom: 8px;
+      }
+      .trust-title {
+        font-size: 14px;
+        font-weight: 700;
+        margin-bottom: 5px;
+      }
+      .trust-body {
+        font-size: 12.5px;
+        line-height: 1.5;
+        color: var(--tm);
+      }
+      .trust-note {
+        padding: 10px 14px;
+        border-radius: 10px;
+        background: rgba(13, 186, 122, 0.08);
+        border: 1px solid rgba(13, 186, 122, 0.22);
+        font-size: 12.5px;
+        line-height: 1.5;
+        color: var(--tm);
+        text-align: center;
+      }
+      .trust-note strong {
+        color: #86efac;
+      }
+
+      /* ── DASHBOARD VALUE ── */
+      .dash-value-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: clamp(16px, 3vw, 28px);
+        flex: 1;
+        align-items: start;
+      }
+      .dash-pillar {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+      }
+      .dash-pillar-title {
+        font-size: 12px;
+        font-weight: 900;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        color: var(--cyan);
+        margin-bottom: 4px;
+      }
+      .dash-item {
+        display: flex;
+        gap: 11px;
+        align-items: flex-start;
+        padding: 10px 12px;
+        border-radius: 10px;
+        background: var(--s1);
+        border: 1px solid var(--b1);
+        transition: border-color 0.2s;
+      }
+      .dash-item:hover {
+        border-color: rgba(0, 200, 239, 0.25);
+      }
+      .dash-item-icon {
+        font-size: 20px;
+        flex-shrink: 0;
+        margin-top: 1px;
+      }
+      .dash-item-title {
+        font-size: 14px;
+        font-weight: 700;
+        margin-bottom: 3px;
+      }
+      .dash-item-body {
+        font-size: 12px;
+        color: var(--tm);
+        line-height: 1.45;
+      }
+      .dash-visual .img-visual {
+        aspect-ratio: 4/3;
+      }
+
+      /* ── METRICS ── */
+      .metric-row {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 11px;
+      }
+      .metric-card {
+        background: var(--s1);
+        border: 1px solid var(--b1);
+        border-radius: 12px;
+        padding: 20px 18px;
+        text-align: center;
+        transition: border-color 0.2s, transform 0.2s;
+      }
+      .metric-card:hover {
+        border-color: rgba(0, 200, 239, 0.28);
+        transform: translateY(-2px);
+      }
+      .metric-card b {
+        display: block;
+        font-size: clamp(30px, 4vw, 48px);
+        font-weight: 900;
+        color: var(--cyan);
+        font-family: var(--mono);
+        letter-spacing: -0.02em;
+        margin-bottom: 6px;
+      }
+      .metric-card span {
+        font-size: 12.5px;
+        color: var(--tm);
+        line-height: 1.4;
+      }
+      .quality-row {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 11px;
+      }
+      .quality-card {
+        background: var(--s1);
+        border: 1px solid var(--b1);
+        border-radius: 10px;
+        padding: 16px;
+        text-align: center;
+        transition: border-color 0.2s, transform 0.2s;
+      }
+      .quality-card:hover {
+        border-color: rgba(0, 200, 239, 0.25);
+        transform: translateY(-2px);
+      }
+      .quality-card b {
+        display: block;
+        font-size: 28px;
+        font-weight: 900;
+        color: var(--amber);
+        font-family: var(--mono);
+        margin-bottom: 5px;
+      }
+      .quality-card b.green {
+        color: var(--green);
+      }
+      .quality-card b.red {
+        color: #fca5a5;
+      }
+      .quality-card span {
+        font-size: 12.5px;
+        color: var(--tm);
+        line-height: 1.45;
+      }
+      .quote-card {
+        background: rgba(0, 200, 239, 0.05);
+        border: 1px solid rgba(0, 200, 239, 0.18);
+        border-left: 3px solid rgba(0, 200, 239, 0.55);
+        border-radius: 10px;
+        padding: 14px 18px;
+        font-size: 14px;
+        color: var(--tm);
+        line-height: 1.55;
+        font-style: italic;
+      }
+      .quote-card cite {
+        display: block;
+        margin-top: 8px;
+        font-style: normal;
+        font-size: 11px;
+        color: var(--td);
+      }
+
+      /* ── VISION / ROADMAP ── */
+      .roadmap {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 12px;
+        flex: 1;
+        align-content: start;
+      }
+      .roadmap-phase {
+        position: relative;
+        padding: 16px 15px;
+        border-radius: 12px;
+        background: var(--s1);
+        border: 1px solid var(--b1);
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+      }
+      .roadmap-phase.now {
+        border-color: rgba(0, 200, 239, 0.3);
+        background: rgba(0, 200, 239, 0.05);
+      }
+      .roadmap-phase.next {
+        border-color: rgba(124, 92, 232, 0.25);
+        background: rgba(124, 92, 232, 0.04);
+      }
+      .roadmap-phase.future {
+        border-color: var(--b1);
+      }
+      .roadmap-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        padding: 3px 10px;
+        border-radius: 99px;
+        font-size: 10px;
+        font-weight: 800;
+        letter-spacing: 1.5px;
+        text-transform: uppercase;
+        width: fit-content;
+      }
+      .roadmap-phase.now .roadmap-badge {
+        background: rgba(0, 200, 239, 0.15);
+        color: var(--cyan);
+      }
+      .roadmap-phase.next .roadmap-badge {
+        background: rgba(124, 92, 232, 0.15);
+        color: #c4b5fd;
+      }
+      .roadmap-phase.future .roadmap-badge {
+        background: var(--s2);
+        color: var(--td);
+      }
+      .roadmap-title {
+        font-size: 16px;
+        font-weight: 800;
+      }
+      .roadmap-items {
+        display: flex;
+        flex-direction: column;
+        gap: 7px;
+      }
+      .roadmap-item {
+        font-size: 12.5px;
+        color: var(--tm);
+        line-height: 1.45;
+        padding-left: 16px;
+        position: relative;
+      }
+      .roadmap-item::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 6px;
+        width: 5px;
+        height: 5px;
+        border-radius: 50%;
+        background: var(--cyan);
+        opacity: 0.5;
+      }
+      .roadmap-phase.next .roadmap-item::before {
+        background: #c4b5fd;
+      }
+      .roadmap-phase.future .roadmap-item::before {
+        background: var(--td);
+      }
+
+      .vision-impact {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 12px;
+      }
+      .vision-impact-card {
+        padding: 14px 16px;
+        border-radius: 10px;
+        background: var(--s1);
+        border: 1px solid var(--b1);
+        text-align: center;
+      }
+      .vision-impact-card .vi-num {
+        font-size: 34px;
+        font-weight: 900;
+        font-family: var(--mono);
+        color: var(--cyan);
+        margin-bottom: 5px;
+      }
+      .vision-impact-card .vi-label {
+        font-size: 12.5px;
+        color: var(--tm);
+        line-height: 1.4;
+      }
+
+      /* ── THANK YOU ── */
+      .thanks-wrap {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        gap: 24px;
+      }
+      .thanks-title {
+        font-size: clamp(56px, 10vw, 116px);
+        font-weight: 900;
+        line-height: 0.88;
+        letter-spacing: -0.045em;
+      }
+      .thanks-title em {
+        color: var(--cyan);
+        font-style: normal;
+      }
+      .thanks-sub {
+        font-size: clamp(13px, 1.7vw, 18px);
+        color: var(--tm);
+        max-width: 520px;
+        line-height: 1.7;
+      }
+      .thanks-links {
+        display: flex;
+        gap: 12px;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+      .tlink {
+        padding: 10px 22px;
+        border-radius: 10px;
+        font-size: 13px;
+        font-weight: 700;
+        text-decoration: none;
+        transition: all 0.2s;
+        border: 1px solid var(--b2);
+        background: var(--s2);
+        color: var(--tx);
+      }
+      .tlink:hover {
+        background: rgba(0, 200, 239, 0.12);
+        border-color: rgba(0, 200, 239, 0.4);
+        color: var(--cyan);
+      }
+      .tlink.primary {
+        background: linear-gradient(135deg, var(--cyan), var(--blue));
+        border-color: transparent;
+        color: #fff;
+      }
+      .tlink.primary:hover {
+        opacity: 0.9;
+      }
+      .team {
+        font-size: 12px;
+        color: var(--td);
+      }
+
+      /* KEY HINT */
+      .hint {
+        position: fixed;
+        right: 18px;
+        bottom: 12px;
+        z-index: 50;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        font-size: 11px;
+        color: var(--td);
+      }
+      .key {
+        border: 1px solid var(--b2);
+        background: var(--s2);
+        border-radius: 4px;
+        padding: 2px 7px;
+        font-size: 10.5px;
+        font-family: var(--mono);
+      }
+
+      /* ── RESPONSIVE ── */
+      @media (max-width: 880px) {
+        .hero-wrap,
+        .ba-grid,
+        .arch-flow-wrap,
+        .story-grid,
+        .dash-value-grid {
+          grid-template-columns: 1fr;
+        }
+        .hero-right {
+          display: none;
+        }
+        .g3,
+        .g4,
+        .trust-grid,
+        .metric-row,
+        .quality-row,
+        .roadmap,
+        .vision-impact {
+          grid-template-columns: 1fr 1fr;
+        }
+        .cmp-table {
+          font-size: 10.5px;
+        }
+        .cmp-table thead th,
+        .cmp-table tbody td {
+          padding: 8px 10px;
+        }
+        .nav-tabs {
+          display: none;
+        }
+      }
+      @media (max-width: 560px) {
+        .g3,
+        .g4,
+        .trust-grid,
+        .metric-row,
+        .quality-row,
+        .roadmap,
+        .vision-impact,
+        .ba-grid,
+        .arch-flow-wrap,
+        .story-grid,
+        .dash-value-grid {
+          grid-template-columns: 1fr;
+        }
+        .arch-layer {
+          grid-template-columns: 1fr;
+        }
+        .arch-layer-side {
+          border-right: none;
+          border-bottom: 1px solid rgba(0, 200, 239, 0.14);
+        }
+        .cmp-table {
+          font-size: 9.5px;
+        }
+        .hero-stat-row {
+          gap: 16px;
+        }
+      }
+      @media (max-height: 680px) {
+        .inner {
+          padding: 16px clamp(16px, 3vw, 40px) 12px;
+          gap: 10px;
+        }
+        .arch-layer-side {
+          padding: 10px 12px;
+        }
+        .arch-layer-main {
+          padding: 10px 12px;
+        }
+        .story-step {
+          padding: 10px 12px;
+        }
+        .trust-card {
+          padding: 12px 13px;
+        }
+        .roadmap-phase {
+          padding: 14px;
+        }
+      }
+      @media (max-height: 760px) {
+        .s-arch .inner {
+          gap: 8px;
+        }
+        .s-arch .lead {
+          font-size: 12px;
+          line-height: 1.5;
+        }
+        .s-arch .arch-stack {
+          gap: 5px;
+        }
+        .s-arch .arch-layer {
+          grid-template-columns: 130px 1fr;
+        }
+        .s-arch .arch-layer-side {
+          padding: 9px 11px 8px;
+        }
+        .s-arch .arch-layer-main {
+          padding: 8px 10px;
+          gap: 5px;
+        }
+        .s-arch .arch-pill {
+          padding: 4px 7px;
+          font-size: 10px;
+        }
+        .story-step-body,
+        .trust-body {
+          font-size: 10.5px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- NAV -->
+    <nav class="nav">
+      <div class="nav-brand"><span class="brand-dot"></span>A20 APP</div>
+      <div class="nav-tabs" id="tabs"></div>
+      <div class="nav-ctrl">
+        <button id="prev" aria-label="Previous">‹</button>
+        <span id="slide-num">01 / 10</span>
+        <button id="next" aria-label="Next">›</button>
+      </div>
+    </nav>
+
+    <!-- PROGRESS -->
+    <div class="prog"><div class="prog-fill" id="prog-fill"></div></div>
+
+    <main class="deck">
+
+      <!-- ═══════════ S1 — HERO ═══════════ -->
+      <section class="slide on s-hero" id="s1">
+        <div class="inner">
+          <div class="hero-wrap">
+            <div class="hero-left">
+              <div class="badge" style="margin-bottom:16px">AI20K Build Phase — Production Ready</div>
+              <h1 class="hero-title">Tuyển sinh<br/>thông minh<br/>với <em>A20</em></h1>
+              <p class="hero-sub">
+                Mỗi năm, đội ngũ tuyển sinh trả lời <strong style="color:var(--tx)">hàng nghìn câu hỏi lặp lại</strong>.
+                A20 thay đổi điều đó — AI đa kênh, phản hồi tức thì, có dẫn nguồn, hoạt động 24/7.
+              </p>
+              <div class="hero-stat-row">
+                <div class="hero-stat"><b>24/7</b><span>Auto Response</span></div>
+                <div class="hero-stat"><b>&lt;3%</b><span>Hallucination</span></div>
+                <div class="hero-stat"><b>3</b><span>Channels</span></div>
+              </div>
+              <div class="hero-tags">
+                <span class="hero-tag">🚀 Railway Production</span>
+                <span class="hero-tag">🤖 RAG + LLM</span>
+                <span class="hero-tag">📅 May 2026</span>
+              </div>
+            </div>
+            <div class="hero-right">
+              <div class="img-visual">
+                <img src="images/hero-ai.jpg" alt="A20 AI Admissions" />
+                <div class="img-overlay"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="sfooter"><strong>A20 APP</strong><span>a20-app-165.vinunits.cloud</span></div>
+      </section>
+
+      <!-- ═══════════ S2 — BEFORE → AFTER ═══════════ -->
+      <section class="slide s-transform" id="s2">
+        <div class="inner">
+          <div class="badge">Tác động</div>
+          <h2 class="h2">Tuyển sinh <span class="hl">trước và sau</span> khi có A20</h2>
+          <p class="lead">
+            Không phải cải tiến nhỏ — đây là sự thay đổi toàn diện cách đội ngũ tuyển sinh vận hành.
+          </p>
+
+          <div class="ba-grid">
+            <div class="ba-col before">
+              <div class="ba-label"><span class="ba-icon">✕</span> Before A20</div>
+              <div class="ba-card">
+                <span class="ba-dot"></span>
+                <div><strong>70% thời gian lặp lại</strong>Cùng một câu hỏi về học phí, học bổng, deadline — trả lời đi trả lời trên nhiều kênh.</div>
+              </div>
+              <div class="ba-card">
+                <span class="ba-dot"></span>
+                <div><strong>Giới hạn giờ hành chính</strong>Tin nhắn ngoài giờ tồn đọng qua đêm. Thí sinh mất kiên nhẫn, giảm tỉ lệ chuyển đổi.</div>
+              </div>
+              <div class="ba-card">
+                <span class="ba-dot"></span>
+                <div><strong>Thông tin rời rạc</strong>Website, PDF, Excel, ghi chú nội bộ. Không ai có bức tranh tổng thể về lead.</div>
+              </div>
+              <div class="ba-card">
+                <span class="ba-dot"></span>
+                <div><strong>Không biết lead nào "nóng"</strong>Không có cơ chế tự động đánh giá mức độ quan tâm. Cơ hội bị bỏ lỡ mỗi ngày.</div>
+              </div>
+            </div>
+
+            <div class="ba-col after">
+              <div class="ba-label"><span class="ba-icon">✓</span> After A20</div>
+              <div class="ba-card">
+                <span class="ba-dot"></span>
+                <div><strong>AI trả lời 80%+ câu hỏi tự động</strong>Chatbot RAG phản hồi tức thì, chính xác, có trích dẫn nguồn. Tư vấn viên tập trung vào lead chất lượng cao.</div>
+              </div>
+              <div class="ba-card">
+                <span class="ba-dot"></span>
+                <div><strong>24/7 trên mọi kênh</strong>Web Chat + Telegram + Dashboard. Hệ thống không ngủ — thí sinh được phản hồi ngay cả lúc 2 giờ sáng.</div>
+              </div>
+              <div class="ba-card">
+                <span class="ba-dot"></span>
+                <div><strong>Kho tri thức tập trung</strong>Tất cả dữ liệu được ingest tự động vào vector DB. Một nguồn duy nhất, luôn cập nhật, truy xuất tức thì.</div>
+              </div>
+              <div class="ba-card">
+                <span class="ba-dot"></span>
+                <div><strong>Lead scoring thông minh</strong>AI tự động phân loại HOT/WARM/COLD. Dashboard realtime — staff biết chính xác cần gọi cho ai, khi nào.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="sfooter"><strong>TRANSFORMATION</strong><span>02 / 10</span></div>
+      </section>
+
+      <!-- ═══════════ S3 — WHY A20 IS DIFFERENT ═══════════ -->
+      <section class="slide s-different" id="s3">
+        <div class="inner">
+          <div class="badge violet">Khác biệt</div>
+          <h2 class="h2">Điều gì làm A20 <span class="hl-v">khác biệt</span> thực sự?</h2>
+          <p class="lead">
+            Không chỉ là một chatbot AI. A20 là một hệ thống tuyển sinh hoàn chỉnh được thiết kế riêng cho môi trường đại học Việt Nam.
+          </p>
+
+          <table class="cmp-table">
+            <thead>
+              <tr>
+                <th>Năng lực</th>
+                <th>Generic AI Chatbot</th>
+                <th>CRM Truyền thống</th>
+                <th class="win">A20 App</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Trả lời tự động 24/7</td>
+                <td class="cmp-check">✓</td>
+                <td class="cmp-dash">—</td>
+                <td class="win cmp-check">✓ RAG + Citations</td>
+              </tr>
+              <tr>
+                <td>Đa kênh đồng bộ</td>
+                <td class="cmp-partial">◐ Một kênh</td>
+                <td class="cmp-dash">—</td>
+                <td class="win">Web + Telegram + Dashboard</td>
+              </tr>
+              <tr>
+                <td>Kho tri thức tự động ingest</td>
+                <td class="cmp-dash">—</td>
+                <td class="cmp-dash">—</td>
+                <td class="win">Firecrawl + OCR + Qdrant</td>
+              </tr>
+              <tr>
+                <td>Lead Scoring tự động</td>
+                <td class="cmp-dash">—</td>
+                <td class="cmp-partial">◐ Manual tagging</td>
+                <td class="win">AI HOT/WARM/COLD</td>
+              </tr>
+              <tr>
+                <td>Human Handoff</td>
+                <td class="cmp-dash">—</td>
+                <td class="cmp-dash">—</td>
+                <td class="win">3-min timeout → AI resume</td>
+              </tr>
+              <tr>
+                <td>Tiếng Việt tối ưu</td>
+                <td class="cmp-partial">◐ Dịch thô</td>
+                <td class="cmp-dash">—</td>
+                <td class="win">Native Vi + En</td>
+              </tr>
+              <tr>
+                <td>Analytics & FAQ xu hướng</td>
+                <td class="cmp-dash">—</td>
+                <td class="cmp-partial">◐ Cơ bản</td>
+                <td class="win">Real-time dashboard</td>
+              </tr>
+              <tr>
+                <td>Triển khai production</td>
+                <td class="cmp-partial">◐ Cần setup</td>
+                <td class="cmp-check">✓</td>
+                <td class="win">Railway + Docker one-click</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <div class="moat">
+            <div class="moat-icon">🏰</div>
+            <div>
+              <strong>Moat của A20:</strong> Không chỉ là wrapper quanh OpenAI API. Đây là một RAG platform hoàn chỉnh với pipeline ingest tự động, hybrid search, rerank, guardrails và cơ chế fallback human-in-the-loop. Dữ liệu càng nhiều, hệ thống càng thông minh — tạo ra lợi thế cạnh tranh tích lũy theo thời gian.
+            </div>
+          </div>
+        </div>
+        <div class="sfooter"><strong>DIFFERENTIATION</strong><span>03 / 10</span></div>
+      </section>
+
+      <!-- ═══════════ S4 — HOW IT WORKS ═══════════ -->
+      <section class="slide s-arch" id="s4">
+        <div class="inner">
+          <div class="badge">Kiến trúc</div>
+          <h2 class="h2" style="max-width:760px">Cách A20 <span class="hl">vận hành</span> từ trong ra ngoài</h2>
+          <p class="lead">
+            Ba lớp chính — từ kênh giao tiếp, qua pipeline xử lý AI, đến hạ tầng dữ liệu. Đơn giản nhưng đầy đủ cho production.
+          </p>
+
+          <div class="arch-flow-wrap">
+            <div class="arch-stack">
+              <div class="arch-layer">
+                <div class="arch-layer-side">
+                  <div class="arch-layer-kicker">Input</div>
+                  <div class="arch-layer-title">Channels & API</div>
+                </div>
+                <div class="arch-layer-main">
+                  <div class="arch-pill"><strong>Web Widget</strong> embed vào website</div>
+                  <div class="arch-pill"><strong>Telegram Bot</strong> đồng bộ backend</div>
+                  <div class="arch-pill"><strong>Admin Dashboard</strong> cho staff</div>
+                  <div class="arch-pill"><strong>FastAPI</strong> JWT + WebSocket</div>
+                </div>
+              </div>
+              <div class="arch-layer">
+                <div class="arch-layer-side">
+                  <div class="arch-layer-kicker">Process</div>
+                  <div class="arch-layer-title">AI Pipeline</div>
+                </div>
+                <div class="arch-layer-main">
+                  <div class="arch-pill"><strong>Router Agent</strong> intent + context</div>
+                  <div class="arch-pill"><strong>RAG Engine</strong> hybrid search + rerank</div>
+                  <div class="arch-pill"><strong>LLM Synthesis</strong> GPT-4o + citations</div>
+                  <div class="arch-pill"><strong>Guardrails</strong> input/output safety</div>
+                  <div class="arch-pill"><strong>Handoff</strong> AI ↔ Staff</div>
+                </div>
+              </div>
+              <div class="arch-layer">
+                <div class="arch-layer-side">
+                  <div class="arch-layer-kicker">Data</div>
+                  <div class="arch-layer-title">Infrastructure</div>
+                </div>
+                <div class="arch-layer-main">
+                  <div class="arch-pill"><strong>PostgreSQL</strong> leads, chat, policies</div>
+                  <div class="arch-pill"><strong>Qdrant</strong> vector retrieval</div>
+                  <div class="arch-pill"><strong>Redis</strong> cache + queue + pub/sub</div>
+                  <div class="arch-pill"><strong>R2 / RQ</strong> artifacts + workers</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="arch-flow-right">
+              <div class="img-visual" style="aspect-ratio:16/10">
+                <img src="images/architecture-flow.jpg" alt="Architecture Data Flow" />
+                <div class="img-overlay"></div>
+              </div>
+              <div class="arch-key-point">
+                <strong>Request path:</strong> Channel → FastAPI → Router → RAG Pipeline → Synthesis → Response. Toàn bộ qua WebSocket realtime.
+              </div>
+              <div class="arch-key-point">
+                <strong>14-node LangGraph pipeline</strong> với conditional routing, hybrid BM25 + vector search, GPT-4o synthesis, Redis pub/sub cho realtime updates.
+              </div>
+              <div class="arch-key-point">
+                <strong>Human-in-the-loop:</strong> AI không chắc chắn → handoff staff. Staff không phản hồi trong 3 phút → AI tự resume.
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="sfooter"><strong>HOW IT WORKS</strong><span>04 / 10</span></div>
+      </section>
+
+      <!-- ═══════════ S5 — DEMO STORY ═══════════ -->
+      <section class="slide s-demo" id="s5">
+        <div class="inner">
+          <div class="badge">Demo Story</div>
+          <h2 class="h2">Một ngày của <span class="hl">thí sinh và tư vấn viên</span></h2>
+          <p class="lead">
+            Kịch bản demo end-to-end: từ câu hỏi đầu tiên đến khi staff chốt lead. Hoàn toàn dựa trên hệ thống thật.
+          </p>
+
+          <div class="story-grid">
+            <div class="story-steps">
+              <div class="story-step">
+                <div class="story-num">01</div>
+                <div>
+                  <div class="story-step-title">Thí sinh hỏi về học phí ngành Kinh doanh</div>
+                  <div class="story-step-body">
+                    Nhập câu hỏi từ Web Widget trên website VinUni. Hệ thống tự động nhận diện lead mới, tạo hội thoại.
+                  </div>
+                </div>
+              </div>
+              <div class="story-step">
+                <div class="story-num">02</div>
+                <div>
+                  <div class="story-step-title">AI trả lời chính xác, có dẫn nguồn</div>
+                  <div class="story-step-body">
+                    RAG pipeline truy xuất tuition policy từ database + knowledge chunks. Câu trả lời kèm citation "Theo Quyết định XXX của VinUni...".
+                  </div>
+                </div>
+              </div>
+              <div class="story-step">
+                <div class="story-num">03</div>
+                <div>
+                  <div class="story-step-title">Thí sinh hỏi thêm học bổng và để lại thông tin</div>
+                  <div class="story-step-body">
+                    AI tiếp tục trả lời, đồng thời phát hiện intent "để lại thông tin". Backend tự động trích xuất phone, email, major interest.
+                  </div>
+                </div>
+              </div>
+              <div class="story-step">
+                <div class="story-num">04</div>
+                <div>
+                  <div class="story-step-title">Dashboard báo lead HOT, staff vào hội thoại</div>
+                  <div class="story-step-body">
+                    Lead được score "HOT", hiển thị trên dashboard. Staff nhận notification, mở hội thoại và tiếp tục tư vấn.
+                  </div>
+                </div>
+              </div>
+              <div class="story-step">
+                <div class="story-num">05</div>
+                <div>
+                  <div class="story-step-title">Hệ thống học hỏi — FAQ được cập nhật</div>
+                  <div class="story-step-body">
+                    Mọi câu hỏi được phân tích xu hướng. Admin thấy "học bổng" đang là hot topic, bổ sung thêm vào knowledge base.
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="story-visual">
+              <div class="img-visual" style="aspect-ratio:4/3">
+                <img src="images/demo-story.jpg" alt="AI Chat and Dashboard" />
+                <div class="img-overlay"></div>
+              </div>
+              <div class="story-cta">
+                <strong>Demo script gợi ý:</strong> Hỏi học phí → Hỏi học bổng → Xin tư vấn viên → Dashboard nhận notification → Staff vào hội thoại. Dưới 2 phút, thể hiện toàn bộ giá trị cốt lõi.
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="sfooter"><strong>DEMO STORY</strong><span>05 / 10</span></div>
+      </section>
+
+      <!-- ═══════════ S6 — TRUST & DATA ═══════════ -->
+      <section class="slide s-trust" id="s6">
+        <div class="inner">
+          <div class="badge green">Grounding</div>
+          <h2 class="h2">Dữ liệu là <span class="hl-g">lợi thế cạnh tranh</span> cốt lõi</h2>
+          <p class="lead">
+            Đây là điểm khác biệt lớn nhất: A20 không "bịa" câu trả lời. Mọi phản hồi đều được neo vào dữ liệu thật, có thể truy vết nguồn.
+          </p>
+
+          <div class="trust-grid" style="flex:1;align-content:start">
+            <div class="trust-card">
+              <div class="trust-kicker">01 · Structured Data</div>
+              <div class="trust-title">Dữ liệu có cấu trúc</div>
+              <div class="trust-body">
+                Học phí, học bổng, ngành học, chính sách — được lưu chuẩn hóa trong PostgreSQL. AI truy xuất chính xác, không bị sai lệch ngữ cảnh.
+              </div>
+            </div>
+            <div class="trust-card">
+              <div class="trust-kicker">02 · Knowledge Base</div>
+              <div class="trust-title">Kho tri thức đã curated</div>
+              <div class="trust-body">
+                FAQ, tài liệu hướng dẫn, policy được chunk hóa, embed và lưu trong Qdrant. Hybrid search kết hợp vector + keyword.
+              </div>
+            </div>
+            <div class="trust-card">
+              <div class="trust-kicker">03 · Auto Ingest</div>
+              <div class="trust-title">Tự động thu thập dữ liệu</div>
+              <div class="trust-body">
+                Website được crawl qua Firecrawl. PDF/Excel qua OCR pipeline. Dữ liệu mới tự động vào KB mà không cần nhập tay.
+              </div>
+            </div>
+            <div class="trust-card">
+              <div class="trust-kicker">04 · Retrieval Layer</div>
+              <div class="trust-title">Hybrid Search + Rerank</div>
+              <div class="trust-body">
+                BM25 keyword search kết hợp Qdrant vector search. Rerank model sắp xếp lại chunk trước khi đưa vào LLM synthesis.
+              </div>
+            </div>
+            <div class="trust-card">
+              <div class="trust-kicker">05 · Safety Net</div>
+              <div class="trust-title">Guardrails đa lớp</div>
+              <div class="trust-body">
+                Input guardrails chặn nội dung ngoài phạm vi. Output guardrails kiểm tra citations. Khi không chắc chắn → làm rõ hoặc handoff.
+              </div>
+            </div>
+            <div class="trust-card">
+              <div class="trust-kicker">06 · Continuous Learning</div>
+              <div class="trust-title">Học liên tục từ thực tế</div>
+              <div class="trust-body">
+                Mỗi câu hỏi mới, mỗi FAQ trend đều được phân tích. Admin có thể bổ sung ngay vào KB để câu trả lời ngày càng tốt hơn.
+              </div>
+            </div>
+          </div>
+
+          <div class="trust-note">
+            <strong>Khác biệt chính:</strong> Đây không phải LLM chat tự do. Đây là RAG platform nơi dữ liệu là tài sản — càng nhiều dữ liệu chất lượng, hệ thống càng thông minh và càng khó bị sao chép.
+          </div>
+        </div>
+        <div class="sfooter"><strong>DATA MOAT</strong><span>06 / 10</span></div>
+      </section>
+
+      <!-- ═══════════ S7 — DASHBOARD ═══════════ -->
+      <section class="slide s-dash" id="s7">
+        <div class="inner">
+          <div class="badge">Dashboard</div>
+          <h2 class="h2">Staff nhìn thấy <span class="hl">toàn cảnh</span> bức tranh tuyển sinh</h2>
+          <p class="lead">
+            Không còn cảnh mỗi người một mảnh thông tin. Dashboard tập trung — từ lead, hội thoại, FAQ đến knowledge base.
+          </p>
+
+          <div class="dash-value-grid">
+            <div class="dash-pillar">
+              <div class="dash-pillar-title">Vận hành</div>
+              <div class="dash-item">
+                <div class="dash-item-icon">📊</div>
+                <div>
+                  <div class="dash-item-title">Tổng quan realtime</div>
+                  <div class="dash-item-body">Leads mới, hội thoại đang chạy, tỉ lệ chuyển đổi — tất cả trên một màn hình.</div>
+                </div>
+              </div>
+              <div class="dash-item">
+                <div class="dash-item-icon">👥</div>
+                <div>
+                  <div class="dash-item-title">CRM & Lead Scoring</div>
+                  <div class="dash-item-body">Score, temperature, assignment. Staff biết chính xác cần ưu tiên lead nào.</div>
+                </div>
+              </div>
+              <div class="dash-item">
+                <div class="dash-item-icon">💬</div>
+                <div>
+                  <div class="dash-item-title">Live Chat + Handoff</div>
+                  <div class="dash-item-body">Xem và tham gia hội thoại realtime. Nhận handoff khi AI không trả lời được.</div>
+                </div>
+              </div>
+              <div class="dash-item">
+                <div class="dash-item-icon">🔥</div>
+                <div>
+                  <div class="dash-item-title">FAQ xu hướng</div>
+                  <div class="dash-item-body">Nhận diện câu hỏi nóng theo ngày/tuần. Phát hiện lỗ hổng thông tin.</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="dash-pillar">
+              <div class="dash-pillar-title">Quản trị</div>
+              <div class="dash-item">
+                <div class="dash-item-icon">📚</div>
+                <div>
+                  <div class="dash-item-title">Knowledge Base Management</div>
+                  <div class="dash-item-body">CRUD chunks, re-embed, quản lý phiên bản kho tri thức.</div>
+                </div>
+              </div>
+              <div class="dash-item">
+                <div class="dash-item-icon">📄</div>
+                <div>
+                  <div class="dash-item-title">OCR & Crawl Pipeline</div>
+                  <div class="dash-item-body">Upload tài liệu, crawl website, review trước khi đưa vào production KB.</div>
+                </div>
+              </div>
+              <div class="dash-item">
+                <div class="dash-item-icon">👨‍💼</div>
+                <div>
+                  <div class="dash-item-title">Phân quyền Staff</div>
+                  <div class="dash-item-body">Admin / Counselor roles. Theo dõi hiệu suất tư vấn viên.</div>
+                </div>
+              </div>
+              <div class="dash-item">
+                <div class="dash-item-icon">🔌</div>
+                <div>
+                  <div class="dash-item-title">Widget Integration</div>
+                  <div class="dash-item-body">Cấu hình chat widget, sinh mã nhúng, tùy chỉnh giao diện.</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+        <div class="sfooter"><strong>DASHBOARD</strong><span>07 / 10</span></div>
+      </section>
+
+      <!-- ═══════════ S8 — TRACTION & QUALITY ═══════════ -->
+      <section class="slide s-metric" id="s8">
+        <div class="inner">
+          <div class="badge">Traction</div>
+          <h2 class="h2">Dự án qua những <span class="hl">Con số</span></h2>
+
+          <div class="metric-row">
+            <div class="metric-card"><b>870</b><span>Tổng Commits (Git)</span></div>
+            <div class="metric-card"><b>778</b><span>Commits trong 4 Tuần</span></div>
+            <div class="metric-card"><b>75</b><span>API Endpoints</span></div>
+            <div class="metric-card"><b>18</b><span>Database Models</span></div>
+            <div class="metric-card"><b>14</b><span>Pipeline Nodes</span></div>
+            <div class="metric-card"><b>12</b><span>Frontend Modules</span></div>
+            <div class="metric-card"><b>3</b><span>Kênh Giao tiếp</span></div>
+            <div class="metric-card"><b>1</b><span>Production Deploy</span></div>
+          </div>
+
+          <div class="quality-row">
+            <div class="quality-card">
+              <b class="green">98%</b><span>Intent Accuracy<br/>Keyword + LLM fallback</span>
+            </div>
+            <div class="quality-card">
+              <b class="green">91%</b><span>Answer Groundedness<br/>LLM-as-judge đánh giá</span>
+            </div>
+            <div class="quality-card">
+              <b class="red">&lt;3%</b><span>Hallucination Rate<br/>RAG + citations + guardrails</span>
+            </div>
+            <div class="quality-card">
+              <b class="green">99.8%</b><span>API Uptime<br/>Railway production metrics</span>
+            </div>
+          </div>
+
+          <div class="quote-card">
+            "Chatbot trả lời rất nhanh và chính xác về học phí, học bổng. Phần hỏi về chương trình học trả lời chi tiết, có dẫn nguồn rõ ràng. Dashboard dễ dùng, xem được toàn bộ hội thoại của lead."
+            <cite>— Internal Tester, May 2026</cite>
+          </div>
+        </div>
+        <div class="sfooter"><strong>TRACTION</strong><span>08 / 10</span></div>
+      </section>
+
+      <!-- ═══════════ S9 — VISION ═══════════ -->
+      <section class="slide s-vision" id="s9">
+        <div class="inner">
+          <div class="badge violet">Tầm nhìn</div>
+          <h2 class="h2">Điều gì <span class="hl-v">tiếp theo</span> cho A20?</h2>
+          <p class="lead">
+            Đây không phải điểm kết thúc. A20 được thiết kế để mở rộng — từ một trường đại học đến một hệ sinh thái giáo dục.
+          </p>
+
+          <div class="roadmap">
+            <div class="roadmap-phase now">
+              <div class="roadmap-badge">Hiện tại · Q2 2026</div>
+              <div class="roadmap-title">Production Ready</div>
+              <div class="roadmap-items">
+                <div class="roadmap-item">Chatbot RAG 24/7 trên Web + Telegram</div>
+                <div class="roadmap-item">Admin Dashboard đầy đủ CRM + KB</div>
+                <div class="roadmap-item">Lead scoring & handoff automation</div>
+                <div class="roadmap-item">OCR + Crawl pipeline ingest tự động</div>
+                <div class="roadmap-item">Railway production deployment</div>
+              </div>
+            </div>
+            <div class="roadmap-phase next">
+              <div class="roadmap-badge">Tiếp theo · Q3 2026</div>
+              <div class="roadmap-title">Mở rộng & Tối ưu</div>
+              <div class="roadmap-items">
+                <div class="roadmap-item">Voice AI — tích hợp gọi điện tự động</div>
+                <div class="roadmap-item">Zalo OA — kênh thứ 4 với 70M+ users</div>
+                <div class="roadmap-item">Multi-tenant — một instance, nhiều trường</div>
+                <div class="roadmap-item">Advanced analytics — cohort, funnel, retention</div>
+                <div class="roadmap-item">Email automation — drip campaign cho lead</div>
+              </div>
+            </div>
+            <div class="roadmap-phase future">
+              <div class="roadmap-badge">Tương lai · 2027+</div>
+              <div class="roadmap-title">Hệ sinh thái</div>
+              <div class="roadmap-items">
+                <div class="roadmap-item">AI Counselor có personality & empathy</div>
+                <div class="roadmap-item">Predictive enrollment — dự đoán tỉ lệ nhập học</div>
+                <div class="roadmap-item">White-label SaaS cho các trường ĐH</div>
+                <div class="roadmap-item">Integrations marketplace (LMS, SIS, CRM)</div>
+                <div class="roadmap-item">Mobile app cho thí sinh & phụ huynh</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="vision-impact">
+            <div class="vision-impact-card">
+              <div class="vi-num">80%</div>
+              <div class="vi-label">Câu hỏi được AI xử lý tự động, giải phóng thời gian cho tư vấn viên</div>
+            </div>
+            <div class="vision-impact-card">
+              <div class="vi-num">10x</div>
+              <div class="vi-label">Tốc độ phản hồi lead — từ vài giờ xuống vài giây, 24/7 không gián đoạn</div>
+            </div>
+            <div class="vision-impact-card">
+              <div class="vi-num">∞</div>
+              <div class="vi-label">Khả năng mở rộng — một hệ thống phục vụ nhiều trường, nhiều mùa tuyển sinh</div>
+            </div>
+          </div>
+        </div>
+        <div class="sfooter"><strong>VISION</strong><span>09 / 10</span></div>
+      </section>
+
+      <!-- ═══════════ S10 — THANK YOU ═══════════ -->
+      <section class="slide s-thanks" id="s10">
+        <div class="inner">
+          <div class="thanks-wrap">
+            <div class="badge">AI20K Build Phase — May 2026</div>
+            <h1 class="thanks-title">Cùng kiến tạo<br/>tuyển sinh <em>thông minh</em></h1>
+            <p class="thanks-sub">
+              A20 App — Hệ thống Tư vấn Tuyển sinh AI cho VinUni. Sẵn sàng cho Production và sẵn sàng mở rộng.
+            </p>
+            <div class="thanks-links">
+              <a href="https://a20-app-165.vinunits.cloud" class="tlink primary" target="_blank">🌐 Live Demo</a>
+              <a href="https://a20-app-165-production.up.railway.app/docs" class="tlink" target="_blank">📖 API Docs</a>
+              <a href="https://github.com/a20-ai-thuc-chien/A20-App-165" class="tlink" target="_blank">💻 GitHub</a>
+            </div>
+            <div class="team">Team: Vuong Tran · Minh Hai · Bao Huy</div>
+          </div>
+        </div>
+      </section>
+
+    </main>
+
+    <!-- KEY HINT -->
+    <div class="hint">
+      <span class="key">←</span><span class="key">→</span> phím mũi tên
+    </div>
+
+    <script>
+      const slides = Array.from(document.querySelectorAll(".slide"));
+      const TOTAL = slides.length;
+      const LABELS = [
+        "Hero",
+        "Before/After",
+        "Khác biệt",
+        "Kiến trúc",
+        "Demo Story",
+        "Data Moat",
+        "Dashboard",
+        "Traction",
+        "Tầm nhìn",
+        "Cảm ơn",
+      ];
+      const numEl = document.getElementById("slide-num");
+      const fillEl = document.getElementById("prog-fill");
+      const tabsEl = document.getElementById("tabs");
+      let cur = 0;
+
+      LABELS.forEach((l, i) => {
+        const b = document.createElement("button");
+        b.className = "nav-tab" + (i === 0 ? " on" : "");
+        b.textContent = l;
+        b.onclick = () => go(i);
+        tabsEl.appendChild(b);
+      });
+
+      function go(i) {
+        if (i < 0 || i >= TOTAL) return;
+        slides[cur].classList.remove("on");
+        cur = i;
+        slides[cur].classList.add("on");
+        slides[cur].scrollTop = 0;
+        numEl.textContent =
+          String(cur + 1).padStart(2, "0") +
+          " / " +
+          String(TOTAL).padStart(2, "0");
+        fillEl.style.width = ((cur + 1) / TOTAL) * 100 + "%";
+        tabsEl
+          .querySelectorAll(".nav-tab")
+          .forEach((t, j) => t.classList.toggle("on", j === cur));
+      }
+
+      document.getElementById("next").onclick = () => go(cur + 1);
+      document.getElementById("prev").onclick = () => go(cur - 1);
+
+      document.addEventListener("keydown", (e) => {
+        if (["ArrowRight", "PageDown", " "].includes(e.key)) {
+          e.preventDefault();
+          go(cur + 1);
+        }
+        if (["ArrowLeft", "PageUp", "Backspace"].includes(e.key)) {
+          e.preventDefault();
+          go(cur - 1);
+        }
+        if (e.key === "Home") go(0);
+        if (e.key === "End") go(TOTAL - 1);
+      });
+
+      let tx = 0;
+      document.addEventListener(
+        "touchstart",
+        (e) => {
+          tx = e.touches[0].clientX;
+        },
+        { passive: true },
+      );
+      document.addEventListener(
+        "touchend",
+        (e) => {
+          const dx = e.changedTouches[0].clientX - tx;
+          if (Math.abs(dx) > 50) go(dx < 0 ? cur + 1 : cur - 1);
+        },
+        { passive: true },
+      );
+
+      go(0);
+    </script>
+  </body>
+</html>

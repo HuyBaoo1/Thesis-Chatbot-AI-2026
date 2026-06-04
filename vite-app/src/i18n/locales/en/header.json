@@ -1,0 +1,11 @@
+{
+  "sections": {
+    "home": "Home",
+    "programs": "Programs",
+    "scholarship": "Scholarships",
+    "admissionConditions": "Admission Requirements",
+    "admissionProcess": "Admission Process"
+  },
+  "loginButton": "Admin Login",
+  "toggleMenu": "Toggle menu"
+}

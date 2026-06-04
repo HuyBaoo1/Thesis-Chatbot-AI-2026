@@ -1,0 +1,83 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(rtk tsc *)",
+      "Bash(rtk find *)",
+      "Bash(python3 *)",
+      "Read(//home/loversky/**)",
+      "Bash(node /home/loversky/.claude/skills-source/plugins/khuym/skills/using-khuym/scripts/onboard_khuym.mjs --help)",
+      "Bash(node /home/loversky/.claude/skills-source/plugins/khuym/skills/using-khuym/scripts/onboard_khuym.mjs)",
+      "Bash(pip search *)",
+      "Bash(pip index *)",
+      "Bash(bd --version)",
+      "Bash(beads --version)",
+      "Bash(bd init *)",
+      "Bash(git rebase *)",
+      "Bash(grep -E \"\\\\.\\(jsx|py|js|txt\\)$\")",
+      "Bash(pkill -f \"rq worker\")",
+      "Bash(docker-compose build *)",
+      "Bash(zlib-flate -uncompress)",
+      "Bash(kill 673385)",
+      "Bash(docker info *)",
+      "Bash(bd create *)",
+      "Bash(bd update *)",
+      "Bash(.venv/bin/python -c \"import fitz; print\\('fitz OK'\\)\")",
+      "Bash(.venv/bin/python -c ' *)"
+    ]
+  },
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": ".*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "AI_TOOL_NAME=claude python3 /home/loversky/Desktop/code/vinai/A20-App-165/scripts/python/log_hook.py"
+          }
+        ]
+      }
+    ],
+    "PreCompact": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bd prime"
+          }
+        ]
+      }
+    ],
+    "SessionStart": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bd prime"
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "AI_TOOL_NAME=claude python3 /home/loversky/Desktop/code/vinai/A20-App-165/scripts/python/log_hook.py"
+          }
+        ]
+      }
+    ],
+    "UserPromptSubmit": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "AI_TOOL_NAME=claude python3 /home/loversky/Desktop/code/vinai/A20-App-165/scripts/python/log_hook.py"
+          }
+        ]
+      }
+    ]
+  }
+}

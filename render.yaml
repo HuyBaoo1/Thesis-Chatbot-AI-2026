@@ -1,0 +1,195 @@
+services:
+  # ============================================================================
+  # PostgreSQL — managed by Render
+  # ============================================================================
+  - type: pserv
+    name: a20-db-backup
+    runtime: image
+    image:
+      image: postgres:16
+    plan: starter
+    disk:
+      name: a20-db-data
+      mountPath: /var/lib/postgresql/data
+      sizeGB: 10
+    envVars:
+      - key: POSTGRES_USER
+        value: a20_admin
+      - key: POSTGRES_PASSWORD
+        generateValue: true
+      - key: POSTGRES_DB
+        value: a20_app
+
+  # ============================================================================
+  # Redis — managed by Render
+  # ============================================================================
+  - type: redis
+    name: a20-redis-backup
+    plan: free
+    maxmemoryPolicy: noeviction
+    ipMask: 0.0.0.0/0
+
+  # ============================================================================
+  # FastAPI Web Service
+  # ============================================================================
+  - type: web
+    name: a20-api-backup
+    runtime: docker
+    repo: https://github.com/a20-ai-thuc-chien/A20-App-165
+    branch: main
+    plan: standard
+    healthCheckPath: /health
+    # Fix DATABASE_URL for psycopg3 driver before starting
+    startCommand: sh -c 'export DATABASE_URL=$(echo "$DATABASE_URL" | sed "s|^postgresql://|postgresql+psycopg://|") && alembic upgrade head && uvicorn src.main:app --host 0.0.0.0 --port 8000 --workers 4'
+    envVars:
+      # ---- Database (managed by Render) ----
+      - key: DATABASE_URL
+        fromDatabase:
+          name: a20-db-backup
+          property: connectionString
+
+      # ---- Redis (managed by Render) ----
+      - key: REDIS_URL
+        fromService:
+          name: a20-redis-backup
+          type: redis
+          property: connectionString
+      - key: REDIS_HOST
+        fromService:
+          name: a20-redis-backup
+          type: redis
+          property: host
+      - key: REDIS_PORT
+        fromService:
+          name: a20-redis-backup
+          type: redis
+          property: port
+
+      # ---- AI / LLM (verified) ----
+      - key: OPENAI_API_KEY
+        value: 
+      - key: EMBEDDING_MODEL
+        value: text-embedding-3-small
+      - key: EMBEDDING_DIMENSION
+        value: "1536"
+      - key: OPENAI_CHAT_MODEL
+        value: gpt-4o
+      - key: DEFAULT_MODEL
+        value: claude-sonnet-4-20250514
+      - key: GEMINI_API_KEY
+        value: AIzaSyCBj9aGTWu3LPsE1Wa2iuVtkshtpHeiodg
+      - key: GEMINI_ROUTER_MODEL
+        value: gemini-3-flash-preview
+
+      # ---- Qdrant Cloud (verified - 3 collections) ----
+      - key: QDRANT_HOST
+        value: 300b4253-3b3a-490f-8e5e-8c218810ce39.us-west-1-0.aws.cloud.qdrant.io
+      - key: QDRANT_PORT
+        value: "443"
+      - key: QDRANT_HTTPS
+        value: "true"
+      - key: QDRANT_API_KEY
+        value: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY2Nlc3MiOiJtIiwic3ViamVjdCI6ImFwaS1rZXk6Y2JkZGE4NzktNjQwMS00NDlhLWI5MWYtZjE3MzVmMGZiODA2In0.n6nbto7L5nF6VqtYhosp847id1T5jbv6dll0evU7Fwc
+      - key: QDRANT_KNOWLEDGE_COLLECTION
+        value: knowledge_chunks
+
+      # ---- Cloudflare R2 (verified - vinuni-knowledge bucket) ----
+      - key: R2_ACCOUNT_ID
+        value: 8d4ba28ed096529750ca4423a7e23833
+      - key: R2_ACCESS_KEY_ID
+        value: 6a4c5237910a4722c53b4fd34928a676
+      - key: R2_SECRET_ACCESS_KEY
+        value: 64472f2f282bf636905655c2a5d33df00821d99ac058b4752d2a921ce3031f2f
+      - key: R2_BUCKET_NAME
+        value: vinuni-knowledge
+      - key: R2_PUBLIC_BASE_URL
+        value: https://pub-700b33596e42417cbbf319106b2cfee0.r2.dev
+
+      # ---- JWT / Auth ----
+      - key: SECRET_KEY
+        generateValue: true
+      - key: ACCESS_TOKEN_EXPIRE_MINUTES
+        value: "60"
+      - key: REFRESH_TOKEN_EXPIRE_MINUTES
+        value: "1440"
+      - key: CONVERSATION_ACCESS_TOKEN_EXPIRE_MINUTES
+        value: "43200"
+      - key: ALGORITHM
+        value: HS256
+      - key: COOKIE_SECURE
+        value: "true"
+
+      # ---- CORS & Security ----
+      # After first deploy, update TRUSTED_HOSTS with Render domain
+      - key: CORS_ALLOW_ORIGINS
+        value: https://a20-app-165.vercel.app,http://localhost:5173,http://127.0.0.1:5173
+      - key: CORS_ALLOW_CREDENTIALS
+        value: "true"
+      - key: CORS_ALLOW_METHODS
+        value: "*"
+      - key: CORS_ALLOW_HEADERS
+        value: "*"
+      - key: TRUSTED_HOSTS
+        value: a20-app-165-production.up.railway.app,a20-app-165.up.railway.app,localhost,127.0.0.1
+
+      # ---- Rate Limits ----
+      - key: CHAT_QUERY_RATE_LIMIT_PER_MINUTE
+        value: "10000"
+      - key: CHAT_QUERY_RATE_LIMIT_PER_HOUR
+        value: "100000"
+      - key: CHAT_QUERY_IP_RATE_LIMIT_PER_MINUTE
+        value: "10000"
+      - key: CHAT_INIT_RATE_LIMIT_PER_MINUTE
+        value: "10000"
+
+      # ---- Bootstrap Admin ----
+      - key: BOOTSTRAP_ADMIN_ENABLED
+        value: "true"
+      - key: BOOTSTRAP_ADMIN_NAME
+        value: System Admin
+      - key: BOOTSTRAP_ADMIN_EMAIL
+        value: admin@example.com
+      - key: BOOTSTRAP_ADMIN_PASSWORD
+        value: Admin@123456
+
+      # ---- RQ / Queue ----
+      - key: RQ_QUEUE_NAME
+        value: default
+      - key: RQ_JOB_TIMEOUT
+        value: "900"
+
+      # ---- Retention ----
+      - key: MESSAGE_CHUNK_USAGE_RETENTION_ENABLED
+        value: "true"
+      - key: MESSAGE_CHUNK_USAGE_RETENTION_DAYS
+        value: "60"
+      - key: MESSAGE_CHUNK_USAGE_RETENTION_RUN_HOUR
+        value: "3"
+      - key: MESSAGE_CHUNK_USAGE_RETENTION_BATCH_SIZE
+        value: "1000"
+      - key: MESSAGE_CHUNK_USAGE_RETENTION_MAX_BATCHES
+        value: "100"
+
+      # ---- OCR ----
+      - key: USE_SMART_EXTRACTION
+        value: "true"
+      - key: ENABLE_VISION_FALLBACK
+        value: "true"
+      - key: OCR_PIPELINE_VERSION
+        value: v2
+
+      # ---- Firecrawl (verified) ----
+      - key: FIRECRAWL_API_KEY
+        value: fc-09505747b1bb4df4ae8db7e8e70814ba
+
+      # ---- Feature flags ----
+      - key: HANDOFF_AI_FALLBACK_ENABLED
+        value: "true"
+
+      # ---- Logging ----
+      - key: LOG_LEVEL
+        value: INFO
+
+      # ---- Telegram (disabled) ----
+      - key: TELEGRAM_POLLING_ENABLED
+        value: "false"

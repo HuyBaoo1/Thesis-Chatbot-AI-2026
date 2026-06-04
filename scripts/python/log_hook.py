@@ -1,0 +1,200 @@
+#!/usr/bin/env python3
+"""
+Shared AI hook logger — Claude Code, Codex, Cursor, Gemini CLI, Copilot, Antigravity.
+
+Reads JSON from stdin, normalizes to common format, appends to .ai-log/session.jsonl
+
+Use --tool <name> so hooks work on Windows without POSIX env syntax (AI_TOOL_NAME=x).
+"""
+from __future__ import annotations
+
+import argparse
+import json
+import os
+import subprocess
+import sys
+from datetime import datetime, timezone, timedelta
+from pathlib import Path
+
+VN_TZ = timezone(timedelta(hours=7))
+
+
+def git(cmd: str) -> str:
+    try:
+        return subprocess.check_output(cmd, shell=True, text=True, stderr=subprocess.DEVNULL).strip()
+    except Exception:
+        return ""
+
+
+def detect_tool(data: dict, arg_tool: str | None = None) -> str:
+    """Detect which AI tool sent this hook event."""
+    if arg_tool:
+        return arg_tool.lower()
+
+    tool_env = os.environ.get("AI_TOOL_NAME", "").lower()
+    if tool_env:
+        return tool_env
+
+    # Kiro AI detection
+    if "kiro" in data.get("source", "").lower() or data.get("agent") == "kiro":
+        return "kiro"
+
+    # Windsurf / Cascade detection
+    if "windsurf" in data.get("source", "").lower() or data.get("agent") == "windsurf":
+        return "windsurf"
+    
+    if "transcript_path" in data:
+        return "codex"
+    if data.get("hook_event_name", "").startswith(("Before", "After", "Session", "Pre", "Notification")):
+        return "gemini"
+    if data.get("hook_event_name", "")[0:1].islower():
+        if "workspace_roots" in data:
+            return "cursor"
+        if "toolName" in data:
+            return "copilot"
+    if "hook_event_name" in data:
+        return "claude"
+    return "unknown"
+
+
+def normalize(data: dict, tool: str) -> dict | None:
+    """Normalize tool-specific payload to common log entry."""
+    event = data.get("hook_event_name") or data.get("event", "")
+    ts = datetime.now(VN_TZ).isoformat()
+
+    base = {
+        "ts": ts,
+        "tool": tool,
+        "event": event,
+        "session_id": (
+            data.get("session_id")
+            or data.get("conversation_id")
+            or data.get("generation_id")
+            or ""
+        ),
+        "model": data.get("model", ""),
+        "repo": git("git remote get-url origin").split("/")[-1].replace(".git", ""),
+        "branch": git("git rev-parse --abbrev-ref HEAD"),
+        "commit": git("git rev-parse --short HEAD"),
+        "student": git("git config user.email"),
+    }
+
+    if tool == "claude":
+        prompt = ""
+        if event == "UserPromptSubmit":
+            prompt = data.get("prompt", "")[:1000]
+        elif isinstance(data.get("tool_input"), dict):
+            prompt = data["tool_input"].get("prompt") or data["tool_input"].get("content") or ""
+        base.update(
+            {
+                "prompt": prompt,
+                "tool_name": data.get("tool_name", ""),
+                "tool_input": data.get("tool_input") if event != "UserPromptSubmit" else None,
+                "tool_response": str(data.get("tool_response", ""))[:500],
+            }
+        )
+
+    elif tool == "gemini":
+        if event == "BeforeAgent":
+            prompt = data.get("prompt", "")[:1000]
+            base.update({"prompt": prompt})
+        else:
+            req = data.get("request", {})
+            contents = req.get("contents", [])
+            prompt = ""
+            for c in reversed(contents):
+                for part in c.get("parts", []):
+                    if part.get("text"):
+                        prompt = part["text"][:1000]
+                        break
+                if prompt:
+                    break
+            resp = data.get("response", {})
+            answer = ""
+            try:
+                answer = resp["candidates"][0]["content"]["parts"][0]["text"][:500]
+            except Exception:
+                pass
+            base.update({"prompt": prompt, "response_summary": answer})
+
+    elif tool == "codex":
+        base.update(
+            {
+                "prompt": data.get("prompt", "")[:1000],
+                "turn_id": data.get("turn_id", ""),
+                "transcript_path": data.get("transcript_path", ""),
+            }
+        )
+
+    elif tool in ("cursor", "antigravity", "kiro", "windsurf"):
+        base.update(
+            {
+                "prompt": data.get("prompt", "")[:1000],
+                "files_context": data.get("attachments", []) or data.get("files", []),
+                "response_summary": str(data.get("response", ""))[:500],
+            }
+        )
+
+    elif tool == "copilot":
+        base.update(
+            {
+                "prompt": data.get("prompt", "")[:1000],
+                "tool_name": data.get("toolName", ""),
+                "tool_args": data.get("toolArgs"),
+            }
+        )
+
+    else:
+        base.update({"prompt": data.get("prompt", "")[:1000]})
+
+    if not base.get("prompt") and not base.get("response_summary") and event not in ("Stop", "stop", "SessionEnd", "sessionEnd", "AfterModel", "afterCascadeResponse"):
+        return None
+
+    return base
+
+
+def main() -> None:
+    parser = argparse.ArgumentParser(description="Shared AI hook logger")
+    parser.add_argument(
+        "--tool",
+        dest="tool",
+        default=None,
+        help="Force tool id: kiro, claude, codex, cursor, gemini, copilot, windsurf, antigravity",
+    )
+    args, _unknown = parser.parse_known_args()
+
+    if sys.stdin.isatty():
+        print(
+            "[ai-log] Expects JSON on stdin (your AI tool pipes it). "
+            "Test: echo '{\"hook_event_name\":\"beforeSubmitPrompt\",\"prompt\":\"hi\"}' | "
+            "python scripts/python/log_hook.py --tool cursor",
+            file=sys.stderr,
+        )
+        sys.exit(0)
+
+    raw = sys.stdin.read().strip()
+    if not raw:
+        sys.exit(0)
+
+    try:
+        data = json.loads(raw)
+    except json.JSONDecodeError:
+        sys.exit(0)
+
+    tool = detect_tool(data, arg_tool=args.tool)
+    entry = normalize(data, tool)
+    if not entry:
+        sys.exit(0)
+
+    log_dir = Path(os.environ.get("AI_LOG_DIR", ".ai-log"))
+    log_dir.mkdir(exist_ok=True)
+    log_file = log_dir / "session.jsonl"
+
+    with open(log_file, "a", encoding="utf-8") as f:
+        f.write(json.dumps(entry, ensure_ascii=False) + "\n")
+
+    print(json.dumps({"status": "logged"}))
+
+
+if __name__ == "__main__":
+    main()

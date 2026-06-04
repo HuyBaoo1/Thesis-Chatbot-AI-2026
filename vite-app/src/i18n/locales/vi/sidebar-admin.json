@@ -1,0 +1,23 @@
+{
+  "adminLabel": "Admissions Admin",
+  "adminDescription": "Quản lý tuyển sinh",
+  "sections": {
+    "overview": "Tổng quan",
+    "admissionsOperations": "Vận hành tuyển sinh",
+    "contentAndPolicy": "Nội dung và chính sách",
+    "systemAdmin": "Quản trị hệ thống",
+    "chat": "Chat"
+  },
+  "nav": {
+    "dashboard": "Dashboard",
+    "hotQuestions": "Hot Questions",
+    "leads": "Leads",
+    "webCrawler": "Web Crawler",
+    "quickProcessing": "Xử lý nhanh",
+    "knowledgeChunks": "Knowledge Chunks",
+    "majors": "Ngành học",
+    "tuitionPolicies": "Chính sách học phí",
+    "staffs": "Nhân viên",
+    "chat": "Chat"
+  }
+}

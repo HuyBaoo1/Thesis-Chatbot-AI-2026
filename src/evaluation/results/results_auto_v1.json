@@ -1,0 +1,51 @@
+{
+  "metrics": {
+    "retrieval_score": 0.2805521048342537,
+    "answer_score": 0.21131363407399326,
+    "combined_score": 0.24593286945412346
+  },
+  "per_record": [
+    {
+      "question": "Tell me about VinUni's undergraduate programs",
+      "retrieval_score": 0.36992618249951115,
+      "answer_score": 0.06958647200002052,
+      "combined_score": 0.21975632724976585
+    },
+    {
+      "question": "Application deadlines & timeline",
+      "retrieval_score": 0.22691292267870572,
+      "answer_score": 0.2220596253854384,
+      "combined_score": 0.22448627403207205
+    },
+    {
+      "question": "Admission requirements for 2026",
+      "retrieval_score": 0.20632161887578215,
+      "answer_score": 0.2282590612813067,
+      "combined_score": 0.21729034007854442
+    },
+    {
+      "question": "What scholarships does VinUni offer?",
+      "retrieval_score": 0.44620862710291337,
+      "answer_score": 0.3267278898027431,
+      "combined_score": 0.38646825845282823
+    },
+    {
+      "question": "When are the application deadlines?",
+      "retrieval_score": 0.22676735225718736,
+      "answer_score": 0.26080797674754524,
+      "combined_score": 0.2437876645023663
+    },
+    {
+      "question": "xin chào",
+      "retrieval_score": 0.23790737290328287,
+      "answer_score": 0.30216794130087843,
+      "combined_score": 0.27003765710208066
+    },
+    {
+      "question": "chương trình học của vin uni",
+      "retrieval_score": 0.24982065752239305,
+      "answer_score": 0.06958647200002052,
+      "combined_score": 0.15970356476120678
+    }
+  ]
+}

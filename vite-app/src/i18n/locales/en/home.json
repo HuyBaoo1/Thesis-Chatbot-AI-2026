@@ -1,0 +1,265 @@
+{
+  "hero": {
+    "badge": "VinUni Smart Admissions Assistant",
+    "headline": "Admissions Chatbot — ",
+    "headlineHighlight": "ask anything.",
+    "description": "Get accurate info about programs, tuition, scholarships, and application process — anytime.",
+    "highlights": [
+      {
+        "label": "Response",
+        "value": "~30 sec",
+        "description": "Quick answers to common admissions questions."
+      },
+      {
+        "label": "Content",
+        "value": "24/7",
+        "description": "Always available for program, tuition, and application info."
+      },
+      {
+        "label": "Counseling",
+        "value": "1:1",
+        "description": "Suggested Q&A pathway before contacting admissions."
+      }
+    ],
+    "telegramButton": "Chat on Telegram",
+    "orUseChatbox": "or use the chatbox on the right"
+  },
+  "leadForm": {
+    "title": "Complete your info to get started",
+    "description": "At least one contact method needed — email or phone.",
+    "fullName": "Full name",
+    "fullNamePlaceholder": "Nguyen Van A",
+    "email": "Email",
+    "emailPlaceholder": "you@email.com",
+    "phone": "Phone number",
+    "phonePlaceholder": "0901 234 567",
+    "submitting": "Creating...",
+    "submit": "Continue to chat"
+  },
+  "chat": {
+    "title": "VinUni Admissions Assistant",
+    "subtitle": "Always ready to help",
+    "welcomeMessage": "Hello! I can help with info about {{highlight1}}, {{highlight2}}, {{highlight3}}, and {{highlight4}}.",
+    "welcomeHighlights": {
+      "admissions": "admissions",
+      "tuition": "tuition",
+      "scholarship": "scholarships",
+      "process": "application process"
+    },
+    "readyLabel": "Ready to answer",
+    "thinking": "Thinking",
+    "sending": "Sending...",
+    "send": "Send",
+    "placeholder": "Type your question here...",
+    "enterToSend": "Enter to send · Shift+Enter for new line",
+    "chatWithCounselor": "Chat with counselor",
+    "counselorRequested": "Counselor connection request received. Team will respond soon.",
+    "counselorRequestSent": "Counselor connection request sent. Team will respond soon.",
+    "you": "You",
+    "counselor": "Counselor",
+    "loadingConversation": "Loading conversation...",
+    "conversationSaved": "Conversation saved",
+    "loadingOlder": "Loading older messages...",
+    "loadingHistory": "Loading chat history...",
+    "errorSend": "Cannot send message right now. Please try again later.",
+    "errorCreateLead": "Cannot create lead right now. Please check your information.",
+    "errorCounselor": "Cannot send counselor request right now. Please try again later.",
+    "counselorChattingWith": "Chatting with {{name}}",
+    "aiWithCounselorInvited": "AI is assisting, a counselor has been invited",
+    "chattingWithAI": "Chatting with VinUni AI",
+    "counselorMessageBanner": "Messages from the counselor will be highlighted in this conversation.",
+    "aiSupportPendingCounselor": "While waiting for the counselor to respond, VinUni AI continues to assist you.",
+    "aiDirectlySupporting": "VinUni AI is directly supporting this conversation.",
+    "counselorMonitoring": "{{name}} is following and replying directly in this conversation.",
+    "counselorInvitedNotice": "{{name}} has been invited to the conversation. While waiting for a response, AI can still assist you.",
+    "counselorAlreadyChattingWith": "You are being assisted by {{name}} in this conversation.",
+    "counselorAlreadyInvitedToChat": "{{name}} has been invited to this chat. AI will continue to assist while waiting.",
+    "counselorRequestSuccessToast": "Counselor connection request sent.",
+    "counselorRequestFailedToast": "Unable to connect with a counselor right now. Please try again later.",
+    "counselorInvited": "Counselor invited",
+    "requestCounselor": "Request counselor connection",
+    "counselorLabel": "Counselor",
+    "aiAndCounselorLabel": "AI + Counselor",
+    "aiLabel": "AI",
+    "messagesCount_one": "{{count}} message",
+    "messagesCount_other": "{{count}} messages",
+    "aiName": "VinUni AI",
+    "fallbackCounselorName": "admissions counselor",
+    "welcomeIntro": "Hello! I can help with info about ",
+    "welcomeAnd": " and "
+  },
+  "telegram": {
+    "title": "Send Telegram Message",
+    "description": "Send a message directly to a Telegram chat via Bot API.",
+    "chatIdLabel": "Telegram Chat ID",
+    "chatIdDescription": "Recipient's Telegram Chat ID.",
+    "messageLabel": "Message content",
+    "messagePlaceholder": "Message content...",
+    "sendButton": "Send message",
+    "error": "Cannot send message. Please check the Chat ID and try again.",
+    "chatIdValidation": "Chat ID cannot be 0",
+    "messageRequired": "Message cannot be empty",
+    "messageTooLong": "Message is too long"
+  },
+  "programsTitle": "Academic Programs",
+  "programsSubtitle": "Discover VinUniversity's world-class undergraduate and graduate programs designed to shape future leaders.",
+  "learnMore": "Learn More",
+  "readyToApply": "Ready to Apply?",
+  "applyCtaText": "Join thousands of students who chose VinUniversity for their higher education journey.",
+  "applyNow": "Apply Now",
+  "contactUs": "Contact Us",
+  "noPrograms": "No programs available yet.",
+  "credits": "credits",
+  "years": "years",
+  "scholarshipTitle": "Scholarships",
+  "scholarshipSubtitle": "Discover scholarship opportunities at VinUniversity.",
+  "noScholarships": "No scholarships available yet.",
+  "scopeGlobal": "University-wide",
+  "scopeMajorSpecific": "Major-specific",
+  "viewPrograms": "View Programs",
+  "scholarshipMerit": "Merit-based Scholarship",
+  "scholarshipNeedBased": "Need-based Scholarship",
+  "scholarshipTalent": "Talent Scholarship",
+  "scholarshipSpecial": "Special Scholarship",
+  "admissionSections": {
+    "programs": {
+      "badge": "Academics",
+      "title": "Programs Built For Real-World Leadership",
+      "description": "Students learn through interdisciplinary coursework, experiential projects, and mentorship from faculty and industry partners.",
+      "learningModelTitle": "Learning Model",
+      "learningModelItems": [
+        "Core foundation + major specialization",
+        "Early exposure to research and innovation",
+        "Career readiness embedded in every semester"
+      ],
+      "tracks": {
+        "business": {
+          "title": "Business and Management",
+          "description": "Practice-based learning with project studios, case clinics, and startup mentoring."
+        },
+        "engineering": {
+          "title": "Science and Engineering",
+          "description": "Strong foundation in STEM with lab work, research pathways, and industry capstones."
+        },
+        "health": {
+          "title": "Health Sciences",
+          "description": "Integrated clinical thinking, public health impact, and interdisciplinary teamwork."
+        },
+        "law": {
+          "title": "Law and Public Policy",
+          "description": "Policy analysis, legal reasoning, and leadership for complex societal challenges."
+        },
+        "arts": {
+          "title": "Arts and Design",
+          "description": "Creative practice with portfolio-driven outcomes and cross-disciplinary collaboration."
+        },
+        "digital": {
+          "title": "Digital and Data Studies",
+          "description": "Data literacy, AI fluency, and problem-solving skills across every field of study."
+        }
+      }
+    },
+    "scholarship": {
+      "badge": "Scholarships",
+      "title": "Investment In Potential, Not Just Performance",
+      "description": "Scholarship decisions are aligned with admissions outcomes, helping applicants evaluate their options early and plan confidently.",
+      "stats": {
+        "coverage": {
+          "label": "Coverage",
+          "value": "Up to full tuition"
+        },
+        "approach": {
+          "label": "Approach",
+          "value": "Holistic review"
+        },
+        "decision": {
+          "label": "Decision",
+          "value": "Announced with offer"
+        }
+      },
+      "types": {
+        "merit": {
+          "title": "Merit Scholarship",
+          "value": "25% - 100%",
+          "description": "For high-achieving applicants with strong academic records."
+        },
+        "needBased": {
+          "title": "Need-based Support",
+          "value": "Flexible",
+          "description": "Additional financial support based on family circumstances."
+        },
+        "talent": {
+          "title": "Talent Scholarship",
+          "value": "Up to 75%",
+          "description": "For exceptional achievements in leadership, arts, sports, or innovation."
+        }
+      },
+      "timelineTitle": "Support timeline",
+      "timeline": [
+        "Submit application and supporting documents",
+        "Holistic scholarship and admission review",
+        "Interview for shortlisted candidates",
+        "Receive admission and scholarship decision together"
+      ]
+    },
+    "conditions": {
+      "badge": "Admission Requirements",
+      "title": "What We Look For In Applicants",
+      "description": "Admissions decisions are based on a holistic review across academic performance, personal potential, and alignment with program goals.",
+      "criteria": {
+        "academic": {
+          "title": "Academic Readiness",
+          "items": [
+            "Strong high school results or equivalent credentials",
+            "Consistent performance in relevant subject groups"
+          ]
+        },
+        "language": {
+          "title": "Language Proficiency",
+          "items": [
+            "English proficiency aligned with program expectations",
+            "Evidence of communication skills for global learning"
+          ]
+        },
+        "leadership": {
+          "title": "Leadership And Engagement",
+          "items": [
+            "Meaningful extracurricular participation",
+            "Community involvement, projects, or initiative building"
+          ]
+        },
+        "statement": {
+          "title": "Personal Statement",
+          "items": [
+            "Clear academic goals and motivation",
+            "Reflection on values, impact, and growth mindset"
+          ]
+        }
+      }
+    },
+    "process": {
+      "badge": "Application Journey",
+      "title": "A Clear Admission Process, Step By Step",
+      "description": "We keep the process structured and transparent so applicants can plan their timelines and prepare confidently.",
+      "stepLabel": "STEP {{number}}",
+      "steps": {
+        "application": {
+          "title": "Build Your Application",
+          "text": "Complete the form and upload transcripts, certificates, and supporting materials."
+        },
+        "review": {
+          "title": "Holistic Review",
+          "text": "The admissions committee evaluates academic profile, personal fit, and potential."
+        },
+        "interview": {
+          "title": "Interview Stage",
+          "text": "Shortlisted applicants are invited to interviews online or in person."
+        },
+        "decision": {
+          "title": "Final Decision",
+          "text": "Receive your admission outcome and next-step guidance for enrollment."
+        }
+      }
+    }
+  }
+}

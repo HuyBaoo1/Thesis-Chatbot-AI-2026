@@ -1,0 +1,11 @@
+{
+  "adminLabel": "Admissions Admin",
+  "adminDescription": "Admissions Management",
+  "sections": {
+    "overview": "Overview",
+    "admissionsOperations": "Admissions Operations",
+    "contentAndPolicy": "Content & Policy",
+    "systemAdmin": "System Admin",
+    "chat": "Chat"
+  }
+}

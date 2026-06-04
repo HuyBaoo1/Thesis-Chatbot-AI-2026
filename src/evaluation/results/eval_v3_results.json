@@ -1,0 +1,872 @@
+[
+  {
+    "question": "Học phí ngành Khoa học Máy tính năm 2026 là bao nhiêu?",
+    "answer": "Bạn đang quan tâm đến học phí ngành Khoa học Máy tính ở bậc Đại học hay Sau đại học cho năm 2026?",
+    "faithfulness": 0.0,
+    "answer_relevancy": 0.5,
+    "context_precision": 0.0,
+    "context_recall": 0.0,
+    "intent": "tuition_lookup",
+    "category": "tuition"
+  },
+  {
+    "question": "Học phí Bác sĩ Y khoa bao nhiêu một năm?",
+    "answer": "Học phí cho chương trình Bác sĩ Y khoa tại VinUniversity là 815.850.000 VNĐ mỗi năm. Mức học phí này chưa bao gồm khoản hỗ trợ 35% học phí do Tập đoàn Vingroup tài trợ, được tự động áp dụng cho tất cả sinh viên trúng tuyển và duy trì trong suốt thời gian học tập.",
+    "faithfulness": 1.0,
+    "answer_relevancy": 1.0,
+    "context_precision": 1.0,
+    "context_recall": 1.0,
+    "intent": "tuition_lookup",
+    "category": "tuition"
+  },
+  {
+    "question": "Học phí 1 năm học tại VinUni khoảng bao nhiêu?",
+    "answer": "Học phí cho các chương trình tại VinUniversity như sau:\n1. Chương trình Cử nhân: Hiện tại hệ thống chưa tìm thấy nguồn dữ liệu chắc chắn để trả lời câu hỏi này.\n2. Chương trình Sau đại học:\n   - Thạc sĩ Quản trị Kinh doanh về Đổi mới sáng tạo và Trí tuệ nhân tạo: 932.400.000 VNĐ/năm.\n   - Tiến sĩ Khoa học Máy tính: 932.400.000 VNĐ/năm.",
+    "faithfulness": 1.0,
+    "answer_relevancy": 0.5,
+    "context_precision": 1.0,
+    "context_recall": 0.0,
+    "intent": "tuition_lookup",
+    "category": "tuition"
+  },
+  {
+    "question": "VinUni có những học bổng gì cho sinh viên?",
+    "answer": "VinUniversity cung cấp nhiều loại học bổng cho sinh viên, bao gồm:\n1. Học bổng tài năng: Dành cho sinh viên có thành tích xuất sắc.\n2. Hỗ trợ Phát triển Giáo dục: Từ năm 2025 đến 2030, tất cả sinh viên nhập học sẽ được hỗ trợ 35% học phí cho toàn bộ thời gian học.\n3. Hỗ trợ tài chính: Dựa trên gia cảnh và nhu cầu thực tế của sinh viên, không phải dựa trên thành tích.",
+    "faithfulness": 1.0,
+    "answer_relevancy": 1.0,
+    "context_precision": 1.0,
+    "context_recall": 0.5,
+    "intent": "scholarship_lookup",
+    "category": "scholarship"
+  },
+  {
+    "question": "Điều kiện nhận học bổng 100% học phí là gì?",
+    "answer": "Để nhận học bổng 100% học phí tại VinUniversity, ứng viên cần đáp ứng các tiêu chí của Hội đồng tuyển sinh, bao gồm khát vọng, trí tuệ và bản lĩnh. Học bổng này có thể là Học bổng Chủ tịch trường (President’s Excellence Scholarship) hoặc Học bổng Hiệu trưởng (Provost’s Merit Scholarship). Để duy trì học bổng, sinh viên cần đạt GPA tối thiểu 3.2 và không vi phạm nghiêm trọng các quy định của trường. VinUni sẽ xem xét kết quả học tập và kỷ luật của sinh viên mỗi năm để quyết định việc tiếp tục cấp học bổng.",
+    "faithfulness": 1.0,
+    "answer_relevancy": 1.0,
+    "context_precision": 0.5,
+    "context_recall": 0.5,
+    "intent": "scholarship_lookup",
+    "category": "scholarship"
+  },
+  {
+    "question": "Chính sách học bổng năm 2026 có gì mới?",
+    "answer": "Chính sách học bổng của VinUniversity từ năm 2025 đến 2030 có một số điểm nổi bật. Tất cả sinh viên nhập học trong giai đoạn này sẽ được hỗ trợ 35% học phí cho toàn bộ thời gian học. Ngoài ra, có nhiều loại học bổng khác như Học bổng Tài năng với giá trị từ 50% đến toàn phần, Học bổng Chủ tịch trường trị giá 100% học phí và toàn phần bao gồm chi phí ăn, ở, và Học bổng Hiệu trưởng trị giá 90% và 100% học phí. Các học bổng khác bao gồm Học bổng Viện trưởng và Học bổng Tài năng Chuyên ngành với các mức hỗ trợ khác nhau.",
+    "faithfulness": 0.5,
+    "answer_relevancy": 1.0,
+    "context_precision": 0.5,
+    "context_recall": 0.5,
+    "intent": "scholarship_lookup",
+    "category": "scholarship"
+  },
+  {
+    "question": "Hạn nộp hồ sơ đợt 1 năm 2026 khi nào?",
+    "answer": "Hiện tại hệ thống chưa tìm thấy nguồn dữ liệu chắc chắn để trả lời câu hỏi này.",
+    "faithfulness": 0.0,
+    "answer_relevancy": 1.0,
+    "context_precision": 0.0,
+    "context_recall": 0.0,
+    "intent": "timeline_process",
+    "category": "timeline"
+  },
+  {
+    "question": "Quy trình xét tuyển VinUni gồm những bước nào?",
+    "answer": "Quy trình xét tuyển vào VinUni bao gồm các bước sau:\n\n1. Chuẩn bị hồ sơ: Bao gồm thông tin cá nhân, CV, bảng điểm cấp 3, chứng chỉ tiếng Anh, bài luận ngắn, hồ sơ ngoại khóa và thông tin người giới thiệu.\n2. Liên hệ với HOTLINE Tư vấn Tuyển sinh 18008189 để được hướng dẫn tiếp.\n3. Sàng lọc trước: Loại bỏ các đơn đăng ký không đáp ứng tiêu chí.\n4. Danh sách rút gọn - Vòng 1: Đánh giá hồ sơ trực tuyến để chọn ứng viên vào vòng tiếp theo.\n5. Phỏng vấn - Vòng 2: Đánh giá cá nhân qua phỏng vấn và các hoạt động khác.\n6. Chấp nhận nhập học: Ứng viên được mời nhập học sẽ nhận hướng dẫn chi tiết về năm học và các bước tiếp theo sau khi chấp nhận thư mời và nộp lệ phí đăng ký.",
+    "faithfulness": 1.0,
+    "answer_relevancy": 1.0,
+    "context_precision": 1.0,
+    "context_recall": 0.5,
+    "intent": "timeline_process",
+    "category": "timeline"
+  },
+  {
+    "question": "Điều kiện tuyển sinh đại học năm 2026 là gì?",
+    "answer": "Hiện tại hệ thống chưa tìm thấy nguồn dữ liệu chắc chắn để trả lời câu hỏi này.",
+    "faithfulness": 0.0,
+    "answer_relevancy": 1.0,
+    "context_precision": 0.5,
+    "context_recall": 0.0,
+    "intent": "admission_requirement",
+    "category": "admission"
+  },
+  {
+    "question": "IELTS 6.0 có được nhận vào VinUni không?",
+    "answer": "Để mình có thể tư vấn chính xác nhất về yêu cầu IELTS, bạn vui lòng cho biết mình đang quan tâm đến hệ Đại học hay Sau đại học, và cụ thể là ngành học nào tại VinUni nhé?",
+    "faithfulness": 0.0,
+    "answer_relevancy": 0.5,
+    "context_precision": 0.0,
+    "context_recall": 0.0,
+    "intent": "admission_requirement",
+    "category": "admission"
+  },
+  {
+    "question": "VinUni có những ngành đào tạo nào?",
+    "answer": "VinUniversity hiện đang đào tạo các chương trình sau:\n\nChương trình đại học:\n1. Bác sĩ Y khoa (MD)\n2. Điều dưỡng (NUR)\n3. Khoa học Dữ liệu (DS)\n4. Khoa học Máy tính (CS)\n5. Kinh tế học (ECON)\n6. Kỹ thuật Cơ khí (ME)\n7. Kỹ thuật Điện và Máy tính (ECE)\n8. Quản trị Khách sạn (HM)\n9. Quản trị Kinh doanh (BBA)\n10. Tâm lý học (PSY)\n11. Truyền thông Đa phương tiện (MMC)\n\nChương trình sau đại học:\n1. Bác sĩ Nội trú (GME)\n2. Thạc sĩ Điều dưỡng (MNUR)\n3. Thạc sĩ Khoa học Máy tính (MSC-CS)\n4. Thạc sĩ Kỹ thuật Cơ khí (MSC-ME)\n5. Thạc sĩ Kỹ thuật Điện (MSC-EE)\n6. Thạc sĩ Quản trị Kinh doanh về Đổi mới sáng tạo và Trí tuệ nhân tạo (MBA-AI)\n7. Tiến sĩ Khoa học Máy tính (PHD-CS).",
+    "faithfulness": 1.0,
+    "answer_relevancy": 1.0,
+    "context_precision": 1.0,
+    "context_recall": 0.5,
+    "intent": "program_info",
+    "category": "program"
+  },
+  {
+    "question": "Ngành Quản trị Kinh doanh học những gì?",
+    "answer": "Chương trình Cử nhân Quản trị Kinh doanh (BBA) tại VinUniversity kéo dài 4 năm và yêu cầu hoàn thành 120 tín chỉ. Chương trình cung cấp nền tảng kinh doanh toàn diện, giúp sinh viên phát triển năng lực quản trị, lãnh đạo, tư duy phân tích, khởi nghiệp và ra quyết định trong môi trường kinh doanh. Sinh viên sẽ được học các kỹ năng như phân tích kinh doanh, tài chính, quản trị du lịch – khách sạn, và năng lực số, dữ liệu và nghiên cứu.\n\nHọc phí cho chương trình này vào năm 2026 là 815,850,000 VND mỗi năm.",
+    "faithfulness": 1.0,
+    "answer_relevancy": 1.0,
+    "context_precision": 1.0,
+    "context_recall": 0.5,
+    "intent": "program_info",
+    "category": "program"
+  },
+  {
+    "question": "VinUni liên kết với trường đại học quốc tế nào?",
+    "answer": "VinUni hiện có hai đối tác chiến lược là Đại học Cornell và Đại học Pennsylvania, cả hai đều thuộc Ivy League và nằm trong top 15 thế giới. Ngoài ra, VinUni cũng đã ký hợp tác với hơn 35 đại học trong top 100 thế giới.",
+    "faithfulness": 1.0,
+    "answer_relevancy": 1.0,
+    "context_precision": 1.0,
+    "context_recall": 1.0,
+    "intent": "school_info",
+    "category": "school"
+  },
+  {
+    "question": "Chất lượng đào tạo của VinUni được đảm bảo như thế nào?",
+    "answer": "Chất lượng đào tạo của VinUni được đảm bảo thông qua nhiều yếu tố. Đội ngũ giảng viên tại VinUni có trình độ tiến sĩ trở lên, đến từ các trường đại học danh giá và có kinh nghiệm từ 14 quốc gia. Một số giảng viên thuộc top 2% nhà khoa học được trích dẫn nhiều nhất thế giới. VinUni duy trì tỷ lệ giảng viên/sinh viên thấp, tương đương với các trường top 10 thế giới, để đảm bảo sự quan tâm và cá nhân hóa trong giảng dạy. Chương trình giảng dạy của VinUni được đồng thiết kế và xác thực chất lượng bởi hai trường đại học hàng đầu thế giới là Cornell và Pennsylvania, và được xây dựng trên các tiêu chuẩn kiểm định quốc tế như AACSB, ABET, và ACEN.",
+    "faithfulness": 1.0,
+    "answer_relevancy": 1.0,
+    "context_precision": 0.5,
+    "context_recall": 1.0,
+    "intent": "school_info",
+    "category": "school"
+  },
+  {
+    "question": "Ký túc xá của VinUni như thế nào?",
+    "answer": "Ký túc xá của VinUni là một phần quan trọng trong trải nghiệm năm đầu tiên của sinh viên. Tất cả sinh viên năm nhất đều phải sống trong ký túc xá, nơi họ có cơ hội phát triển lòng tôn trọng và sự quan tâm đến người khác, cũng như học cách sống độc lập trong một cộng đồng đa dạng. Sinh viên cần hoàn thành các thủ tục và giấy tờ đăng ký trước khi chuyển vào. Ký túc xá cũng có các quy định về việc mời khách, trong đó khách cần được đăng ký trước và không được phép ở lại qua đêm trong phòng sinh viên.",
+    "faithfulness": 1.0,
+    "answer_relevancy": 1.0,
+    "context_precision": 0.5,
+    "context_recall": 0.5,
+    "intent": "general_question",
+    "category": "general"
+  },
+  {
+    "question": "Sinh hoạt ngoại khóa và câu lạc bộ tại VinUni có gì?",
+    "answer": "Tại VinUni, sinh viên có cơ hội tham gia nhiều hoạt động ngoại khóa và câu lạc bộ đa dạng. Các hoạt động ngoại khóa bao gồm các cuộc thi giải quyết vấn đề và Hackathon. Ngoài ra, sinh viên có thể tham gia vào các câu lạc bộ sinh viên với không gian riêng để sinh hoạt. Các tiện ích khác như bể bơi, phòng tập gym, và sân vận động cũng được cung cấp miễn phí tại Khu liên hợp thể thao, giúp sinh viên có thêm nhiều lựa chọn để phát triển bản thân và giải trí.",
+    "faithfulness": 1.0,
+    "answer_relevancy": 1.0,
+    "context_precision": 1.0,
+    "context_recall": 0.5,
+    "intent": "general_question",
+    "category": "general"
+  },
+  {
+    "question": "What is the tuition for Computer Science program?",
+    "answer": "Bạn đang quan tâm đến học phí ngành Khoa học Máy tính ở bậc Đại học, Thạc sĩ hay Tiến sĩ?",
+    "faithfulness": 0.0,
+    "answer_relevancy": 0.5,
+    "context_precision": 0.0,
+    "context_recall": 0.0,
+    "intent": "tuition_lookup",
+    "category": "tuition_en"
+  },
+  {
+    "question": "Cho tôi hỏi về VinUni",
+    "answer": "Trường Đại học VinUni, hay VinUniversity, tọa lạc tại Khu đô thị Vinhomes Ocean Park, xã Gia Lâm, Hà Nội. Đây là một cơ sở giáo dục đại học với cam kết tuyển sinh công bằng và hợp pháp, đảm bảo quyền lợi cao nhất cho thí sinh. Trường có các kênh liên hệ chính thức như website https://vinuni.edu.vn/, email admission@vinuni.edu.vn, và số điện thoại tuyển sinh 1800 8189. Ngoài ra, VinUni còn có trang Facebook chính thức tại https://www.facebook.com/vinuniversity để cung cấp thông tin và hỗ trợ thí sinh.",
+    "faithfulness": 1.0,
+    "answer_relevancy": 1.0,
+    "context_precision": 1.0,
+    "context_recall": 0.5,
+    "intent": "general_question",
+    "category": "vague"
+  },
+  {
+    "question": "Học phí và học bổng ngành Bác sĩ Y khoa như thế nào?",
+    "answer": "Học phí cho chương trình Bác sĩ Y khoa tại VinUniversity là 815.850.000 VNĐ mỗi năm. Mức học phí này chưa bao gồm khoản hỗ trợ 35% học phí do Tập đoàn Vingroup tài trợ, được tự động áp dụng cho tất cả sinh viên trúng tuyển và duy trì trong suốt thời gian học tập.",
+    "faithfulness": 1.0,
+    "answer_relevancy": 1.0,
+    "context_precision": 1.0,
+    "context_recall": 1.0,
+    "intent": "tuition_lookup",
+    "category": "multi_intent"
+  },
+  {
+    "question": "Xin chào, tôi muốn hỏi về tuyển sinh VinUni",
+    "answer": "Xin chào! Để ứng tuyển vào VinUniversity, bạn cần thực hiện các bước sau:\n1. Chuẩn bị hồ sơ bao gồm thông tin cá nhân, CV 1 trang theo mẫu của VinUni, bảng điểm cấp 3, chứng chỉ tiếng Anh, bài luận ngắn, hồ sơ ngoại khóa và các thành tích khác nếu có.\n2. Liên hệ với đường dây nóng tư vấn tuyển sinh 18008189 để được hướng dẫn chi tiết.\n\nCác mốc thời gian quan trọng cho kỳ tuyển sinh năm học 2026-2027 là:\n- Đợt 1 (Early Round): 15/10/2025 – 15/01/2026\n- Đợt 2 (Regular Round): 15/02 – 15/05/2026\n- Đợt 3 (Rolling Round): 15/06 – 15/08/2026\n\nBạn có thể tìm thêm thông tin chi tiết và đăng ký tham quan trường tại trang tuyển sinh của VinUni: https://admissions.vinuni.edu.vn/.",
+    "faithfulness": 1.0,
+    "answer_relevancy": 1.0,
+    "context_precision": 1.0,
+    "context_recall": 1.0,
+    "intent": "general_question",
+    "category": "greeting"
+  },
+  {
+    "question": "Học phí ngành Kỹ thuật Điện là bao nhiêu?",
+    "answer": "Bạn đang quan tâm đến học phí ngành Kỹ thuật Điện ở bậc Đại học hay Sau đại học (Thạc sĩ/Tiến sĩ) ạ?",
+    "faithfulness": 0.0,
+    "answer_relevancy": 0.5,
+    "context_precision": 0.0,
+    "context_recall": 0.0,
+    "intent": "tuition_lookup",
+    "category": "tuition"
+  },
+  {
+    "question": "Học phí ngành Tâm lý học năm 2026?",
+    "answer": "Học phí cho ngành Cử nhân Tâm lý học tại VinUniversity năm 2026 là 815,850,000 VND mỗi năm. Mức học phí này đã bao gồm các khoản phí đào tạo, cơ sở vật chất, và các dịch vụ hỗ trợ sinh viên. Ngoài ra, tất cả sinh viên trúng tuyển sẽ được hưởng khoản hỗ trợ 35% học phí từ Tập đoàn Vingroup, giúp giảm bớt gánh nặng tài chính trong suốt thời gian học tập.",
+    "faithfulness": 1.0,
+    "answer_relevancy": 1.0,
+    "context_precision": 1.0,
+    "context_recall": 1.0,
+    "intent": "tuition_lookup",
+    "category": "tuition"
+  },
+  {
+    "question": "Học phí ngành Truyền thông đa phương tiện?",
+    "answer": "Học phí cho chương trình Cử nhân Truyền thông Đa phương tiện tại VinUniversity năm 2026 là 815,850,000 VND mỗi năm. Chương trình này trang bị cho sinh viên nền tảng lý thuyết và kỹ năng đa nền tảng tiên tiến, cùng với kiến thức công nghệ tích hợp để thích ứng với sự phức tạp của thời đại thông tin và truyền thông mới. Sinh viên sẽ có cơ hội thực tập hoặc thực hiện dự án cuối khóa để áp dụng kiến thức vào thực tế.",
+    "faithfulness": 1.0,
+    "answer_relevancy": 1.0,
+    "context_precision": 1.0,
+    "context_recall": 1.0,
+    "intent": "tuition_lookup",
+    "category": "tuition"
+  },
+  {
+    "question": "Ngành Kinh tế có học phí bao nhiêu?",
+    "answer": "Học phí cho ngành Kinh tế học tại VinUniversity năm 2026 là 815.850.000 VNĐ mỗi năm. Học phí theo kỳ là 407.925.000 VNĐ và theo tín chỉ là 27.195.000 VNĐ. Lưu ý rằng mức học phí này chưa bao gồm khoản hỗ trợ 35% từ Tập đoàn Vingroup, được áp dụng tự động cho tất cả sinh viên trúng tuyển.",
+    "faithfulness": 0.0,
+    "answer_relevancy": 1.0,
+    "context_precision": 1.0,
+    "context_recall": 1.0,
+    "intent": "tuition_lookup",
+    "category": "tuition"
+  },
+  {
+    "question": "Học phí ngành Kỹ thuật Cơ khí là bao nhiêu?",
+    "answer": "Bạn đang quan tâm đến học phí ngành Kỹ thuật Cơ khí cho hệ Đại học hay Sau đại học?",
+    "faithfulness": 0.0,
+    "answer_relevancy": 1.0,
+    "context_precision": 0.0,
+    "context_recall": 0.0,
+    "intent": "tuition_lookup",
+    "category": "tuition"
+  },
+  {
+    "question": "Học phí ngành Khoa học Dữ liệu?",
+    "answer": "Chương trình Cử nhân Khoa học Dữ liệu tại VinUniversity kéo dài 4 năm toàn thời gian và yêu cầu hoàn thành 120 tín chỉ nếu chọn một ngành chính, hoặc 135 tín chỉ nếu kết hợp với một chuyên ngành phụ. Học phí cho chương trình này vào năm 2026 là 815,850,000 VND mỗi năm. Sinh viên sẽ được đào tạo để thu thập, quản lý, và phân tích dữ liệu lớn, áp dụng lý thuyết máy tính và thống kê, và phát triển kỹ năng lãnh đạo trong các nhóm đa ngành.",
+    "faithfulness": 1.0,
+    "answer_relevancy": 1.0,
+    "context_precision": 1.0,
+    "context_recall": 1.0,
+    "intent": "tuition_lookup",
+    "category": "tuition"
+  },
+  {
+    "question": "Học phí ngành Điều dưỡng có khác ngành khác không?",
+    "answer": "Chào bạn, để mình có thể so sánh học phí ngành Điều dưỡng với các ngành khác một cách chính xác nhất, bạn vui lòng cho mình biết bạn đang quan tâm đến bậc Đại học hay bậc học nào khác nhé?",
+    "faithfulness": 0.0,
+    "answer_relevancy": 0.5,
+    "context_precision": 0.0,
+    "context_recall": 0.0,
+    "intent": "tuition_lookup",
+    "category": "tuition"
+  },
+  {
+    "question": "Chương trình liên thông Vinschool có được giảm học phí không?",
+    "answer": "Hiện tại hệ thống chưa tìm thấy nguồn dữ liệu chắc chắn để trả lời câu hỏi này.",
+    "faithfulness": 0.5,
+    "answer_relevancy": 1.0,
+    "context_precision": 0.0,
+    "context_recall": 0.0,
+    "intent": "scholarship_lookup",
+    "category": "scholarship"
+  },
+  {
+    "question": "Học bổng Dean Choi Grant là gì?",
+    "answer": "Học bổng \"Dean Choi Grant by Soosan\" là một học bổng trị giá 10% học phí, được tài trợ bởi Tập đoàn Soosan. Học bổng này dành cho những sinh viên xuất sắc thuộc Viện Kinh doanh Quản trị (CBM) và Viện Kỹ thuật và Khoa học Máy tính (CECS) tại VinUniversity. Việc xét chọn học bổng dựa trên các tiêu chí do nhà tài trợ quy định.",
+    "faithfulness": 1.0,
+    "answer_relevancy": 1.0,
+    "context_precision": 1.0,
+    "context_recall": 1.0,
+    "intent": "scholarship_lookup",
+    "category": "scholarship"
+  },
+  {
+    "question": "Women in Tech scholarship có điều kiện gì?",
+    "answer": "Học bổng Women in Tech (WIT) tại VinUniversity có trị giá 5% học phí và dành cho các ứng viên nữ theo đuổi đam mê trong các lĩnh vực khoa học công nghệ.",
+    "faithfulness": 1.0,
+    "answer_relevancy": 0.5,
+    "context_precision": 1.0,
+    "context_recall": 0.5,
+    "intent": "scholarship_lookup",
+    "category": "scholarship"
+  },
+  {
+    "question": "Làm sao để nhận được học bổng Viện trưởng?",
+    "answer": "VinUniversity cung cấp nhiều loại học bổng cho sinh viên, bao gồm:\n1. Học bổng tài năng: Dành cho sinh viên có thành tích xuất sắc.\n2. Hỗ trợ Phát triển Giáo dục: Từ năm 2025 đến 2030, tất cả sinh viên nhập học sẽ được hỗ trợ 35% học phí cho toàn bộ thời gian học.\n3. Hỗ trợ tài chính: Dựa trên gia cảnh và nhu cầu thực tế của sinh viên, không phải dựa trên thành tích.",
+    "faithfulness": 1.0,
+    "answer_relevancy": 0.0,
+    "context_precision": 0.5,
+    "context_recall": 0.0,
+    "intent": "scholarship_lookup",
+    "category": "scholarship"
+  },
+  {
+    "question": "Tổng hỗ trợ tài chính tối đa được bao nhiêu?",
+    "answer": "Mức hỗ trợ tài chính tối đa tại VinUniversity không được xác định cụ thể bằng một con số cố định. Thay vào đó, mức hỗ trợ tài chính được xác định dựa trên tình hình tài chính đã được xác minh của gia đình ứng viên. Hội đồng Hỗ trợ tài chính sẽ xem xét cẩn thận từng hồ sơ để quyết định mức hỗ trợ phù hợp. Kết quả xét hỗ trợ tài chính được công bố vào ngày 15 hàng tháng.",
+    "faithfulness": 1.0,
+    "answer_relevancy": 1.0,
+    "context_precision": 0.5,
+    "context_recall": 0.5,
+    "intent": "scholarship_lookup",
+    "category": "scholarship"
+  },
+  {
+    "question": "Điều kiện duy trì học bổng 80% là gì?",
+    "answer": "Để duy trì học bổng 80% tại VinUniversity, sinh viên cần đạt điểm trung bình (GPA) tối thiểu là 2.5. Ngoài ra, sinh viên cần có kỷ luật tốt và không vi phạm nghiêm trọng các quy định của trường. VinUniversity sẽ xem xét kết quả học tập và kỷ luật của sinh viên mỗi năm để xác định liệu sinh viên có đủ điều kiện tiếp tục nhận học bổng hay không.",
+    "faithfulness": 1.0,
+    "answer_relevancy": 1.0,
+    "context_precision": 1.0,
+    "context_recall": 1.0,
+    "intent": "scholarship_lookup",
+    "category": "scholarship"
+  },
+  {
+    "question": "Học bổng có xét lại hàng năm không?",
+    "answer": "Học bổng tại VinUniversity được xét lại hàng năm. Để duy trì học bổng, sinh viên cần đạt điểm trung bình (GPA) tối thiểu 2.5 cho học bổng từ 50% đến 90%, và tối thiểu 3.2 cho học bổng 100% và toàn phần. Ngoài ra, sinh viên cần có kỷ luật tốt và không vi phạm nghiêm trọng các quy định của trường. Kết quả học tập và kỷ luật của sinh viên sẽ được xem xét mỗi năm để xác định liệu sinh viên có đủ điều kiện tiếp tục nhận học bổng hay không.",
+    "faithfulness": 1.0,
+    "answer_relevancy": 1.0,
+    "context_precision": 0.5,
+    "context_recall": 0.5,
+    "intent": "scholarship_lookup",
+    "category": "scholarship"
+  },
+  {
+    "question": "Hạn nộp hồ sơ đợt 2 năm 2026?",
+    "answer": "Hạn nộp hồ sơ đợt 2 năm 2026 của VinUniversity là từ ngày 15/02/2026 đến ngày 15/05/2026.",
+    "faithfulness": 1.0,
+    "answer_relevancy": 1.0,
+    "context_precision": 1.0,
+    "context_recall": 1.0,
+    "intent": "timeline_process",
+    "category": "timeline"
+  },
+  {
+    "question": "Hạn nộp đợt cuối năm 2026?",
+    "answer": "Hạn nộp hồ sơ đợt cuối năm 2026 tại VinUniversity là từ ngày 15/06/2026 đến ngày 15/08/2026 cho Kỳ tuyển sinh Đợt 3 – Rolling Round. Đây là cơ hội cuối cùng trong năm để nộp hồ sơ ứng tuyển vào trường.",
+    "faithfulness": 1.0,
+    "answer_relevancy": 1.0,
+    "context_precision": 1.0,
+    "context_recall": 1.0,
+    "intent": "timeline_process",
+    "category": "timeline"
+  },
+  {
+    "question": "Nộp hồ sơ sớm có lợi ích gì?",
+    "answer": "Nộp hồ sơ sớm tại VinUniversity mang lại nhiều lợi ích cho ứng viên. Đầu tiên, tỷ lệ cạnh tranh giữa các hồ sơ tương đối thấp, giúp tăng cơ hội trúng tuyển. Thứ hai, ứng viên có thể được miễn lệ phí tuyển sinh trị giá 2.000.000 VNĐ nếu tham gia các sự kiện do phòng tuyển sinh tổ chức. Cuối cùng, số lượng suất học bổng còn dồi dào, tạo cơ hội lớn hơn để nhận được hỗ trợ tài chính.",
+    "faithfulness": 1.0,
+    "answer_relevancy": 1.0,
+    "context_precision": 1.0,
+    "context_recall": 1.0,
+    "intent": "timeline_process",
+    "category": "timeline"
+  },
+  {
+    "question": "Quy trình nộp hồ sơ trực tuyến như thế nào?",
+    "answer": "Quy trình nộp hồ sơ trực tuyến tại VinUniversity bao gồm các bước sau:\n1. Chuẩn bị đầy đủ tài liệu theo danh mục yêu cầu.\n2. Đăng nhập vào Cổng thông tin ứng viên VinUni.\n3. Hoàn thiện và tải lên tất cả tài liệu yêu cầu ở định dạng PDF.\n4. Nộp hồ sơ trước hạn (23:59 ngày 15 hàng tháng).\n5. Chờ kết quả xét duyệt, kết quả sẽ được gửi đến email mà bạn đã đăng ký.",
+    "faithfulness": 1.0,
+    "answer_relevancy": 1.0,
+    "context_precision": 1.0,
+    "context_recall": 0.5,
+    "intent": "timeline_process",
+    "category": "timeline"
+  },
+  {
+    "question": "Phỏng vấn tuyển sinh VinUni như thế nào?",
+    "answer": "Phỏng vấn tuyển sinh tại VinUni là một phần của Vòng 2 trong quy trình xét duyệt. Vòng này bao gồm một cuộc phỏng vấn cá nhân hoặc thử thách dựa trên kịch bản với giảng viên. Ứng viên có thể chọn phỏng vấn trực tiếp hoặc trực tuyến qua Zoom. Mục tiêu của phỏng vấn là để giảng viên đánh giá hiệu suất tổng thể và mức độ phù hợp của ứng viên với VinUni và chương trình học. Ngoài ra, còn có các hoạt động khác giúp ứng viên hiểu rõ hơn về VinUni và ngược lại. Kết quả phỏng vấn sẽ ảnh hưởng đến quyết định mời nhập học vào một chương trình cụ thể dựa trên giới hạn số lượng sinh viên và ngưỡng do giảng viên thiết lập.",
+    "faithfulness": 1.0,
+    "answer_relevancy": 1.0,
+    "context_precision": 1.0,
+    "context_recall": 0.5,
+    "intent": "timeline_process",
+    "category": "timeline"
+  },
+  {
+    "question": "Được chọn mấy ngành để xét tuyển?",
+    "answer": "Hiện tại hệ thống chưa tìm thấy nguồn dữ liệu chắc chắn để trả lời câu hỏi này.",
+    "faithfulness": 0.0,
+    "answer_relevancy": 0.5,
+    "context_precision": 0.0,
+    "context_recall": 0.0,
+    "intent": "admission_requirement",
+    "category": "admission"
+  },
+  {
+    "question": "GPA bao nhiêu thì có thể đỗ VinUni?",
+    "answer": "VinUniversity không có một mức GPA cụ thể nào đảm bảo cho việc nhập học. Quá trình xét tuyển tại VinUni là toàn diện, không chỉ dựa vào các chỉ số học thuật mà còn xem xét nhiều yếu tố khác như tài năng, sáng tạo, và các phẩm chất cá nhân khác. Các ứng viên có lợi thế nếu thể hiện sự xuất sắc trong các lĩnh vực học thuật và có khả năng lãnh đạo, sáng tạo.",
+    "faithfulness": 1.0,
+    "answer_relevancy": 1.0,
+    "context_precision": 0.0,
+    "context_recall": 0.0,
+    "intent": "admission_requirement",
+    "category": "admission"
+  },
+  {
+    "question": "Yêu cầu tiếng Anh cho năm 2026?",
+    "answer": "Từ năm 2026, Trường Đại học VinUni yêu cầu tất cả sinh viên khi nhập học phải có chứng chỉ IELTS 6.5 Overall, không có kỹ năng nào dưới 6.0, hoặc chứng chỉ tương đương. Các kỳ thi tiếng Anh do VinUni tổ chức và Khóa tiếng Anh Dự bị sẽ không còn được tổ chức từ năm học này. Nếu bạn chưa có IELTS, bạn có thể tham gia các kỳ thi tiếng Anh chuẩn hóa khác như TOEFL iBT, PTE Academic, Cambridge English Qualifications hoặc VSTEP.",
+    "faithfulness": 1.0,
+    "answer_relevancy": 1.0,
+    "context_precision": 1.0,
+    "context_recall": 1.0,
+    "intent": "admission_requirement",
+    "category": "admission"
+  },
+  {
+    "question": "Có cần nộp GMAT hoặc GRE không?",
+    "answer": "Bạn đang quan tâm đến yêu cầu GMAT/GRE cho chương trình Đại học hay Sau đại học, và cho ngành học nào để mình hỗ trợ chính xác nhất ạ?",
+    "faithfulness": 0.0,
+    "answer_relevancy": 0.5,
+    "context_precision": 0.0,
+    "context_recall": 0.0,
+    "intent": "admission_requirement",
+    "category": "admission"
+  },
+  {
+    "question": "Hồ sơ gồm những gì?",
+    "answer": "Để ứng tuyển vào chương trình Bác sĩ Y khoa tại VinUniversity, hồ sơ cần bao gồm các yêu cầu sau:\n\n1. Chứng chỉ tiếng Anh: Ứng viên cần có chứng chỉ IELTS tối thiểu 6.0 hoặc tương đương.\n2. Chứng chỉ tiếng Việt: Đối với sinh viên quốc tế, cần đạt trình độ tiếng Việt A2 khi nhập học và B2 cho kỹ năng nghe & nói, B1 cho kỹ năng đọc & viết khi bước vào giai đoạn lâm sàng.\n3. Yêu cầu về Khoa học: Hoàn thành các môn Sinh học, Hóa học, và một môn khoa học bổ sung (Toán hoặc Vật lý) ở bậc Trung học phổ thông.\n4. Các tài liệu khác: Hồ sơ học tập, thư giới thiệu, và bài luận cá nhân có thể được yêu cầu để đánh giá toàn diện ứng viên.",
+    "faithfulness": 0.5,
+    "answer_relevancy": 0.5,
+    "context_precision": 0.0,
+    "context_recall": 0.0,
+    "intent": "admission_requirement",
+    "category": "admission"
+  },
+  {
+    "question": "Bài luận VinUni viết về chủ đề gì?",
+    "answer": "Bài luận tuyển sinh vào VinUni không có chủ đề cố định. Các giảng viên chỉ đưa ra một câu hỏi duy nhất và không có câu trả lời đúng hay sai. Mục đích là để ứng viên tự do thể hiện bản thân, cách suy nghĩ và phân tích vấn đề. Bài luận cần phản ánh quan điểm cá nhân của ứng viên và không được sao chép hay nhờ người khác viết hộ.",
+    "faithfulness": 1.0,
+    "answer_relevancy": 1.0,
+    "context_precision": 0.5,
+    "context_recall": 0.5,
+    "intent": "admission_requirement",
+    "category": "admission"
+  },
+  {
+    "question": "Ai có thể viết thư giới thiệu?",
+    "answer": "Để viết thư giới thiệu cho hồ sơ tuyển sinh vào VinUniversity, bạn cần cung cấp thông tin liên lạc của hai người có thể cho ý kiến về bạn. Những người này nên là giáo viên của bạn, vì họ có thể cung cấp phản hồi khách quan và chính xác về năng lực và thành tích của bạn. VinUniversity có thể liên hệ với những người này để thảo luận về đơn ứng tuyển của bạn hoặc yêu cầu thư giới thiệu từ họ sau này.",
+    "faithfulness": 1.0,
+    "answer_relevancy": 1.0,
+    "context_precision": 0.5,
+    "context_recall": 0.5,
+    "intent": "admission_requirement",
+    "category": "admission"
+  },
+  {
+    "question": "Yêu cầu xét tuyển thạc sĩ khác gì cử nhân?",
+    "answer": "Yêu cầu xét tuyển cho chương trình thạc sĩ và cử nhân tại VinUniversity có một số điểm khác biệt chính. Đối với chương trình cử nhân, ứng viên cần đạt điểm tối thiểu trong các bài kiểm tra tiếng Anh như Pearson hoặc Cambridge, và từ năm 2026, yêu cầu IELTS tối thiểu là 6.5. Trong khi đó, chương trình thạc sĩ thường yêu cầu ứng viên có bằng cử nhân liên quan và có thể yêu cầu kinh nghiệm làm việc hoặc nghiên cứu trước đó. Ngoài ra, cả hai chương trình đều có thể yêu cầu các bài kiểm tra đầu vào hoặc phỏng vấn để đánh giá năng lực và sự phù hợp của ứng viên.",
+    "faithfulness": 0.5,
+    "answer_relevancy": 1.0,
+    "context_precision": 0.0,
+    "context_recall": 0.5,
+    "intent": "admission_requirement",
+    "category": "admission"
+  },
+  {
+    "question": "Chương trình BSc Computer Science dạy những gì?",
+    "answer": "Chương trình Cử nhân Khoa học Máy tính tại VinUniversity kéo dài 4 năm và yêu cầu hoàn thành 120 tín chỉ. Chương trình cung cấp nền tảng vững chắc về khoa học máy tính, lập trình, thuật toán, hệ thống phần mềm, trí tuệ nhân tạo, và các kỹ năng giải quyết vấn đề công nghệ. Sinh viên có thể chọn học thêm ngành phụ như Robotics, Thiết kế sản phẩm, hoặc Khởi nghiệp, nâng tổng số tín chỉ lên 135. Học phí cho chương trình này vào năm 2026 là 815,850,000 VND mỗi năm.",
+    "faithfulness": 1.0,
+    "answer_relevancy": 1.0,
+    "context_precision": 1.0,
+    "context_recall": 0.5,
+    "intent": "program_info",
+    "category": "program"
+  },
+  {
+    "question": "Ngành Kỹ thuật Điện học gì?",
+    "answer": "Chương trình Cử nhân Kỹ thuật Cơ khí tại VinUniversity kéo dài 4 năm và yêu cầu hoàn thành 120 tín chỉ. Sinh viên sẽ được học các kiến thức nền tảng về thiết kế, chế tạo, cơ học, hệ thống cơ điện, năng lượng, ô tô và các ứng dụng kỹ thuật thực tiễn. Ngoài ra, chương trình cũng cung cấp các khóa học liên quan đến hệ thống vật lý thông minh và cơ điện tử, giúp sinh viên phát triển kỹ năng thiết kế và chế tạo các hệ thống tự động hiện đại.\n\nVề học phí, năm 2026, học phí cho ngành Kỹ thuật Cơ khí là 815,850,000 VND mỗi năm.",
+    "faithfulness": 1.0,
+    "answer_relevancy": 0.0,
+    "context_precision": 0.0,
+    "context_recall": 0.0,
+    "intent": "program_info",
+    "category": "program"
+  },
+  {
+    "question": "Chuyên ngành Tài chính trong Quản trị Kinh doanh học gì?",
+    "answer": "Chương trình Cử nhân Quản trị Kinh doanh (BBA) tại VinUniversity kéo dài 4 năm và yêu cầu hoàn thành 120 tín chỉ. Chương trình cung cấp nền tảng kinh doanh toàn diện, giúp sinh viên phát triển năng lực quản trị, lãnh đạo, tư duy phân tích, khởi nghiệp và ra quyết định trong môi trường kinh doanh. Sinh viên sẽ được học các kỹ năng như phân tích kinh doanh, tài chính, quản trị du lịch – khách sạn, và năng lực số, dữ liệu và nghiên cứu.\n\nHọc phí cho chương trình này vào năm 2026 là 815,850,000 VND mỗi năm.",
+    "faithfulness": 1.0,
+    "answer_relevancy": 0.5,
+    "context_precision": 0.5,
+    "context_recall": 0.5,
+    "intent": "program_info",
+    "category": "program"
+  },
+  {
+    "question": "Marketing trong ngành Quản trị Kinh doanh học những gì?",
+    "answer": "Chương trình Cử nhân Quản trị Kinh doanh (BBA) tại VinUniversity kéo dài 4 năm và yêu cầu hoàn thành 120 tín chỉ. Chương trình cung cấp nền tảng kinh doanh toàn diện, giúp sinh viên phát triển năng lực quản trị, lãnh đạo, tư duy phân tích, khởi nghiệp và ra quyết định trong môi trường kinh doanh. Sinh viên sẽ được học các kỹ năng như phân tích kinh doanh, tài chính, quản trị du lịch – khách sạn, và năng lực số, dữ liệu và nghiên cứu.\n\nHọc phí cho chương trình này vào năm 2026 là 815,850,000 VND mỗi năm.",
+    "faithfulness": 1.0,
+    "answer_relevancy": 0.5,
+    "context_precision": 0.5,
+    "context_recall": 0.0,
+    "intent": "program_info",
+    "category": "program"
+  },
+  {
+    "question": "Ngành Bác sĩ Y khoa đào tạo mấy năm?",
+    "answer": "Chương trình đào tạo Bác sĩ Y khoa (MD) tại VinUniversity kéo dài 6 năm và yêu cầu hoàn thành 180 tín chỉ. Chương trình này cung cấp nền tảng khoa học y sinh, kỹ năng lâm sàng, đạo đức nghề nghiệp và năng lực chăm sóc sức khỏe theo chuẩn quốc tế.",
+    "faithfulness": 1.0,
+    "answer_relevancy": 1.0,
+    "context_precision": 1.0,
+    "context_recall": 1.0,
+    "intent": "program_info",
+    "category": "program"
+  },
+  {
+    "question": "Chương trình điều dưỡng có gì đặc biệt?",
+    "answer": "Chương trình Cử nhân Điều dưỡng tại VinUniversity kéo dài 4 năm, yêu cầu hoàn thành 120 tín chỉ. Chương trình này cung cấp kiến thức khoa học sức khỏe, kỹ năng chăm sóc người bệnh, thực hành lâm sàng, giao tiếp y tế và đạo đức nghề nghiệp. Sinh viên tốt nghiệp có cơ hội làm việc tại Bệnh viện Đa khoa Quốc tế Vinmec với mức lương cạnh tranh và có thể học thêm các chuyên ngành phụ để mở rộng cơ hội nghề nghiệp. Học phí cho năm 2026 là 349,650,000 VND mỗi năm.",
+    "faithfulness": 1.0,
+    "answer_relevancy": 1.0,
+    "context_precision": 1.0,
+    "context_recall": 0.5,
+    "intent": "program_info",
+    "category": "program"
+  },
+  {
+    "question": "Chương trình trao đổi quốc tế có mấy trường?",
+    "answer": "Chương trình trao đổi quốc tế của VinUniversity cho phép sinh viên học tại các trường đối tác thuộc Top 100 ở Mỹ, Anh, Úc, Canada, Pháp. Sinh viên có thể tham gia chương trình trao đổi từ 1 đến 2 học kỳ tại các trường này.",
+    "faithfulness": 1.0,
+    "answer_relevancy": 0.5,
+    "context_precision": 0.5,
+    "context_recall": 0.5,
+    "intent": "program_info",
+    "category": "program"
+  },
+  {
+    "question": "Chuẩn kiểm định AACSB là gì?",
+    "answer": "Chuẩn kiểm định AACSB (Association to Advance Collegiate Schools of Business) là một tiêu chuẩn kiểm định quốc tế dành cho các chương trình đào tạo về kinh doanh và quản trị. Đây là một trong những tiêu chuẩn kiểm định uy tín nhất trong lĩnh vực này, đảm bảo rằng các chương trình đào tạo đáp ứng các tiêu chí nghiêm ngặt về chất lượng giáo dục, giảng dạy, và nghiên cứu.",
+    "faithfulness": 0.5,
+    "answer_relevancy": 1.0,
+    "context_precision": 0.5,
+    "context_recall": 0.5,
+    "intent": "school_info",
+    "category": "school"
+  },
+  {
+    "question": "Chuẩn kiểm định ABET có ý nghĩa gì?",
+    "answer": "Chuẩn kiểm định ABET có ý nghĩa quan trọng đối với các chương trình đào tạo kỹ thuật và khoa học máy tính tại VinUniversity. ABET là một tổ chức kiểm định quốc tế uy tín, đảm bảo rằng các chương trình đào tạo đáp ứng các tiêu chuẩn chất lượng cao về giáo dục kỹ thuật. Việc đạt được chuẩn kiểm định này giúp các chương trình của VinUniversity được công nhận rộng rãi, đảm bảo sinh viên nhận được một nền giáo dục chất lượng, chuẩn bị tốt cho sự nghiệp trong các lĩnh vực kỹ thuật và công nghệ.",
+    "faithfulness": 1.0,
+    "answer_relevancy": 1.0,
+    "context_precision": 0.5,
+    "context_recall": 0.5,
+    "intent": "school_info",
+    "category": "school"
+  },
+  {
+    "question": "Đội ngũ giảng viên VinUni như thế nào?",
+    "answer": "Đội ngũ giảng viên tại VinUni có trình độ tiến sĩ trở lên và đến từ các trường đại học danh giá trên thế giới. Họ có kinh nghiệm phong phú từ 14 quốc gia khác nhau, trong đó có những giáo sư thuộc top 2% nhà khoa học được trích dẫn nhiều nhất thế giới. VinUni duy trì tỷ lệ giảng viên/sinh viên thấp, tương đương với các trường top 10 thế giới, để đảm bảo sinh viên nhận được sự quan tâm và hỗ trợ cá nhân hóa tốt nhất.",
+    "faithfulness": 1.0,
+    "answer_relevancy": 1.0,
+    "context_precision": 1.0,
+    "context_recall": 1.0,
+    "intent": "school_info",
+    "category": "school"
+  },
+  {
+    "question": "Tỷ lệ sinh viên có việc làm sau tốt nghiệp?",
+    "answer": "Hiện tại hệ thống chưa tìm thấy nguồn dữ liệu chắc chắn để trả lời câu hỏi này.",
+    "faithfulness": 0.0,
+    "answer_relevancy": 1.0,
+    "context_precision": 0.5,
+    "context_recall": 0.5,
+    "intent": "school_info",
+    "category": "school"
+  },
+  {
+    "question": "Sinh viên đến từ những quốc gia nào?",
+    "answer": "Sinh viên tại VinUniversity đến từ 20 quốc gia khác nhau, tạo nên một cộng đồng đa dạng và phong phú về văn hóa. Điều này mang lại cơ hội giao lưu và học hỏi từ nhiều nền văn hóa khác nhau cho sinh viên.",
+    "faithfulness": 1.0,
+    "answer_relevancy": 0.5,
+    "context_precision": 0.5,
+    "context_recall": 1.0,
+    "intent": "school_info",
+    "category": "school"
+  },
+  {
+    "question": "Cơ sở vật chất VinUni có gì?",
+    "answer": "VinUniversity có cơ sở vật chất hiện đại và công nghệ cao, bao gồm các phòng thí nghiệm tiền lâm sàng và trung tâm mô phỏng để đào tạo các quy trình chuyên môn, kỹ năng giao tiếp và thực hành mô phỏng. Sinh viên có cơ hội trải nghiệm học tập thực tế tại hệ thống bệnh viện Vinmec và các bệnh viện hàng đầu khác. Ngoài ra, các phòng học như phòng C401 có sức chứa 236 người với 33 bàn tròn, 202 ghế ngồi và 6 máy chiếu, cùng các phòng E402 và E403 với sức chứa từ 96 đến 233 người, được trang bị bàn, ghế đào tạo, máy chiếu và TV.",
+    "faithfulness": 1.0,
+    "answer_relevancy": 1.0,
+    "context_precision": 1.0,
+    "context_recall": 0.5,
+    "intent": "school_info",
+    "category": "school"
+  },
+  {
+    "question": "Ứng dụng E-Lab khởi nghiệp là gì?",
+    "answer": "Ứng dụng E-Lab khởi nghiệp tại VinUniversity là một trung tâm hỗ trợ sinh viên phát triển và ra mắt các dự án khởi nghiệp. E-Lab cung cấp một hệ sinh thái hỗ trợ với sự hướng dẫn từ các cố vấn là những doanh nhân và nhà quản lý có kinh nghiệm. Sinh viên có cơ hội nhận tài trợ 2.000 USD cho giai đoạn ươm tạo và lên đến 10.000 USD cho các dự án xuất sắc trong vòng Tăng tốc. Đây là nơi sinh viên có thể khám phá, phát triển ý tưởng và thử nghiệm trong môi trường thực tế.",
+    "faithfulness": 1.0,
+    "answer_relevancy": 1.0,
+    "context_precision": 1.0,
+    "context_recall": 1.0,
+    "intent": "general_question",
+    "category": "general"
+  },
+  {
+    "question": "Thực tập từ năm nhất như thế nào?",
+    "answer": "Hiện tại hệ thống chưa tìm thấy nguồn dữ liệu chắc chắn để trả lời câu hỏi này.",
+    "faithfulness": 0.0,
+    "answer_relevancy": 0.0,
+    "context_precision": 0.0,
+    "context_recall": 0.0,
+    "intent": "general_question",
+    "category": "general"
+  },
+  {
+    "question": "Học phí đã bao gồm hoạt động ngoại khóa chưa?",
+    "answer": "Học phí tại VinUniversity đã bao gồm các hoạt động sinh viên như định hướng, dịch vụ y tế, câu lạc bộ, và sự kiện thể thao - văn hóa. Điều này áp dụng cho cả chương trình Cử nhân và Sau đại học.",
+    "faithfulness": 1.0,
+    "answer_relevancy": 1.0,
+    "context_precision": 1.0,
+    "context_recall": 1.0,
+    "intent": "general_question",
+    "category": "general"
+  },
+  {
+    "question": "Hỗ trợ tư vấn nghề nghiệp như thế nào?",
+    "answer": "VinUniversity cung cấp dịch vụ tư vấn nghề nghiệp toàn diện cho sinh viên. Sinh viên có cơ hội làm việc tại các doanh nghiệp hàng đầu như Ernst & Young, Deloitte, BCG, Vietnam Airlines, và nhiều công ty khác trong hệ sinh thái của Vingroup như Vinpearl, Vincom Retail, VinAI, VinFast, và Vinmec. Ngoài ra, sinh viên có thể tiếp tục học lên cao với các chương trình thạc sĩ hoặc tiến sĩ tại VinUni hoặc các trường đối tác. Dịch vụ tư vấn nghề nghiệp cũng bao gồm các hoạt động hỗ trợ như cố vấn học tập và tư vấn tâm lý để giúp sinh viên phát triển toàn diện và sẵn sàng cho thị trường lao động.",
+    "faithfulness": 1.0,
+    "answer_relevancy": 1.0,
+    "context_precision": 0.5,
+    "context_recall": 0.5,
+    "intent": "general_question",
+    "category": "general"
+  },
+  {
+    "question": "Địa chỉ và thông tin liên hệ VinUni?",
+    "answer": "Địa chỉ và thông tin liên hệ của Trường Đại học VinUni như sau:\n\n1. **Địa chỉ:** Khu đô thị Vinhomes Ocean Park, Đa Tốn, Gia Lâm, Hà Nội\n2. **Hotline:** 1800 8189 hoặc +84-2471089779\n3. **Email tuyển sinh:** admission@vinuni.edu.vn\n4. **Website chính thức:** [vinuni.edu.vn](https://vinuni.edu.vn/)\n5. **Fanpage Facebook:** [VinUniversity](https://www.facebook.com/vinuniversity/)",
+    "faithfulness": 1.0,
+    "answer_relevancy": 1.0,
+    "context_precision": 1.0,
+    "context_recall": 0.5,
+    "intent": "general_question",
+    "category": "contact"
+  },
+  {
+    "question": "Có được chuyển đổi ngành sau khi nhập học không?",
+    "answer": "Hiện tại hệ thống chưa tìm thấy nguồn dữ liệu chắc chắn để trả lời câu hỏi này.",
+    "faithfulness": 0.0,
+    "answer_relevancy": 0.5,
+    "context_precision": 0.0,
+    "context_recall": 0.0,
+    "intent": "admission_requirement",
+    "category": "policy"
+  },
+  {
+    "question": "Được phép nghỉ học tạm thời không?",
+    "answer": "Hiện tại hệ thống chưa tìm thấy nguồn dữ liệu chắc chắn để trả lời câu hỏi này.",
+    "faithfulness": 1.0,
+    "answer_relevancy": 0.5,
+    "context_precision": 0.5,
+    "context_recall": 0.0,
+    "intent": "general_question",
+    "category": "policy"
+  },
+  {
+    "question": "Học lại có được không?",
+    "answer": "Tại VinUniversity, sinh viên có thể học lại môn trong một số trường hợp như không đạt điểm yêu cầu, không đủ điều kiện dự thi do vắng mặt hoặc vi phạm quy chế, hoặc đăng ký học lại để cải thiện điểm. Điều này cho phép sinh viên có cơ hội nâng cao kết quả học tập của mình.",
+    "faithfulness": 1.0,
+    "answer_relevancy": 1.0,
+    "context_precision": 0.5,
+    "context_recall": 0.5,
+    "intent": "general_question",
+    "category": "policy"
+  },
+  {
+    "question": "Chính sách hoàn tiền học phí như thế nào?",
+    "answer": "Hiện tại hệ thống chưa tìm thấy nguồn dữ liệu chắc chắn để trả lời câu hỏi này.",
+    "faithfulness": 0.0,
+    "answer_relevancy": 0.0,
+    "context_precision": 0.0,
+    "context_recall": 0.0,
+    "intent": "general_question",
+    "category": "policy"
+  },
+  {
+    "question": "Thời gian đóng học phí khi nào?",
+    "answer": "Thời gian đóng học phí cho chương trình Cử nhân Kỹ thuật Cơ khí tại VinUniversity không được nêu rõ trong dữ liệu hiện có. Tuy nhiên, học phí cho năm 2026 là 815,850,000 VND mỗi năm, 407,925,000 VND mỗi học kỳ, hoặc 27,195,000 VND mỗi tín chỉ. Bạn có thể liên hệ trực tiếp với phòng tài chính của trường để biết thêm chi tiết về thời gian đóng học phí cụ thể.",
+    "faithfulness": 1.0,
+    "answer_relevancy": 0.5,
+    "context_precision": 0.0,
+    "context_recall": 0.0,
+    "intent": "general_question",
+    "category": "policy"
+  },
+  {
+    "question": "Lệ phí tuyển sinh là bao nhiêu?",
+    "answer": "Lệ phí xét tuyển tại VinUniversity là 2.000.000 đồng cho mỗi lần ứng viên được vào vòng phỏng vấn. Tuy nhiên, ứng viên có thể được miễn trừ phí này nếu tham gia các sự kiện tuyển sinh hoặc các cuộc thi do trường tổ chức, hoặc các trường hợp khác được phê duyệt theo từng chiến dịch tuyển sinh.",
+    "faithfulness": 1.0,
+    "answer_relevancy": 0.5,
+    "context_precision": 1.0,
+    "context_recall": 1.0,
+    "intent": "admission_requirement",
+    "category": "fee"
+  },
+  {
+    "question": "Phí ký túc xá thanh toán thế nào?",
+    "answer": "Phí ký túc xá tại VinUniversity có thể được thanh toán thông qua hai hình thức chính: thanh toán bằng thẻ Visa trực tiếp tại phòng Kế toán - Tài chính của VinUni hoặc chuyển tiền trực tuyến qua cổng Salesforce. Hướng dẫn chi tiết về cách chuyển tiền trực tuyến sẽ được gửi qua email cho sinh viên.",
+    "faithfulness": 0.5,
+    "answer_relevancy": 1.0,
+    "context_precision": 0.5,
+    "context_recall": 0.5,
+    "intent": "general_question",
+    "category": "fee"
+  },
+  {
+    "question": "Có chương trình học bổng 50% không?",
+    "answer": "VinUniversity có chương trình Học bổng Tài năng với giá trị từ 50% đến 100% học phí. Ngoài ra, còn có Học bổng Tài năng Chuyên ngành trị giá 50%, 60%, hoặc 70% học phí. Các học bổng này dành cho những ứng viên có thành tích học tập nổi trội và phẩm chất cá nhân tốt đẹp.",
+    "faithfulness": 1.0,
+    "answer_relevancy": 1.0,
+    "context_precision": 1.0,
+    "context_recall": 1.0,
+    "intent": "scholarship_lookup",
+    "category": "scholarship"
+  },
+  {
+    "question": "What are the admission requirements for international students?",
+    "answer": "Yêu cầu tuyển sinh cho sinh viên quốc tế tại VinUniversity bao gồm việc đánh giá toàn diện hồ sơ học tập của ứng viên. Điều này bao gồm số lượng tín chỉ đã hoàn thành, các khóa học giáo dục đại cương, và các khóa học chuẩn bị cho chuyên ngành. Ngoài ra, quy trình xét tuyển cũng công nhận các tài năng và sự sáng tạo của ứng viên, những yếu tố này không nhất thiết phải thể hiện qua các chỉ số học thuật truyền thống nhưng được xem là dấu hiệu tích cực về khả năng thành công tại VinUniversity và trong sự nghiệp sau này.",
+    "faithfulness": 1.0,
+    "answer_relevancy": 0.5,
+    "context_precision": 0.0,
+    "context_recall": 0.0,
+    "intent": "admission_requirement",
+    "category": "international"
+  },
+  {
+    "question": "Can I study part-time at VinUni?",
+    "answer": "Hiện tại hệ thống chưa tìm thấy nguồn dữ liệu chắc chắn để trả lời câu hỏi này.",
+    "faithfulness": 0.0,
+    "answer_relevancy": 0.0,
+    "context_precision": 0.0,
+    "context_recall": 0.5,
+    "intent": "program_info",
+    "category": "policy"
+  },
+  {
+    "question": "What is the medium of instruction at VinUni?",
+    "answer": "Ngôn ngữ giảng dạy tại VinUni là tiếng Anh. Tất cả sinh viên, bất kể trình độ tiếng Anh nào, đều phải học các môn bắt buộc về kỹ năng viết và kỹ năng học thuật bằng tiếng Anh trong năm học đầu tiên. Ngoài ra, có các khóa học giao tiếp tự chọn để phát triển kỹ năng cho sinh viên.",
+    "faithfulness": 1.0,
+    "answer_relevancy": 1.0,
+    "context_precision": 0.5,
+    "context_recall": 0.5,
+    "intent": "school_info",
+    "category": "general"
+  },
+  {
+    "question": "Is there an English preparation program?",
+    "answer": "VinUniversity sẽ ngừng tổ chức các Khóa học dự bị tiếng Anh (English Pathway) từ năm 2026. Do đó, ứng viên cần chuẩn bị và đảm bảo thỏa mãn yêu cầu về trình độ tiếng Anh trước khi nộp hồ sơ. Yêu cầu tối thiểu là IELTS 6.5 tổng thể, không kỹ năng nào dưới 6.0, hoặc các chứng chỉ tương đương khác như TOEFL iBT hoặc PTE Academic.",
+    "faithfulness": 1.0,
+    "answer_relevancy": 0.5,
+    "context_precision": 0.5,
+    "context_recall": 1.0,
+    "intent": "admission_requirement",
+    "category": "policy"
+  },
+  {
+    "question": "Làm sao để apply học bổng?",
+    "answer": "Để ứng tuyển học bổng tại VinUniversity, bạn không cần nộp đơn riêng cho học bổng dựa trên thành tích. Tất cả các ứng viên được nhận vào trường sẽ tự động được xét duyệt cho các học bổng này. Sau khi nhận được thư mời nhập học, bạn cần chấp nhận hoặc từ chối học bổng trong khung thời gian quy định. Khi đã chấp nhận, bạn sẽ nhận được hướng dẫn chi tiết về các bước tiếp theo, bao gồm chuẩn bị cho năm học đầu tiên tại VinUni.",
+    "faithfulness": 1.0,
+    "answer_relevancy": 1.0,
+    "context_precision": 0.5,
+    "context_recall": 1.0,
+    "intent": "scholarship_lookup",
+    "category": "scholarship"
+  },
+  {
+    "question": "Có chương trình liên thông từ cao đẳng không?",
+    "answer": "Hiện tại hệ thống chưa tìm thấy nguồn dữ liệu chắc chắn để trả lời câu hỏi này.",
+    "faithfulness": 1.0,
+    "answer_relevancy": 0.5,
+    "context_precision": 0.0,
+    "context_recall": 0.0,
+    "intent": "admission_requirement",
+    "category": "policy"
+  },
+  {
+    "question": "Học phí cho người nước ngoài có khác không?",
+    "answer": "Chính sách học phí tại VinUniversity không có sự khác biệt giữa sinh viên Việt Nam và sinh viên quốc tế. Tất cả sinh viên trúng tuyển, bao gồm cả sinh viên quốc tế, đều được hưởng khoản hỗ trợ 35% học phí từ Tập đoàn Vingroup. Điều này giúp giảm học phí còn khoảng 227 triệu VNĐ mỗi năm cho chương trình Điều dưỡng và khoảng 530 triệu VNĐ mỗi năm cho các chương trình khác.",
+    "faithfulness": 1.0,
+    "answer_relevancy": 1.0,
+    "context_precision": 0.5,
+    "context_recall": 1.0,
+    "intent": "tuition_lookup",
+    "category": "international"
+  },
+  {
+    "question": "What is the grading system at VinUni?",
+    "answer": "Hiện tại hệ thống chưa tìm thấy nguồn dữ liệu chắc chắn để trả lời câu hỏi này.",
+    "faithfulness": 0.0,
+    "answer_relevancy": 0.0,
+    "context_precision": 0.0,
+    "context_recall": 0.0,
+    "intent": "school_info",
+    "category": "general"
+  },
+  {
+    "question": "Có chương trình MBA không?",
+    "answer": "VinUniversity có chương trình Thạc sĩ Quản trị Kinh doanh về Đổi mới sáng tạo và Trí tuệ nhân tạo (MBA-AI). Chương trình này kéo dài 18 tháng và yêu cầu hoàn thành 60 tín chỉ. Nó tập trung vào quản trị kinh doanh, đổi mới sáng tạo, chuyển đổi số và ứng dụng trí tuệ nhân tạo trong quản lý, chiến lược và vận hành doanh nghiệp. Chương trình không có các kỳ thi truyền thống mà nhấn mạnh vào học hỏi thông qua phương pháp giảng dạy thực tế và tài liệu học tập.",
+    "faithfulness": 1.0,
+    "answer_relevancy": 1.0,
+    "context_precision": 1.0,
+    "context_recall": 1.0,
+    "intent": "program_info",
+    "category": "program"
+  },
+  {
+    "question": "Ngành nào khó tuyển nhất?",
+    "answer": "Hiện tại hệ thống chưa tìm thấy nguồn dữ liệu chắc chắn để trả lời câu hỏi này.",
+    "faithfulness": 0.0,
+    "answer_relevancy": 1.0,
+    "context_precision": 0.0,
+    "context_recall": 0.0,
+    "intent": "admission_requirement",
+    "category": "admission"
+  },
+  {
+    "question": "Có cần phỏng vấn khi nộp hồ sơ không?",
+    "answer": "Hiện tại hệ thống chưa tìm thấy nguồn dữ liệu chắc chắn để trả lời câu hỏi này.",
+    "faithfulness": 0.0,
+    "answer_relevancy": 0.5,
+    "context_precision": 0.0,
+    "context_recall": 0.0,
+    "intent": "admission_requirement",
+    "category": "admission"
+  },
+  {
+    "question": "Quy định về trang phục tại VinUni?",
+    "answer": "Hiện tại hệ thống gặp lỗi khi tạo câu trả lời. Bạn thử lại sau nhé.",
+    "faithfulness": 0.0,
+    "answer_relevancy": 0.0,
+    "context_precision": 0.0,
+    "context_recall": 0.0,
+    "intent": "general_question",
+    "category": "general"
+  },
+  {
+    "question": "Có dịch vụ y tế cho sinh viên không?",
+    "answer": "VinUniversity cung cấp dịch vụ y tế cho sinh viên với nhiều hỗ trợ khác nhau. Dịch vụ y tế tại VinUni sẵn sàng đưa ra khuyến nghị và chăm sóc y tế cho các vấn đề thường gặp như sơ cứu các vết thương không nghiêm trọng, cung cấp các loại thuốc không kê đơn, và tư vấn về sức khỏe tổng quát. Sinh viên có thể đến trực tiếp phòng y tế I119, tầng 1 nhà I mà không cần đặt hẹn trước. Ngoài ra, VinUni còn có dịch vụ tư vấn tâm lý và tổ chức các hoạt động chăm sóc đời sống tinh thần cho sinh viên.",
+    "faithfulness": 1.0,
+    "answer_relevancy": 1.0,
+    "context_precision": 1.0,
+    "context_recall": 0.5,
+    "intent": "general_question",
+    "category": "general"
+  },
+  {
+    "question": "Khi nào có kết quả học bổng?",
+    "answer": "Hiện tại hệ thống chưa tìm thấy nguồn dữ liệu chắc chắn để trả lời câu hỏi này.",
+    "faithfulness": 0.0,
+    "answer_relevancy": 1.0,
+    "context_precision": 0.0,
+    "context_recall": 0.0,
+    "intent": "scholarship_lookup",
+    "category": "timeline"
+  }
+]
