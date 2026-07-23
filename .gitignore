@@ -15,9 +15,6 @@ build/
 # OS
 .DS_Store
 
-# AI logs — tracked structure, ignored content
-.ai-log/*.jsonl
-
 postgres_data/
 qdrant_storage/
 node_modules/

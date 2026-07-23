@@ -26,6 +26,10 @@ ALLOWED_INTENTS = {
 ALLOWED_ANSWER_MODES = {"direct", "retrieve", "clarify", "history"}
 
 
+def _institution_name_for_query() -> str:
+    return settings.UNIVERSITY_SHORT_NAME.strip() or settings.UNIVERSITY_NAME.strip() or "configured university"
+
+
 def run_router_agent(state: PipelineState) -> PipelineState:
     original_query = (state.query or "").strip()
     if not original_query:
@@ -235,11 +239,11 @@ def _route_to_history(state: PipelineState, query: str) -> None:
 def _route_to_program_list(state: PipelineState, *, query: str | None = None) -> None:
     normalized = _normalize_for_matching(query)
     if any(token in normalized for token in ["sau dai hoc", "thac si", "tien si", "graduate", "master", "phd"]):
-        resolved = "cac nganh sau dai hoc thac si tien si VinUniversity"
+        resolved = f"cac nganh sau dai hoc thac si tien si {_institution_name_for_query()}"
     elif any(token in normalized for token in ["dai hoc", "cu nhan", "undergraduate", "bachelor"]):
-        resolved = "cac nganh dai hoc cu nhan VinUniversity"
+        resolved = f"cac nganh dai hoc cu nhan {_institution_name_for_query()}"
     else:
-        resolved = "tat ca cac nganh chuong trinh VinUniversity"
+        resolved = f"tat ca cac nganh chuong trinh {_institution_name_for_query()}"
     state.intent = "program_info"
     state.answer_mode = "retrieve"
     state.needs_retrieval = True
@@ -385,7 +389,13 @@ def _normalize_for_matching(value: str | None) -> str:
     normalized = normalized.replace("\u0111", "d").replace("\u0110", "D")
     normalized = normalized.lower().strip()
     normalized = " ".join(normalized.split())
-    return normalized.replace("nghanh", "nganh").replace("viuni", "vinuni")
+    return (
+        normalized
+        .replace("nghanh", "nganh")
+        .replace("dai hoc viet duc", "vgu")
+        .replace("viet duc", "vgu")
+        .replace("viuni", _institution_name_for_query().lower())
+    )
 
 
 def _looks_like_global_program_list(query: str | None) -> bool:
@@ -401,8 +411,9 @@ def _looks_like_global_program_list(query: str | None) -> bool:
     has_institution = any(
         token in q
         for token in [
-            "vinuni",
-            "vinuniversity",
+            "vgu",
+            "viet duc",
+            "vietnamese german university",
             "truong",
             "dao tao",
             "dang dao tao",

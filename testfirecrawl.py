@@ -25,4 +25,4 @@ if __name__ == "__main__":
     if not api_key:
         print("Error: FIRECRAWL_API_KEY environment variable not set")
         exit(1)
-    get_total_urls_firecrawl(api_key, "https://admissions.vinuni.edu.vn")
+    get_total_urls_firecrawl(api_key, "https://vgu.edu.vn/admission")

@@ -122,7 +122,9 @@ def _generate_rolling_summary(*, previous_summary: str, transcript: str) -> str 
 
 def _summary_system_prompt() -> str:
     return (
-        "You maintain rolling memory for a VinUniversity admissions chat assistant. "
+        "You maintain rolling memory for a "
+        f"{settings.UNIVERSITY_SHORT_NAME.strip() or settings.UNIVERSITY_NAME.strip()} "
+        "admissions chat assistant. "
         "Merge the previous summary with the recent transcript and return ONLY valid JSON "
         "with one key: summary. "
         "The summary should be concise, stable, and useful for future turns. "

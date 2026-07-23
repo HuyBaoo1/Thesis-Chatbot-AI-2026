@@ -15,6 +15,7 @@ import {
 } from "@/components/ui/field"
 import { Input } from "@/components/ui/input"
 import useAuth from "@/hooks/use-auth"
+import { universityShortName } from "@/lib/university"
 import { loginSchema, type LoginSchema } from "@/schemas/auth-schema"
 
 const LoginLayout = () => {
@@ -140,7 +141,7 @@ const LoginLayout = () => {
                     <img
                       className="h-11 w-auto"
                       src={logo}
-                      alt="VinUni AI Admissions"
+                      alt={`${universityShortName} AI Admissions`}
                     />
                   </Link>
                   <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-slate-950 text-white shadow-sm">
@@ -178,7 +179,7 @@ const LoginLayout = () => {
                           type="email"
                           autoComplete="email"
                           className="h-11 rounded-xl border-slate-200 bg-slate-50/50 px-3.5 text-[14px] text-slate-800 placeholder:text-slate-400 focus-visible:border-slate-400 focus-visible:bg-white focus-visible:shadow-[0_0_0_3px_rgba(15,23,42,0.06)]"
-                          placeholder="admin@vinuni.edu.vn"
+                          placeholder="admin@example.edu.vn"
                           {...form.register("email")}
                         />
                         <FieldError errors={[form.formState.errors.email]} />

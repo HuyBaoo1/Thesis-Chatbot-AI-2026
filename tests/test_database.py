@@ -2,14 +2,11 @@
 import pytest
 import httpx
 from uuid import uuid4
+from tests.config import invalid_origin, origin_headers, test_origin as configured_origin
 
 
 class TestLeadCRUD:
     """Tests for Lead CRUD operations via API."""
-
-    @pytest.fixture
-    def api_url(self):
-        return "https://a20-app-165-production.up.railway.app"
 
     def test_create_lead(self, api_url):
         """Test creating a new lead."""
@@ -21,7 +18,7 @@ class TestLeadCRUD:
                 "email": email,
                 "phone": "0123456789"
             },
-            headers={"Origin": "https://admin.vinunits.cloud"}
+            headers=origin_headers()
         )
         assert response.status_code == 200
         data = response.json()
@@ -39,7 +36,7 @@ class TestLeadCRUD:
                 "email": f"read_{uuid4()}@example.com",
                 "phone": "0123456789"
             },
-            headers={"Origin": "https://admin.vinunits.cloud"}
+            headers=origin_headers()
         )
         lead_id = response.json()["lead_id"]
 
@@ -50,7 +47,7 @@ class TestLeadCRUD:
                 "query": "Test query",
                 "lead_id": lead_id
             },
-            headers={"Origin": "https://admin.vinunits.cloud"},
+            headers=origin_headers(),
             timeout=60
         )
         assert response2.status_code == 200
@@ -67,7 +64,7 @@ class TestLeadCRUD:
                 "email": email,
                 "phone": "1111111111"
             },
-            headers={"Origin": "https://admin.vinunits.cloud"}
+            headers=origin_headers()
         )
         lead_id1 = response1.json()["lead_id"]
 
@@ -79,7 +76,7 @@ class TestLeadCRUD:
                 "email": email,
                 "phone": "2222222222"
             },
-            headers={"Origin": "https://admin.vinunits.cloud"}
+            headers=origin_headers()
         )
         lead_id2 = response2.json()["lead_id"]
 
@@ -98,7 +95,7 @@ class TestLeadCRUD:
                 "email": email,
                 "phone": "1111111111"
             },
-            headers={"Origin": "https://admin.vinunits.cloud"}
+            headers=origin_headers()
         )
         assert response1.status_code == 200
         lead_id1 = response1.json()["lead_id"]
@@ -111,7 +108,7 @@ class TestLeadCRUD:
                 "email": email,
                 "phone": "2222222222"
             },
-            headers={"Origin": "https://admin.vinunits.cloud"}
+            headers=origin_headers()
         )
         lead_id2 = response2.json()["lead_id"]
         assert lead_id1 == lead_id2
@@ -119,10 +116,6 @@ class TestLeadCRUD:
 
 class TestConversationStorage:
     """Tests for conversation data storage."""
-
-    @pytest.fixture
-    def api_url(self):
-        return "https://a20-app-165-production.up.railway.app"
 
     @pytest.fixture
     def lead_id(self, api_url):
@@ -133,7 +126,7 @@ class TestConversationStorage:
                 "email": f"storage_{uuid4()}@example.com",
                 "phone": f"0{uuid4().hex[:9]}"
             },
-            headers={"Origin": "https://admin.vinunits.cloud"}
+            headers=origin_headers()
         )
         return response.json()["lead_id"]
 
@@ -145,7 +138,7 @@ class TestConversationStorage:
                 "query": "First message",
                 "lead_id": lead_id
             },
-            headers={"Origin": "https://admin.vinunits.cloud"},
+            headers=origin_headers(),
             timeout=60
         )
         assert response.status_code == 200
@@ -163,7 +156,7 @@ class TestConversationStorage:
                     "query": f"Conversation {i+1} message",
                     "lead_id": lead_id
                 },
-                headers={"Origin": "https://admin.vinunits.cloud"},
+                headers=origin_headers(),
                 timeout=60
             )
             assert response.status_code == 200
@@ -185,7 +178,7 @@ class TestConversationStorage:
                     "lead_id": lead_id,
                     "conversation_id": conversation_id
                 },
-                headers={"Origin": "https://admin.vinunits.cloud"},
+                headers=origin_headers(),
                 timeout=60
             )
             assert response.status_code == 200
@@ -194,10 +187,6 @@ class TestConversationStorage:
 
 class TestMessagePersistence:
     """Tests for message data persistence."""
-
-    @pytest.fixture
-    def api_url(self):
-        return "https://a20-app-165-production.up.railway.app"
 
     @pytest.fixture
     def conversation_id(self, api_url):
@@ -209,7 +198,7 @@ class TestMessagePersistence:
                 "email": f"message_{uuid4()}@example.com",
                 "phone": f"0{uuid4().hex[:9]}"
             },
-            headers={"Origin": "https://admin.vinunits.cloud"}
+            headers=origin_headers()
         )
         lead_id = response.json()["lead_id"]
 
@@ -220,7 +209,7 @@ class TestMessagePersistence:
                 "query": "Initial message",
                 "lead_id": lead_id
             },
-            headers={"Origin": "https://admin.vinunits.cloud"},
+            headers=origin_headers(),
             timeout=60
         )
         return response2.json().get("conversation_id")

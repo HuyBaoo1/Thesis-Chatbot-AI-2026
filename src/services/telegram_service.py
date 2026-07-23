@@ -28,6 +28,14 @@ def _get_telegram_api_base() -> str:
 
 logger = logging.getLogger(__name__)
 
+
+def _configured_school_short_name() -> str:
+    return settings.UNIVERSITY_SHORT_NAME.strip() or settings.UNIVERSITY_NAME.strip()
+
+
+def _configured_school_label() -> str:
+    return settings.university_label
+
 _telegram_http_client: httpx.Client | None = None
 _client_lock = threading.Lock()
 
@@ -190,7 +198,7 @@ def _ask_for_contact(
     if include_intro:
         msg = (
             f"Xin chào {name}!\n\n"
-            "Mình là trợ lý tư vấn tuyển sinh của VinUniversity. "
+            f"Minh la tro ly tu van tuyen sinh cua {_configured_school_label()}. "
             "Bạn có thể hỏi mình về:\n\n"
             "- Chương trình đào tạo\n"
             "- Học phí, học bổng và hỗ trợ tài chính\n"
@@ -229,7 +237,7 @@ def _confirm_registration(
         "Hoàn tất!\n\n"
         f"Tên: <b>{name}</b>\n"
         f"{contact_type.title()}: <b>{contact}</b>\n\n"
-        "Bạn đã sẵn sàng sử dụng hệ thống tư vấn tuyển sinh VinUniversity.\n"
+        f"Ban da san sang su dung he thong tu van tuyen sinh {_configured_school_short_name()}.\n"
         "Bạn có thể hỏi mình về:\n\n"
         "- Chương trình đào tạo\n"
         "- Học phí và học bổng\n"
@@ -447,7 +455,7 @@ def _process_update_sync(update: dict) -> None:
                 send_message(
                     chat_id,
                     f"Cảm ơn {name}! Mình đã nhận được thông tin liên hệ của bạn. "
-                    "Bây giờ bạn có thể hỏi mình về VinUniversity nhé!",
+                    f"Bay gio ban co the hoi minh ve {_configured_school_short_name()} nhe!",
                     reply_markup={"remove_keyboard": True},
                 )
             except Exception as e:

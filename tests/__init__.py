@@ -1,1 +1,1 @@
-"""Test suite for A20-App-165 VinUni Admissions Chatbot."""
+"""Test suite for the configured university admissions chatbot."""

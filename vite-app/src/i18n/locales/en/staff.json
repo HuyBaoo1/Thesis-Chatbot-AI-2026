@@ -31,7 +31,7 @@
   "editDescription": "Update information, role, or password.",
   "fullName": "Full name",
   "namePlaceholder": "Nguyen Van A",
-  "emailPlaceholder": "staff@vinuni.edu.vn",
+  "emailPlaceholder": "staff@example.edu.vn",
   "password": "Password",
   "passwordPlaceholderCreate": "At least 6 characters",
   "passwordPlaceholderEdit": "Leave blank to keep current",

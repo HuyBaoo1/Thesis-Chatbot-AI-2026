@@ -1,6 +1,6 @@
 # Test Suite
 
-Comprehensive test suite for VinUni Admissions Chatbot.
+Comprehensive test suite for configured university admissions chatbot.
 
 ## Test Categories
 
@@ -61,7 +61,9 @@ pytest tests/test_load_stress.py -v
 
 ## Notes
 
-- Tests target the production API: `https://a20-app-165-production.up.railway.app`
+- Tests target `BACKEND_TEST_API_URL` when set; otherwise they use `http://127.0.0.1:8000` and skip cleanly if the backend is not running.
+- Use `BACKEND_TEST_ORIGIN` to set the allowed Origin header used by CORS/CSRF tests.
+- Set `BACKEND_TEST_CSRF_ENABLED=true` only when testing an environment with `COOKIE_SECURE=true`.
 - Some tests may create data (leads, conversations)
 - Rate limiting tests may take longer to complete
 - Load/stress tests require sufficient API quota

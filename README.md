@@ -1,8 +1,8 @@
-# A20 App — Hệ thống Tư vấn Tuyển sinh VinUni
+# VGU Admissions AI Chatbot Thesis
 
-> **AI-powered admissions counseling system** for VinUniversity. A multi-channel AI assistant that helps prospective students with admissions questions using RAG (Retrieval-Augmented Generation), while giving staff a full dashboard for lead management, knowledge base curation, and analytics.
+> **AI-powered admissions counseling system** for Vietnamese-German University (VGU) as a thesis project. The system keeps the original multi-channel RAG chatbot architecture, staff dashboard, knowledge-base management, OCR/crawler pipeline, and analytics flow, but the brand and runtime prompts are adapted for VGU.
 
-**[🌐 Trang công khai](https://a20-app-165.vinunits.cloud)** &nbsp;|&nbsp; **[🔐 Admin Dashboard](https://admin.vinunits.cloud)** &nbsp;|&nbsp; **[📽️ Slide giới thiệu](https://slides.a20-app-165.vinunits.cloud)** &nbsp;|&nbsp; **[📖 API Docs](https://a20-app-165-production.up.railway.app/docs)** &nbsp;|&nbsp; **[🧭 Architecture](docs/ARCHITECTURE_DIAGRAMS.md)** &nbsp;|&nbsp; **[📝 AI Logs](docs/AI_LOGS.md)**
+**[🌐 VGU official website](https://vgu.edu.vn/)** &nbsp;|&nbsp; **[🎓 VGU Admission](https://vgu.edu.vn/admission)** &nbsp;|&nbsp; **[🧭 Architecture](docs/ARCHITECTURE_DIAGRAMS.md)**
 
 ---
 
@@ -21,7 +21,9 @@
 
 ## Mô tả ngắn gọn
 
-A20 App là nền tảng tư vấn tuyển sinh thông minh dành cho **VinUniversity**. Hệ thống cung cấp một chatbot AI đa kênh (web, Telegram) có khả năng trả lời các câu hỏi về chương trình học, học bổng, học phí, yêu cầu đầu vào, và quy trình tuyển sinh. Phía backend, đội ngũ tư vấn viên (counselors) và quản trị viên (admins) có một dashboard đầy đủ để quản lý leads, theo dõi hội thoại, quản trị kho tri thức (knowledge base), xử lý tài liệu qua OCR, và phân tích dữ liệu.
+VGU Admissions AI Chatbot là nền tảng tư vấn tuyển sinh thông minh dành cho **Trường Đại học Việt Đức (Vietnamese-German University - VGU)**. Hệ thống cung cấp một chatbot AI đa kênh (web, Telegram/Zalo khi cấu hình token) có khả năng trả lời câu hỏi tuyển sinh dựa trên kho tri thức đã import/crawl, đồng thời cung cấp dashboard cho tư vấn viên và quản trị viên để quản lý leads, hội thoại, knowledge base, OCR và analytics.
+
+> **Ghi chú dữ liệu quan trọng:** Repo vẫn còn thư mục `vinuni_admissions_import/` và một số báo cáo đánh giá lịch sử dùng VinUni làm case study ban đầu. Không dùng dữ liệu đó để trả lời như thể là thông tin VGU. Trước khi demo/triển khai cho VGU, hãy crawl/import dữ liệu chính thức từ `https://vgu.edu.vn/`, đặc biệt các mục Admission, Study Programs, Tuition Fees và Scholarships.
 
 ---
 
@@ -70,8 +72,8 @@ A20 App là nền tảng tư vấn tuyển sinh thông minh dành cho **VinUnive
 - Thông báo đa kênh (in-app, Telegram)
 
 ### 🔐 Bảo mật — Tách biệt Public / Admin
-- **Trang công khai** (`a20-app-165.vinunits.cloud`): Chỉ chứa trang chủ và chat widget. **Không** hiển thị nút đăng nhập admin, không có route `/login` hay `/admin`.
-- **Trang quản trị** (`admin.vinunits.cloud`): Subdomain riêng biệt, chỉ chứa trang login và admin dashboard. Người dùng ngoài không thể biết sự tồn tại của cổng admin từ trang công khai.
+- **Trang công khai** (`<public-domain>`): Chỉ chứa trang chủ và chat widget. **Không** hiển thị nút đăng nhập admin, không có route `/login` hay `/admin`.
+- **Trang quản trị** (`<admin-domain>`): Subdomain riêng biệt, chỉ chứa trang login và admin dashboard. Người dùng ngoài không thể biết sự tồn tại của cổng admin từ trang công khai.
 - Hai bản build Vite tách biệt, chọn router qua `VITE_APP_MODE` env var (`public` / `admin`).
 - CORS backend chỉ cho phép origin từ các domain được phê duyệt.
 
@@ -86,8 +88,8 @@ A20 App là nền tảng tư vấn tuyển sinh thông minh dành cho **VinUnive
 ```mermaid
 flowchart TB
   subgraph L1["🔵 Experience Layer"]
-    PUB["🌐 Public Web App<br/>a20-app-165.vinunits.cloud"]
-    ADM["🔐 Admin Dashboard<br/>admin.vinunits.cloud"]
+    PUB["🌐 Public Web App<br/><public-domain>"]
+    ADM["🔐 Admin Dashboard<br/><admin-domain>"]
     TEL["📱 Telegram User"]
   end
 
@@ -290,7 +292,7 @@ flowchart TB
 
 ```bash
 git clone <repo-url>
-cd A20-App-165
+cd Thesis-Chatbot-AI-2026
 ```
 
 ### 2. Cấu hình biến môi trường
@@ -379,12 +381,12 @@ open http://localhost:8000/docs
 
 ## Hướng dẫn sử dụng sản phẩm
 
-### Tài khoản demo (dành cho Ban Giám Khảo)
+### Tài khoản demo (cấu hình local)
 
 | Vai trò | Email | Mật khẩu | Trang truy cập |
 |---------|-------|----------|----------------|
-| **Quản trị viên (Admin)** | `admin@test.com` | `admin123` | [admin.vinunits.cloud/login](https://admin.vinunits.cloud/login) |
-| **Cố vấn (Counselor)** | `hhh@gmail.com` | `12345678` | [admin.vinunits.cloud/login](https://admin.vinunits.cloud/login) |
+| **Quản trị viên (Admin)** | `admin@test.com` | `admin123` | `/login` hoặc `<admin-domain>/login` |
+| **Cố vấn (Counselor)** | `hhh@gmail.com` | `12345678` | `/login` hoặc `<admin-domain>/login` |
 
 > **Quyền hạn:**
 > - **Admin**: Toàn quyền — quản lý staff, leads, knowledge base, OCR, crawl, analytics, scholarship & tuition policies.
@@ -392,14 +394,14 @@ open http://localhost:8000/docs
 
 ### Dành cho Sinh viên (Chat Widget)
 
-1. Truy cập trang chat widget (được nhúng vào website VinUni hoặc truy cập trực tiếp)
+1. Truy cập trang chat widget (được nhúng vào website tuyển sinh hoặc truy cập trực tiếp)
 2. Nhập thông tin cơ bản (tên, email, số điện thoại) để bắt đầu hội thoại
 3. Đặt câu hỏi về chương trình học, học bổng, học phí, yêu cầu đầu vào...
 4. Chatbot AI sẽ trả lời tự động. Nếu cần hỗ trợ thêm, có thể yêu cầu **"Liên hệ tư vấn viên"** để được staff hỗ trợ trực tiếp
 
 ### Dành cho Tư vấn viên (Staff Dashboard)
 
-1. Truy cập **Admin Dashboard** tại **[admin.vinunits.cloud](https://admin.vinunits.cloud)**
+1. Truy cập **Admin Dashboard** tại `/login` hoặc domain admin đã cấu hình
    
    **Tài khoản demo:**
    - **Admin**: `admin@test.com` / `admin123`
@@ -443,26 +445,25 @@ API đầy đủ được document tại `/docs` (Swagger UI) và `/redoc`. Hỗ
 
 | Môi trường | URL | Nền tảng |
 |------------|-----|----------|
-| **Trang công khai** | [a20-app-165.vinunits.cloud](https://a20-app-165.vinunits.cloud) | Vercel (`vinunits` project) |
-| **Admin Dashboard** | [admin.vinunits.cloud](https://admin.vinunits.cloud) | Vercel (`a20-app-165-admin` project) |
-| **Slide giới thiệu** | [slides.a20-app-165.vinunits.cloud](https://slides.a20-app-165.vinunits.cloud) | Vercel (`slides-a20` project) |
-| **Backend API** | [a20-app-165-production.up.railway.app](https://a20-app-165-production.up.railway.app) | Railway |
-| **API Docs (Swagger)** | [a20-app-165-production.up.railway.app/docs](https://a20-app-165-production.up.railway.app/docs) | Railway |
+| **Trang công khai** | `<public-domain>` | Vercel hoặc static host tương đương |
+| **Admin Dashboard** | `<admin-domain>` | Vercel hoặc static host tương đương |
+| **Backend API** | `<backend-domain>` | Railway hoặc container host tương đương |
+| **API Docs (Swagger)** | `<backend-domain>/docs` | FastAPI |
 
 ### Cấu hình Vercel (Frontend)
 
 | Project | Domain | `VITE_APP_MODE` | Routes |
 |---------|--------|------------------|--------|
-| `vinunits` | a20-app-165.vinunits.cloud | `public` | `/`, `/widget` |
-| `a20-app-165-admin` | admin.vinunits.cloud | `admin` | `/login`, `/admin/*`, `/message` |
+| `<public-project>` | `<public-domain>` | `public` | `/`, `/widget` |
+| `<admin-project>` | `<admin-domain>` | `admin` | `/login`, `/admin/*`, `/message` |
 
-Cả 2 project build từ cùng GitHub repo (`a20-ai-thuc-chien/A20-App-165`), root `vite-app`, output `dist`. Khác biệt chỉ ở env var `VITE_APP_MODE` — quyết định router nào được sử dụng lúc build.
+Cả 2 project build từ cùng repo thesis, root `vite-app`, output `dist`. Khác biệt chỉ ở env var `VITE_APP_MODE` — quyết định router nào được sử dụng lúc build.
 
 ### Cấu hình Railway (Backend)
 
 | Biến | Giá trị |
 |------|--------|
-| `CORS_ALLOW_ORIGINS` | `http://localhost:5173`, `https://vinunits.vercel.app`, `https://vinunits.cloud`, `https://a20-app-165.vinunits.cloud`, `https://admin.vinunits.cloud` |
+| `CORS_ALLOW_ORIGINS` | `http://localhost:5173`, `http://127.0.0.1:5173`, `<public-domain>`, `<admin-domain>` |
 
 ---
 
@@ -473,13 +474,25 @@ Cả 2 project build từ cùng GitHub repo (`a20-ai-thuc-chien/A20-App-165`), r
 | Documentation Index | [docs/ARCHITECTURE_DOCUMENT_SET.md](docs/ARCHITECTURE_DOCUMENT_SET.md) |
 | System Design Overview | [docs/SYSTEM_DESIGN_OVERVIEW.md](docs/SYSTEM_DESIGN_OVERVIEW.md) |
 | Architecture Diagrams | [docs/ARCHITECTURE_DIAGRAMS.md](docs/ARCHITECTURE_DIAGRAMS.md) |
-| AI Logs | [docs/AI_LOGS.md](docs/AI_LOGS.md) |
 | Frontend Architecture | [docs/SYSTEM_DESIGN_FRONTEND.md](docs/SYSTEM_DESIGN_FRONTEND.md) |
 | Archived Supporting Docs | [docs/archive/README.md](docs/archive/README.md) |
 | AI Agent Guidelines | [CLAUDE.md](CLAUDE.md) |
 | Automation Scripts | [scripts/](scripts/) |
 
 ---
+
+## VGU runtime configuration and data
+
+Runtime university identity is controlled by:
+
+```env
+UNIVERSITY_NAME=Vietnamese-German University
+UNIVERSITY_SHORT_NAME=VGU
+UNIVERSITY_WEBSITE=https://vgu.edu.vn/
+UNIVERSITY_DOMAIN=vgu.edu.vn
+```
+
+Official VGU admissions content is `DATA_REQUIRED`. Use `vgu_admissions_import/manifest.template.json` to record source metadata before importing through the existing Knowledge Chunks, OCR Quick Processing, or Web Crawler flows. Do not use `vinuni_admissions_import/` as VGU answer data.
 
 ## License
 

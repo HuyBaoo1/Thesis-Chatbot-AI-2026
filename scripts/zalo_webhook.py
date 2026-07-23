@@ -6,7 +6,7 @@ Reads ZALO_BOT_TOKEN and ZALO_WEBHOOK_SECRET from the environment / .env
 
 Usage:
     python scripts/zalo_webhook.py getme
-    python scripts/zalo_webhook.py set https://a20-app-165-production.up.railway.app/api/zalo/webhook
+    python scripts/zalo_webhook.py set https://your-backend-domain.example.com/api/zalo/webhook
     python scripts/zalo_webhook.py info
     python scripts/zalo_webhook.py delete
 

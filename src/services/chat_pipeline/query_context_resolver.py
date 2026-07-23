@@ -2,6 +2,7 @@ import re
 from dataclasses import dataclass
 from typing import Any
 
+from src.core.config import settings
 from src.models.enums import MajorType
 from src.models.major import Major
 from src.services.chat_pipeline.types import PipelineState
@@ -24,6 +25,10 @@ class _MajorSnapshot:
     description: str | None
     degree_type: str | None
     major_type: MajorType | None
+
+
+def _institution_name_for_query() -> str:
+    return settings.UNIVERSITY_SHORT_NAME.strip() or settings.UNIVERSITY_NAME.strip() or "configured university"
 
 
 def resolve_query_context(state: PipelineState, db) -> PipelineState:
@@ -166,7 +171,10 @@ def _apply_common_typos(value: str) -> str:
         r"\bnghanh\b": "nganh",
         r"\bsau dao hoc\b": "sau dai hoc",
         r"\bthac sy\b": "thac si",
-        r"\bviuni\b": "vinuni",
+        r"\bdai hoc viet duc\b": "vgu",
+        r"\bviet duc\b": "vgu",
+        r"\bvietnamese[-\s]+german university\b": "vgu",
+        r"\bviuni\b": _institution_name_for_query(),
     }
     for pattern, replacement in replacements.items():
         text = re.sub(pattern, replacement, text, flags=re.IGNORECASE)
@@ -216,26 +224,26 @@ def _build_resolved_query(
     has_global_scholarship_context: bool,
 ) -> str | None:
     if _is_grad_program_list_query(normalized_query):
-        return "cac nganh sau dai hoc thac si tien si VinUniversity"
+        return f"cac nganh sau dai hoc thac si tien si {_institution_name_for_query()}"
 
     if _is_undergrad_program_list_query(normalized_query):
-        return "cac nganh dai hoc cu nhan VinUniversity"
+        return f"cac nganh dai hoc cu nhan {_institution_name_for_query()}"
 
     if _is_global_program_list_query(normalized_query):
-        return "tat ca cac nganh chuong trinh VinUniversity"
+        return f"tat ca cac nganh chuong trinh {_institution_name_for_query()}"
 
     if _is_global_scholarship_query(normalized_query) and not target_major:
-        return "tat ca cac loai hoc bong VinUniversity"
+        return f"tat ca cac loai hoc bong {_institution_name_for_query()}"
 
     if _is_generic_institution_scholarship_query(normalized_query) and not target_major:
-        return "tat ca cac loai hoc bong VinUniversity"
+        return f"tat ca cac loai hoc bong {_institution_name_for_query()}"
 
     if (
         _is_scholarship_follow_up_query(normalized_query)
         and has_global_scholarship_context
         and not target_major
     ):
-        return "dieu kien nhan hoc bong VinUniversity"
+        return f"dieu kien nhan hoc bong {_institution_name_for_query()}"
 
     is_follow_up = _is_contextual_follow_up(normalized_query)
     is_level_only = _is_level_only(normalized_query)
@@ -494,8 +502,9 @@ def _is_global_program_list_query(value: str) -> bool:
         "nhung nganh",
     ]
     institution_markers = [
-        "vinuni",
-        "vinuniversity",
+        "vgu",
+        "viet duc",
+        "vietnamese german university",
         "truong",
         "dao tao",
         "dang dao tao",
@@ -537,8 +546,9 @@ def _is_generic_institution_scholarship_query(value: str) -> bool:
         return False
 
     institution_markers = [
-        "vinuni",
-        "vinuniversity",
+        "vgu",
+        "viet duc",
+        "vietnamese german university",
         "truong",
         "nha truong",
     ]
@@ -615,7 +625,8 @@ def _looks_like_broad_major_list(value: str) -> bool:
     list_markers = [
         "tat ca cac nganh",
         "tat ca nganh",
-        "cac nganh vinuni",
+        "cac nganh vgu",
+        "cac nganh viet duc",
         "list of majors",
         "hien dang dao tao",
     ]

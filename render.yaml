@@ -77,33 +77,43 @@ services:
       - key: DEFAULT_MODEL
         value: claude-sonnet-4-20250514
       - key: GEMINI_API_KEY
-        value: AIzaSyCBj9aGTWu3LPsE1Wa2iuVtkshtpHeiodg
+        value:
       - key: GEMINI_ROUTER_MODEL
         value: gemini-3-flash-preview
 
-      # ---- Qdrant Cloud (verified - 3 collections) ----
+      # ---- Qdrant Cloud ----
       - key: QDRANT_HOST
-        value: 300b4253-3b3a-490f-8e5e-8c218810ce39.us-west-1-0.aws.cloud.qdrant.io
+        value: DATA_REQUIRED
       - key: QDRANT_PORT
         value: "443"
       - key: QDRANT_HTTPS
         value: "true"
       - key: QDRANT_API_KEY
-        value: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY2Nlc3MiOiJtIiwic3ViamVjdCI6ImFwaS1rZXk6Y2JkZGE4NzktNjQwMS00NDlhLWI5MWYtZjE3MzVmMGZiODA2In0.n6nbto7L5nF6VqtYhosp847id1T5jbv6dll0evU7Fwc
+        value:
       - key: QDRANT_KNOWLEDGE_COLLECTION
         value: knowledge_chunks
 
-      # ---- Cloudflare R2 (verified - vinuni-knowledge bucket) ----
+      # ---- University identity ----
+      - key: UNIVERSITY_NAME
+        value: DATA_REQUIRED
+      - key: UNIVERSITY_SHORT_NAME
+        value: DATA_REQUIRED
+      - key: UNIVERSITY_WEBSITE
+        value: DATA_REQUIRED
+      - key: UNIVERSITY_DOMAIN
+        value: DATA_REQUIRED
+
+      # ---- Cloudflare R2 ----
       - key: R2_ACCOUNT_ID
-        value: 8d4ba28ed096529750ca4423a7e23833
+        value:
       - key: R2_ACCESS_KEY_ID
-        value: 6a4c5237910a4722c53b4fd34928a676
+        value:
       - key: R2_SECRET_ACCESS_KEY
-        value: 64472f2f282bf636905655c2a5d33df00821d99ac058b4752d2a921ce3031f2f
+        value:
       - key: R2_BUCKET_NAME
-        value: vinuni-knowledge
+        value: DATA_REQUIRED
       - key: R2_PUBLIC_BASE_URL
-        value: https://pub-700b33596e42417cbbf319106b2cfee0.r2.dev
+        value: DATA_REQUIRED
 
       # ---- JWT / Auth ----
       - key: SECRET_KEY
@@ -178,9 +188,9 @@ services:
       - key: OCR_PIPELINE_VERSION
         value: v2
 
-      # ---- Firecrawl (verified) ----
+      # ---- Firecrawl ----
       - key: FIRECRAWL_API_KEY
-        value: fc-09505747b1bb4df4ae8db7e8e70814ba
+        value:
 
       # ---- Feature flags ----
       - key: HANDOFF_AI_FALLBACK_ENABLED

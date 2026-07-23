@@ -248,8 +248,9 @@ def _meaningful_tokens(value: str) -> list[str]:
         "toi",
         "trinh",
         "ve",
-        "vinuni",
-        "vinuniversity",
+        "vgu",
+        "viet",
+        "duc",
     }
     return [
         token
@@ -277,7 +278,9 @@ def _normalize_common_typos(value: str) -> str:
         "nghanh": "nganh",
         "sau dao hoc": "sau dai hoc",
         "thac sy": "thac si",
-        "viuni": "vinuni",
+        "dai hoc viet duc": "vgu",
+        "viet duc": "vgu",
+        "viuni": "vgu",
     }
     normalized = value
     for old, new in replacements.items():

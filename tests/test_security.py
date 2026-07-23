@@ -2,14 +2,11 @@
 import pytest
 import httpx
 from uuid import uuid4
+from tests.config import csrf_protection_enabled, invalid_origin, origin_headers, test_origin as configured_origin
 
 
 class TestCSRFProtection:
     """Tests for CSRF protection."""
-
-    @pytest.fixture
-    def api_url(self):
-        return "https://a20-app-165-production.up.railway.app"
 
     @pytest.fixture
     def lead_id(self, api_url):
@@ -20,12 +17,14 @@ class TestCSRFProtection:
                 "email": f"csrf_{uuid4()}@example.com",
                 "phone": f"0{uuid4().hex[:9]}"
             },
-            headers={"Origin": "https://admin.vinunits.cloud"}
+            headers=origin_headers()
         )
         return response.json()["lead_id"]
 
     def test_reject_missing_origin(self, api_url, lead_id):
         """Test that requests without Origin header are rejected."""
+        if not csrf_protection_enabled():
+            pytest.skip("Set BACKEND_TEST_CSRF_ENABLED=true to run CSRF rejection tests.")
         response = httpx.post(
             f"{api_url}/api/chat/query",
             json={
@@ -38,10 +37,12 @@ class TestCSRFProtection:
 
     def test_reject_invalid_origin(self, api_url, lead_id):
         """Test that requests from invalid origins are rejected."""
+        if not csrf_protection_enabled():
+            pytest.skip("Set BACKEND_TEST_CSRF_ENABLED=true to run CSRF rejection tests.")
         invalid_origins = [
-            "https://evil.com",
+            invalid_origin(),
             "https://attacker.net",
-            "http://localhost:3000",  # May be rejected if not in ALLOWED_ORIGINS
+            invalid_origin(),
         ]
 
         for origin in invalid_origins:
@@ -58,10 +59,7 @@ class TestCSRFProtection:
 
     def test_accept_valid_origin(self, api_url, lead_id):
         """Test that requests from valid origins are accepted."""
-        valid_origins = [
-            "https://admin.vinunits.cloud",
-            "https://vinunits.cloud",
-        ]
+        valid_origins = [configured_origin()]
 
         for origin in valid_origins:
             response = httpx.post(
@@ -79,10 +77,6 @@ class TestCSRFProtection:
 class TestRateLimiting:
     """Tests for rate limiting functionality."""
 
-    @pytest.fixture
-    def api_url(self):
-        return "https://a20-app-165-production.up.railway.app"
-
     def test_rate_limit_per_lead(self, api_url):
         """Test rate limiting per lead_id."""
         # Create lead
@@ -93,7 +87,7 @@ class TestRateLimiting:
                 "email": f"ratelimit_{uuid4()}@example.com",
                 "phone": f"0{uuid4().hex[:9]}"
             },
-            headers={"Origin": "https://admin.vinunits.cloud"}
+            headers=origin_headers()
         )
         lead_id = response.json()["lead_id"]
 
@@ -106,7 +100,7 @@ class TestRateLimiting:
                     "query": f"Rate limit test {i}",
                     "lead_id": lead_id
                 },
-                headers={"Origin": "https://admin.vinunits.cloud"},
+                headers=origin_headers(),
                 timeout=60
             )
             if response.status_code == 429:
@@ -128,7 +122,7 @@ class TestRateLimiting:
                     "email": f"iprate_{uuid4()}@example.com",
                     "phone": f"0{uuid4().hex[:9]}"
                 },
-                headers={"Origin": "https://admin.vinunits.cloud"}
+                headers=origin_headers()
             )
             lead_ids.append(response.json()["lead_id"])
 
@@ -141,7 +135,7 @@ class TestRateLimiting:
                     "query": f"IP rate test {i}",
                     "lead_id": lead_ids[i % len(lead_ids)]
                 },
-                headers={"Origin": "https://admin.vinunits.cloud"},
+                headers=origin_headers(),
                 timeout=60
             )
             if response.status_code == 429:
@@ -153,10 +147,6 @@ class TestInputValidation:
     """Tests for input validation and sanitization."""
 
     @pytest.fixture
-    def api_url(self):
-        return "https://a20-app-165-production.up.railway.app"
-
-    @pytest.fixture
     def lead_id(self, api_url):
         response = httpx.post(
             f"{api_url}/api/chat/init-lead",
@@ -165,7 +155,7 @@ class TestInputValidation:
                 "email": f"validation_{uuid4()}@example.com",
                 "phone": f"0{uuid4().hex[:9]}"
             },
-            headers={"Origin": "https://admin.vinunits.cloud"}
+            headers=origin_headers()
         )
         return response.json()["lead_id"]
 
@@ -184,7 +174,7 @@ class TestInputValidation:
                     "query": query,
                     "lead_id": lead_id
                 },
-                headers={"Origin": "https://admin.vinunits.cloud"},
+                headers=origin_headers(),
                 timeout=60
             )
             # Should not return 500 error
@@ -208,7 +198,7 @@ class TestInputValidation:
                     "query": query,
                     "lead_id": lead_id
                 },
-                headers={"Origin": "https://admin.vinunits.cloud"},
+                headers=origin_headers(),
                 timeout=60
             )
             # Should not reflect script tags in response
@@ -225,7 +215,7 @@ class TestInputValidation:
                 "query": long_query,
                 "lead_id": lead_id
             },
-            headers={"Origin": "https://admin.vinunits.cloud"},
+            headers=origin_headers(),
             timeout=60
         )
         # Should either accept or reject gracefully
@@ -235,7 +225,7 @@ class TestInputValidation:
         """Test that Vietnamese characters are handled correctly."""
         vietnamese_queries = [
             "Học phí ngành Y khoa là bao nhiêu?",
-            "Cho tôi biết về học bổng VinUni",
+            "Cho tôi biết về học bổng của trường",
             "Điều kiện tuyển sinh năm 2026",
         ]
 
@@ -246,7 +236,7 @@ class TestInputValidation:
                     "query": query,
                     "lead_id": lead_id
                 },
-                headers={"Origin": "https://admin.vinunits.cloud"},
+                headers=origin_headers(),
                 timeout=60
             )
             assert response.status_code == 200
@@ -270,7 +260,7 @@ class TestInputValidation:
                     "query": "Test query",
                     "lead_id": lead_id
                 },
-                headers={"Origin": "https://admin.vinunits.cloud"},
+                headers=origin_headers(),
                 timeout=60
             )
             assert response.status_code == 422
@@ -280,7 +270,7 @@ class TestInputValidation:
         response = httpx.post(
             f"{api_url}/api/chat/query",
             json={},
-            headers={"Origin": "https://admin.vinunits.cloud"},
+            headers=origin_headers(),
             timeout=60
         )
         assert response.status_code == 422
@@ -293,6 +283,6 @@ class TestInputValidation:
                 "full_name": "Test User"
                 # missing email and phone
             },
-            headers={"Origin": "https://admin.vinunits.cloud"}
+            headers=origin_headers()
         )
         assert response.status_code == 422

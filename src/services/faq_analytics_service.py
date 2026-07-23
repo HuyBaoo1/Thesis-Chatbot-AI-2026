@@ -121,10 +121,10 @@ def _normalize_common_question_typos(value: str) -> str:
         r"\bnghanhs\b": "nganh",
         r"\bsau dao hoc\b": "sau dai hoc",
         r"\bthac sy\b": "thac si",
-        r"\bvin\s+uni\b": "vinuni",
-        r"\bviuni\b": "vinuni",
-        r"\bvinuniversity\b": "vinuni",
-        r"\bvin\s+university\b": "vinuni",
+        r"\bdai hoc viet duc\b": "vgu",
+        r"\bviet duc\b": "vgu",
+        r"\bvietnamese[-\s]+german university\b": "vgu",
+        r"\bviuni\b": "vgu",
     }
     normalized = value
     for pattern, replacement in replacements.items():

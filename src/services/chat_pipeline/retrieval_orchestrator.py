@@ -5,10 +5,15 @@ import unicodedata
 from time import perf_counter
 from typing import Any
 
+from src.core.config import settings
 from src.services.chat_pipeline import toolset
 from src.services.chat_pipeline.types import PipelineState
 
 logger = logging.getLogger(__name__)
+
+
+def _institution_name_for_query() -> str:
+    return settings.UNIVERSITY_SHORT_NAME.strip() or settings.UNIVERSITY_NAME.strip() or "configured university"
 
 
 def run_retrieval_orchestrator(state: PipelineState, db) -> PipelineState:
@@ -394,7 +399,7 @@ def _major_list_to_candidates(output: dict[str, Any]) -> list[dict[str, Any]]:
             "chunk_id": None,
             "category": "MAJOR_INFO",
             "source": "major_table",
-            "content": "List of active VinUniversity majors/programs:\n" + "\n\n".join(sections),
+            "content": f"List of active {_institution_name_for_query()} majors/programs:\n" + "\n\n".join(sections),
             "score": 0.9,
             "path": "tool:get_all_majors",
             "tool_payload": {"items": items},
@@ -512,7 +517,13 @@ def _normalize_text(value: str | None) -> str:
     normalized = re.sub(r"[^\w\s]", " ", normalized, flags=re.UNICODE)
     normalized = normalized.lower().strip()
     normalized = " ".join(normalized.split())
-    return normalized.replace("nghanh", "nganh").replace("viuni", "vinuni")
+    return (
+        normalized
+        .replace("nghanh", "nganh")
+        .replace("dai hoc viet duc", "vgu")
+        .replace("viet duc", "vgu")
+        .replace("viuni", _institution_name_for_query().lower())
+    )
 
 
 def _looks_like_program_list(value: str) -> bool:
@@ -537,8 +548,9 @@ def _looks_like_program_list(value: str) -> bool:
         "nhung chuong trinh",
     ]
     institution_or_catalog_markers = [
-        "vinuni",
-        "vinuniversity",
+        "vgu",
+        "viet duc",
+        "vietnamese german university",
         "dao tao",
         "dang dao tao",
         "hien dang dao tao",

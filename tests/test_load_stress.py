@@ -3,15 +3,12 @@ import pytest
 import httpx
 import asyncio
 from uuid import uuid4
+from tests.config import invalid_origin, origin_headers, test_origin as configured_origin
 import time
 
 
 class TestConcurrentUsers:
     """Tests for concurrent user handling."""
-
-    @pytest.fixture
-    def api_url(self):
-        return "https://a20-app-165-production.up.railway.app"
 
     @pytest.mark.asyncio
     async def test_concurrent_chat_requests(self, api_url):
@@ -28,7 +25,7 @@ class TestConcurrentUsers:
                         "email": f"concurrent_{uuid4()}@example.com",
                         "phone": f"0{uuid4().hex[:9]}"
                     },
-                    headers={"Origin": "https://admin.vinunits.cloud"}
+                    headers=origin_headers()
                 )
                 lead_id = lead_response.json()["lead_id"]
 
@@ -39,7 +36,7 @@ class TestConcurrentUsers:
                         "query": f"Concurrent test query {index}",
                         "lead_id": lead_id
                     },
-                    headers={"Origin": "https://admin.vinunits.cloud"},
+                    headers=origin_headers(),
                     timeout=120
                 )
                 return query_response.status_code == 200
@@ -66,7 +63,7 @@ class TestConcurrentUsers:
                 "email": f"concurrent_same_{uuid4()}@example.com",
                 "phone": f"0{uuid4().hex[:9]}"
             },
-            headers={"Origin": "https://admin.vinunits.cloud"}
+            headers=origin_headers()
         )
         lead_id = response.json()["lead_id"]
 
@@ -78,7 +75,7 @@ class TestConcurrentUsers:
                         "query": f"Query {index} for same lead",
                         "lead_id": lead_id
                     },
-                    headers={"Origin": "https://admin.vinunits.cloud"},
+                    headers=origin_headers(),
                     timeout=120
                 )
                 return response.status_code == 200
@@ -97,10 +94,6 @@ class TestAPILatency:
     """Tests for API latency under various conditions."""
 
     @pytest.fixture
-    def api_url(self):
-        return "https://a20-app-165-production.up.railway.app"
-
-    @pytest.fixture
     def lead_id(self, api_url):
         response = httpx.post(
             f"{api_url}/api/chat/init-lead",
@@ -109,7 +102,7 @@ class TestAPILatency:
                 "email": f"latency_{uuid4()}@example.com",
                 "phone": f"0{uuid4().hex[:9]}"
             },
-            headers={"Origin": "https://admin.vinunits.cloud"}
+            headers=origin_headers()
         )
         return response.json()["lead_id"]
 
@@ -126,7 +119,7 @@ class TestAPILatency:
                     "email": f"latency_{uuid4()}@example.com",
                     "phone": f"0{uuid4().hex[:9]}"
                 },
-                headers={"Origin": "https://admin.vinunits.cloud"}
+                headers=origin_headers()
             )
             latency = time.time() - start
             latencies.append(latency)
@@ -149,7 +142,7 @@ class TestAPILatency:
                     "query": "Học phí ngành Y khoa là bao nhiêu?",
                     "lead_id": lead_id
                 },
-                headers={"Origin": "https://admin.vinunits.cloud"},
+                headers=origin_headers(),
                 timeout=120
             )
             latency = time.time() - start
@@ -164,10 +157,6 @@ class TestAPILatency:
 
 class TestThroughput:
     """Tests for system throughput."""
-
-    @pytest.fixture
-    def api_url(self):
-        return "https://a20-app-165-production.up.railway.app"
 
     def test_sustained_request_rate(self, api_url):
         """Test sustained request rate over time."""
@@ -185,7 +174,7 @@ class TestThroughput:
                         "email": f"throughput_{uuid4()}@example.com",
                         "phone": f"0{uuid4().hex[:9]}"
                     },
-                    headers={"Origin": "https://admin.vinunits.cloud"},
+                    headers=origin_headers(),
                     timeout=30
                 )
                 if response.status_code == 200:
@@ -205,10 +194,6 @@ class TestThroughput:
 class TestResourceLimits:
     """Tests for resource limit handling."""
 
-    @pytest.fixture
-    def api_url(self):
-        return "https://a20-app-165-production.up.railway.app"
-
     def test_large_conversation_history(self, api_url):
         """Test handling of conversation with large history."""
         # Create lead
@@ -219,7 +204,7 @@ class TestResourceLimits:
                 "email": f"largehistory_{uuid4()}@example.com",
                 "phone": f"0{uuid4().hex[:9]}"
             },
-            headers={"Origin": "https://admin.vinunits.cloud"}
+            headers=origin_headers()
         )
         lead_id = response.json()["lead_id"]
         conversation_id = None
@@ -233,7 +218,7 @@ class TestResourceLimits:
                     "lead_id": lead_id,
                     "conversation_id": conversation_id
                 },
-                headers={"Origin": "https://admin.vinunits.cloud"},
+                headers=origin_headers(),
                 timeout=120
             )
             assert response.status_code == 200
@@ -253,7 +238,7 @@ class TestResourceLimits:
                         "email": f"rapidfire_{uuid4()}@example.com",
                         "phone": f"0{uuid4().hex[:9]}"
                     },
-                    headers={"Origin": "https://admin.vinunits.cloud"},
+                    headers=origin_headers(),
                     timeout=30
                 )
                 if response.status_code == 200:

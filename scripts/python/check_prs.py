@@ -3,11 +3,34 @@
 
 import os
 import sys
+import subprocess
 import requests
+
+def get_repo_from_git():
+    try:
+        result = subprocess.run(
+            ["git", "config", "--get", "remote.origin.url"],
+            capture_output=True,
+            text=True,
+            check=True,
+        )
+        url = result.stdout.strip()
+        if "github.com" not in url:
+            return None
+        if url.startswith("git@github.com:"):
+            return url.replace("git@github.com:", "").replace(".git", "")
+        if "github.com/" in url:
+            return url.split("github.com/", 1)[1].replace(".git", "")
+    except Exception:
+        return None
+    return None
 
 def check_prs():
     token = os.getenv("GITHUB_TOKEN")
-    repo = os.getenv("GITHUB_REPO", "a20-ai-thuc-chien/A20-App-165")
+    repo = os.getenv("GITHUB_REPO") or get_repo_from_git()
+    if not repo:
+        print("Error: Could not determine repository. Set GITHUB_REPO=owner/repo.")
+        sys.exit(1)
     
     headers = {"Accept": "application/vnd.github.v3+json"}
     if token:

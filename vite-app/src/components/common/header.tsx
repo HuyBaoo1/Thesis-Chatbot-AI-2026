@@ -5,6 +5,7 @@ import { Menu, X } from "lucide-react"
 
 import logo from "@/assets/logo.png"
 import LanguageSwitcher from "@/components/common/language-switcher"
+import { universityShortName } from "@/lib/university"
 
 import { cn } from "@/lib/utils"
 
@@ -37,7 +38,7 @@ const Header = () => {
     <header className="sticky top-0 z-50 border-b border-border/50 bg-background/80 backdrop-blur-xl">
       <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-3 lg:px-10">
         <Link to="/" className="shrink-0">
-          <img className="h-12 w-auto" src={logo} alt="VinUni AI Admissions" />
+          <img className="h-12 w-auto" src={logo} alt={`${universityShortName} AI Admissions`} />
         </Link>
 
         <nav className="hidden items-center gap-2 md:flex">

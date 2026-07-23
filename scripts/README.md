@@ -31,7 +31,7 @@ scripts/
 - `force-restart-backend.ps1` - Force restart
 
 ### Data Management
-- `crawl-vinuni-full.ps1` - Crawl VinUni website
+- `crawl-vinuni-full.ps1` - Crawl the VGU admissions website
 - `generate-embeddings.ps1` / `regenerate-embeddings-simple.ps1` - Embeddings
 - `clear-and-regenerate-embeddings.ps1` / `reset-and-regenerate.ps1` - Clear & regenerate
 - `populate-analytics-data.ps1` / `populate-data-simple.ps1` - Populate data
@@ -56,17 +56,12 @@ scripts/
 - `create-tracking-api-key.ps1` - Create tracking API key
 - `upgrade-to-large-embeddings.ps1` - Upgrade embeddings
 
-### AI Logging
-- `windsurf-auto-log.ps1` / `kiro-auto-log.ps1` - Auto-log wrappers
-- `log-kiro-session.ps1` / `log-current-conversation.ps1` - Manual logging
+### Local Debugging
+- External AI prompt logging is disabled for this personal project.
+- Legacy local AI logging helpers have been removed.
 - `auto-fetch-pr-reviews.ps1` - Auto-fetch PR reviews
 
 ## Python (`python/`)
-
-### AI Prompt Logging
-- `log_hook.py` - Main AI prompt logger (called by all tools)
-- `cursor_log_hook.py` - Cursor backward-compatible entry
-- `windsurf_hook_adapter.py` - Windsurf hook adapter
 
 ### PR Review Automation
 - `fetch_pr_reviews.py` - Fetch PR reviews from GitHub
@@ -76,8 +71,7 @@ scripts/
 - `check_prs.py` - Check PR status
 
 ### Setup & Data
-- `setup_hooks.py` - Install git hooks for AI logging
-- `submit_log.py` - Submit AI logs to grading server
+- `setup_hooks.py` - Install personal GitHub PR review hooks
 - `export_crawl_markdown.py` - Export crawled content as Markdown
 - `cleanup_error_pages.py` - Cleanup error pages from database
 

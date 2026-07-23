@@ -1,31 +1,22 @@
 # Agent Guidelines
 
-## Mandatory Rules When Using AI Coding Agents
+## Personal Project Rules
 
-### 1. AI Prompt Logging (Automatic)
+### 1. AI Prompt Logging
 
-Prompts are **automatically logged** via hooks when you use any supported AI tool.
-You do **not** need to manually update `PROMPT_LOG.md`.
+External AI prompt logging is removed for this personal thesis project.
+Do not send prompts, chat transcripts, or AI coding sessions to third-party logging servers.
 
-Supported tools and their hook configs:
-| Tool | Config file |
-|---|---|
-| Claude Code | `.claude/settings.json` |
-| Cursor | `.cursor/hooks.json` |
-| OpenAI Codex | `.codex/hooks.json` |
-| Gemini CLI | `.gemini/settings.json` |
-| GitHub Copilot | `.github/hooks/hooks.json` |
-
-Logs are saved to `.ai-log/session.jsonl` and submitted automatically on `git push`.
+Do not add repository hooks or local helper scripts that record AI prompts unless the repository owner explicitly asks for them.
 
 ### 2. Setup (One-time)
 
 ```bash
-# Install git pre-push hook
+# Install personal Git hooks
 bash scripts/setup_hooks.sh
 ```
 
-`AI_LOG_SERVER` and `AI_LOG_API_KEY` are already set in `.env.example`.
+The hook installer must not configure `AI_LOG_SERVER`, `AI_LOG_API_KEY`, or any external AI log submission.
 
 ### 3. Pull Request Requirements
 
@@ -48,10 +39,8 @@ PR description format:
 
 If you are an AI coding agent (Claude Code, Cursor, Copilot, Codex, Gemini, etc.):
 
-- **MUST NOT** create a PR without first ensuring `bash scripts/setup_hooks.sh` has been run
 - **MUST** include a clear PR description with summary and changed files
-- **DO NOT** commit `.ai-log/*.jsonl` files (they are gitignored)
-- Logging happens automatically — do not ask users to log prompts manually
+- **DO NOT** re-enable automatic external AI prompt logging without explicit user approval
 
 <!-- BEGIN BEADS INTEGRATION v:1 profile:minimal hash:ca08a54f -->
 ## Beads Issue Tracker

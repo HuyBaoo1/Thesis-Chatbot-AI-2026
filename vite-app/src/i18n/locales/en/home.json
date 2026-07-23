@@ -1,6 +1,6 @@
 {
   "hero": {
-    "badge": "VinUni Smart Admissions Assistant",
+    "badge": "Smart Admissions Assistant",
     "headline": "Admissions Chatbot — ",
     "headlineHighlight": "ask anything.",
     "description": "Get accurate info about programs, tuition, scholarships, and application process — anytime.",
@@ -37,7 +37,7 @@
     "submit": "Continue to chat"
   },
   "chat": {
-    "title": "VinUni Admissions Assistant",
+    "title": "Admissions Assistant",
     "subtitle": "Always ready to help",
     "welcomeMessage": "Hello! I can help with info about {{highlight1}}, {{highlight2}}, {{highlight3}}, and {{highlight4}}.",
     "welcomeHighlights": {
@@ -66,10 +66,10 @@
     "errorCounselor": "Cannot send counselor request right now. Please try again later.",
     "counselorChattingWith": "Chatting with {{name}}",
     "aiWithCounselorInvited": "AI is assisting, a counselor has been invited",
-    "chattingWithAI": "Chatting with VinUni AI",
+    "chattingWithAI": "Chatting with AI",
     "counselorMessageBanner": "Messages from the counselor will be highlighted in this conversation.",
-    "aiSupportPendingCounselor": "While waiting for the counselor to respond, VinUni AI continues to assist you.",
-    "aiDirectlySupporting": "VinUni AI is directly supporting this conversation.",
+    "aiSupportPendingCounselor": "While waiting for the counselor to respond, AI continues to assist you.",
+    "aiDirectlySupporting": "AI is directly supporting this conversation.",
     "counselorMonitoring": "{{name}} is following and replying directly in this conversation.",
     "counselorInvitedNotice": "{{name}} has been invited to the conversation. While waiting for a response, AI can still assist you.",
     "counselorAlreadyChattingWith": "You are being assisted by {{name}} in this conversation.",
@@ -83,7 +83,7 @@
     "aiLabel": "AI",
     "messagesCount_one": "{{count}} message",
     "messagesCount_other": "{{count}} messages",
-    "aiName": "VinUni AI",
+    "aiName": "AI",
     "fallbackCounselorName": "admissions counselor",
     "welcomeIntro": "Hello! I can help with info about ",
     "welcomeAnd": " and "
@@ -102,17 +102,17 @@
     "messageTooLong": "Message is too long"
   },
   "programsTitle": "Academic Programs",
-  "programsSubtitle": "Discover VinUniversity's world-class undergraduate and graduate programs designed to shape future leaders.",
+  "programsSubtitle": "Explore programs after official sources have been imported or crawled into the knowledge base.",
   "learnMore": "Learn More",
   "readyToApply": "Ready to Apply?",
-  "applyCtaText": "Join thousands of students who chose VinUniversity for their higher education journey.",
+  "applyCtaText": "Find admissions information from official sources available in the system.",
   "applyNow": "Apply Now",
   "contactUs": "Contact Us",
   "noPrograms": "No programs available yet.",
   "credits": "credits",
   "years": "years",
   "scholarshipTitle": "Scholarships",
-  "scholarshipSubtitle": "Discover scholarship opportunities at VinUniversity.",
+  "scholarshipSubtitle": "Discover scholarship information after official data has been updated.",
   "noScholarships": "No scholarships available yet.",
   "scopeGlobal": "University-wide",
   "scopeMajorSpecific": "Major-specific",
@@ -166,32 +166,32 @@
       "stats": {
         "coverage": {
           "label": "Coverage",
-          "value": "Up to full tuition"
+          "value": "From official sources"
         },
         "approach": {
           "label": "Approach",
-          "value": "Holistic review"
+          "value": "Source-checked"
         },
         "decision": {
           "label": "Decision",
-          "value": "Announced with offer"
+          "value": "Per admission notice"
         }
       },
       "types": {
         "merit": {
           "title": "Merit Scholarship",
-          "value": "25% - 100%",
-          "description": "For high-achieving applicants with strong academic records."
+          "value": "Update from official sources",
+          "description": "Detailed figures appear only when official sources are in the knowledge base."
         },
         "needBased": {
           "title": "Need-based Support",
-          "value": "Flexible",
-          "description": "Additional financial support based on family circumstances."
+          "value": "Update from official sources",
+          "description": "This information must come from official documents or pages."
         },
         "talent": {
           "title": "Talent Scholarship",
-          "value": "Up to 75%",
-          "description": "For exceptional achievements in leadership, arts, sports, or innovation."
+          "value": "Update from official sources",
+          "description": "No support level is hard-coded without verified source data."
         }
       },
       "timelineTitle": "Support timeline",

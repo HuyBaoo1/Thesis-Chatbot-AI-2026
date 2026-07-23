@@ -1,7 +1,7 @@
 /**
- * VinUni AI Chat Widget — embeddable chat for external sites.
+ * VGU AI Chat Widget — embeddable chat for external sites.
  *
- * Usage: <script src="https://vinunits.cloud/widget.js" data-org="vinuni"></script>
+ * Usage: <script src="https://your-public-domain/widget.js" data-org="vgu"></script>
  *
  * The script injects a floating chat bubble + iframe pointing to
  * /widget?embed=true. No framework dependencies — vanilla JS.
@@ -12,11 +12,11 @@
   var script = document.currentScript
   if (!script) return
 
-  var ORG = script.getAttribute("data-org") || "vinuni"
+  var ORG = script.getAttribute("data-org") || "vgu"
   var rawUrl =
-    script.getAttribute("data-widget-url") || "https://vinunits.cloud"
+    script.getAttribute("data-widget-url") || window.location.origin
   // Only allow HTTPS URLs to prevent javascript: or data: URI injection
-  var WIDGET_URL = /^https:\/\/.+/.test(rawUrl) ? rawUrl : "https://vinunits.cloud"
+  var WIDGET_URL = /^https:\/\/.+/.test(rawUrl) ? rawUrl : window.location.origin
   var rawColor = script.getAttribute("data-primary") || "#0f172a"
   // Only allow valid hex (#rgb / #rrggbb) or rgb()/rgba() color strings
   var PRIMARY_COLOR = /^(#([0-9a-fA-F]{3}|[0-9a-fA-F]{6})|rgba?\(.+\))$/.test(rawColor)
@@ -32,8 +32,8 @@
 
   // ── Floating button ──────────────────────────────────────────────
   var bubble = document.createElement("button")
-  bubble.setAttribute("aria-label", "Chat with VinUni Admissions")
-  bubble.setAttribute("id", "vinuni-chat-bubble")
+  bubble.setAttribute("aria-label", "Chat with VGU Admissions")
+  bubble.setAttribute("id", "admissions-chat-bubble")
   bubble.innerHTML =
     '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>'
 
@@ -84,7 +84,7 @@
 
   // ── Container (bubble + iframe wrapper) ──────────────────────────
   var container = document.createElement("div")
-  container.setAttribute("id", "vinuni-chat-container")
+  container.setAttribute("id", "admissions-chat-container")
   container.style.cssText = "position:fixed;z-index:2147483646;"
   container.style[POSITION === "left" ? "left" : "right"] = "20px"
   container.style.bottom = "20px"
@@ -92,7 +92,7 @@
 
   // ── iframe wrapper ───────────────────────────────────────────────
   var frameWrapper = document.createElement("div")
-  frameWrapper.setAttribute("id", "vinuni-chat-frame-wrapper")
+  frameWrapper.setAttribute("id", "admissions-chat-frame-wrapper")
   frameWrapper.setAttribute("aria-hidden", "true")
   frameWrapper.style.cssText = [
     "display:none",
@@ -111,8 +111,8 @@
 
   // ── iframe ───────────────────────────────────────────────────────
   var iframe = document.createElement("iframe")
-  iframe.setAttribute("id", "vinuni-chat-iframe")
-  iframe.setAttribute("title", "VinUni Admissions Chat")
+  iframe.setAttribute("id", "admissions-chat-iframe")
+  iframe.setAttribute("title", "VGU Admissions Chat")
   iframe.setAttribute("allow", "microphone")
   // allow-same-origin is safe here: the iframe loads from WIDGET_URL (a
   // different origin than the embedding site), so it only has access to its
@@ -196,11 +196,11 @@
     if (event.origin !== _resolveWidgetOrigin()) return
     if (!event.data || typeof event.data !== "object") return
 
-    if (event.data.type === "vinuni-widget-ready") {
-      console.log("[VinUni Widget] Chat ready")
+    if (event.data.type === "admissions-widget-ready") {
+      console.log("[Admissions Widget] Chat ready")
     }
 
-    if (event.data.type === "vinuni-widget-close") {
+    if (event.data.type === "admissions-widget-close") {
       close()
     }
   })
@@ -249,5 +249,5 @@
     }, 200)
   })
 
-  console.log("[VinUni Widget] Loaded — click the chat bubble to start")
+  console.log("[Admissions Widget] Loaded — click the chat bubble to start")
 })()

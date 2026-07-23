@@ -2,14 +2,14 @@
 import pytest
 import httpx
 from uuid import uuid4
+from tests.config import invalid_origin, origin_headers, test_origin as configured_origin
 
 
 class TestMultiTurnConversation:
     """Tests for multi-turn conversation flow."""
 
     @pytest.fixture
-    def api_url_and_lead(self):
-        api_url = "https://a20-app-165-production.up.railway.app"
+    def api_url_and_lead(self, api_url):
         response = httpx.post(
             f"{api_url}/api/chat/init-lead",
             json={
@@ -17,7 +17,7 @@ class TestMultiTurnConversation:
                 "email": f"multiturn_{uuid4()}@example.com",
                 "phone": f"0{uuid4().hex[:9]}"
             },
-            headers={"Origin": "https://admin.vinunits.cloud"}
+            headers=origin_headers()
         )
         lead_id = response.json()["lead_id"]
         return api_url, lead_id
@@ -33,7 +33,7 @@ class TestMultiTurnConversation:
                 "query": "Học phí ngành Y khoa là bao nhiêu?",
                 "lead_id": lead_id
             },
-            headers={"Origin": "https://admin.vinunits.cloud"},
+            headers=origin_headers(),
             timeout=60
         )
         assert response1.status_code == 200
@@ -47,7 +47,7 @@ class TestMultiTurnConversation:
                 "lead_id": lead_id,
                 "conversation_id": conversation_id
             },
-            headers={"Origin": "https://admin.vinunits.cloud"},
+            headers=origin_headers(),
             timeout=60
         )
         assert response2.status_code == 200
@@ -64,7 +64,7 @@ class TestMultiTurnConversation:
                 "query": "Cho tôi biết về học bổng",
                 "lead_id": lead_id
             },
-            headers={"Origin": "https://admin.vinunits.cloud"},
+            headers=origin_headers(),
             timeout=60
         )
         conv_id = response1.json().get("conversation_id")
@@ -80,7 +80,7 @@ class TestMultiTurnConversation:
                 "lead_id": lead_id,
                 "conversation_id": conv_id
             },
-            headers={"Origin": "https://admin.vinunits.cloud"},
+            headers=origin_headers(),
             timeout=60
         )
         assert response2.status_code == 200
@@ -93,7 +93,7 @@ class TestMultiTurnConversation:
                 "lead_id": lead_id,
                 "conversation_id": conv_id
             },
-            headers={"Origin": "https://admin.vinunits.cloud"},
+            headers=origin_headers(),
             timeout=60
         )
         assert response3.status_code == 200
@@ -103,8 +103,7 @@ class TestConversationHistory:
     """Tests for conversation history retrieval."""
 
     @pytest.fixture
-    def api_url_and_lead(self):
-        api_url = "https://a20-app-165-production.up.railway.app"
+    def api_url_and_lead(self, api_url):
         response = httpx.post(
             f"{api_url}/api/chat/init-lead",
             json={
@@ -112,7 +111,7 @@ class TestConversationHistory:
                 "email": f"history_{uuid4()}@example.com",
                 "phone": f"0{uuid4().hex[:9]}"
             },
-            headers={"Origin": "https://admin.vinunits.cloud"}
+            headers=origin_headers()
         )
         lead_id = response.json()["lead_id"]
         return api_url, lead_id
@@ -128,7 +127,7 @@ class TestConversationHistory:
                 "query": "Cho tôi biết về quy trình tuyển sinh",
                 "lead_id": lead_id
             },
-            headers={"Origin": "https://admin.vinunits.cloud"},
+            headers=origin_headers(),
             timeout=60
         )
         assert response.status_code == 200
@@ -147,7 +146,7 @@ class TestConversationHistory:
                 "query": "Học phí và học bổng như thế nào?",
                 "lead_id": lead_id
             },
-            headers={"Origin": "https://admin.vinunits.cloud"},
+            headers=origin_headers(),
             timeout=60
         )
         assert response.status_code == 200
@@ -160,8 +159,7 @@ class TestConversationPersistence:
     """Tests for conversation data persistence."""
 
     @pytest.fixture
-    def api_url_and_lead(self):
-        api_url = "https://a20-app-165-production.up.railway.app"
+    def api_url_and_lead(self, api_url):
         response = httpx.post(
             f"{api_url}/api/chat/init-lead",
             json={
@@ -169,7 +167,7 @@ class TestConversationPersistence:
                 "email": f"persist_{uuid4()}@example.com",
                 "phone": f"0{uuid4().hex[:9]}"
             },
-            headers={"Origin": "https://admin.vinunits.cloud"}
+            headers=origin_headers()
         )
         lead_id = response.json()["lead_id"]
         return api_url, lead_id
@@ -186,7 +184,7 @@ class TestConversationPersistence:
                     "query": f"Câu hỏi thứ {i+1}",
                     "lead_id": lead_id
                 },
-                headers={"Origin": "https://admin.vinunits.cloud"},
+                headers=origin_headers(),
                 timeout=60
             )
             assert response.status_code == 200
@@ -203,7 +201,7 @@ class TestConversationPersistence:
                 "query": "Học phí ngành nào rẻ nhất?",
                 "lead_id": lead_id
             },
-            headers={"Origin": "https://admin.vinunits.cloud"},
+            headers=origin_headers(),
             timeout=60
         )
         assert response.status_code == 200

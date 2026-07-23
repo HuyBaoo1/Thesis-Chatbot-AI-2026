@@ -2,6 +2,7 @@ import { useEffect, useState } from "react"
 import { useSearchParams } from "react-router-dom"
 
 import HomeChatShell from "@/features/home/components/home-chat-shell"
+import { universityShortName, universityWebsite } from "@/lib/university"
 import useLeadStore from "@/stores/lead-store"
 
 const WidgetLayout = () => {
@@ -30,7 +31,7 @@ const WidgetLayout = () => {
     // safeOrigin is validated from the URL param set by widget.js.
     if (window.parent !== window && safeOrigin) {
       window.parent.postMessage(
-        { type: "vinuni-widget-ready" },
+        { type: "admissions-widget-ready" },
         safeOrigin,
       )
     }
@@ -59,7 +60,7 @@ const WidgetLayout = () => {
               AI
             </div>
             <span className="text-[13px] font-medium text-slate-700">
-              VinUni Admissions
+              {universityShortName} Admissions
             </span>
           </div>
         </div>
@@ -73,12 +74,12 @@ const WidgetLayout = () => {
       {/* Powered-by line */}
       <div className="shrink-0 border-t border-slate-200/40 px-4 py-2 text-center">
         <a
-          href="https://vinuni.edu.vn"
+          href={universityWebsite}
           target="_blank"
           rel="noopener noreferrer"
           className="text-[11px] text-slate-400 transition-colors hover:text-slate-600"
         >
-          Powered by VinUni AI
+          Powered by {universityShortName} AI
         </a>
       </div>
     </div>

@@ -2,14 +2,11 @@
 import pytest
 import httpx
 import uuid
+from tests.config import csrf_protection_enabled, invalid_origin, origin_headers, test_origin as configured_origin
 
 
 class TestChatQueryEndpoint:
     """Tests for /api/chat/query endpoint."""
-
-    @pytest.fixture
-    def api_url(self):
-        return "https://a20-app-165-production.up.railway.app"
 
     @pytest.fixture
     def lead_id(self, api_url):
@@ -21,7 +18,7 @@ class TestChatQueryEndpoint:
                 "email": f"test_{uuid.uuid4()}@example.com",
                 "phone": f"0{uuid.uuid4().hex[:9]}"
             },
-            headers={"Origin": "https://admin.vinunits.cloud"}
+            headers=origin_headers()
         )
         assert response.status_code == 200
         return response.json()["lead_id"]
@@ -34,7 +31,7 @@ class TestChatQueryEndpoint:
                 "query": "Cho tôi biết về học phí ngành Y khoa",
                 "lead_id": lead_id
             },
-            headers={"Origin": "https://admin.vinunits.cloud"},
+            headers=origin_headers(),
             timeout=60
         )
         assert response.status_code == 200
@@ -47,7 +44,7 @@ class TestChatQueryEndpoint:
         response = httpx.post(
             f"{api_url}/api/chat/query",
             json={"query": "Cho tôi biết về học phí"},
-            headers={"Origin": "https://admin.vinunits.cloud"},
+            headers=origin_headers(),
             timeout=60
         )
         assert response.status_code == 422
@@ -60,7 +57,7 @@ class TestChatQueryEndpoint:
                 "query": "Cho tôi biết về học phí",
                 "lead_id": "invalid-uuid"
             },
-            headers={"Origin": "https://admin.vinunits.cloud"},
+            headers=origin_headers(),
             timeout=60
         )
         assert response.status_code == 422
@@ -73,7 +70,7 @@ class TestChatQueryEndpoint:
                 "query": "",
                 "lead_id": lead_id
             },
-            headers={"Origin": "https://admin.vinunits.cloud"},
+            headers=origin_headers(),
             timeout=60
         )
         # Should either succeed with clarify response or return 422
@@ -81,13 +78,15 @@ class TestChatQueryEndpoint:
 
     def test_chat_query_csrf_rejection(self, api_url, lead_id):
         """Test CSRF protection rejects invalid origin."""
+        if not csrf_protection_enabled():
+            pytest.skip("Set BACKEND_TEST_CSRF_ENABLED=true to run CSRF rejection tests.")
         response = httpx.post(
             f"{api_url}/api/chat/query",
             json={
                 "query": "Test query",
                 "lead_id": lead_id
             },
-            headers={"Origin": "https://evil.com"},
+            headers={"Origin": invalid_origin()},
             timeout=60
         )
         assert response.status_code == 403
@@ -95,10 +94,6 @@ class TestChatQueryEndpoint:
 
 class TestInitLeadEndpoint:
     """Tests for /api/chat/init-lead endpoint."""
-
-    @pytest.fixture
-    def api_url(self):
-        return "https://a20-app-165-production.up.railway.app"
 
     def test_init_lead_success(self, api_url):
         """Test successful lead creation."""
@@ -109,7 +104,7 @@ class TestInitLeadEndpoint:
                 "email": f"test_{uuid.uuid4()}@example.com",
                 "phone": f"0{uuid.uuid4().hex[:9]}"
             },
-            headers={"Origin": "https://admin.vinunits.cloud"}
+            headers=origin_headers()
         )
         assert response.status_code == 200
         data = response.json()
@@ -128,7 +123,7 @@ class TestInitLeadEndpoint:
                 "email": email,
                 "phone": "0123456789"
             },
-            headers={"Origin": "https://admin.vinunits.cloud"}
+            headers=origin_headers()
         )
         assert response1.status_code == 200
         lead_id1 = response1.json()["lead_id"]
@@ -141,7 +136,7 @@ class TestInitLeadEndpoint:
                 "email": email,
                 "phone": "0987654321"
             },
-            headers={"Origin": "https://admin.vinunits.cloud"}
+            headers=origin_headers()
         )
         assert response2.status_code == 200
         lead_id2 = response2.json()["lead_id"]
@@ -156,7 +151,7 @@ class TestInitLeadEndpoint:
                 "full_name": "Test User"
                 # missing email and phone
             },
-            headers={"Origin": "https://admin.vinunits.cloud"}
+            headers=origin_headers()
         )
         assert response.status_code == 422
 
@@ -169,7 +164,7 @@ class TestInitLeadEndpoint:
                 "email": "not-an-email",
                 "phone": "0123456789"
             },
-            headers={"Origin": "https://admin.vinunits.cloud"}
+            headers=origin_headers()
         )
         assert response.status_code == 422
 
@@ -177,16 +172,12 @@ class TestInitLeadEndpoint:
 class TestCORs:
     """Tests for CORS configuration."""
 
-    @pytest.fixture
-    def api_url(self):
-        return "https://a20-app-165-production.up.railway.app"
-
     def test_cors_allowed_origin(self, api_url):
-        """Test CORS allows admin.vinunits.cloud."""
+        """Test CORS allows configured test origin."""
         response = httpx.options(
             f"{api_url}/api/chat/query",
             headers={
-                "Origin": "https://admin.vinunits.cloud",
+                "Origin": configured_origin(),
                 "Access-Control-Request-Method": "POST",
                 "Access-Control-Request-Headers": "Content-Type"
             },
@@ -197,10 +188,12 @@ class TestCORs:
 
     def test_cors_rejected_origin(self, api_url):
         """Test CORS rejects unknown origin for actual request."""
+        if not csrf_protection_enabled():
+            pytest.skip("Set BACKEND_TEST_CSRF_ENABLED=true to run CSRF rejection tests.")
         response = httpx.post(
             f"{api_url}/api/chat/query",
             json={"query": "test", "lead_id": str(uuid.uuid4())},
-            headers={"Origin": "https://unknown-site.com"},
+            headers={"Origin": invalid_origin()},
             timeout=60
         )
         assert response.status_code == 403
@@ -208,10 +201,6 @@ class TestCORs:
 
 class TestRateLimiting:
     """Tests for rate limiting."""
-
-    @pytest.fixture
-    def api_url(self):
-        return "https://a20-app-165-production.up.railway.app"
 
     def test_rate_limit_on_query(self, api_url):
         """Test rate limiting on chat query endpoint."""
@@ -223,7 +212,7 @@ class TestRateLimiting:
                 "email": f"ratetest_{uuid.uuid4()}@example.com",
                 "phone": f"0{uuid.uuid4().hex[:9]}"
             },
-            headers={"Origin": "https://admin.vinunits.cloud"}
+            headers=origin_headers()
         )
         lead_id = lead_response.json()["lead_id"]
 
@@ -233,7 +222,7 @@ class TestRateLimiting:
             response = httpx.post(
                 f"{api_url}/api/chat/query",
                 json={"query": f"Test query {i}", "lead_id": lead_id},
-                headers={"Origin": "https://admin.vinunits.cloud"},
+                headers=origin_headers(),
                 timeout=60
             )
             if response.status_code == 429:

@@ -193,75 +193,10 @@ def _is_global_scholarship_overview_request(state: PipelineState) -> bool:
 
 
 def _build_global_scholarship_answer(state: PipelineState) -> str | None:
-    text = _combined_candidate_text(state)
-    normalized = _normalize_for_matching(text)
-    if (
-        "hoc bong" not in normalized
-        and "scholarship" not in normalized
-        and "ho tro tai chinh" not in normalized
-    ):
-        return None
-
-    lines: list[str] = []
-
-    if "35%" in text and "2025" in text and "2030" in text:
-        lines.append(
-            "- Hỗ trợ Phát triển Giáo dục 35% học phí cho toàn bộ sinh viên nhập học giai đoạn 2025-2030, áp dụng cho toàn bộ thời gian học."
-        )
-
-    merit_levels: list[str] = []
-    if "chu tich truong" in normalized:
-        merit_levels.append("Chủ tịch Trường: toàn phần, gồm 100% học phí và chi phí sinh hoạt")
-    if "hieu truong" in normalized:
-        merit_levels.append("Hiệu trưởng: 100% học phí")
-    if "vien truong" in normalized:
-        merit_levels.append("Viện trưởng: 80% hoặc 90% học phí")
-    if "tai nang chuyen nganh" in normalized:
-        merit_levels.append("Tài năng Chuyên ngành: 50%, 60% hoặc 70% học phí")
-    if merit_levels:
-        lines.append("- Học bổng Tài năng: " + "; ".join(merit_levels) + ".")
-
-    add_on_items: list[str] = []
-    if "women in tech" in normalized:
-        add_on_items.append("Women in Tech Scholarship (+5% học phí)")
-    if "vinschool" in normalized:
-        add_on_items.append("học bổng liên thông Vinschool - VinUni (+5% học phí)")
-    if "gia dinh vingroup" in normalized:
-        add_on_items.append("học bổng Gia đình Vingroup")
-    if "dac thu nganh" in normalized:
-        add_on_items.append("học bổng đặc thù ngành (+5% học phí cho một số ngành)")
-    if add_on_items:
-        lines.append("- Học bổng khuyến khích/cộng thêm: " + ", ".join(add_on_items) + ".")
-
-    special_items: list[str] = []
-    if "dean choi grant" in normalized or "soosan" in normalized:
-        special_items.append("Dean Choi Grant by Soosan (10% học phí)")
-    if "nha lanh dao tuong lai" in normalized:
-        special_items.append("học bổng 'Nhà Lãnh đạo Tương Lai' (10% học phí)")
-    if special_items:
-        lines.append("- Học bổng tài trợ đặc biệt: " + ", ".join(special_items) + ".")
-
-    if "100% hoc phi" in normalized and "kho khan tai chinh" in normalized:
-        lines.append(
-            "- Hỗ trợ tài chính riêng cho ứng viên gặp khó khăn tài chính, mức hỗ trợ có thể lên tới 100% học phí."
-        )
-
-    postgrad_items: list[str] = []
-    if "bac si noi tru" in normalized and "tai tro hoc phi" in normalized:
-        postgrad_items.append(
-            "Bác sĩ nội trú có cơ hội được tài trợ học phí và nhận thêm phụ cấp/hỗ trợ từ hệ thống Vinmec"
-        )
-    if "phd khoa hoc may tinh" in normalized or "tien si khoa hoc may tinh" in normalized:
-        postgrad_items.append(
-            "PhD Khoa học Máy tính có thể được tài trợ 100% học phí và phụ cấp tối đa 240.000.000 VND/năm"
-        )
-    if postgrad_items:
-        lines.append("- Sau đại học: " + "; ".join(postgrad_items) + ".")
-
-    if not lines:
-        return None
-
-    return "VinUni hiện đang hỗ trợ các nhóm học bổng và tài chính sau:\n" + "\n".join(lines)
+    # Scholarship policies must be answered only from retrieved/imported
+    # official context. The old source-specific deterministic shortcut is
+    # intentionally disabled to avoid carrying unsupported figures into the configured university.
+    return None
 
 
 def _combined_candidate_text(state: PipelineState) -> str:

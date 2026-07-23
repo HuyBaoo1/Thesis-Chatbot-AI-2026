@@ -86,7 +86,7 @@ def fetch_url(url: str) -> str:
         return f"Error: {e}"
 
 
-# VinUni Admissions Domain Tools
+# Admissions domain tools
 
 def get_lead(lead_id: str) -> str:
     """Get a lead by ID from the admissions system."""
@@ -142,7 +142,7 @@ TOOLS = {
         "description": "Fetch content from a URL",
         "parameters": {"url": "string"},
     },
-    # VinUni domain tools
+    # Admissions domain tools
     "get_lead": {
         "fn": get_lead,
         "description": "Get a lead by ID from the admissions system",

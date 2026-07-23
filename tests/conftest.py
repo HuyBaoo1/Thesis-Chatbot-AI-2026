@@ -1,5 +1,9 @@
-"""Shared pytest configuration and fixtures."""
 import pytest
+import httpx
+import os
+
+
+DEFAULT_BACKEND_TEST_API_URL = "http://127.0.0.1:8000"
 
 
 def pytest_configure(config):
@@ -17,3 +21,29 @@ def pytest_configure(config):
 
 # Configure asyncio for pytest
 pytest_plugins = ('pytest_asyncio',)
+
+
+@pytest.fixture(scope="session")
+def api_url():
+    """HTTP base URL for backend integration tests.
+
+    Set BACKEND_TEST_API_URL to point tests at a personal/staging deployment.
+    Without it, tests use the local backend URL and skip cleanly if it is not
+    running.
+    """
+    url = os.getenv("BACKEND_TEST_API_URL", DEFAULT_BACKEND_TEST_API_URL).rstrip("/")
+    try:
+        response = httpx.get(f"{url}/health", timeout=3)
+    except httpx.HTTPError as exc:
+        pytest.skip(
+            f"Backend test API is not reachable at {url}. "
+            "Start the backend locally or set BACKEND_TEST_API_URL. "
+            f"Original error: {exc}"
+        )
+
+    if response.status_code >= 500:
+        pytest.skip(
+            f"Backend test API health check failed at {url}/health "
+            f"with status {response.status_code}."
+        )
+    return url

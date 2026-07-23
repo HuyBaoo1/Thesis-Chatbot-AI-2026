@@ -1,6 +1,7 @@
 from typing import Any
 
 from src.models.conversation import Conversation
+from src.core.config import settings
 from src.models.lead import Lead
 from src.models.lead_activity import LeadActivity
 from src.models.lead_major_interest import LeadMajorInterest
@@ -25,7 +26,11 @@ def load_memory_context(state: PipelineState, db) -> PipelineState:
     state.semantic_memory = [
         {
             "type": "admissions_knowledge_base",
-            "description": "Use retrieval tools for factual VinUniversity admissions, program, tuition, scholarship, and timeline details.",
+            "description": (
+                "Use retrieval tools for factual "
+                f"{settings.UNIVERSITY_SHORT_NAME.strip() or settings.UNIVERSITY_NAME.strip()} "
+                "admissions, program, tuition, scholarship, and timeline details."
+            ),
         }
     ]
     state.memory_context = _format_memory_context(

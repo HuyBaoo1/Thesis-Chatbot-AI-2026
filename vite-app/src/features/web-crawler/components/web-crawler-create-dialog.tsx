@@ -95,7 +95,7 @@ const WebCrawlerCreateDialog = ({
                     type="url"
                     required
                     value={targetUrl}
-                    placeholder="https://admissions.vinuni.edu.vn"
+                    placeholder="DATA_REQUIRED"
                     className="h-10 rounded-xl border-slate-200 bg-slate-50/80 text-[13px] shadow-none placeholder:text-slate-400 focus:border-slate-300 focus:bg-white focus-visible:ring-0"
                     onChange={(event) => setTargetUrl(event.target.value)}
                   />

@@ -1,5 +1,5 @@
 #!/usr/bin/env sh
-# Install git pre-push hook for AI log submission (delegates to setup_hooks.py).
+# Install personal Git hooks (delegates to setup_hooks.py).
 # Works on Linux, macOS, and Git Bash on Windows.
 set -e
 ROOT="$(CDPATH= cd -- "$(dirname "$0")/../.." && pwd)"
@@ -12,6 +12,6 @@ elif command -v python >/dev/null 2>&1; then
 elif command -v py >/dev/null 2>&1; then
   exec py -3 scripts/python/setup_hooks.py
 else
-  echo "[ai-log] ERROR: Need Python 3 (python3, python, or py)." >&2
+  echo "[hooks] ERROR: Need Python 3 (python3, python, or py)." >&2
   exit 1
 fi

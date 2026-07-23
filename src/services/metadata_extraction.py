@@ -84,7 +84,7 @@ Content preview: {(content or '')[:500]}
 Return JSON with:
 - category: one of TUITION|SCHOLARSHIP|REQUIREMENT|DEADLINE|PROCESS|MAJOR_INFO|FAQ|NONE
 - year: the year mentioned (e.g. 2025, 2026) or null
-- source: the domain name (e.g. vinuni.edu.vn)
+- source: the domain name (e.g. {settings.UNIVERSITY_DOMAIN})
 
 Respond with valid JSON only."""
 

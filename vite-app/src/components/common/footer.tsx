@@ -1,14 +1,15 @@
 import { useTranslation } from "react-i18next"
 import type { ReactNode } from "react"
 import type { LucideIcon } from "lucide-react"
-import { ArrowUpRight, Mail, Phone } from "lucide-react"
+import { ArrowUpRight, Globe } from "lucide-react"
 
 import logo from "@/assets/logo.png"
 import { Separator } from "@/components/ui/separator"
+import { universityName, universityShortName, universityWebsite } from "@/lib/university"
 import LanguageSwitcher from "./language-switcher"
 
 const quickLinks = [
-  { labelKey: "aboutVinUni", href: "https://vinuni.edu.vn/", label: "About VinUni" },
+  { labelKey: "aboutUniversity", href: universityWebsite, label: `About ${universityShortName}` },
   { labelKey: "ourCampus", href: "#campus", label: "Our Campus" },
   { labelKey: "newsEvents", href: "#news", label: "News & Events" },
   { labelKey: "search", href: "#search", label: "Search" },
@@ -17,23 +18,23 @@ const quickLinks = [
 const academicLinks = [
   {
     labelKey: "collegeBusiness",
-    href: "https://cbm.vinuni.edu.vn/",
-    label: "College of Business",
+    href: "#",
+    label: "Admission",
   },
   {
     labelKey: "collegeEngineering",
-    href: "https://cecs.vinuni.edu.vn/",
-    label: "College of Engineering",
+    href: "#",
+    label: "Study Programs",
   },
   {
     labelKey: "collegeHealth",
-    href: "https://chs.vinuni.edu.vn/",
-    label: "College of Health Sciences",
+    href: "#",
+    label: "Tuition Fees",
   },
   {
     labelKey: "collegeArts",
-    href: "https://cas.vinuni.edu.vn/",
-    label: "College of Arts & Sciences",
+    href: "#",
+    label: "Scholarships",
   },
 ]
 
@@ -45,9 +46,7 @@ interface ContactLink {
 }
 
 const contactLinks: ContactLink[] = [
-  { labelKey: "careersAtVinUni", href: "https://vinuni.edu.vn/careers/", label: "Careers at VinUni" },
-  { labelKey: "email", href: "mailto:admissions@vinuni.edu.vn", icon: Mail, label: "Email admissions" },
-  { labelKey: "phone", href: "tel:18008189", icon: Phone, label: "Call 18008189" },
+  { labelKey: "contactUniversity", href: universityWebsite, icon: Globe, label: "Official website" },
 ]
 
 const NavLink = ({ href, children }: { href: string; children: ReactNode }) => (
@@ -73,14 +72,14 @@ const Footer = () => {
     <footer className="relative overflow-hidden border-t border-border bg-background text-foreground">
       <div className="relative mx-auto grid max-w-7xl gap-12 px-6 py-16 lg:grid-cols-[1.4fr_1fr_1.2fr_1fr] lg:px-10">
         <div className="space-y-6">
-          <img className="h-12 w-auto" src={logo} alt="VinUni AI Admissions" />
+          <img className="h-12 w-auto" src={logo} alt={`${universityShortName} AI Admissions`} />
           <div className="space-y-2">
             <p className="text-[11px] font-semibold tracking-[0.26em] text-[#d6ae4e] uppercase">
-              VinUniversity Admissions
+              {universityShortName} Admissions
             </p>
             <p className="max-w-xs text-sm leading-relaxed text-muted-foreground">
-              A modern admissions experience powered by AI, built for the next
-              generation of VinUni students.
+              A thesis-grade admissions counseling experience powered by AI and
+              grounded in official {universityName} sources.
             </p>
           </div>
         </div>
@@ -144,7 +143,7 @@ const Footer = () => {
             <LanguageSwitcher />
           </div>
           <p className="text-xs text-muted-foreground">
-            {t("craftedForVinUni")}
+            {t("craftedForUniversity")}
           </p>
         </div>
       </div>

@@ -21,7 +21,7 @@ class Conversation(Base):
 
     summary = Column(String)
     external_id = Column(String)
-    source_domain = Column(String)  # e.g. "tuyensinh.vinuni.edu.vn" when embedded via widget
+    source_domain = Column(String)  # e.g. the configured admissions domain when embedded via widget
     ai_fallback_deadline_at = Column(DateTime)
 
     created_at = Column(DateTime, server_default=func.now())

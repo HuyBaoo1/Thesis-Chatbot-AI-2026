@@ -1,0 +1,63 @@
+{
+  "university": "DATA_REQUIRED",
+  "short_name": "DATA_REQUIRED",
+  "website": "DATA_REQUIRED",
+  "documents": [
+    {
+      "file": "DATA_REQUIRED",
+      "category": "MAJOR_INFO",
+      "source": "official",
+      "source_url": "DATA_REQUIRED",
+      "language": "vi",
+      "effective_date": "DATA_REQUIRED"
+    },
+    {
+      "file": "DATA_REQUIRED",
+      "category": "TUITION",
+      "source": "official",
+      "source_url": "DATA_REQUIRED",
+      "language": "vi",
+      "effective_date": "DATA_REQUIRED"
+    },
+    {
+      "file": "DATA_REQUIRED",
+      "category": "SCHOLARSHIP",
+      "source": "official",
+      "source_url": "DATA_REQUIRED",
+      "language": "vi",
+      "effective_date": "DATA_REQUIRED"
+    },
+    {
+      "file": "DATA_REQUIRED",
+      "category": "REQUIREMENT",
+      "source": "official",
+      "source_url": "DATA_REQUIRED",
+      "language": "vi",
+      "effective_date": "DATA_REQUIRED"
+    },
+    {
+      "file": "DATA_REQUIRED",
+      "category": "DEADLINE",
+      "source": "official",
+      "source_url": "DATA_REQUIRED",
+      "language": "vi",
+      "effective_date": "DATA_REQUIRED"
+    },
+    {
+      "file": "DATA_REQUIRED",
+      "category": "PROCESS",
+      "source": "official",
+      "source_url": "DATA_REQUIRED",
+      "language": "vi",
+      "effective_date": "DATA_REQUIRED"
+    },
+    {
+      "file": "DATA_REQUIRED",
+      "category": "FAQ",
+      "source": "official",
+      "source_url": "DATA_REQUIRED",
+      "language": "vi",
+      "effective_date": "DATA_REQUIRED"
+    }
+  ]
+}

@@ -12,13 +12,13 @@ const WIDGET_URL =
 
 const PRESET_COLORS = [
   { label: "Slate", value: "#0f172a" },
-  { label: "VinUni Gold", value: "#b8922e" },
+  { label: "University Gold", value: "#b8922e" },
   { label: "Blue", value: "#2563eb" },
   { label: "Emerald", value: "#059669" },
 ]
 
 const WidgetIntegrationPage = () => {
-  const [org, setOrg] = useState("vinuni")
+  const [org, setOrg] = useState("vgu")
   const [primaryColor, setPrimaryColor] = useState("#0f172a")
   const [position, setPosition] = useState<"right" | "left">("right")
   const [copied, setCopied] = useState(false)
@@ -107,7 +107,7 @@ const WidgetIntegrationPage = () => {
               value={org}
               onChange={(e) => setOrg(e.target.value)}
               className="h-10 rounded-xl"
-              placeholder="vinuni"
+              placeholder="vgu"
             />
             <p className="text-[11px] text-slate-400">
               Dùng để tracking nguồn lead

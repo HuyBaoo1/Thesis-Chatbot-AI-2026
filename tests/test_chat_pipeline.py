@@ -2,14 +2,14 @@
 import pytest
 import httpx
 from uuid import uuid4
+from tests.config import invalid_origin, origin_headers, test_origin as configured_origin
 
 
 class TestRouterIntentClassification:
     """Tests for router intent classification."""
 
     @pytest.fixture
-    def api_url_and_lead(self):
-        api_url = "https://a20-app-165-production.up.railway.app"
+    def api_url_and_lead(self, api_url):
         # Create lead
         response = httpx.post(
             f"{api_url}/api/chat/init-lead",
@@ -18,7 +18,7 @@ class TestRouterIntentClassification:
                 "email": f"router_{uuid4()}@example.com",
                 "phone": f"0{uuid4().hex[:9]}"
             },
-            headers={"Origin": "https://admin.vinunits.cloud"}
+            headers=origin_headers()
         )
         lead_id = response.json()["lead_id"]
         return api_url, lead_id
@@ -33,7 +33,7 @@ class TestRouterIntentClassification:
                 "query": "Học phí ngành Bác sĩ Y khoa là bao nhiêu?",
                 "lead_id": lead_id
             },
-            headers={"Origin": "https://admin.vinunits.cloud"},
+            headers=origin_headers(),
             timeout=60
         )
         assert response.status_code == 200
@@ -48,10 +48,10 @@ class TestRouterIntentClassification:
         response = httpx.post(
             f"{api_url}/api/chat/query",
             json={
-                "query": "VinUni có những học bổng gì cho sinh viên?",
+                "query": "Truong có những học bổng gì cho sinh viên?",
                 "lead_id": lead_id
             },
-            headers={"Origin": "https://admin.vinunits.cloud"},
+            headers=origin_headers(),
             timeout=60
         )
         assert response.status_code == 200
@@ -68,7 +68,7 @@ class TestRouterIntentClassification:
                 "query": "Điều kiện tuyển sinh năm 2026 là gì?",
                 "lead_id": lead_id
             },
-            headers={"Origin": "https://admin.vinunits.cloud"},
+            headers=origin_headers(),
             timeout=60
         )
         assert response.status_code == 200
@@ -80,8 +80,7 @@ class TestClarifyMode:
     """Tests for clarify mode triggering."""
 
     @pytest.fixture
-    def api_url_and_lead(self):
-        api_url = "https://a20-app-165-production.up.railway.app"
+    def api_url_and_lead(self, api_url):
         response = httpx.post(
             f"{api_url}/api/chat/init-lead",
             json={
@@ -89,7 +88,7 @@ class TestClarifyMode:
                 "email": f"clarify_{uuid4()}@example.com",
                 "phone": f"0{uuid4().hex[:9]}"
             },
-            headers={"Origin": "https://admin.vinunits.cloud"}
+            headers=origin_headers()
         )
         lead_id = response.json()["lead_id"]
         return api_url, lead_id
@@ -104,7 +103,7 @@ class TestClarifyMode:
                 "query": "Học phí bao nhiêu?",  # Ambiguous - which program?
                 "lead_id": lead_id
             },
-            headers={"Origin": "https://admin.vinunits.cloud"},
+            headers=origin_headers(),
             timeout=60
         )
         assert response.status_code == 200
@@ -124,7 +123,7 @@ class TestClarifyMode:
                 "query": "Học phí ngành Khoa học Máy tính năm 2026 là bao nhiêu?",
                 "lead_id": lead_id
             },
-            headers={"Origin": "https://admin.vinunits.cloud"},
+            headers=origin_headers(),
             timeout=60
         )
         assert response.status_code == 200
@@ -138,8 +137,7 @@ class TestFallbackBehavior:
     """Tests for fallback when context not found."""
 
     @pytest.fixture
-    def api_url_and_lead(self):
-        api_url = "https://a20-app-165-production.up.railway.app"
+    def api_url_and_lead(self, api_url):
         response = httpx.post(
             f"{api_url}/api/chat/init-lead",
             json={
@@ -147,7 +145,7 @@ class TestFallbackBehavior:
                 "email": f"fallback_{uuid4()}@example.com",
                 "phone": f"0{uuid4().hex[:9]}"
             },
-            headers={"Origin": "https://admin.vinunits.cloud"}
+            headers=origin_headers()
         )
         lead_id = response.json()["lead_id"]
         return api_url, lead_id
@@ -162,7 +160,7 @@ class TestFallbackBehavior:
                 "query": "How to cook pho?",
                 "lead_id": lead_id
             },
-            headers={"Origin": "https://admin.vinunits.cloud"},
+            headers=origin_headers(),
             timeout=60
         )
         assert response.status_code == 200
@@ -180,7 +178,7 @@ class TestFallbackBehavior:
                 "query": "asdfghjkl qwerty",
                 "lead_id": lead_id
             },
-            headers={"Origin": "https://admin.vinunits.cloud"},
+            headers=origin_headers(),
             timeout=60
         )
         assert response.status_code == 200
@@ -193,8 +191,7 @@ class TestRetrievalModes:
     """Tests for different retrieval modes."""
 
     @pytest.fixture
-    def api_url_and_lead(self):
-        api_url = "https://a20-app-165-production.up.railway.app"
+    def api_url_and_lead(self, api_url):
         response = httpx.post(
             f"{api_url}/api/chat/init-lead",
             json={
@@ -202,7 +199,7 @@ class TestRetrievalModes:
                 "email": f"retrieval_{uuid4()}@example.com",
                 "phone": f"0{uuid4().hex[:9]}"
             },
-            headers={"Origin": "https://admin.vinunits.cloud"}
+            headers=origin_headers()
         )
         lead_id = response.json()["lead_id"]
         return api_url, lead_id
@@ -217,7 +214,7 @@ class TestRetrievalModes:
                 "query": "Học bổng 100% yêu cầu gpa bao nhiêu?",
                 "lead_id": lead_id
             },
-            headers={"Origin": "https://admin.vinunits.cloud"},
+            headers=origin_headers(),
             timeout=60
         )
         assert response.status_code == 200
@@ -233,10 +230,10 @@ class TestRetrievalModes:
         response = httpx.post(
             f"{api_url}/api/chat/query",
             json={
-                "query": "Chất lượng giảng viên VinUni thế nào?",
+                "query": "Chất lượng giảng viên truong the nao?",
                 "lead_id": lead_id
             },
-            headers={"Origin": "https://admin.vinunits.cloud"},
+            headers=origin_headers(),
             timeout=60
         )
         assert response.status_code == 200
@@ -251,7 +248,7 @@ class TestRetrievalModes:
                 "query": "Học phí 2026 815 triệu",
                 "lead_id": lead_id
             },
-            headers={"Origin": "https://admin.vinunits.cloud"},
+            headers=origin_headers(),
             timeout=60
         )
         assert response.status_code == 200

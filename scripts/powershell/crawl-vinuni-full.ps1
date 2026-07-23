@@ -1,16 +1,16 @@
-# Script to crawl full VinUni Admissions website
+# Script to crawl the official VGU admissions website
 $apiUrl = "http://localhost:8000"
 $apiKey = "dev-api-key-12345"
 
-Write-Host "Creating crawl session for VinUni Admissions..." -ForegroundColor Green
+Write-Host "Creating crawl session for VGU Admissions..." -ForegroundColor Green
 
 # Create session
 $sessionBody = @{
-    name = "VinUni Admissions Full Crawl"
-    start_urls = @("https://admissions.vinuni.edu.vn/")
+    name = "VGU Admissions Full Crawl"
+    start_urls = @("https://vgu.edu.vn/admission")
     max_depth = 3
     max_pages = 100
-    include_patterns = @("admissions.vinuni.edu.vn/*")
+    include_patterns = @("vgu.edu.vn/admission*", "vgu.edu.vn/study-programs*", "vgu.edu.vn/tuition-fees*", "vgu.edu.vn/scholarships*")
     exclude_patterns = @()
     follow_links = $true
     respect_robots_txt = $true

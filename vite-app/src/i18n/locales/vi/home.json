@@ -1,6 +1,6 @@
 {
   "hero": {
-    "badge": "Trợ lý tư vấn tuyển sinh thông minh VinUni",
+    "badge": "Trợ lý tư vấn tuyển sinh thông minh",
     "headline": "Chatbot tuyển sinh — ",
     "headlineHighlight": "hỏi bất cứ điều gì.",
     "description": "Nhận thông tin chính xác về chương trình học, học phí, học bổng và quy trình nộp hồ sơ — bất kỳ lúc nào.",
@@ -37,7 +37,7 @@
     "submit": "Tiếp tục vào chat"
   },
   "chat": {
-    "title": "VinUni Admissions Assistant",
+    "title": "Admissions Assistant",
     "subtitle": "Luôn sẵn sàng hỗ trợ",
     "welcomeMessage": "Xin chào! Tôi có thể hỗ trợ thông tin về {{highlight1}}, {{highlight2}}, {{highlight3}} và {{highlight4}}.",
     "welcomeHighlights": {
@@ -66,10 +66,10 @@
     "errorCounselor": "Không thể gửi yêu cầu kết nối cố vấn lúc này. Vui lòng thử lại sau.",
     "counselorChattingWith": "Đang chat với {{name}}",
     "aiWithCounselorInvited": "AI đang hỗ trợ, cố vấn đã được mời",
-    "chattingWithAI": "Đang chat với VinUni AI",
+    "chattingWithAI": "Đang chat với AI",
     "counselorMessageBanner": "Tin nhắn từ cố vấn sẽ hiển thị nổi bật trong cuộc trò chuyện.",
-    "aiSupportPendingCounselor": "Trong lúc chờ cố vấn phản hồi, VinUni AI vẫn tiếp tục hỗ trợ bạn.",
-    "aiDirectlySupporting": "VinUni AI đang là người trực tiếp hỗ trợ cuộc trò chuyện này.",
+    "aiSupportPendingCounselor": "Trong lúc chờ cố vấn phản hồi, AI vẫn tiếp tục hỗ trợ bạn.",
+    "aiDirectlySupporting": "AI đang là người trực tiếp hỗ trợ cuộc trò chuyện này.",
     "counselorMonitoring": "{{name}} đang theo dõi và trả lời trực tiếp trong cuộc trò chuyện này.",
     "counselorInvitedNotice": "{{name}} đã được mời vào cuộc trò chuyện. Trong lúc chờ phản hồi, AI vẫn có thể hỗ trợ bạn.",
     "counselorAlreadyChattingWith": "Bạn đang được {{name}} hỗ trợ trong cuộc trò chuyện này.",
@@ -82,7 +82,7 @@
     "aiAndCounselorLabel": "AI + Cố vấn",
     "aiLabel": "AI",
     "messagesCount": "{{count}} tin nhắn",
-    "aiName": "VinUni AI",
+    "aiName": "AI",
     "fallbackCounselorName": "cố vấn tuyển sinh",
     "welcomeIntro": "Xin chào! Tôi có thể hỗ trợ thông tin về ",
     "welcomeAnd": " và "
@@ -101,17 +101,17 @@
     "messageTooLong": "Tin nhắn quá dài"
   },
   "programsTitle": "Chương trình học",
-  "programsSubtitle": "Khám phá các chương trình đào tạo được thiết kế để phát triển những nhà lãnh đạo tương lai.",
+  "programsSubtitle": "Khám phá chương trình đào tạo từ kho tri thức sau khi import/crawl nguồn chính thức.",
   "learnMore": "Tìm hiểu thêm",
   "readyToApply": "Sẵn sàng nộp hồ sơ?",
-  "applyCtaText": "Gia nhập hàng ngàn sinh viên đã chọn VinUniversity cho hành trình học tập của mình.",
+  "applyCtaText": "Tìm hiểu thông tin tuyển sinh từ các nguồn chính thức đã được đưa vào hệ thống.",
   "applyNow": "Nộp hồ sơ ngay",
   "contactUs": "Liên hệ",
   "noPrograms": "Chưa có chương trình nào.",
   "credits": "tín chỉ",
   "years": "năm",
   "scholarshipTitle": "Học bổng",
-  "scholarshipSubtitle": "Khám phá các chương trình học bổng hấp dẫn tại VinUniversity.",
+  "scholarshipSubtitle": "Khám phá thông tin học bổng sau khi dữ liệu chính thức được cập nhật.",
   "noScholarships": "Chưa có học bổng nào.",
   "scopeGlobal": "Áp dụng toàn trường",
   "scopeMajorSpecific": "Theo ngành cụ thể",
@@ -165,32 +165,32 @@
       "stats": {
         "coverage": {
           "label": "Mức hỗ trợ",
-          "value": "Tối đa toàn bộ học phí"
+          "value": "Theo nguồn chính thức"
         },
         "approach": {
           "label": "Cách đánh giá",
-          "value": "Đánh giá toàn diện"
+          "value": "Cần đối chiếu nguồn"
         },
         "decision": {
           "label": "Thông báo",
-          "value": "Công bố cùng thư mời"
+          "value": "Theo thông báo tuyển sinh"
         }
       },
       "types": {
         "merit": {
           "title": "Học bổng thành tích",
-          "value": "25% - 100%",
-          "description": "Dành cho ứng viên có thành tích học tập nổi bật."
+          "value": "Cập nhật từ nguồn chính thức",
+          "description": "Chỉ hiển thị chi tiết khi kho tri thức có nguồn chính thức."
         },
         "needBased": {
           "title": "Hỗ trợ theo nhu cầu",
-          "value": "Linh hoạt",
-          "description": "Hỗ trợ thêm dựa trên điều kiện tài chính gia đình."
+          "value": "Cập nhật từ nguồn chính thức",
+          "description": "Thông tin cần được lấy từ tài liệu hoặc website chính thức."
         },
         "talent": {
           "title": "Học bổng tài năng",
-          "value": "Tối đa 75%",
-          "description": "Dành cho ứng viên có thành tích đặc biệt về lãnh đạo, nghệ thuật, thể thao hoặc đổi mới."
+          "value": "Cập nhật từ nguồn chính thức",
+          "description": "Không hard-code mức hỗ trợ nếu chưa có nguồn xác thực."
         }
       },
       "timelineTitle": "Tiến độ hỗ trợ",

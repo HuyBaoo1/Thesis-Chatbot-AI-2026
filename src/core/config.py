@@ -18,6 +18,12 @@ class Settings(BaseSettings):
     OPENAI_API_KEY: str
     GEMINI_API_KEY: str = Field(default="", description="Optional Google Gemini API key")
 
+    # University branding / runtime identity
+    UNIVERSITY_NAME: str = "DATA_REQUIRED"
+    UNIVERSITY_SHORT_NAME: str = "DATA_REQUIRED"
+    UNIVERSITY_WEBSITE: str = "DATA_REQUIRED"
+    UNIVERSITY_DOMAIN: str = "DATA_REQUIRED"
+
     # OCR
     USE_SMART_EXTRACTION: bool = Field(default=True, description="Enable smart routing for OCR (PyMuPDF/RapidOCR/Vision)")
     ENABLE_VISION_FALLBACK: bool = Field(default=True, description="Allow Vision API fallback for complex documents")
@@ -156,5 +162,13 @@ class Settings(BaseSettings):
     def cors_allow_headers(self) -> list[str]:
         headers = self._parse_csv(self.CORS_ALLOW_HEADERS)
         return headers or ["*"]
+
+    @property
+    def university_label(self) -> str:
+        name = self.UNIVERSITY_NAME.strip()
+        short_name = self.UNIVERSITY_SHORT_NAME.strip()
+        if short_name and short_name.lower() not in name.lower():
+            return f"{name} ({short_name})"
+        return name or short_name or "the configured university"
 
 settings = Settings()

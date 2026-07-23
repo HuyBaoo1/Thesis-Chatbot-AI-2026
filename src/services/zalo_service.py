@@ -35,6 +35,14 @@ from src.services.lead_service import create_or_get_lead_by_contact
 
 logger = logging.getLogger(__name__)
 
+
+def _configured_school_short_name() -> str:
+    return settings.UNIVERSITY_SHORT_NAME.strip() or settings.UNIVERSITY_NAME.strip()
+
+
+def _configured_school_label() -> str:
+    return settings.university_label
+
 # Zalo sendMessage hard limit (1..2000 characters).
 _MAX_MESSAGE_LEN = 2000
 
@@ -229,7 +237,7 @@ def _ask_for_contact(chat_id: int | str, name: str, include_intro: bool = False)
     if include_intro:
         msg = (
             f"Xin chào {name}!\n\n"
-            "Mình là trợ lý tư vấn tuyển sinh của VinUniversity. "
+            f"Minh la tro ly tu van tuyen sinh cua {_configured_school_label()}. "
             "Bạn có thể hỏi mình về:\n\n"
             "- Chương trình đào tạo\n"
             "- Học phí, học bổng và hỗ trợ tài chính\n"
@@ -260,7 +268,7 @@ def _confirm_registration(chat_id: int | str, name: str, contact: str, is_email:
         "Hoàn tất!\n\n"
         f"Tên: {name}\n"
         f"{contact_type}: {contact}\n\n"
-        "Bạn đã sẵn sàng sử dụng hệ thống tư vấn tuyển sinh VinUniversity.\n"
+        f"Ban da san sang su dung he thong tu van tuyen sinh {_configured_school_short_name()}.\n"
         "Bạn có thể hỏi mình về:\n\n"
         "- Chương trình đào tạo\n"
         "- Học phí và học bổng\n"

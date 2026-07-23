@@ -31,7 +31,7 @@
   "editDescription": "Cập nhật thông tin, vai trò hoặc mật khẩu.",
   "fullName": "Họ và tên",
   "namePlaceholder": "Nguyễn Văn A",
-  "emailPlaceholder": "nhanvien@vinuni.edu.vn",
+  "emailPlaceholder": "nhanvien@example.edu.vn",
   "password": "Mật khẩu",
   "passwordPlaceholderCreate": "Tối thiểu 6 ký tự",
   "passwordPlaceholderEdit": "Để trống nếu không đổi",

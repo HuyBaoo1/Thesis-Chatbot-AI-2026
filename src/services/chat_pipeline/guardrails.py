@@ -1,3 +1,4 @@
+from src.services.chat_pipeline.prompts import INSUFFICIENT_CONTEXT_ANSWER
 from src.services.chat_pipeline.types import PipelineState
 
 
@@ -79,9 +80,6 @@ def run_output_guardrails(state: PipelineState) -> PipelineState:
         return state
 
     if not state.reranked:
-        state.answer = (
-            "Hiện mình chưa tìm thấy nguồn dữ liệu phù hợp trong hệ thống để trả lời chắc chắn. "
-            "Bạn thử cung cấp thêm ngành hoặc năm tuyển sinh nhé."
-        )
+        state.answer = INSUFFICIENT_CONTEXT_ANSWER
         state.confidence = min(state.confidence, 0.35)
     return state

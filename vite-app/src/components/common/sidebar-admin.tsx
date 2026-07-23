@@ -27,6 +27,7 @@ import {
   SidebarRail,
 } from "@/components/ui/sidebar"
 import { canAccessAdminOnlyTools } from "@/lib/permissions"
+import { universityShortName } from "@/lib/university"
 import useAuthStore from "@/stores/auth-store"
 import type { UserRole } from "@/types/auth-type"
 
@@ -142,7 +143,7 @@ const AppSidebar = () => {
           <img
             className="h-10 w-auto shrink-0"
             src={logo}
-            alt="VinUni AI Admissions"
+            alt={`${universityShortName} AI Admissions`}
           />
           <div className="min-w-0">
             <p className="truncate text-sm font-semibold text-slate-950">
