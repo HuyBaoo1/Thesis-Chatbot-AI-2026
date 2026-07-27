@@ -32,7 +32,8 @@ class Settings(BaseSettings):
     OCR_PARSE_API_BASE_URL: str = Field(default="", description="Base URL for document parse API")
     OCR_PARSE_POLL_INTERVAL_SECONDS: float = Field(default=2.0, description="Polling interval for parse jobs")
     OCR_PARSE_TIMEOUT_SECONDS: int = Field(default=600, description="Timeout for parse job completion")
-    OCR_TEMP_DIR: str = Field(default="/tmp/admissions-ocr", description="Temp directory for OCR files")
+    OCR_TEMP_DIR: str = Field(default="/app/data/runtime/admissions-ocr", description="Temp directory for OCR files")
+    OCR_TESSERACT_LANG: str = Field(default="vie+eng", description="Tesseract language pack order for local OCR")
 
     EMBEDDING_MODEL: str = "text-embedding-3-small"
     EMBEDDING_DIMENSION: int = 1536
@@ -60,11 +61,11 @@ class Settings(BaseSettings):
     COOKIE_SECURE: bool = False
     
     # Cloudflare R2
-    R2_ACCOUNT_ID: str
-    R2_ACCESS_KEY_ID: str
-    R2_SECRET_ACCESS_KEY: str
-    R2_BUCKET_NAME: str
-    R2_PUBLIC_BASE_URL: str
+    R2_ACCOUNT_ID: str = ""
+    R2_ACCESS_KEY_ID: str = ""
+    R2_SECRET_ACCESS_KEY: str = ""
+    R2_BUCKET_NAME: str = ""
+    R2_PUBLIC_BASE_URL: str = ""
 
     # Firecrawl
     FIRECRAWL_API_KEY: str
@@ -112,7 +113,7 @@ class Settings(BaseSettings):
     
     # App
     API_PORT: int = 8000
-    TRUSTED_HOSTS: str = "a20-app-165-production.up.railway.app,a20-app-165.up.railway.app,localhost,127.0.0.1"
+    TRUSTED_HOSTS: str = "localhost,127.0.0.1,vgu.edu.vn,www.vgu.edu.vn,tuyensinh.vgu.edu.vn"
     CORS_ALLOW_ORIGINS: str
     CORS_ALLOW_CREDENTIALS: bool = True
     CORS_ALLOW_METHODS: str = "*"

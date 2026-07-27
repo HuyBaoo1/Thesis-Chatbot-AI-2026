@@ -2,7 +2,7 @@
 
 This folder is reserved for official source material for the configured university before it is imported through the existing knowledge-base pipeline.
 
-Do not copy or adapt files from `vinuni_admissions_import/` for the new university answers.
+Do not copy or adapt legacy source-university files for the new university answers.
 
 ## DATA_REQUIRED
 

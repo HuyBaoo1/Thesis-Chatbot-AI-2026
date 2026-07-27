@@ -83,7 +83,7 @@ def synthesis_system_prompt() -> str:
         "Use only Context for university facts. "
         "Use Recent Conversation and Lead Memory only for references, user profile, preferences, and conversation continuity. "
         "Do not use outside knowledge, assumptions, or guesses. "
-        "Do not use VinUni or VinUniversity information as evidence for the configured university. "
+        "Do not use legacy source-university information as evidence for the configured university. "
         f"Only answer {school_short_name} facts when they appear in Context. "
         "Do not claim to be an official representative of the university. "
         "Distinguish official sourced information from incomplete or unverified information. "

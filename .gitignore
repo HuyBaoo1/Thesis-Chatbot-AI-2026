@@ -25,3 +25,5 @@ node_modules/
 .beads-credential-key
 .vercel
 .env*.local
+.local-backup/
+data/runtime/

@@ -8,6 +8,8 @@ from src.services.ocr_smart_extractor import (
     ExtractionRouter,
     ExtractionStrategy,
     FastTextExtractor,
+    LocalTesseractExtractor,
+    VisionAPIExtractor,
 )
 from src.services.ocr_temp_storage import delete_temp_file, is_local_reference, read_bytes
 from src.services.r2_service import delete_file, download_file_bytes, upload_file_bytes
@@ -90,7 +92,9 @@ def _extract_with_openai_vision_fallback(
         raise Exception(f"{reason}; OpenAI fallback is not configured")
 
     router = ExtractionRouter(force_strategy=ExtractionStrategy.VISION_API)
-    markdown, fallback_analysis = router.extract(file_bytes, file_name)
+    images = router._convert_to_images(file_bytes, file_name)
+    markdown = VisionAPIExtractor(provider="openai").extract(images)
+    fallback_analysis = router.analyzer.analyze(file_bytes, file_name)
     active_analysis = analysis or fallback_analysis
 
     extraction_info = {
@@ -107,6 +111,78 @@ def _extract_with_openai_vision_fallback(
         "has_formulas": active_analysis.has_formulas,
     }
     return markdown, extraction_info, active_analysis.total_pages
+
+
+def _has_usable_markdown(md_content: str, *, min_chars: int = 50) -> bool:
+    body = "\n".join(
+        line for line in md_content.splitlines()
+        if not line.strip().lower().startswith("## page")
+    )
+    return len(body.strip()) >= min_chars
+
+
+def _extract_with_local_tesseract(
+    file_bytes: bytes,
+    file_name: str,
+    *,
+    reason: str,
+    analysis=None,
+) -> tuple[str, dict, int]:
+    router = ExtractionRouter(force_strategy=ExtractionStrategy.VISION_API)
+    images = router._convert_to_images(file_bytes, file_name)
+    markdown = LocalTesseractExtractor().extract(images)
+    active_analysis = analysis or router.analyzer.analyze(file_bytes, file_name)
+
+    extraction_info = {
+        "strategy": "local_tesseract",
+        "provider": "local_tesseract",
+        "source_filename": file_name,
+        "fallback_reason": reason,
+        "analysis_reason": active_analysis.strategy_reason,
+        "total_pages": active_analysis.total_pages,
+        "scanned_pages": active_analysis.scanned_pages,
+        "text_pages": active_analysis.text_pages,
+        "mixed_pages": active_analysis.mixed_pages,
+        "avg_chars_per_page": round(active_analysis.avg_chars_per_page, 2),
+        "has_formulas": active_analysis.has_formulas,
+        "tesseract_lang": settings.OCR_TESSERACT_LANG.strip() or "vie+eng",
+    }
+    return markdown, extraction_info, active_analysis.total_pages or len(images)
+
+
+def _extract_with_local_then_openai(
+    file_bytes: bytes,
+    file_name: str,
+    *,
+    reason: str,
+    analysis=None,
+) -> tuple[str, dict, int]:
+    try:
+        markdown, extraction_info, page_count = _extract_with_local_tesseract(
+            file_bytes,
+            file_name,
+            reason=reason,
+            analysis=analysis,
+        )
+        if _has_usable_markdown(markdown):
+            return markdown, extraction_info, page_count
+        if not settings.ENABLE_VISION_FALLBACK or not settings.OPENAI_API_KEY:
+            if markdown.strip():
+                extraction_info["warning"] = "Local Tesseract produced low text yield; manual review is required"
+                return markdown, extraction_info, page_count
+            raise Exception(f"Local Tesseract produced no usable text after: {reason}")
+        reason = f"Local Tesseract produced low text yield after: {reason}"
+    except Exception as exc:
+        if not settings.ENABLE_VISION_FALLBACK:
+            raise
+        reason = f"Local Tesseract failed after: {reason}; {str(exc)[:300]}"
+
+    return _extract_with_openai_vision_fallback(
+        file_bytes,
+        file_name,
+        reason=reason,
+        analysis=analysis,
+    )
 
 
 def _extract_with_local_first(file_bytes: bytes, file_name: str) -> tuple[str, dict, int]:
@@ -150,9 +226,7 @@ def _extract_with_local_first(file_bytes: bytes, file_name: str) -> tuple[str, d
             extraction_info["parser_metadata"] = parse_result.metadata
         return markdown, extraction_info, parse_result.page_count or analysis.total_pages
     except Exception as exc:
-        if not settings.ENABLE_VISION_FALLBACK:
-            raise
-        return _extract_with_openai_vision_fallback(
+        return _extract_with_local_then_openai(
             file_bytes,
             file_name,
             reason=f"Remote parser failed: {str(exc)[:300]}",
@@ -161,11 +235,17 @@ def _extract_with_local_first(file_bytes: bytes, file_name: str) -> tuple[str, d
 
 
 EXCEL_EXTENSIONS = {".xlsx", ".xls", ".csv"}
+IMAGE_EXTENSIONS = {".png", ".jpg", ".jpeg", ".webp", ".tiff"}
 
 
 def _is_excel_file(file_name: str) -> bool:
     suffix = file_name.lower().rsplit(".", 1)[-1] if "." in file_name else ""
     return f".{suffix}" in EXCEL_EXTENSIONS
+
+
+def _is_image_file(file_name: str) -> bool:
+    suffix = file_name.lower().rsplit(".", 1)[-1] if "." in file_name else ""
+    return f".{suffix}" in IMAGE_EXTENSIONS
 
 
 def _extract_excel(file_bytes: bytes, file_name: str) -> tuple[str, dict, int]:
@@ -203,9 +283,7 @@ def _extract_with_remote_parser(file_bytes: bytes, file_name: str) -> tuple[str,
             extraction_info["parser_metadata"] = parse_result.metadata
         return md_content, extraction_info, parse_result.page_count or 0
     except Exception as exc:
-        if not settings.ENABLE_VISION_FALLBACK:
-            raise
-        return _extract_with_openai_vision_fallback(
+        return _extract_with_local_then_openai(
             file_bytes,
             file_name,
             reason=f"Remote parser failed: {str(exc)[:300]}",
@@ -278,6 +356,13 @@ def process_ocr_job(
     elif should_use_smart_extraction and file_name.lower().endswith(".pdf"):
         _update_job_progress(35, "Extracting markdown with local-first routing...")
         md_content, extraction_info, page_count = _extract_with_local_first(file_bytes, file_name)
+    elif _is_image_file(file_name):
+        _update_job_progress(35, "Extracting image text with local OCR...")
+        md_content, extraction_info, page_count = _extract_with_local_then_openai(
+            file_bytes,
+            file_name,
+            reason="Image upload uses local OCR first",
+        )
     else:
         _update_job_progress(35, "Extracting markdown with remote parser...")
         md_content, extraction_info, page_count = _extract_with_remote_parser(file_bytes, file_name)

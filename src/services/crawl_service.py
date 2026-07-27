@@ -270,7 +270,10 @@ def persist_markdown_artifact(*, page_job_id: str, md_content: str) -> dict:
 
 
 def read_markdown_content(md_r2_key: str) -> str:
-    return r2_service.download_file_bytes(md_r2_key).decode("utf-8")
+    try:
+        return r2_service.download_file_bytes(md_r2_key).decode("utf-8")
+    except FileNotFoundError:
+        raise HTTPException(status_code=404, detail="Markdown artifact is missing from storage")
 
 
 def _delete_markdown_artifact(md_r2_key: str | None) -> None:
@@ -382,13 +385,14 @@ def send_crawl_page_job_to_knowledge_base(
     if not page_job.md_r2_key:
         raise HTTPException(status_code=400, detail="Page markdown not found")
 
+    if page_job.sent_to_kb:
+        return {"page_job": page_job, "kb_result": None, "reused": True}
+
     md_content = read_markdown_content(page_job.md_r2_key)
     if not md_content.strip():
         raise HTTPException(status_code=400, detail="Page markdown is empty")
 
     content_hash = _build_content_hash(md_content)
-    if page_job.sent_to_kb:
-        return {"page_job": page_job, "kb_result": None, "reused": True}
 
     existing_sent = (
         db.query(CrawlPageJob)

@@ -12,8 +12,8 @@ Run from repo root:
     python scripts/seed_mock_auth_data.py
 
 This script is idempotent. It will create or update two staff users:
-- admin.mock@vinuni.edu.vn
-- counselor.mock@vinuni.edu.vn
+- admin.mock@vgu.edu.vn
+- counselor.mock@vgu.edu.vn
 """
 
 from pathlib import Path
@@ -52,13 +52,13 @@ COUNSELOR_PASSWORD = _get_password("MOCK_COUNSELOR_PASSWORD")
 MOCK_STAFF_USERS = [
     {
         "name": "Mock Admin",
-        "email": "admin.mock@vinuni.edu.vn",
+        "email": "admin.mock@vgu.edu.vn",
         "password": ADMIN_PASSWORD,
         "role": StaffRole.ADMIN,
     },
     {
         "name": "Mock Counselor",
-        "email": "counselor.mock@vinuni.edu.vn",
+        "email": "counselor.mock@vgu.edu.vn",
         "password": COUNSELOR_PASSWORD,
         "role": StaffRole.COUNSELOR,
     },

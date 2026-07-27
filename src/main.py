@@ -10,6 +10,7 @@ from starlette.middleware.trustedhost import TrustedHostMiddleware
 
 from src.api.router import api_router
 from src.core.config import settings
+from src.core.logging_redaction import configure_sensitive_log_redaction
 from src.db import session
 from src.services.handoff_ai_fallback_scheduler import (
     run_handoff_ai_fallback_scheduler,
@@ -151,6 +152,7 @@ logging.basicConfig(
     level=logging.INFO,
     format="%(asctime)s [%(levelname)s] %(name)s %(message)s",
 )
+configure_sensitive_log_redaction()
 
 
 class CSRFOriginMiddleware(BaseHTTPMiddleware):

@@ -8,6 +8,7 @@ from fastapi import HTTPException
 
 from src.models.enums import ConversationStatus
 from src.schemas.chat_pipeline import ChatQueryRequest
+from src.services.chat_pipeline.prompts import INSUFFICIENT_CONTEXT_ANSWER
 from src.services.chat_pipeline.graph import build_chat_graph
 from src.services.chat_pipeline.jobs import enqueue_chat_turn_side_effects
 from src.services.chat_pipeline.types import PipelineState
@@ -176,14 +177,15 @@ def run_chat_pipeline(request: ChatQueryRequest, db):
             }
 
         final_answer = final_state.answer
-        citations = build_message_citations_from_chunks(final_state.reranked)
+        is_fallback = final_state.confidence < 0.4 or _is_insufficient_context_answer(final_answer)
+        citations = _build_user_visible_citations(final_answer, final_state.reranked)
 
         assistant_message = create_assistant_message(
             db,
             conversation_id=conversation.id,
             content=final_answer,
             intent=final_state.intent,
-            is_fallback=(final_state.confidence < 0.4),
+            is_fallback=is_fallback,
             citations=citations,
             auto_commit=False,
         )
@@ -194,7 +196,6 @@ def run_chat_pipeline(request: ChatQueryRequest, db):
             auto_commit=False,
         )
 
-        is_fallback = final_state.confidence < 0.4
         record_chat_turn_activity(
             db,
             lead_id=conversation.lead_id,
@@ -333,6 +334,20 @@ def _build_sources(state: PipelineState) -> list[dict]:
         }
         for item in state.reranked
     ]
+
+
+def _build_user_visible_citations(answer: str | None, chunks: list[dict]) -> list[dict[str, str]]:
+    if _is_insufficient_context_answer(answer):
+        return []
+    return build_message_citations_from_chunks(chunks)
+
+
+def _is_insufficient_context_answer(answer: str | None) -> bool:
+    expected = _normalize_for_matching(INSUFFICIENT_CONTEXT_ANSWER)
+    actual = _normalize_for_matching(answer)
+    if not expected or not actual:
+        return False
+    return actual == expected or actual.startswith("toi chua tim thay thong tin nay trong kho du lieu chinh thuc")
 
 
 def _lead_response_fields(lead, conversation) -> dict:

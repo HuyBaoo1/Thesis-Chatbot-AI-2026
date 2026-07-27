@@ -82,7 +82,7 @@ const useRealtime = ({
       socket = new WebSocket(
         buildRealtimeUrl(path, {
           conversation_token: conversationToken,
-          token: staffToken,
+          token: undefined,
         })
       )
 

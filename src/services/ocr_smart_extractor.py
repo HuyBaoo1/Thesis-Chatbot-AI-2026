@@ -471,6 +471,48 @@ RULES:
         return "\n\n".join(formatted) if formatted else "[No text extracted]"
 
 
+class LocalTesseractExtractor:
+    """Local OCR extractor using the Tesseract binary installed in Docker."""
+
+    def extract(self, images: list[bytes]) -> str:
+        if not images:
+            raise ValueError("No images available for local OCR")
+
+        import pytesseract
+        from src.core.config import settings
+        from src.services.vietnamese_encoding_fixer import VietnameseEncodingCorrector
+
+        corrector = VietnameseEncodingCorrector()
+        sections: list[str] = []
+        lang = settings.OCR_TESSERACT_LANG.strip() or "vie+eng"
+
+        for index, image_bytes in enumerate(images, start=1):
+            image = Image.open(io.BytesIO(image_bytes))
+            try:
+                image = image.convert("L").filter(ImageFilter.SHARPEN)
+                text = pytesseract.image_to_string(
+                    image,
+                    lang=lang,
+                    config="--oem 3 --psm 6",
+                )
+            except pytesseract.TesseractError:
+                if lang != "eng":
+                    text = pytesseract.image_to_string(
+                        image,
+                        lang="eng",
+                        config="--oem 3 --psm 6",
+                    )
+                else:
+                    raise
+            finally:
+                image.close()
+
+            fixed_text = corrector.fix(text.strip())
+            sections.append(f"## Page {index}\n\n{fixed_text}".strip())
+
+        return "\n\n".join(sections).strip()
+
+
 class ExtractionRouter:
     """Main router that orchestrates extraction based on analysis."""
 

@@ -286,12 +286,14 @@ def _tokenize_text(text: str) -> list[str]:
 
 
 def _row_to_candidate(row: KnowledgeChunk, score: float, path: str) -> dict[str, Any]:
+    metadata = row.metadata_json or {}
+    official_source_url = metadata.get("source_url") or row.source_url
     return {
         "chunk_id": row.id,
         "title": row.title,
         "category": row.category.value if row.category else None,
         "source": row.source,
-        "source_url": row.source_url,
+        "source_url": official_source_url,
         "year": row.year,
         "content": row.content,
         "score": float(score),
@@ -317,12 +319,15 @@ def _payload_to_candidate(payload: dict[str, Any], *, score: float) -> dict[str,
         except (TypeError, ValueError):
             chunk_id_value = chunk_id
 
+    metadata = payload.get("metadata_json") or {}
+    official_source_url = metadata.get("source_url") or payload.get("source_url")
+
     return {
         "chunk_id": chunk_id_value,
         "title": payload.get("title"),
         "category": payload.get("category"),
         "source": payload.get("source"),
-        "source_url": payload.get("source_url"),
+        "source_url": official_source_url,
         "year": payload.get("year"),
         "content": payload.get("content"),
         "score": float(score),

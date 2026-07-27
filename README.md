@@ -23,7 +23,7 @@
 
 VGU Admissions AI Chatbot là nền tảng tư vấn tuyển sinh thông minh dành cho **Trường Đại học Việt Đức (Vietnamese-German University - VGU)**. Hệ thống cung cấp một chatbot AI đa kênh (web, Telegram/Zalo khi cấu hình token) có khả năng trả lời câu hỏi tuyển sinh dựa trên kho tri thức đã import/crawl, đồng thời cung cấp dashboard cho tư vấn viên và quản trị viên để quản lý leads, hội thoại, knowledge base, OCR và analytics.
 
-> **Ghi chú dữ liệu quan trọng:** Repo vẫn còn thư mục `vinuni_admissions_import/` và một số báo cáo đánh giá lịch sử dùng VinUni làm case study ban đầu. Không dùng dữ liệu đó để trả lời như thể là thông tin VGU. Trước khi demo/triển khai cho VGU, hãy crawl/import dữ liệu chính thức từ `https://vgu.edu.vn/`, đặc biệt các mục Admission, Study Programs, Tuition Fees và Scholarships.
+> **Ghi chú dữ liệu quan trọng:** Runtime dataset của project này là VGU-only. Dữ liệu import của trường nguồn cũ đã được backup cục bộ và loại khỏi runtime. Trước khi demo/triển khai cho VGU, hãy crawl/import dữ liệu chính thức từ `https://vgu.edu.vn/`, đặc biệt các mục Admission, Tuition Fees và Scholarships.
 
 ---
 
@@ -193,10 +193,10 @@ flowchart LR
   A["📄 Upload File / Submit URL"] --> B["API OCR / Crawl Router"]
   B --> C["Push Job → Redis Queue"]
   C --> D["RQ Worker"]
-  D --> E["OCR / Extraction / Chunking<br/>PyMuPDF · RapidOCR · Vision API"]
+  D --> E["OCR / Extraction / Chunking<br/>PyMuPDF · Tesseract · Remote Parser · Vision API"]
   E --> F["Embedding Generation<br/>text-embedding-3-small"]
   F --> G["Upsert → Qdrant"]
-  E --> H["Store Artifact → R2"]
+  E --> H["Store Artifact → R2 or local OCR_TEMP_DIR"]
   E --> I["Store Metadata → PostgreSQL"]
 ```
 
@@ -270,7 +270,7 @@ flowchart TB
 | **AI / LLM** | OpenAI GPT-4o, text-embedding-3-small | Tổng hợp câu trả lời, embeddings |
 | **AI Router** | Gemini Flash (optional, fallback to OpenAI) | Phân loại ý định nhanh |
 | **LLM Orchestration** | LangGraph 0.4 | Điều phối pipeline chat 11 bước |
-| **OCR** | PyMuPDF, pytesseract, OpenAI Vision | Trích xuất văn bản từ tài liệu |
+| **OCR** | PyMuPDF, Tesseract/pytesseract, optional remote parser, OpenAI Vision fallback | Trích xuất văn bản từ tài liệu |
 | **Crawling** | Firecrawl | Thu thập nội dung web |
 | **Auth** | JWT (python-jose), bcrypt | Xác thực & phân quyền |
 | **Real-time** | WebSocket, SSE | Cập nhật trực tiếp |
@@ -371,7 +371,7 @@ npm run dev
 
 ```bash
 # Kiểm tra API
-curl http://localhost:8000/api/health
+curl http://localhost:8000/health
 
 # Xem API docs
 open http://localhost:8000/docs
@@ -385,8 +385,8 @@ open http://localhost:8000/docs
 
 | Vai trò | Email | Mật khẩu | Trang truy cập |
 |---------|-------|----------|----------------|
-| **Quản trị viên (Admin)** | `admin@test.com` | `admin123` | `/login` hoặc `<admin-domain>/login` |
-| **Cố vấn (Counselor)** | `hhh@gmail.com` | `12345678` | `/login` hoặc `<admin-domain>/login` |
+| **Quản trị viên (Admin)** | `DATA_REQUIRED` | `DATA_REQUIRED` | `/login` hoặc `<admin-domain>/login` |
+| **Cố vấn (Counselor)** | `DATA_REQUIRED` | `DATA_REQUIRED` | `/login` hoặc `<admin-domain>/login` |
 
 > **Quyền hạn:**
 > - **Admin**: Toàn quyền — quản lý staff, leads, knowledge base, OCR, crawl, analytics, scholarship & tuition policies.
@@ -404,8 +404,8 @@ open http://localhost:8000/docs
 1. Truy cập **Admin Dashboard** tại `/login` hoặc domain admin đã cấu hình
    
    **Tài khoản demo:**
-   - **Admin**: `admin@test.com` / `admin123`
-   - **Cố vấn**: `hhh@gmail.com` / `12345678`
+   - **Admin**: `DATA_REQUIRED`
+   - **Cố vấn**: `DATA_REQUIRED`
 
 2. Đăng nhập với tài khoản được cấp (email + password)
 3. **Trang Dashboard**: Xem tổng quan leads, hội thoại, thống kê
@@ -492,7 +492,7 @@ UNIVERSITY_WEBSITE=https://vgu.edu.vn/
 UNIVERSITY_DOMAIN=vgu.edu.vn
 ```
 
-Official VGU admissions content is `DATA_REQUIRED`. Use `vgu_admissions_import/manifest.template.json` to record source metadata before importing through the existing Knowledge Chunks, OCR Quick Processing, or Web Crawler flows. Do not use `vinuni_admissions_import/` as VGU answer data.
+Official VGU admissions content is `DATA_REQUIRED`. Use `vgu_admissions_import/crawl_sources.json` for validated crawl seeds and `vgu_admissions_import/manifest.template.json` to record reviewed source metadata before importing through the existing Knowledge Chunks, OCR Quick Processing, or Web Crawler flows.
 
 ## License
 

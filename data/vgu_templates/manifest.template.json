@@ -1,0 +1,107 @@
+{
+  "university": "Vietnamese-German University",
+  "short_name": "VGU",
+  "website": "https://vgu.edu.vn/",
+  "documents": [
+    {
+      "file": "01_admissions_overview.md",
+      "category": "PROCESS",
+      "source": "official",
+      "source_url": "DATA_REQUIRED",
+      "language": "DATA_REQUIRED",
+      "effective_date": "DATA_REQUIRED",
+      "review_status": "DATA_REQUIRED",
+      "import_ready": false
+    },
+    {
+      "file": "02_application_process.md",
+      "category": "PROCESS",
+      "source": "official",
+      "source_url": "DATA_REQUIRED",
+      "language": "DATA_REQUIRED",
+      "effective_date": "DATA_REQUIRED",
+      "review_status": "DATA_REQUIRED",
+      "import_ready": false
+    },
+    {
+      "file": "03_entry_requirements.md",
+      "category": "REQUIREMENT",
+      "source": "official",
+      "source_url": "DATA_REQUIRED",
+      "language": "DATA_REQUIRED",
+      "effective_date": "DATA_REQUIRED",
+      "review_status": "DATA_REQUIRED",
+      "import_ready": false
+    },
+    {
+      "file": "04_deadlines.md",
+      "category": "DEADLINE",
+      "source": "official",
+      "source_url": "DATA_REQUIRED",
+      "language": "DATA_REQUIRED",
+      "effective_date": "DATA_REQUIRED",
+      "review_status": "DATA_REQUIRED",
+      "import_ready": false
+    },
+    {
+      "file": "05_programs.md",
+      "category": "MAJOR_INFO",
+      "source": "official",
+      "source_url": "DATA_REQUIRED",
+      "language": "DATA_REQUIRED",
+      "effective_date": "DATA_REQUIRED",
+      "review_status": "DATA_REQUIRED",
+      "import_ready": false
+    },
+    {
+      "file": "06_tuition.md",
+      "category": "TUITION",
+      "source": "official",
+      "source_url": "DATA_REQUIRED",
+      "language": "DATA_REQUIRED",
+      "effective_date": "DATA_REQUIRED",
+      "review_status": "DATA_REQUIRED",
+      "import_ready": false
+    },
+    {
+      "file": "07_scholarships.md",
+      "category": "SCHOLARSHIP",
+      "source": "official",
+      "source_url": "DATA_REQUIRED",
+      "language": "DATA_REQUIRED",
+      "effective_date": "DATA_REQUIRED",
+      "review_status": "DATA_REQUIRED",
+      "import_ready": false
+    },
+    {
+      "file": "08_student_services_and_campus.md",
+      "category": "FAQ",
+      "source": "official",
+      "source_url": "DATA_REQUIRED",
+      "language": "DATA_REQUIRED",
+      "effective_date": "DATA_REQUIRED",
+      "review_status": "DATA_REQUIRED",
+      "import_ready": false
+    },
+    {
+      "file": "09_faq.md",
+      "category": "FAQ",
+      "source": "official",
+      "source_url": "DATA_REQUIRED",
+      "language": "DATA_REQUIRED",
+      "effective_date": "DATA_REQUIRED",
+      "review_status": "DATA_REQUIRED",
+      "import_ready": false
+    },
+    {
+      "file": "10_contacts.md",
+      "category": "FAQ",
+      "source": "official",
+      "source_url": "DATA_REQUIRED",
+      "language": "DATA_REQUIRED",
+      "effective_date": "DATA_REQUIRED",
+      "review_status": "DATA_REQUIRED",
+      "import_ready": false
+    }
+  ]
+}

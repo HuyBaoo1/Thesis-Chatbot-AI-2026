@@ -33,9 +33,9 @@ services:
   # FastAPI Web Service
   # ============================================================================
   - type: web
-    name: a20-api-backup
+    name: vgu-admissions-api
     runtime: docker
-    repo: https://github.com/a20-ai-thuc-chien/A20-App-165
+    repo: DATA_REQUIRED
     branch: main
     plan: standard
     healthCheckPath: /health
@@ -95,13 +95,13 @@ services:
 
       # ---- University identity ----
       - key: UNIVERSITY_NAME
-        value: DATA_REQUIRED
+        value: Vietnamese-German University
       - key: UNIVERSITY_SHORT_NAME
-        value: DATA_REQUIRED
+        value: VGU
       - key: UNIVERSITY_WEBSITE
-        value: DATA_REQUIRED
+        value: https://vgu.edu.vn/
       - key: UNIVERSITY_DOMAIN
-        value: DATA_REQUIRED
+        value: vgu.edu.vn
 
       # ---- Cloudflare R2 ----
       - key: R2_ACCOUNT_ID
@@ -130,9 +130,9 @@ services:
         value: "true"
 
       # ---- CORS & Security ----
-      # After first deploy, update TRUSTED_HOSTS with Render domain
+      # After first deploy, update these with your frontend and backend domains.
       - key: CORS_ALLOW_ORIGINS
-        value: https://a20-app-165.vercel.app,http://localhost:5173,http://127.0.0.1:5173
+        value: DATA_REQUIRED,http://localhost:5173,http://127.0.0.1:5173
       - key: CORS_ALLOW_CREDENTIALS
         value: "true"
       - key: CORS_ALLOW_METHODS
@@ -140,7 +140,7 @@ services:
       - key: CORS_ALLOW_HEADERS
         value: "*"
       - key: TRUSTED_HOSTS
-        value: a20-app-165-production.up.railway.app,a20-app-165.up.railway.app,localhost,127.0.0.1
+        value: DATA_REQUIRED,localhost,127.0.0.1
 
       # ---- Rate Limits ----
       - key: CHAT_QUERY_RATE_LIMIT_PER_MINUTE
@@ -154,13 +154,13 @@ services:
 
       # ---- Bootstrap Admin ----
       - key: BOOTSTRAP_ADMIN_ENABLED
-        value: "true"
+        value: "false"
       - key: BOOTSTRAP_ADMIN_NAME
         value: System Admin
       - key: BOOTSTRAP_ADMIN_EMAIL
-        value: admin@example.com
+        value:
       - key: BOOTSTRAP_ADMIN_PASSWORD
-        value: Admin@123456
+        value:
 
       # ---- RQ / Queue ----
       - key: RQ_QUEUE_NAME

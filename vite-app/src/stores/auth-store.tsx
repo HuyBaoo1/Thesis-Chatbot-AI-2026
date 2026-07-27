@@ -1,5 +1,6 @@
 import { create } from "zustand"
 
+import { clearWsAuthCookie } from "@/lib/realtime"
 import type { AuthUser } from "@/types/auth-type"
 
 type AuthState = {
@@ -25,6 +26,7 @@ const useAuthStore = create<AuthState>()((set) => ({
 
   clearAuthData: () => {
     localStorage.removeItem(AUTH_SESSION_HINT_KEY)
+    clearWsAuthCookie()
     set({
       accessToken: null,
       user: null,

@@ -31,7 +31,7 @@ scripts/
 - `force-restart-backend.ps1` - Force restart
 
 ### Data Management
-- `crawl-vinuni-full.ps1` - Crawl the VGU admissions website
+- `crawl-vgu-full.ps1` - Crawl the VGU admissions website through the current `/api/crawl` endpoints; pass an admin `AccessToken` when the backend requires auth
 - `generate-embeddings.ps1` / `regenerate-embeddings-simple.ps1` - Embeddings
 - `clear-and-regenerate-embeddings.ps1` / `reset-and-regenerate.ps1` - Clear & regenerate
 - `populate-analytics-data.ps1` / `populate-data-simple.ps1` - Populate data

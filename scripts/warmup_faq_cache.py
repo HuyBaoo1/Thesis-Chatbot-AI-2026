@@ -57,7 +57,7 @@ def warmup(limit: int = 30, intent: str | None = None) -> dict:
                 f"{API_BASE_URL}/api/chat/init-lead",
                 json={
                     "full_name": "Cache Warmup",
-                    "email": "cache-warmup@vinuni.edu.vn",
+                    "email": "cache-warmup@vgu.edu.vn",
                     "phone": "0000000000",
                 },
             )

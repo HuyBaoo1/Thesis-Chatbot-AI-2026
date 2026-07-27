@@ -1,12 +1,11 @@
-version: "3.9"
-
 services:
   postgres:
     image: postgres:16-alpine
     container_name: admissions-postgres
     restart: unless-stopped
     env_file:
-      - .env
+      - path: .env
+        required: false
     environment:
       POSTGRES_USER: ${POSTGRES_USER}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
@@ -57,14 +56,16 @@ services:
     container_name: admissions-api
     restart: unless-stopped
     env_file:
-      - .env
+      - path: .env
+        required: false
     environment:
       DATABASE_URL: postgresql+psycopg://${POSTGRES_USER}:${POSTGRES_PASSWORD}@postgres:5432/${POSTGRES_DB}
       QDRANT_HOST: qdrant
       QDRANT_PORT: 6333
       QDRANT_API_KEY: ${QDRANT_API_KEY}
       REDIS_URL: redis://redis:6379/0
-      RUN_EVAL_ON_DEPLOY: "true"
+      OCR_TEMP_DIR: ${OCR_TEMP_DIR:-/app/data/runtime/admissions-ocr}
+      RUN_EVAL_ON_DEPLOY: "false"
     ports:
       - "${API_PORT}:8000"
     depends_on:
@@ -89,13 +90,15 @@ services:
     profiles:
       - queue
     env_file:
-      - .env
+      - path: .env
+        required: false
     environment:
       DATABASE_URL: postgresql+psycopg://${POSTGRES_USER}:${POSTGRES_PASSWORD}@postgres:5432/${POSTGRES_DB}
       QDRANT_HOST: qdrant
       QDRANT_PORT: 6333
       QDRANT_API_KEY: ${QDRANT_API_KEY}
       REDIS_URL: redis://redis:6379/0
+      OCR_TEMP_DIR: ${OCR_TEMP_DIR:-/app/data/runtime/admissions-ocr}
       PYTHONPATH: /app
     depends_on:
       postgres:
