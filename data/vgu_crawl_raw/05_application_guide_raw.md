@@ -1,13 +1,3 @@
-![](https://vgu.edu.vn/huong-dan-nop-ho-so;jsessionid=605A2E53E3A62834BF5C2CF8456A52C5?p_p_id=CmsSlider_WAR_cmsportlet&p_p_lifecycle=2&p_p_state=normal&p_p_mode=view&p_p_cacheability=cacheLevelPage&p_p_col_id=column-1&p_p_col_count=1&_CmsSlider_WAR_cmsportlet_javax.faces.resource=loading%2Floading.gif&_CmsSlider_WAR_cmsportlet_ln=images)
-
-![](https://vgu.edu.vn/huong-dan-nop-ho-so;jsessionid=605A2E53E3A62834BF5C2CF8456A52C5?p_p_id=CmsSlider_WAR_cmsportlet&p_p_lifecycle=2&p_p_state=normal&p_p_mode=view&p_p_cacheability=cacheLevelPage&p_p_col_id=column-1&p_p_col_count=1&_CmsSlider_WAR_cmsportlet_javax.faces.resource=error.png&_CmsSlider_WAR_cmsportlet_ln=images)
-
-![7.jpg](https://vgu.edu.vn/cms-portlet/data/upload/slider/e03936d2cf20ddf6be60de9c4c46c61d.jpg)
-
-![](https://vgu.edu.vn/huong-dan-nop-ho-so;jsessionid=605A2E53E3A62834BF5C2CF8456A52C5?p_p_id=CmsHienThiBaiVietTinh_WAR_cmsportlet_INSTANCE_OLumN44tVVXt&p_p_lifecycle=2&p_p_state=normal&p_p_mode=view&p_p_cacheability=cacheLevelPage&p_p_col_id=column-ex-4&p_p_col_count=1&_CmsHienThiBaiVietTinh_WAR_cmsportlet_INSTANCE_OLumN44tVVXt_javax.faces.resource=loading%2Floading.gif&_CmsHienThiBaiVietTinh_WAR_cmsportlet_INSTANCE_OLumN44tVVXt_ln=images)
-
-![](https://vgu.edu.vn/huong-dan-nop-ho-so;jsessionid=605A2E53E3A62834BF5C2CF8456A52C5?p_p_id=CmsHienThiBaiVietTinh_WAR_cmsportlet_INSTANCE_OLumN44tVVXt&p_p_lifecycle=2&p_p_state=normal&p_p_mode=view&p_p_cacheability=cacheLevelPage&p_p_col_id=column-ex-4&p_p_col_count=1&_CmsHienThiBaiVietTinh_WAR_cmsportlet_INSTANCE_OLumN44tVVXt_javax.faces.resource=error.png&_CmsHienThiBaiVietTinh_WAR_cmsportlet_INSTANCE_OLumN44tVVXt_ln=images)
-
 # **ENROLLMENT PROCESS**
 
 Enrollment is the procedure to officially be accepted into a degree program of the Vietnamese-German University (VGU). This process requires applicants to submit relevant documents and pay tuition fees within the prescribed timeframe. After completing the enrollment process, applicants will receive VGU student status, study schedules and access services such as dormitories, buses. Applicants must observe the steps in the enrolment process as follows:
@@ -240,33 +230,3 @@ VGU Campus
 - [Career](https://vgu.edu.vn/career1;jsessionid=605A2E53E3A62834BF5C2CF8456A52C5)
 - [Contact Us](https://vgu.edu.vn/contact-us;jsessionid=605A2E53E3A62834BF5C2CF8456A52C5)
 - [Library](https://library.vgu.edu.vn/)
-
-#### [Sign In](https://vgu.edu.vn/c/portal/login?p_l_id=9650545)
-
-VIETNAMESE - GERMAN UNIVERSITY
-
-**VGU Campus**
-
-Ring road 4, Quarter 4, Thoi Hoa Ward, Ho Chi Minh City
-
-(0274) 222 0990 -  (0274) 222 0980
-
-![](https://vgu.edu.vn/cms-vgu-theme-4/images/cms/map-direction.png)[Get direction](https://www.google.com/maps/place/Vietnamese+-+German+University/@11.0547843,106.6634109,17z/data=!3m1!4b1!4m5!3m4!1s0x3174ce286d98ddc7:0xfa362a1ccda178aa!8m2!3d11.0547843!4d106.6655996)
-
-Confirm
-
-Are you sure you want to delete?
-
-OkCancel
-
-Confirm
-
-Are you sure you want to delete?
-
-OkCancel
-
-Confirm
-
-Are you sure you want to delete?
-
-OkCancel

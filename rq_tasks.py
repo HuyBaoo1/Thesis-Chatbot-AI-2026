@@ -1,5 +1,6 @@
 from uuid import UUID
 
+from src.core.logging_redaction import configure_sensitive_log_redaction
 from src.db.session import SessionLocal
 from src.services.chat_pipeline.conversation_summary import maybe_update_conversation_summary
 from src.services.conversation_service import (
@@ -22,6 +23,9 @@ from src.services.notification_service import (
     serialize_notification,
 )
 from src.services.realtime import publish_realtime_event
+
+
+configure_sensitive_log_redaction()
 
 
 def process_chat_turn_side_effects(

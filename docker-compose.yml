@@ -1,7 +1,6 @@
 services:
   postgres:
     image: postgres:16-alpine
-    container_name: admissions-postgres
     restart: unless-stopped
     env_file:
       - path: .env
@@ -17,27 +16,25 @@ services:
     networks:
       - app-network
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER} -d ${POSTGRES_DB}"]
+      test: ["CMD-SHELL", "pg_isready -U \"$${POSTGRES_USER}\" -d \"$${POSTGRES_DB}\""]
       interval: 10s
       timeout: 5s
       retries: 5
 
   qdrant:
     image: qdrant/qdrant:latest
-    container_name: admissions-qdrant
     restart: unless-stopped
     ports:
       - "${QDRANT_PORT}:6333"
     environment:
       QDRANT__SERVICE__API_KEY: ${QDRANT_API_KEY}
     volumes:
-      - qdrant_storage:/qdrant/storage
+      - qdrant_data:/qdrant/storage
     networks:
       - app-network
 
   redis:
     image: redis:7-alpine
-    container_name: admissions-redis
     restart: unless-stopped
     ports:
       - "${REDIS_PORT:-6379}:6379"
@@ -53,19 +50,20 @@ services:
 
   api:
     build: .
-    container_name: admissions-api
+    image: vgu-admissions-platform-api:${APP_IMAGE_TAG:-local}
     restart: unless-stopped
     env_file:
       - path: .env
         required: false
     environment:
-      DATABASE_URL: postgresql+psycopg://${POSTGRES_USER}:${POSTGRES_PASSWORD}@postgres:5432/${POSTGRES_DB}
+      DATABASE_URL: postgresql+psycopg://${APP_DATABASE_USER}:${APP_DATABASE_PASSWORD}@postgres:5432/${POSTGRES_DB}
       QDRANT_HOST: qdrant
       QDRANT_PORT: 6333
       QDRANT_API_KEY: ${QDRANT_API_KEY}
       REDIS_URL: redis://redis:6379/0
       OCR_TEMP_DIR: ${OCR_TEMP_DIR:-/app/data/runtime/admissions-ocr}
       RUN_EVAL_ON_DEPLOY: "false"
+      START_EMBEDDED_WORKER: ${START_EMBEDDED_WORKER:-true}
     ports:
       - "${API_PORT}:8000"
     depends_on:
@@ -82,9 +80,9 @@ services:
     networks:
       - app-network
 
-  rq-worker:
+  worker:
     build: .
-    container_name: admissions-rq-worker
+    image: vgu-admissions-platform-worker:${APP_IMAGE_TAG:-local}
     restart: unless-stopped
     working_dir: /app
     profiles:
@@ -93,7 +91,7 @@ services:
       - path: .env
         required: false
     environment:
-      DATABASE_URL: postgresql+psycopg://${POSTGRES_USER}:${POSTGRES_PASSWORD}@postgres:5432/${POSTGRES_DB}
+      DATABASE_URL: postgresql+psycopg://${APP_DATABASE_USER}:${APP_DATABASE_PASSWORD}@postgres:5432/${POSTGRES_DB}
       QDRANT_HOST: qdrant
       QDRANT_PORT: 6333
       QDRANT_API_KEY: ${QDRANT_API_KEY}
@@ -109,13 +107,13 @@ services:
         condition: service_healthy
     volumes:
       - .:/app
-    command: sh -c "python -m rq.cli worker --url \"$${REDIS_URL}\" \"$${RQ_QUEUE_NAME:-default}\""
+    command: python /app/worker/start.py
     networks:
       - app-network
 
 volumes:
   postgres_data:
-  qdrant_storage:
+  qdrant_data:
   redis_data:
 
 networks:

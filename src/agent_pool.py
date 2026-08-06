@@ -1,5 +1,5 @@
 """
-Agent Pool Manager for VinUni Admissions Portal
+Agent Pool Manager for VGU Admissions Intelligence Platform
 
 Provides multi-agent pool with role-based agent creation,
 integrated with BMad Method roles and khuym orchestration.

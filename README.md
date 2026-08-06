@@ -1,4 +1,4 @@
-# VGU Admissions AI Chatbot Thesis
+# VGU Admissions Intelligence Platform
 
 > **AI-powered admissions counseling system** for Vietnamese-German University (VGU) as a thesis project. The system keeps the original multi-channel RAG chatbot architecture, staff dashboard, knowledge-base management, OCR/crawler pipeline, and analytics flow, but the brand and runtime prompts are adapted for VGU.
 

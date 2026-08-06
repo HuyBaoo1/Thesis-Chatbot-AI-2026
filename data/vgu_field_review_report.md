@@ -130,3 +130,18 @@ Generated: 2026-07-28
 | News excerpts | Includes 2026 admissions-news excerpts | Same page | Individual article URLs required | 2026 | AMBIGUOUS | Crawl/review article pages separately if needed. |
 | Scholarship marketing blocks | Scholarship section present | Same page | Scholarship pages/PDFs required | dynamic | AMBIGUOUS | Do not duplicate specialized scholarship sources. |
 | Marketing/event/social content | Present | Same page | n/a | dynamic | NOT_APPLICABLE | Exclude from import. |
+
+## Bachelor programs - Vietnamese-German University
+
+- Source URL: https://vgu.edu.vn/tuition-fees/for-bachelor-programs
+- Raw file: data/vgu_crawl_raw/01_bachelor_programs_vietnamese_german_university_30a6b40a_raw.md
+- Reviewed draft: data/vgu_crawl_reviewed/01_bachelor_programs_vietnamese_german_university_30a6b40a_review_required.md
+- Review status: needs_review
+
+| Field | Extracted value | Official source | Effective date/intake | Match status | Action |
+|---|---|---|---|---|---|
+| Tuition | DATA_REQUIRED | DATA_REQUIRED | DATA_REQUIRED | REVIEW_REQUIRED | Human verification required before import. |
+| Scholarship | DATA_REQUIRED | DATA_REQUIRED | DATA_REQUIRED | REVIEW_REQUIRED | Human verification required before import. |
+| Deadline | DATA_REQUIRED | DATA_REQUIRED | DATA_REQUIRED | REVIEW_REQUIRED | Human verification required before import. |
+| Entry requirement | DATA_REQUIRED | DATA_REQUIRED | DATA_REQUIRED | REVIEW_REQUIRED | Human verification required before import. |
+| Contact | DATA_REQUIRED | DATA_REQUIRED | DATA_REQUIRED | REVIEW_REQUIRED | Human verification required before import. |

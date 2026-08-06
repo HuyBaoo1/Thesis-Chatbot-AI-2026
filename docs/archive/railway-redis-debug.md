@@ -53,12 +53,12 @@ This caused all `railway up` deployments from `worker/` directory to deploy to t
 
 Changed `REDIS_URL` from:
 ```
-redis://default:password@redis.railway.internal:6379
+redis://<REDACTED>
 ```
 
 To:
 ```
-redis://default:password@switchyard.proxy.rlwy.net:16890
+redis://<REDACTED>
 ```
 
 ### 2. Fixed worker/.railway.json
@@ -134,7 +134,7 @@ railway run printenv | grep REDIS
 3. **If using private hostname fails**, change to TCP proxy:
    ```bash
    railway service rq-worker
-   railway variables --set REDIS_URL="redis://default:PASSWORD@switchyard.proxy.rlwy.net:16890"
+   railway variables --set REDIS_URL="redis://<REDACTED>"
    railway up
    ```
 

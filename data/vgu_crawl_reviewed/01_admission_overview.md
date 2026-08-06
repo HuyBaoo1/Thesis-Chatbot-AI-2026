@@ -1,11 +1,4 @@
 # VGU Admissions Overview
-
-## Scope
-
-This reviewed Markdown was created from the official Vietnamese-German University admissions overview page.
-
-It is verified only for the admissions overview structure, bachelor program list, master program list, and official application links shown on the page. It does not verify tuition, scholarships, deadlines, admission conditions, English requirements, quotas, or contact details.
-
 ## Bachelor Programs
 
 The VGU admissions overview page groups bachelor programs under Engineering and Economics and Management.

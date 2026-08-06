@@ -1,5 +1,7 @@
 import logging
 import posixpath
+import re
+import time
 from typing import Any
 from urllib.parse import urljoin, urlparse, urlunparse, urldefrag
 
@@ -37,11 +39,32 @@ SKIPPED_URL_EXTENSIONS = (
 )
 
 
+RETRYABLE_ERROR_MARKERS = (
+    "408",
+    "429",
+    "500",
+    "502",
+    "503",
+    "504",
+    "timeout",
+    "timed out",
+    "temporarily unavailable",
+    "too many requests",
+    "rate limit",
+)
+
+
 def get_firecrawl_client() -> FirecrawlApp:
     api_key = settings.FIRECRAWL_API_KEY
     if not api_key:
         raise ValueError("FIRECRAWL_API_KEY is not set")
-    return FirecrawlApp(api_key=api_key)
+    timeout_seconds = max(1.0, settings.FIRECRAWL_SCRAPE_TIMEOUT_MS / 1000)
+    return FirecrawlApp(
+        api_key=api_key,
+        timeout=timeout_seconds,
+        max_retries=settings.FIRECRAWL_SDK_MAX_RETRIES,
+        backoff_factor=0,
+    )
 
 
 def crawl_sync(url: str, limit: int = 100) -> dict[str, Any]:
@@ -57,13 +80,8 @@ def crawl_sync(url: str, limit: int = 100) -> dict[str, Any]:
     seed_url = _normalize_url(url)
     site_urls = discover_site_urls(client, seed_url, normalized_limit)
 
-    scrape_params = {
-        "formats": ["markdown"],
-        "onlyMainContent": True,
-    }
-
     if len(site_urls) == 1:
-        page = client.scrape_url(site_urls[0], params=scrape_params)
+        page = scrape_page_with_retry(client, site_urls[0], formats=["markdown"])
         data = [page] if page else []
         return _build_site_crawl_result(
             success=bool(data),
@@ -73,7 +91,7 @@ def crawl_sync(url: str, limit: int = 100) -> dict[str, Any]:
             raw_result=None,
         )
 
-    result = client.batch_scrape_urls(site_urls, params=scrape_params)
+    result = batch_scrape_with_retry(client, site_urls)
     return _normalize_batch_scrape_result(result, site_urls)
 
 
@@ -81,22 +99,301 @@ def discover_site_urls(client: FirecrawlApp, url: str, limit: int) -> list[str]:
     urls: list[str] = [url]
 
     try:
-        map_result = client.map_url(url, params={"search": ""})
+        map_result = _map_url(client, url, limit=limit)
         urls.extend(_extract_links_from_map_result(map_result))
     except Exception:
         logger.warning("Firecrawl map failed for %s", url, exc_info=True)
 
     if len(_filter_site_urls(url, urls, limit)) < limit:
         try:
-            links_page = client.scrape_url(
+            links_page = scrape_page_with_retry(
+                client,
                 url,
-                params={"formats": ["links"], "onlyMainContent": False},
+                formats=["links"],
+                only_main_content=False,
             )
             urls.extend(_extract_links_from_scrape_result(links_page))
         except Exception:
             logger.info("Firecrawl link scrape failed for %s", url, exc_info=True)
 
     return _filter_site_urls(url, urls, limit)
+
+
+def scrape_page_with_retry(
+    client: FirecrawlApp,
+    url: str,
+    *,
+    formats: list[str],
+    only_main_content: bool = True,
+) -> dict[str, Any]:
+    return _call_firecrawl_with_policy(
+        lambda proxy: _scrape_url(
+            client,
+            url,
+            formats=formats,
+            only_main_content=only_main_content,
+            proxy=proxy,
+        ),
+        operation="scrape",
+        url=url,
+    )
+
+
+def batch_scrape_with_retry(client: FirecrawlApp, urls: list[str]) -> dict[str, Any]:
+    return _call_firecrawl_with_policy(
+        lambda proxy: _batch_scrape_urls(client, urls, proxy=proxy),
+        operation="batch_scrape",
+        url=urls[0] if urls else "",
+    )
+
+
+def _call_firecrawl_with_policy(call, *, operation: str, url: str) -> dict[str, Any]:
+    attempts = _build_proxy_attempts()
+    last_exc: Exception | None = None
+
+    for attempt_index, proxy in enumerate(attempts, start=1):
+        try:
+            result = call(proxy)
+            normalized = _to_plain_dict(result)
+            if normalized:
+                _attach_firecrawl_attempt(normalized, attempt_index=attempt_index, proxy=proxy)
+            return normalized
+        except Exception as exc:
+            last_exc = exc
+            retryable = _is_retryable_firecrawl_error(exc)
+            error_summary = classify_firecrawl_exception(
+                exc,
+                operation=operation,
+                url=url,
+                attempt_index=attempt_index,
+                proxy=proxy,
+            )
+            logger.warning(
+                "Firecrawl %s attempt %s/%s failed for %s using proxy=%s retryable=%s classification=%s http_status=%s request_id=%s",
+                operation,
+                attempt_index,
+                len(attempts),
+                url,
+                proxy,
+                retryable,
+                error_summary["classification"],
+                error_summary["http_status"],
+                error_summary["provider_request_id"],
+                exc_info=True,
+            )
+            if attempt_index >= len(attempts) or not retryable:
+                raise
+            if settings.FIRECRAWL_RETRY_BACKOFF_SECONDS > 0:
+                time.sleep(settings.FIRECRAWL_RETRY_BACKOFF_SECONDS)
+
+    if last_exc:
+        raise last_exc
+    return {}
+
+
+def _build_proxy_attempts() -> list[str]:
+    primary = _normalize_proxy_mode(settings.FIRECRAWL_PROXY_MODE)
+    attempts = [primary]
+    if (
+        settings.FIRECRAWL_ALLOW_ENHANCED_RETRY
+        and primary == "basic"
+        and settings.FIRECRAWL_MAX_ATTEMPTS > 1
+    ):
+        attempts.append("enhanced")
+    return attempts[: settings.FIRECRAWL_MAX_ATTEMPTS]
+
+
+def _normalize_proxy_mode(value: str) -> str:
+    normalized = (value or "basic").strip().lower()
+    if normalized not in {"basic", "enhanced"}:
+        raise ValueError("FIRECRAWL_PROXY_MODE must be either 'basic' or 'enhanced'")
+    return normalized
+
+
+def _scrape_url(
+    client: FirecrawlApp,
+    url: str,
+    *,
+    formats: list[str],
+    only_main_content: bool,
+    proxy: str,
+) -> dict[str, Any]:
+    if hasattr(client, "scrape"):
+        return _to_plain_dict(
+            client.scrape(
+                url,
+                formats=formats,
+                only_main_content=only_main_content,
+                timeout=settings.FIRECRAWL_SCRAPE_TIMEOUT_MS,
+                proxy=proxy,
+            )
+        )
+
+    return _to_plain_dict(
+        client.scrape_url(
+            url,
+            params={
+                "formats": formats,
+                "onlyMainContent": only_main_content,
+                "timeout": settings.FIRECRAWL_SCRAPE_TIMEOUT_MS,
+                "proxy": proxy,
+            },
+        )
+    )
+
+
+def _batch_scrape_urls(client: FirecrawlApp, urls: list[str], *, proxy: str) -> dict[str, Any]:
+    if hasattr(client, "batch_scrape"):
+        return _to_plain_dict(
+            client.batch_scrape(
+                urls,
+                formats=["markdown"],
+                only_main_content=True,
+                timeout=settings.FIRECRAWL_SCRAPE_TIMEOUT_MS,
+                proxy=proxy,
+                poll_interval=2,
+                wait_timeout=max(1, settings.RQ_JOB_TIMEOUT - 5),
+            )
+        )
+
+    return _to_plain_dict(
+        client.batch_scrape_urls(
+            urls,
+            params={
+                "formats": ["markdown"],
+                "onlyMainContent": True,
+                "timeout": settings.FIRECRAWL_SCRAPE_TIMEOUT_MS,
+                "proxy": proxy,
+            },
+        )
+    )
+
+
+def _map_url(client: FirecrawlApp, url: str, *, limit: int) -> dict[str, Any]:
+    if hasattr(client, "map"):
+        return _to_plain_dict(
+            client.map(
+                url,
+                search="",
+                limit=limit,
+                timeout=settings.FIRECRAWL_SCRAPE_TIMEOUT_MS,
+            )
+        )
+
+    return _to_plain_dict(
+        client.map_url(
+            url,
+            params={
+                "search": "",
+                "limit": limit,
+                "timeout": settings.FIRECRAWL_SCRAPE_TIMEOUT_MS,
+            },
+        )
+    )
+
+
+def _is_retryable_firecrawl_error(exc: Exception) -> bool:
+    message = f"{type(exc).__name__}: {exc}".lower()
+    return any(marker in message for marker in RETRYABLE_ERROR_MARKERS)
+
+
+def classify_firecrawl_exception(
+    exc: Exception,
+    *,
+    operation: str | None = None,
+    url: str | None = None,
+    attempt_index: int | None = None,
+    proxy: str | None = None,
+) -> dict[str, Any]:
+    message = f"{type(exc).__name__}: {exc}"
+    lowered = message.lower()
+    http_status = _extract_http_status(exc, message)
+    provider_request_id = _extract_provider_request_id(exc)
+    error_code = _extract_error_code(exc)
+
+    if "ssl" in lowered or "eof occurred in violation of protocol" in lowered:
+        classification = "PROVIDER_SSL_ERROR"
+    elif "timeout" in lowered or "timed out" in lowered:
+        classification = "PROVIDER_TIMEOUT"
+    elif http_status == 429 or "rate limit" in lowered or "too many requests" in lowered:
+        classification = "PROVIDER_RATE_LIMIT"
+    elif http_status and 400 <= http_status < 500:
+        classification = "PROVIDER_CLIENT_ERROR"
+    elif http_status and http_status >= 500:
+        classification = "PROVIDER_SERVER_ERROR"
+    else:
+        classification = "PROVIDER_ERROR"
+
+    return {
+        "classification": classification,
+        "exception_class": type(exc).__name__,
+        "http_status": http_status,
+        "firecrawl_error_code": error_code,
+        "provider_request_id": provider_request_id,
+        "operation": operation,
+        "target_url": url,
+        "attempt": attempt_index,
+        "proxy": proxy,
+        "sdk_retries": settings.FIRECRAWL_SDK_MAX_RETRIES,
+    }
+
+
+def _extract_http_status(exc: Exception, message: str) -> int | None:
+    response = getattr(exc, "response", None)
+    status = getattr(response, "status_code", None)
+    if isinstance(status, int):
+        return status
+    match = re.search(r"\b([45][0-9]{2})\b", message)
+    return int(match.group(1)) if match else None
+
+
+def _extract_provider_request_id(exc: Exception) -> str | None:
+    response = getattr(exc, "response", None)
+    headers = getattr(response, "headers", None)
+    if not headers:
+        return getattr(exc, "request_id", None)
+    for key in ("x-request-id", "x-firecrawl-request-id", "request-id"):
+        value = headers.get(key)
+        if value:
+            return str(value)
+    return getattr(exc, "request_id", None)
+
+
+def _extract_error_code(exc: Exception) -> str | None:
+    for attr in ("code", "error_code"):
+        value = getattr(exc, attr, None)
+        if value:
+            return str(value)
+    return None
+
+
+def _to_plain_dict(value: Any) -> dict[str, Any]:
+    if value is None:
+        return {}
+    if isinstance(value, dict):
+        return value
+    if hasattr(value, "model_dump"):
+        dumped = value.model_dump(mode="json", exclude_none=True)
+        return dumped if isinstance(dumped, dict) else {"raw": dumped}
+    if hasattr(value, "dict"):
+        dumped = value.dict()
+        return dumped if isinstance(dumped, dict) else {"raw": dumped}
+
+    result: dict[str, Any] = {}
+    for key in ("markdown", "html", "raw_html", "links", "metadata", "url"):
+        if hasattr(value, key):
+            result[key] = getattr(value, key)
+    return result or {"raw": repr(value)}
+
+
+def _attach_firecrawl_attempt(page: dict[str, Any], *, attempt_index: int, proxy: str) -> None:
+    metadata = page.get("metadata")
+    if not isinstance(metadata, dict):
+        metadata = {}
+        page["metadata"] = metadata
+    metadata["firecrawl_proxy"] = proxy
+    metadata["firecrawl_attempt"] = attempt_index
+    metadata["firecrawl_sdk_retries"] = settings.FIRECRAWL_SDK_MAX_RETRIES
 
 
 def _normalize_batch_scrape_result(result: Any, selected_urls: list[str]) -> dict[str, Any]:

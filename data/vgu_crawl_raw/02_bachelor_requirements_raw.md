@@ -1,4 +1,4 @@
-
+﻿
 **Eligible applicants:**
 
 **Eligible applicants must satisfy the following conditions:**
@@ -60,7 +60,7 @@ Applicants will be admitted if they meet all of the following requirements:
 - No component tests (Core Module and Subject Module) scores below 50 points
 according to TestAS grading scale.
 - Applicants must obtain a minimum total score of 15.00 out of 30 for three subjects (including compulsory Mathematics and Literature) in the High School Graduation Examination (or the Vocational High School Examination for applicants from Vocational Education), applicable to applicants graduating from 2026 onwards. This provision shall not apply to applicants who are granted special consideration for high school graduation, and to those who have graduated from international high school programs.
-- Total score of the VGU entrance examination or total score of a valid TestAS certificate must be greater than or equal to VGU Admission scores for each study program which are decided by the Examination Committee based on the number of applicants that fulfill the conditions mentioned in above point of this clause and the admission quota. The admission scores are greater than or equal to minimum threshold point as stipulated in the Circular No. 06/2026/TT-BGDĐT dated 15 February 2026 issued by the Ministry of Education and Training..
+- Total score of the VGU entrance examination or total score of a valid TestAS certificate must be greater than or equal to VGU Admission scores for each study program which are decided by the Examination Committee based on the number of applicants that fulfill the conditions mentioned in above point of this clause and the admission quota. The admission scores are greater than or equal to minimum threshold point as stipulated in the Circular No. 06/2026/TT-BGDÄT dated 15 February 2026 issued by the Ministry of Education and Training..
 
 Applicants are be ranked based on the their total scores of the entrance examination, from highest to lowest.If the number of qualified applicants is greater than the admission quota, and the last ranked applicants have equal total scores, those with higher English score will be given the priority for admission. The equivalency conversion among different English test formats shall be implemented in accordance with VGU regulations. If their English scores are also equal, then the applicants with higher subject module score will be given the priority for admission. The official admission list with ranking will be approved by the Examination Committee.
 
@@ -89,7 +89,7 @@ Applicants are required to complete the application form and submit the followin
 
 **Total score** = (M x 25%) + (P x 15%) + (L x 15%) + (E1 x 15%) + (E2 x 15%) + (E3 x 15%)
 
-In which, M, P, L, E1, E2, E3 are means of the respective subjects in Grade 10, Grade 11 and Grade 12 (i.e. M=(M10 + M11 + M12) ⁄ 3; L=(L10 + L11 + L12) / 3…)
+In which, M, P, L, E1, E2, E3 are means of the respective subjects in Grade 10, Grade 11 and Grade 12 (i.e. M=(M10 + M11 + M12) â„ 3; L=(L10 + L11 + L12) / 3â€¦)
 
 - **For BME:** six subjects, including Mathematics, Physics, Literature and three elective subjects. Three elective subjects can be chosen among Foreign Language, Chemistry, Biology, Informatics, Technology, History and Geography; or six subjects, including Mathematics, Physics, Chemistry and three elective subjects. Three elective subjects can be chosen among Foreign Language, Literature, Biology, Informatics, Technology, History and Geography.
 
@@ -99,7 +99,7 @@ or
 
 **Total score** = (M x 35%) + (P x 13%) + (C x 13%) + (E1 x 13%) + (E2 x 13%) + (E3x 13%);
 
-In which, M, C, P, L, E1, E2, E3 are means of the respective subjects in Grade 10, Grade 11 and Grade 12 (i.e. M=(M10 + M11 + M12) ⁄ 3; L=(L10 + L11 + L12) ⁄ 3…)
+In which, M, C, P, L, E1, E2, E3 are means of the respective subjects in Grade 10, Grade 11 and Grade 12 (i.e. M=(M10 + M11 + M12) â„ 3; L=(L10 + L11 + L12) â„ 3â€¦)
 
 - **For SPE:** six subjects, including Mathematics, Chemistry, Literature and three elective subjects. Three elective subjects can be chosen among Foreign language, Physics, Biology, Informatics, Technology, History and Geography; or six subjects, including Mathematics, Physics, Literature and three elective subjects. Three elective subjects can be chosen among Foreign language, Chemistry, Biology, Informatics, Technology, History and Geography.
 
@@ -109,7 +109,7 @@ or
 
 **Total score**(M x 25%) + (P x 15%) + (L x 15%) + (E1 x 15%) + (E2 x 15%) + (E3 x 15%)
 
-In which, M, C, P, L, E1, E2, E3 are means of the respective subjects in Grade 10, Grade 11 and Grade 12 (i.e. M=(M10 + M11 + M12) ⁄ 3; L=(L10 + L11 + L12) ⁄ 3…)
+In which, M, C, P, L, E1, E2, E3 are means of the respective subjects in Grade 10, Grade 11 and Grade 12 (i.e. M=(M10 + M11 + M12) â„ 3; L=(L10 + L11 + L12) â„ 3â€¦)
 
 - **For CSE:** six subjects, including Mathematics, Informatics, Literature and three elective subjects. Three elective subjects can be chosen among Foreign language, Physics, Chemistry, Biology, Technology, History and Geography; or six subjects, including Mathematics, Physics, Literature and three elective subjects. Three elective subjects can be chosen among Foreign language, Informatics, Chemistry, Biology, Technology, History and Geography.
 
@@ -121,7 +121,7 @@ or
 
 
 
-In which, M, IT, P, L, E1, E2, E3 are means of the respective subjects in Grade 10, Grade 11 and Grade 12 (i.e. M=(M10 + M11 + M12 )⁄3; L=(L10 + L11 + L12 ) ⁄ 3...).
+In which, M, IT, P, L, E1, E2, E3 are means of the respective subjects in Grade 10, Grade 11 and Grade 12 (i.e. M=(M10 + M11 + M12 )â„3; L=(L10 + L11 + L12 ) â„ 3...).
 
 - **For BFA, BBA, BSE, BDE:** six subjects, including Mathematics, Literature, and four elective subjects. Four elective subjects can be chosen among Foreign language, Physics, Chemistry, Informatics, Technology, Economic and Legal Education, History and Geography.
 
@@ -129,7 +129,7 @@ In which, M, IT, P, L, E1, E2, E3 are means of the respective subjects in Grade 
 
 
 
-In which, M, L, E1, E2, E3, E4 are means of the respective subjects in Grade 10, Grade 11 and Grade 12 (i.e. M=(M10 + M11 + M12)⁄3; L=(L10 + L11 + L12 ) ⁄ 3...).
+In which, M, L, E1, E2, E3, E4 are means of the respective subjects in Grade 10, Grade 11 and Grade 12 (i.e. M=(M10 + M11 + M12)â„3; L=(L10 + L11 + L12 ) â„ 3...).
 
 
 \- Additional points: For each of the following achievements, applicants will have 0.25 points added to
@@ -155,9 +155,9 @@ of qualified applicants is higher than the admission quota and the last ranked a
 have equal scores, those with higher entrance English scores will be given the priority
 for admission.The equivalency conversion among different English test formats shall be implemented in accordance with VGU regulations.
 
-**Mode 3 – Direct admission**
+**Mode 3 â€“ Direct admission**
 
-**Mode 3 – Direct admission**
+**Mode 3 â€“ Direct admission**
 
 **1\. Eligible applicants:**
 
@@ -177,13 +177,13 @@ Applicants are required to complete the application form and submit the followin
 
 **Eligible applicants must belong to one of the types below:**
 
-a) Being a member of the National team in the competition "International Olympiad" for the high school, following by one of these subjects: Mathematics, Physics, Chemistry, Informatics or winning the 1st, 2nd, 3rd prize in the high-school competition "Asian – Pacific Olympiad" in the subjects of Mathematics, Physics or Informatics.
+a) Being a member of the National team in the competition "International Olympiad" for the high school, following by one of these subjects: Mathematics, Physics, Chemistry, Informatics or winning the 1st, 2nd, 3rd prize in the high-school competition "Asian â€“ Pacific Olympiad" in the subjects of Mathematics, Physics or Informatics.
 
 b) Winning the 1st, 2nd, 3rd or Consolation prize in the Vietnam National High school competition or in the Provincial High school competition in subjects relevant to applied study programs:
 
-    -  For CSE, ECE, MEN, SME, SPE, BCE, ARC, MEC and BME: accepted with the subjects of Mathematics, Physics, Chemistry and Informatics;
+Â  Â  -Â  For CSE, ECE, MEN, SME, SPE, BCE, ARC, MEC and BME: accepted with the subjects of Mathematics, Physics, Chemistry and Informatics;
 
-    -  For BFA, BBA, BSE, BDE: accepted with the subjects of Mathematics, Physics, Chemistry, Informatics, English, German, French and Literature.
+Â  Â  -Â  For BFA, BBA, BSE, BDE: accepted with the subjects of Mathematics, Physics, Chemistry, Informatics, English, German, French and Literature.
 
 c) Being a member of the National team in the International Science and Engineering Fair (ISEF) or winning the 1st, 2nd, 3rd prize of the Vietnam National Competition of Science and Technology. The result of the winning project must be consistent with the applied study program at VGU.
 
@@ -199,9 +199,9 @@ b) Applicants must obtain a minimum total score of 15.00 out of 30 for three sub
 
 This provision shall not apply to applicants who are granted special consideration for high school graduation, and to those who have won first, second, or third prizes in national or international competitions for excellent students, or in national or international science and technology contests organized or nominated for the applicant's participation by the Ministry of Education and Training.
 
-**Mode 4 – International high school diplomas/certificates**
+**Mode 4 â€“ International high school diplomas/certificates**
 
-**Mode 4 – International high school diplomas/certificates**
+**Mode 4 â€“ International high school diplomas/certificates**
 
 **1\. Admission procedures:**
 
@@ -211,7 +211,7 @@ Applicants are required to complete the application form and submit the followin
 
 \- High school academic records (Grades 10, 11 and 12);
 
-\- Recognized international high school diplomas (IBD, AS/A-Level/IGCSE, WACE …) or certificates of international aptitude tests (SAT, TestAS);
+\- Recognized international high school diplomas (IBD, AS/A-Level/IGCSE, WACE â€¦) or certificates of international aptitude tests (SAT, TestAS);
 
 \- Valid English certificate (if any).
 
@@ -231,22 +231,22 @@ The admission score and the subject specific requirements for different certific
 | --- | --- | --- | --- |
 | **No.** | **Certificates/ Granted organizations** | **Score** | **Subject-specific requirements of the certificate** |
 | 1 | SAT (Scholastic Assessment Test)/College Board | Based on total point. | - |
-| 2 | ACT (The American College Testing)/ ACT Inc. | Based on total point. |  |
+| 2 | ACT (The American College Testing)/Â ACT Inc. | Based on total point. |  |
 | 3 | IBD (International Baccalaureate Diploma)/IB Organization | Based on total point of 6 subjects. | - |
 | 4 | A-Level combined with AS-Level/IGCSE(International Advanced Levels)/ <br>Cambridge; Pearson Edexcel | Based on average score of 3 A-Level subjects.<br>(At least 1 A-level subject is required. The remaining A-level subjects can be replaced by AS-Level or IGCSE subjects as follows:<br>\- 2 AS-Level subjects equivalent to 1 A-level subject<br>\- 3 IGCSE subjects equivalent to 1 A-level subject | \- Engineering programs (CSE, ECE, MEN, SME, SPE, BCE, ARC, MEC, BME): Mathematics and at least 1 science subject.<br>\- Economic programs (BBA, BFA, BSE, BDE): Mathematics and at least 1 science or social science subject. |
 | 5 | WACE (Western Australian Certificate of Education)/Western Australia School Curriculum and Standards Authority<br>SACE (South Australian Certificate of Education)/ SACE Board of South Australia | Based on average score of 3 ATAR subjects (ATAR: Australian Tertiary Admission Rank) |
 | 6 | Paper-based TestAS<br>(Test for Academic Studies)/ TestDaF Institute | For the paper-based test: Based on total score without any component tests are lower than 90 points.For the digital test: Based on total score without any component tests are<br>lower than 50 points | Subject-specific tests are stipulated in Mode 1. |
 | 7 | Digital TestAS |
 | 8 | GED (General Educational Development)/American Council on Education | Based on average score of 4 subjects, without any component tests are lower than 145 points. | - |
-| 9 | Regconized international high school diplomas [Click here![](https://vgu.edu.vn/documents/10192/2798865/Icon+dowload-01.png/6549bf59-4e74-428c-ae4c-9ee532b36c6e?t=1708677146000)](https://vgu.edu.vn/documents/14921/5162316/Annex+3.pdf/690aac3e-3cdc-45d8-bb70-ed75275bfa33) | ased on overall GPA of high school diploma. | - |
+| 9 | Regconized international high school diplomasÂ [Click here![](https://vgu.edu.vn/documents/10192/2798865/Icon+dowload-01.png/6549bf59-4e74-428c-ae4c-9ee532b36c6e?t=1708677146000)](https://vgu.edu.vn/documents/14921/5162316/Annex+3.pdf/690aac3e-3cdc-45d8-bb70-ed75275bfa33) | ased on overall GPA of high school diploma. | - |
 
 For applicants applying for admission based on an international upper secondary school diploma/certificate, the list of recognized upper secondary school diplomas/certificates by country shall be specified by VGU.
 
 Applicants whose Grade Point Average (GPA) of the upper secondary school diploma is below 70% but who achieve a high graduation ranking within their class may be considered for admission by the Admissions Council on a case-by-case basis.
 
-**Mode 5 – High School Graduation Exam**
+**Mode 5 â€“ High School Graduation Exam**
 
-**Mode 5 – High School Graduation Exam**
+**Mode 5 â€“ High School Graduation Exam**
 
 **1\. Eligible applicants:**
 
@@ -274,43 +274,43 @@ If applicants must take VGU English test, the test fee is 1,000,000 VND per test
 
 Applicants can use the results of the High School Graduation Exam of the current or previous admission year for application, according to the admission subject groups (admission blocks) specified for the study programs as follows:
 
-\- [Computer Science (CSE) – Code 7480101](https://vgu.edu.vn/admission/bachelor/admission-requirements#)
+\- [Computer Science (CSE) â€“ Code 7480101](https://vgu.edu.vn/admission/bachelor/admission-requirements#)
 
-\- [Electrical and Computer Engineering (ECE) – Code 7520208](https://vgu.edu.vn/admission/bachelor/admission-requirements#)
+\- [Electrical and Computer Engineering (ECE) â€“ Code 7520208](https://vgu.edu.vn/admission/bachelor/admission-requirements#)
 
-\- [Mechanical Engineering (MEN) – Code 7520103](https://vgu.edu.vn/admission/bachelor/admission-requirements#)
+\- [Mechanical Engineering (MEN) â€“ Code 7520103](https://vgu.edu.vn/admission/bachelor/admission-requirements#)
 
-\- [Civil Engineering and Construction Management (BCE) – Code 7580201](https://vgu.edu.vn/admission/bachelor/admission-requirements#)
+\- [Civil Engineering and Construction Management (BCE) â€“ Code 7580201](https://vgu.edu.vn/admission/bachelor/admission-requirements#)
 
-\- [Architecture (ARC) – Code 7580101](https://vgu.edu.vn/documents/14921/13164837/ARC.docx/d89cf366-2c85-45e6-9046-8e907a6b3d97)
+\- [Architecture (ARC) â€“ Code 7580101](https://vgu.edu.vn/documents/14921/13164837/ARC.docx/d89cf366-2c85-45e6-9046-8e907a6b3d97)
 
-\- [Business Administration (BBA) – Code 7340101](https://vgu.edu.vn/admission/bachelor/admission-requirements#)
+\- [Business Administration (BBA) â€“ Code 7340101](https://vgu.edu.vn/admission/bachelor/admission-requirements#)
 
-\- [Finance and Accounting (BFA) – Code 7340202](https://vgu.edu.vn/admission/bachelor/admission-requirements#)
+\- [Finance and Accounting (BFA) â€“ Code 7340202](https://vgu.edu.vn/admission/bachelor/admission-requirements#)
 
-\- [Smart Mobility Engineering (SME) – Code 7510104](https://vgu.edu.vn/admission/bachelor/admission-requirements#)
+\- [Smart Mobility Engineering (SME) â€“ Code 7510104](https://vgu.edu.vn/admission/bachelor/admission-requirements#)
 
-\- [Sustainable Process Engineering (SPE) – Code 7510206](https://vgu.edu.vn/admission/bachelor/admission-requirements#)
+\- [Sustainable Process Engineering (SPE) â€“ Code 7510206](https://vgu.edu.vn/admission/bachelor/admission-requirements#)
 
-\- [Mechatronics (MEC) – Code 7520114](https://vgu.edu.vn/admission/bachelor/admission-requirements#)
+\- [Mechatronics (MEC) â€“ Code 7520114](https://vgu.edu.vn/admission/bachelor/admission-requirements#)
 
-\- [Economics (BSE) – Code 7310101](https://vgu.edu.vn/admission/bachelor/admission-requirements#)
+\- [Economics (BSE) â€“ Code 7310101](https://vgu.edu.vn/admission/bachelor/admission-requirements#)
 
-\- [Digital Management and International Entrepreneurship (BDE) – Code 7340122](https://vgu.edu.vn/admission/bachelor/admission-requirements#)
+\- [Digital Management and International Entrepreneurship (BDE) â€“ Code 7340122](https://vgu.edu.vn/admission/bachelor/admission-requirements#)
 
-\- [Biomedical Engineering (BME) – Code 7520212](https://vgu.edu.vn/admission/bachelor/admission-requirements#)
+\- [Biomedical Engineering (BME) â€“ Code 7520212](https://vgu.edu.vn/admission/bachelor/admission-requirements#)
 
 3\. Requirements for admission:
 
 \- The total score of three subjects of the applied admission block according to 30 grading scale (without multiplication factors), including the bonus points stipulated by the MoET must be equal to or higher than the VGU admission score for the respective admission block and program.
 
-\- Satisfy English requirements. Score of a valid international English certificate (IELTS Academic, TOEFL iBT…) can be converted to an equivalent English score in the relevant admission blocks according to the English proficiency tests equivalency table here [![](https://vgu.edu.vn/documents/10192/2798865/Icon+dowload-01.png/6549bf59-4e74-428c-ae4c-9ee532b36c6e?t=1708677146000)](https://vgu.edu.vn/documents/14921/11688573/Annex+1.+English+proficiency+tests+equivalency+table.pdf/b9230ada-106c-457b-b2b1-e5a6c6b17536).
+\- Satisfy English requirements. Score of a valid international English certificate (IELTS Academic, TOEFL iBTâ€¦) can be converted to an equivalent English score in the relevant admission blocks according to the English proficiency tests equivalency table hereÂ [![](https://vgu.edu.vn/documents/10192/2798865/Icon+dowload-01.png/6549bf59-4e74-428c-ae4c-9ee532b36c6e?t=1708677146000)](https://vgu.edu.vn/documents/14921/11688573/Annex+1.+English+proficiency+tests+equivalency+table.pdf/b9230ada-106c-457b-b2b1-e5a6c6b17536).
 
 **English proficiency requirement:**
 
 1\. Applicants are required to satisfy one of the following requirements for entrance English proficiency:
 
-_-_ Have a valid international English certificate, equivalent to at least IELTS Academic 5.0 at the time of application. The equivalency of different English proficiency tests is detailed here _[![](https://vgu.edu.vn/documents/10192/2798865/Icon+dowload-01.png/6549bf59-4e74-428c-ae4c-9ee532b36c6e?t=1708677146000)](https://vgu.edu.vn/documents/14921/11688573/Annex+1.+English+proficiency+tests+equivalency+table.pdf/b9230ada-106c-457b-b2b1-e5a6c6b17536)_ ; or
+_-_ Have a valid international English certificate, equivalent to at least IELTS Academic 5.0 at the time of application. The equivalency of different English proficiency tests is detailed here; or
 
 \- Pass VGU English test which covers listening, speaking, reading and writing skills at least 75/100; or
 
@@ -318,9 +318,9 @@ _-_ Have a valid international English certificate, equivalent to at least IELTS
 
 2\. Applicants are exempted from the English proficiency requirement if:
 
-\- Applicants from one of the countries where English is an official language according to the list provided here [![](https://vgu.edu.vn/documents/10192/2798865/Icon+dowload-01.png/6549bf59-4e74-428c-ae4c-9ee532b36c6e?t=1708677146000)](https://vgu.edu.vn/documents/14921/10674296/List+of+countries+where+English+is+an+official+language.pdf/79e14290-d5be-4c35-a765-c338d40fad87).
+\- Applicants from one of the countries where English is an official language according to the list provided hereÂ [![](https://vgu.edu.vn/documents/10192/2798865/Icon+dowload-01.png/6549bf59-4e74-428c-ae4c-9ee532b36c6e?t=1708677146000)](https://vgu.edu.vn/documents/14921/10674296/List+of+countries+where+English+is+an+official+language.pdf/79e14290-d5be-4c35-a765-c338d40fad87).
 
-\- Graduates from international high school programs where the language of instruction and examination is English. The list of recognized High school diplomas/certificates by country provided here [![](https://vgu.edu.vn/documents/10192/2798865/Icon+dowload-01.png/6549bf59-4e74-428c-ae4c-9ee532b36c6e?t=1708677146000)](https://vgu.edu.vn/documents/14921/10674296/List+of+recognized+Highschool+diplomas_certificates+by+country.pdf/479f96ca-48b7-4756-9cbf-2e0b16c0dba8) They must submit a letter of confirmation issued by their school, stating that the instruction and examination were conducted in English
+\- Graduates from international high school programs where the language of instruction and examination is English. TheÂ list of recognized High school diplomas/certificates by countryÂ provided hereÂ [![](https://vgu.edu.vn/documents/10192/2798865/Icon+dowload-01.png/6549bf59-4e74-428c-ae4c-9ee532b36c6e?t=1708677146000)](https://vgu.edu.vn/documents/14921/10674296/List+of+recognized+Highschool+diplomas_certificates+by+country.pdf/479f96ca-48b7-4756-9cbf-2e0b16c0dba8) They must submit a letter of confirmation issued by their school, stating that the instruction and examination were conducted in English
 
 \- The VGU's English test covers listening, speaking, reading, writing skills. For more information about the Sample tests please click here. [![](https://vgu.edu.vn/documents/10192/2798865/Icon+dowload-01.png/6549bf59-4e74-428c-ae4c-9ee532b36c6e?t=1708677146000)](https://vgu.edu.vn/en/admission/bachelor/sample-test)
 
@@ -328,11 +328,11 @@ _-_ Have a valid international English certificate, equivalent to at least IELTS
 
 ![](https://vgu.edu.vn/admission/bachelor/admission-requirements;jsessionid=E0DDED61750EF3D5B8EFA9AD282D213A?p_p_id=CmsHienThiBaiVietTinh_WAR_cmsportlet_INSTANCE_sc9E6mqnAMOy&p_p_lifecycle=2&p_p_state=normal&p_p_mode=view&p_p_cacheability=cacheLevelPage&p_p_col_id=column-31&p_p_col_count=1&_CmsHienThiBaiVietTinh_WAR_cmsportlet_INSTANCE_sc9E6mqnAMOy_javax.faces.resource=error.png&_CmsHienThiBaiVietTinh_WAR_cmsportlet_INSTANCE_sc9E6mqnAMOy_ln=images)
 
-Marketing and Student Recruitment Department
+MarketingÂ andÂ StudentÂ Recruitment Department
 
 VGU Campus
 
-![](https://vgu.edu.vn/documents/10192/2798865/location.png/0e98a350-796e-4056-8f5d-6dba3f14c4d1?t=1705979573000) 220 - Admin Building
+![](https://vgu.edu.vn/documents/10192/2798865/location.png/0e98a350-796e-4056-8f5d-6dba3f14c4d1?t=1705979573000)Â 220 - Admin Building
 
 ![](https://vgu.edu.vn/documents/10192/2798865/phone-call.png/973d2259-d15c-40ae-a865-01e6816cb8e1?t=1705979565000)+84(0)274 222 0990 Ext:70158
 
@@ -346,30 +346,10 @@ Vietnamese-German University
 
 VGU Campus
 
-![](https://vgu.edu.vn/documents/10192/2798865/location.png/0e98a350-796e-4056-8f5d-6dba3f14c4d1?t=1705979573000) Ring Road 4, Quarter 4, Thoi Hoa Ward, HCMC
+![](https://vgu.edu.vn/documents/10192/2798865/location.png/0e98a350-796e-4056-8f5d-6dba3f14c4d1?t=1705979573000)Â Ring Road 4, Quarter 4, Thoi Hoa Ward, HCMC
 
 VGU Office in Ho Chi Minh City
 
-![](https://vgu.edu.vn/documents/10192/2798865/location.png/0e98a350-796e-4056-8f5d-6dba3f14c4d1?t=1705979573000) 5th Floor, L'Mark Orchard Park View Building - 130-132 Hong Ha, Duc Nhuan Ward, HCMC
+![](https://vgu.edu.vn/documents/10192/2798865/location.png/0e98a350-796e-4056-8f5d-6dba3f14c4d1?t=1705979573000)Â 5th Floor, L'Mark Orchard Park View Building -Â 130-132 Hong Ha, Duc Nhuan Ward,Â HCMC
 
 _To visit us: Park in B2, take the elevator to the ground floor, then ask the guard or receptionist to reach the fifth floor._
-
-* * *
-
-[![](https://vgu.edu.vn/documents/10192/2798865/button_orange.jpg/c9316b10-5a56-4a6f-8004-8f80edca0854?t=1705941266000)](http://apply.vgu.edu.vn/)
-
-#### [Quick Access](https://vgu.edu.vn/career;jsessionid=E0DDED61750EF3D5B8EFA9AD282D213A)
-
-- [Career](https://vgu.edu.vn/career1;jsessionid=E0DDED61750EF3D5B8EFA9AD282D213A)
-- [Contact Us](https://vgu.edu.vn/contact-us;jsessionid=E0DDED61750EF3D5B8EFA9AD282D213A)
-- [Library](https://library.vgu.edu.vn/)
-
-#### [Sign In](https://vgu.edu.vn/c/portal/login?p_l_id=2365862)
-
-VIETNAMESE - GERMAN UNIVERSITY
-
-**VGU Campus**
-
-Ring Road 4, Thoi An Quarter, Thoi Hoa Ward, Ho Chi Minh city
-
-(0274) 222 0990 -  (0274) 222 0980

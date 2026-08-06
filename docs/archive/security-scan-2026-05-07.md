@@ -24,7 +24,7 @@
 
 **1. [SECRET] Redis credentials hardcoded in source code**
 
-- `worker/start.py:13` — Redis URL with embedded password (`redis://default:***@switchyard.proxy.rlwy.net:16890`)
+- `worker/start.py:13` — Redis URL with embedded password (`redis://<REDACTED>`)
 - `worker/railway.toml:5` — Same Redis URL in deploy start command
 
 The Redis connection password is embedded directly in source files. Anyone with access to the repo can read it. This is a production Redis instance on Railway (switchyard.proxy.rlwy.net).

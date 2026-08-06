@@ -2,4 +2,4 @@
 builder = "DOCKERFILE"
 
 [deploy]
-startCommand = "rq worker --url $REDIS_URL default -v"
+startCommand = "python worker/start.py"

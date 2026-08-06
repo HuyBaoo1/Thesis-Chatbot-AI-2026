@@ -1,5 +1,5 @@
 """
-VinUni Admissions Portal - Agent System
+VGU Admissions Intelligence Platform - Agent System
 
 BMad Method agent roles with khuym multi-agent orchestration support.
 """

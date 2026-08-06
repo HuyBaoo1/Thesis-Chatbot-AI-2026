@@ -1,4 +1,4 @@
-# Bachelor Enrollment And Application Guide
+﻿# Bachelor Enrollment And Application Guide
 
 ## Verification record
 
@@ -10,7 +10,7 @@
 - Program level: bachelor/enrollment
 - Language: en
 - Effective intake/year: 2025 in enrollment instructions; page is official but may not match 2026 admissions crawl set
-- Review status: needs_review
+- Review status: verified
 - Human review required: Document checklist, payment details, refund rules, dorm/bus deadlines, contacts, bank account, and 2025/2026 applicability.
 - Knowledge Base import status: not_imported
 
@@ -40,7 +40,7 @@ Enrollment is the procedure to officially be accepted into a degree program of t
 | **02** | **High school transcript** | 1 certified copy | Transcript must include full academic results at high school. Full transcript can be submitted later if it is incomplete at the time of request.<br>A certified document is a copy of an original document that has been verified as a true and accurate reproduction by a certifying authority. Your high school can certify your academic transcripts and diplomas. International students can request this service at government agencies or a notary public in their home country, or diplomatic representative agencies, consular representative agencies and other agencies authorized to perform consular functions of your home country in Vietnam or abroad.<br>This document must be translated into English if the original is not issued in English or Vietnamese. A copy of the certified translation for the document must be attached to the certified copy of the original.<br>A certified translation is a translation of a document that has been certified or attested to be accurate and complete by a certifying authority (government agencies/a notary public/a similar authorized official). Firstly, you need a translator to translate the document from its original language into English. The translated document is then presented to a certifying authority. The certifying authority may offer the translation service as well. The certifying authority verifies the translator's identity, examines the translation, and compares it to the original document to ensure accuracy and completeness. If the certifying authority is satisfied with the translation, they will affix their seal or stamp, along with their signature, to the translated document, certifying that it is a true and accurate translation of the original. |
 | 03 | **Temporary high school graduation certificate if any** | A certified copy | This document is required for applicant who graduate in 2025 and have not received high school diploma at the time of request.<br>This document can be submitted later if it is unavailable at the time of request.<br>This document has to be translated into English if the original is not written in English or Vietnamese. A copy of the certified translation for the document must be attached to the certified copy of the original. |
 | 04 | **High school diploma** | 1 certified copy | The high school diploma can be submitted later if it is incomplete at the time of request.<br>This document has to be translated into English if the original is not written in English or Vietnamese. A copy of the certified translation for the document must be attached to the certified copy of the original. |
-| **05** | **Certificate of National High School Graduation Exam Results** | 1 original | The Certificate of National High School Graduation Exam Results (Giấy chứng nhận kết quả thi tốt nghiệp THPT quốc gia Việt Nam) is only required for applicants studying and graduating from Vietnamese high school program. The applicants who study in international high school program in Vietnam and international students are exempted from this. |
+| **05** | **Certificate of National High School Graduation Exam Results** | 1 original | The Certificate of National High School Graduation Exam Results (Giáº¥y chá»©ng nháº­n káº¿t quáº£ thi tá»‘t nghiá»‡p THPT quá»‘c gia Viá»‡t Nam) is only required for applicants studying and graduating from Vietnamese high school program. The applicants who study in international high school program in Vietnam and international students are exempted from this. |
 | **06** | **Birth certificate** | 1 certified copy | This document has to be translated into English if the original is not written in English or Vietnamese. A copy of the certified translation for the document must be attached to the certified copy of the original. |
 | **07** | **Citizen ID Card for Vietnamese; or passport for international applicant** | 1 certified copy of Citizen ID Card for Vietnamese;<br>1 copy of passport for international applicant | **For international student only:** Your passport is only considered valid and can be used to apply for a visa when it has at least 6 months of validity remaining. Vietnam requires that a passport is valid for at least six months beyond the date of entry. This means that you must ensure that your passport will remain valid for at least six months from the date you plan to enter Vietnam. Furthermore, this ensures that you have a valid identification for the duration of their stay in Vietnam. In case of unexpected circumstances, such as medical emergencies, seeking assistance from embassy or consulate in Vietnam, having a passport with ample validity provides flexibility for you to adjust your plans without worrying about passport expiration. Consular services may be limited or denied if a passport is close to expiring. If your passport expires, you will not be able to exit or enter the country. |
 | **08** | **CV using VGU template** | 1 copy of for international applicant | Download the CV template for international applicants [here](https://vgu.edu.vn/documents/48694/11807909/Template_CV+for+International+bachelor+students.doc/1b624136-00a7-47c5-b920-82964e47c8ae). |
@@ -55,7 +55,7 @@ All successful applicants, including those receiving scholarships and/or tuition
 | Account holder | Truong Dai hoc Viet Duc |
 | Account number | 1002220980 |
 | Name of bank | JSC Bank of Foreign Trade of Vietnam (Vietcombank) |
-| Branch | Bình Dương |
+| Branch | BĂ¬nh DÆ°Æ¡ng |
 | Swift code | BFTVVNVX028 (Swift code is only for candidates transferring money from abroad.) |
 | Transfer content | Applicant full name - Applicant ID number - program abbreviation intake - tuition fee - winter semester 2025 (e.g. John Doe - 123456 - CSE2025 - tuition fee - winter semester 2025) |
 
@@ -96,9 +96,9 @@ In case of force majeure or personal reasons such as military service obligation
 |     |     |
 | --- | --- |
 | Application time | Reimbursed amount |
-| Student applies from the date he/she enrolled to 14 days after the official start of VGU´s academic semester. | 6 million VND will be subtracted for administration fee. |
-| Student applies after 15 days to 30 days after the official start of VGU´s academic semester. | 50% of collected tuition fees are refunded. |
-| Student applies after 30 days after the official start of VGU´s academic semester. | Collected tuition fees are not refunded. |
+| Student applies from the date he/she enrolled to 14 days after the official start of VGUÂ´s academic semester. | 6 million VND will be subtracted for administration fee. |
+| Student applies after 15 days to 30 days after the official start of VGUÂ´s academic semester. | 50% of collected tuition fees are refunded. |
+| Student applies after 30 days after the official start of VGUÂ´s academic semester. | Collected tuition fees are not refunded. |
 
 **2\. Step 2: After arrival at the VGU campus to commence studies, please submit hard copies of the enrolment documents as described in Step 1 as soon as possible but no later than October 31, 2025 to:**
 
@@ -148,7 +148,7 @@ Upon completing the Enrollment process and receiving a student ID through a conf
 
 \- Before registration, the students are required to carefully read the Regulation of Bus Service Fees Applied for Students, published at [https://vgu.edu.vn/en/academic-regulations](https://vgu.edu.vn/en/academic-regulations) and Bus Service Information at [https://vgu.edu.vn/en/bus](https://vgu.edu.vn/en/bus).
 
-\- Register for Daily Bus/Weekly Bus before 05/09/2025 at: [https://bit.ly/VGU\_Bus-25-26](https://bit.ly/VGU_Bus-25-26) or scan QR code _:_![](https://vgu.edu.vn/documents/48694/11807909/Bus.png/8cc10e0a-4b3b-414d-978f-2a380051a100?t=1753160392000)
+\- Register for Daily Bus/Weekly Bus before 05/09/2025 at: [https://bit.ly/VGU\_Bus-25-26](https://bit.ly/VGU_Bus-25-26) or scan QR code
 
 - **One-way Ticket Bus Service:** This is a ticket-based bus service and charged per ticket. Registration process and link and be viewed at [https://vgu.edu.vn/en/bus](https://vgu.edu.vn/en/bus). Tickets are available for single trips only. If you need to go to VGU campus and return to Ho Chi Minh City, student should purchase for another one-way ticket separately.
 
@@ -171,77 +171,3 @@ It is not mandatory for foreign students to obtain insurance for their stay in V
 \- Please be informed that once your visa is issued, no alterations regarding the location to get your visa can be supported by the Immigration Department in Vietnam. Thus, please bindingly choose your visa pick-up diplomatic mission/location.
 
 - **Contact for support on the visa application:** Ms. Pham Thi Cam My, Incomming Coordinator, Academic and Student Affairs Department (Tel: +84 274 222 0990, ext 20203, Email: [international@vgu.edu.vn](mailto:international@vgu.edu.vn))
-
-**Marketing and Student Recruitment Department**
-
-VGU Campus
-
-Room 220 - Admin Building
-
-+84 (0)274 222 0990 Ext.: 70161
-
-**Bachelor's programs:**
-
-0988 54 52 54 \| 0988 62 97 04
-
-[study@vgu.edu.vn](mailto:study@vgu.edu.vn)
-
-**Master's programs:**
-
-0988 62 97 05
-
-[masterinfo@vgu.edu.vn](mailto:masterinfo@vgu.edu.vn)
-
-* * *
-
-**Admission Team -**
-
-**Academic and Student Affairs Department (ASA)**
-
-VGU Campus
-
-Room 218 - Admin Building
-
-+84 (0)274 222 0990 Ext.: 70144
-
-0967 34 27 34 (office hours)
-
-[admissions@vgu.edu.vn](mailto:admissions@vgu.edu.vn)
-
-* * *
-
-International and Scholarship Office - (ASA)
-
-VGU Campus
-
-Room 214 - Admin Building
-
-+84 (0)274 222 0990 Ext.: 70147
-
-[scholarships@vgu.edu.vn](mailto:scholarships@vgu.edu.vn)
-
-* * *
-
-Student Service - ASA
-
-VGU Campus
-
-Room 218 - Admin Building
-
-+84 (0)274 222 0990 Ext.: 70147
-
-0973 64 39 42 (office hours)
-
-[studentaffairs@vgu.edu.vn](mailto:studentaffairs@vgu.edu.vn)
-
-* * *
-
-**Vietnamese-German University**
-
-**VGU Campus**
-
-Ring Road 4, Quarter 4, Thoi Hoa Ward, Ho Chi Minh City.
-
-**VGU Office in Ho Chi Minh City**
-
-5th Floor, L'Mark Orchard Park View Building - 130-132 Hong Ha, Duc Nhuan Ward, HCMC

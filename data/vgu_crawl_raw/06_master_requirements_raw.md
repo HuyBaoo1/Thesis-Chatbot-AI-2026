@@ -1,13 +1,3 @@
-![](https://vgu.edu.vn/admission/master/admission-requirements;jsessionid=F13678BC6639E1C417EA276226F7B4F1?p_p_id=CmsSlider_WAR_cmsportlet&p_p_lifecycle=2&p_p_state=normal&p_p_mode=view&p_p_cacheability=cacheLevelPage&p_p_col_id=column-1&p_p_col_count=1&_CmsSlider_WAR_cmsportlet_javax.faces.resource=loading%2Floading.gif&_CmsSlider_WAR_cmsportlet_ln=images)
-
-![](https://vgu.edu.vn/admission/master/admission-requirements;jsessionid=F13678BC6639E1C417EA276226F7B4F1?p_p_id=CmsSlider_WAR_cmsportlet&p_p_lifecycle=2&p_p_state=normal&p_p_mode=view&p_p_cacheability=cacheLevelPage&p_p_col_id=column-1&p_p_col_count=1&_CmsSlider_WAR_cmsportlet_javax.faces.resource=error.png&_CmsSlider_WAR_cmsportlet_ln=images)
-
-![11.jpg](https://vgu.edu.vn/cms-portlet/data/upload/slider/cca98c969665832154725f525bba56fe.jpg)
-
-![](https://vgu.edu.vn/admission/master/admission-requirements;jsessionid=F13678BC6639E1C417EA276226F7B4F1?p_p_id=CmsHienThiBaiVietTinh_WAR_cmsportlet_INSTANCE_uMS9Sn8nGoJd&p_p_lifecycle=2&p_p_state=normal&p_p_mode=view&p_p_cacheability=cacheLevelPage&p_p_col_id=column-ex-4&p_p_col_count=1&_CmsHienThiBaiVietTinh_WAR_cmsportlet_INSTANCE_uMS9Sn8nGoJd_javax.faces.resource=loading%2Floading.gif&_CmsHienThiBaiVietTinh_WAR_cmsportlet_INSTANCE_uMS9Sn8nGoJd_ln=images)
-
-![](https://vgu.edu.vn/admission/master/admission-requirements;jsessionid=F13678BC6639E1C417EA276226F7B4F1?p_p_id=CmsHienThiBaiVietTinh_WAR_cmsportlet_INSTANCE_uMS9Sn8nGoJd&p_p_lifecycle=2&p_p_state=normal&p_p_mode=view&p_p_cacheability=cacheLevelPage&p_p_col_id=column-ex-4&p_p_col_count=1&_CmsHienThiBaiVietTinh_WAR_cmsportlet_INSTANCE_uMS9Sn8nGoJd_javax.faces.resource=error.png&_CmsHienThiBaiVietTinh_WAR_cmsportlet_INSTANCE_uMS9Sn8nGoJd_ln=images)
-
 1\. Requirements to VGU Entrance Examination
 
 1.1. Requirement on academic degree:
@@ -96,31 +86,3 @@ _To visit us: Park in B2, take the elevator to the ground floor, then ask the gu
 - [Library](https://library.vgu.edu.vn/)
 
 #### [Sign In](https://vgu.edu.vn/c/portal/login?p_l_id=2366102)
-
-VIETNAMESE - GERMAN UNIVERSITY
-
-**VGU Campus**
-
-Ring Road 4, Thoi An Quarter, Thoi Hoa Ward, Ho Chi Minh city
-
-(0274) 222 0990 -  (0274) 222 0980
-
-![](https://vgu.edu.vn/cms-vgu-theme-4/images/cms/map-direction.png)[Get direction](https://www.google.com/maps/place/Vietnamese+-+German+University/@11.0547843,106.6634109,17z/data=!3m1!4b1!4m5!3m4!1s0x3174ce286d98ddc7:0xfa362a1ccda178aa!8m2!3d11.0547843!4d106.6655996)
-
-Confirm
-
-Are you sure you want to delete?
-
-OkCancel
-
-Confirm
-
-Are you sure you want to delete?
-
-OkCancel
-
-Confirm
-
-Are you sure you want to delete?
-
-OkCancel

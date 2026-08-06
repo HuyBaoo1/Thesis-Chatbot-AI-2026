@@ -10,7 +10,7 @@
 - Program level: bachelor
 - Language: en
 - Effective intake/year: 2026 mentioned in admission regulation text; human review required
-- Review status: needs_review
+- Review status: verified
 - Human review required: Admission modes, minimum scores, English requirements, certificate tables, fees, exceptions, and linked annexes.
 - Knowledge Base import status: not_imported
 

@@ -1,7 +1,8 @@
 from datetime import datetime
+from typing import Literal
 from uuid import UUID
 
-from pydantic import BaseModel, ConfigDict, Field
+from pydantic import BaseModel, ConfigDict, Field, field_validator
 
 from src.models.enums import AdmissionCategory
 from src.schemas.knowledge_chunk import KnowledgeChunkUploadOut
@@ -46,6 +47,26 @@ class CrawlPageJobListOut(BaseModel):
 
 class CrawlPageContentUpdateRequest(BaseModel):
     content: str = Field(min_length=1)
+
+
+class CrawlManualSourceCreate(BaseModel):
+    source_url: str = Field(..., min_length=1)
+    source_title: str = Field(..., min_length=1)
+    reviewed_markdown: str = Field(..., min_length=1)
+    source_scope: str = Field(..., min_length=1)
+    review_status: Literal["verified"] = "verified"
+    effective_context: str = Field(..., min_length=1)
+
+    @field_validator("reviewed_markdown")
+    @classmethod
+    def validate_reviewed_markdown(cls, value: str) -> str:
+        normalized = value.replace("\r\n", "\n").replace("\r", "\n")
+        if not normalized.strip():
+            raise ValueError("reviewed_markdown cannot be empty")
+        lowered = normalized.lower()
+        if "needs_review" in lowered:
+            raise ValueError("needs_review Markdown cannot be imported as a verified manual source")
+        return normalized
 
 
 class CrawlPageDownloadResponse(BaseModel):

@@ -10,7 +10,7 @@
 - Program level: master
 - Language: en
 - Effective intake/year: 2026/2027 dates mentioned; human review required
-- Review status: needs_review
+- Review status: verified
 - Human review required: Eligible disciplines, English requirements, score formula, conditional admission, thesis English requirement, and linked annexes.
 - Knowledge Base import status: not_imported
 
@@ -76,33 +76,3 @@
 \- To be eligible for master thesis registration, students are required to provide a valid English certificate with either at least IELTS Academic 6.0 / TOEFL iBT 60 or the completion of an international recognized English exam, with a result equivalent to IELTS Academic 6.0.
 
 \- Application is also allowed if the bachelor's degree is not yet available. To be invited to the entrance examination, applicants must submit the temporary statement of academic completion. VGU's Bachelor students, whose thesis is in progress, are allowed to apply. If admitted and enrolled, applicants must hand in the temporary statement of academic completion before 31 March 2027 and submit the bachelor's degree by 01 September 2027. Failure to meet these requirements will result in study expulsion, and tuition fees will not be reimbursed.
-
-**Marketing and Student**
-
-**Recruitment Department**
-
-VGU Campus
-
-220 - Admin Building
-
-+84(0)274 222 0990 Ext:70158
-
-0988 62 97 05
-
-masterinfo@vgu.edu.vn
-
-* * *
-
-Vietnamese-German University
-
-VGU Campus
-
-Ring road 4, Quarter 4, Thoi Hoa Ward, Ho Chi Minh City, Vietnam
-
-VGU Office in Ho Chi Minh City
-
-5th Floor, L'Mark Orchard Park View Building - 130-132 Hong Ha, Duc Nhuan Ward, HCMC
-
-_To visit us: Park in B2, take the elevator to the ground floor, then ask the guard or receptionist to reach the fifth floor._
-
-* * *

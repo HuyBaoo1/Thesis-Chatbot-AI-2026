@@ -1,0 +1,31 @@
+{
+  "university": "Vietnamese-German University",
+  "short_name": "VGU",
+  "generated_at": "2026-07-29T09:42:51+00:00",
+  "sources": [
+    {
+      "source_url": "https://vgu.edu.vn/tuition-fees/for-bachelor-programs",
+      "canonical_url": "https://vgu.edu.vn/tuition-fees/for-bachelor-programs",
+      "provider_page_title": "Bachelor programs - Vietnamese-German University",
+      "document_title": "VGU Bachelor Tuition Fees 2026",
+      "canonical_slug": "bachelor_tuition_2026",
+      "source_scope": "bachelor_tuition",
+      "expected_effective_context": "2026 intake",
+      "raw_content_hash": "1b4ac4471502fd63eb5e1bf10cd32cf3c322290b1068ece0a969251227ccf996",
+      "raw_file": "data/vgu_crawl_raw/01_bachelor_programs_vietnamese_german_university_30a6b40a_raw.md",
+      "reviewed_file": "data/vgu_crawl_reviewed/01_bachelor_programs_vietnamese_german_university_30a6b40a_review_required.md",
+      "reviewed_content_hash": "1153d50cdc400b2e73dc72aa1c6d7979d708aa3ce20b6c5e3f5ba2eb189e6dd4",
+      "crawl_session_id": "ae41d6d1-55bc-4026-a0cd-c64ff050d084",
+      "page_job_id": "30a6b40a-e439-4f14-b137-cd6faea74443",
+      "page_index": 0,
+      "review_status": "REVIEW_REQUIRED",
+      "diagnostic_only": true,
+      "promotion_allowed": false,
+      "legacy_diagnostic_filename": true,
+      "comparison_status": "CONTENT_CHANGED_REVIEW_REQUIRED",
+      "created_at": "2026-07-29T09:42:51+00:00",
+      "firecrawl_proxy": "basic",
+      "firecrawl_attempt": 1
+    }
+  ]
+}

@@ -21,14 +21,14 @@ The `$REDIS_URL` shell expansion was corrupted, causing `parse_url()` to receive
 Private DNS `redis.railway.internal` is broken. Use TCP proxy instead:
 
 ```bash
-railway variables --set REDIS_URL="redis://default:<password>@switchyard.proxy.rlwy.net:16890" --service rq-worker
+railway variables --set REDIS_URL="redis://<REDACTED>" --service rq-worker
 ```
 
 ### 2. Override Start Command in Dashboard
 
 Railway Dashboard → rq-worker → Settings → **Custom Start Command**:
 ```
-rq worker --url 'redis://default:<password>@switchyard.proxy.rlwy.net:16890' default -v
+rq worker --url 'redis://<REDACTED>' default -v
 ```
 
 Hardcoded URL with single quotes ensures no shell variable expansion issues.

@@ -69,6 +69,20 @@ class Settings(BaseSettings):
 
     # Firecrawl
     FIRECRAWL_API_KEY: str
+    FIRECRAWL_PROXY_MODE: str = Field(default="basic", description="Allowed values: basic or enhanced")
+    FIRECRAWL_SCRAPE_TIMEOUT_MS: int = Field(default=120000, ge=1000, le=300000)
+    FIRECRAWL_SDK_MAX_RETRIES: int = Field(default=0, ge=0, le=5)
+    FIRECRAWL_MAX_ATTEMPTS: int = Field(default=2, ge=1, le=5)
+    FIRECRAWL_RETRY_BACKOFF_SECONDS: float = Field(default=3.0, ge=0, le=60)
+    FIRECRAWL_ALLOW_ENHANCED_RETRY: bool = True
+    VGU_AUTO_SAVE_RAW: bool = True
+    VGU_AUTO_CREATE_REVIEW_DRAFT: bool = True
+    VGU_AUTO_PROMOTE_VERIFIED: bool = False
+    VGU_RAW_CRAWL_DIR: str = "data/vgu_crawl_raw"
+    VGU_REVIEWED_CRAWL_DIR: str = "data/vgu_crawl_reviewed"
+    VGU_IMPORT_DIR: str = "vgu_admissions_import"
+    VGU_SOURCE_REGISTRY_PATH: str = "data/vgu_source_registry.json"
+    VGU_FIELD_REVIEW_REPORT_PATH: str = "data/vgu_field_review_report.md"
 
     # Bootstrap admin
     BOOTSTRAP_ADMIN_ENABLED: bool = True

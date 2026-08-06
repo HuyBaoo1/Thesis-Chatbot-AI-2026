@@ -3,28 +3,28 @@ services:
   # PostgreSQL — managed by Render
   # ============================================================================
   - type: pserv
-    name: a20-db-backup
+    name: vgu-admissions-platform-db
     runtime: image
     image:
       image: postgres:16
     plan: starter
     disk:
-      name: a20-db-data
+      name: vgu-admissions-platform-db-data
       mountPath: /var/lib/postgresql/data
       sizeGB: 10
     envVars:
       - key: POSTGRES_USER
-        value: a20_admin
+        value: vgu_migration
       - key: POSTGRES_PASSWORD
         generateValue: true
       - key: POSTGRES_DB
-        value: a20_app
+        value: vgu_admissions
 
   # ============================================================================
   # Redis — managed by Render
   # ============================================================================
   - type: redis
-    name: a20-redis-backup
+    name: vgu-admissions-platform-redis
     plan: free
     maxmemoryPolicy: noeviction
     ipMask: 0.0.0.0/0
@@ -33,7 +33,7 @@ services:
   # FastAPI Web Service
   # ============================================================================
   - type: web
-    name: vgu-admissions-api
+    name: vgu-admissions-platform-api
     runtime: docker
     repo: DATA_REQUIRED
     branch: main
@@ -44,24 +44,22 @@ services:
     envVars:
       # ---- Database (managed by Render) ----
       - key: DATABASE_URL
-        fromDatabase:
-          name: a20-db-backup
-          property: connectionString
+        value: DATA_REQUIRED
 
       # ---- Redis (managed by Render) ----
       - key: REDIS_URL
         fromService:
-          name: a20-redis-backup
+          name: vgu-admissions-platform-redis
           type: redis
           property: connectionString
       - key: REDIS_HOST
         fromService:
-          name: a20-redis-backup
+          name: vgu-admissions-platform-redis
           type: redis
           property: host
       - key: REDIS_PORT
         fromService:
-          name: a20-redis-backup
+          name: vgu-admissions-platform-redis
           type: redis
           property: port
 
@@ -132,7 +130,7 @@ services:
       # ---- CORS & Security ----
       # After first deploy, update these with your frontend and backend domains.
       - key: CORS_ALLOW_ORIGINS
-        value: DATA_REQUIRED,http://localhost:5173,http://127.0.0.1:5173
+        value: DATA_REQUIRED
       - key: CORS_ALLOW_CREDENTIALS
         value: "true"
       - key: CORS_ALLOW_METHODS
@@ -140,7 +138,7 @@ services:
       - key: CORS_ALLOW_HEADERS
         value: "*"
       - key: TRUSTED_HOSTS
-        value: DATA_REQUIRED,localhost,127.0.0.1
+        value: DATA_REQUIRED
 
       # ---- Rate Limits ----
       - key: CHAT_QUERY_RATE_LIMIT_PER_MINUTE
@@ -164,7 +162,7 @@ services:
 
       # ---- RQ / Queue ----
       - key: RQ_QUEUE_NAME
-        value: default
+        value: vgu-admissions
       - key: RQ_JOB_TIMEOUT
         value: "900"
 

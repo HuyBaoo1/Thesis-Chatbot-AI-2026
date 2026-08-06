@@ -1,5 +1,31 @@
 # VGU Crawl Review Inventory
 
+## Phase A inventory - 2026-08-06
+
+| File | Source URL | Registry identity | Text status | Trusted manifest status | Diagnostic only | Promotion allowed | Active document exists | Lifecycle classification | Result |
+|---|---|---|---|---|---|---|---|---|---|
+| data/vgu_crawl_reviewed/01_admission_overview.md | https://vgu.edu.vn/admission | admission_overview | verified_overview_only | verified_overview_only legacy manifest | n/a | n/a | yes | existing active document | SKIPPED - ALREADY ACTIVE; no replacement candidate. |
+| data/vgu_crawl_reviewed/01_bachelor_programs_vietnamese_german_university_30a6b40a_review_required.md | https://vgu.edu.vn/tuition-fees/for-bachelor-programs | bachelor_tuition_2026 | reviewed | REVIEW_REQUIRED | true | false | yes | diagnostic artifact | BLOCKED - DIAGNOSTIC_PROMOTION_BLOCKED. |
+| data/vgu_crawl_reviewed/02_bachelor_requirements.md | https://vgu.edu.vn/admission/bachelor/admission-requirements | bachelor_admission_requirements | verified | needs_review legacy manifest; no trusted lineage entry | n/a | n/a | no | new candidate blocked | BLOCKED - REVIEW_METADATA_INCOMPLETE and FIELD_REVIEW_BLOCKED. |
+| data/vgu_crawl_reviewed/03_bachelor_tuition_2026.md | https://vgu.edu.vn/tuition-fees/for-bachelor-programs | bachelor_tuition_2026 | verified | verified legacy manifest; no trusted lineage entry | n/a | n/a | yes | existing active document | SKIPPED - ALREADY ACTIVE; no duplicate import. |
+| data/vgu_crawl_reviewed/04_bachelor_scholarships_2026.md | https://vgu.edu.vn/scholarships-for-bachelor-programs | bachelor_scholarships_2026 | verified | needs_review legacy manifest; no trusted lineage entry | n/a | n/a | no | new candidate blocked | BLOCKED - REVIEW_METADATA_INCOMPLETE and FIELD_REVIEW_BLOCKED. |
+| data/vgu_crawl_reviewed/05_application_guide.md | https://vgu.edu.vn/huong-dan-nop-ho-so | application_guide | verified | needs_review legacy manifest; no trusted lineage entry | n/a | n/a | no | historical only | HISTORICAL_ONLY - 2025 enrollment content; not imported into current KB. |
+| data/vgu_crawl_reviewed/06_master_requirements.md | https://vgu.edu.vn/admission/master/admission-requirements | master_admission_requirements | verified | needs_review legacy manifest; no trusted lineage entry | n/a | n/a | no | new candidate blocked | BLOCKED - REVIEW_METADATA_INCOMPLETE and FIELD_REVIEW_BLOCKED. |
+| data/vgu_crawl_reviewed/07_master_admission_2026.md | https://vgu.edu.vn/admission/master/admission-announcement | master_admission_announcement | verified | needs_review legacy manifest; no trusted lineage entry | n/a | n/a | no | new candidate blocked | BLOCKED - REVIEW_METADATA_INCOMPLETE and FIELD_REVIEW_BLOCKED. |
+| data/vgu_crawl_reviewed/08_master_tuition_2026.md | https://vgu.edu.vn/tuition-fees/for-master-programs | master_tuition_2026 | verified | needs_review legacy manifest; no trusted lineage entry | n/a | n/a | no | new candidate blocked | BLOCKED - REVIEW_METADATA_INCOMPLETE and FIELD_REVIEW_BLOCKED. |
+| data/vgu_crawl_reviewed/09_master_scholarships_2026.md | https://vgu.edu.vn/scholarships-for-master-programs | master_scholarships_2026 | needs_review | needs_review legacy manifest; no trusted lineage entry | n/a | n/a | no | not verified | BLOCKED - HUMAN_SOURCE_REVIEW_REQUIRED. |
+| data/vgu_crawl_reviewed/10_tuyensinh_home.md | https://tuyensinh.vgu.edu.vn/ | tuyensinh_home | needs_review | needs_review legacy manifest; no trusted lineage entry | n/a | n/a | no | not verified | BLOCKED - HUMAN_SOURCE_REVIEW_REQUIRED. |
+
+Gate result: `BLOCKED - HUMAN VERIFIED TEXT / TRUSTED REVIEW METADATA INCOMPLETE`.
+
+Required before promotion:
+
+- Add explicit reviewer identity, reviewed timestamp, and approval method.
+- Add trusted raw/review lineage entries with raw and reviewed content hashes.
+- Set `diagnostic_only=false` and `promotion_allowed=true` only through explicit human approval.
+- Resolve field blockers recorded in `data/vgu_field_review_report.md`.
+- Keep `05_application_guide.md` out of the current KB unless a separate historical retrieval policy is implemented.
+
 Generated: 2026-07-28
 
 | File | Classification | Source URL | Session ID | Page-job ID | Crawl status | Current review status | Effective intake | Program level | Language |

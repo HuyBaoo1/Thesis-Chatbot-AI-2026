@@ -1,184 +1,174 @@
-top of page
+﻿## TRÆ¯á»œNG Äáº I Há»ŒC VIá»†T Äá»¨C
 
-Chuyển đến nội dung chính
+TrÆ°á»ng Äáº¡i há»c Viá»‡t Äá»©c \| VGU lĂ  Ä‘áº¡i há»c cĂ´ng láº­p há»£p tĂ¡c giá»¯a ChĂ­nh phá»§ Viá»‡t Nam vĂ  Äá»©c, Ä‘Ă o táº¡o theo mĂ´ hĂ¬nh Ä‘áº¡i há»c nghiĂªn cá»©u chuáº©n Äá»©c. VGU káº¿t há»£p ná»n táº£ng hĂ n lĂ¢m vá»¯ng cháº¯c vá»›i tĂ­nh á»©ng dá»¥ng cao, hÆ°á»›ng tá»›i Ä‘á»•i má»›i sĂ¡ng táº¡o vĂ  há»™i nháº­p quá»‘c táº¿ â€“ nÆ¡i báº¡n Ä‘Æ°á»£c rĂ¨n tÆ° duy khoa há»c, báº£n lÄ©nh toĂ n cáº§u vĂ  nÄƒng lá»±c lĂ m viá»‡c bá»n bá»‰ Ä‘á»ƒ chinh phá»¥c nhá»¯ng thĂ¡ch thá»©c lá»›n.
 
-Close
+[Ná»˜P Há»’ SÆ ](http://apply.vgu.edu.vn/)
 
-![VGU Logo](https://static.wixstatic.com/media/208805_559a1dbc1edf414c909b1bfbe6a16667~mv2.png/v1/fill/w_49,h_28,al_c,q_85,usm_0.66_1.00_0.01,blur_2,enc_avif,quality_auto/VGU%20Logo.png)
+![VGU_NGĂ€NH Há»ŒC_tĂ¬m hiá»ƒu ngay_Ká»¸ THUáº¬T SX THĂ”NG MINH.jpg](https://static.wixstatic.com/media/208805_2118eb6ca01042deb21c2e10561f0e02~mv2.jpg/v1/fill/w_685,h_510,fp_0.31_0.37,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/VGU_NG%C3%80NH%20H%E1%BB%8CC_t%C3%ACm%20hi%E1%BB%83u%20ngay_K%E1%BB%B8%20THU%E1%BA%ACT%20SX%20TH%C3%94NG%20MINH.jpg)
 
-![](https://static.wixstatic.com/media/208805_c5881101be81454faf06c34c7671813bf002.jpg/v1/fill/w_1600,h_800,al_c,q_85,usm_0.33_1.00_0.00,enc_avif,quality_auto/208805_c5881101be81454faf06c34c7671813bf002.jpg)
-
-## TRƯỜNG ĐẠI HỌC VIỆT ĐỨC
-
-Trường Đại học Việt Đức \| VGU là đại học công lập hợp tác giữa Chính phủ Việt Nam và Đức, đào tạo theo mô hình đại học nghiên cứu chuẩn Đức. VGU kết hợp nền tảng hàn lâm vững chắc với tính ứng dụng cao, hướng tới đổi mới sáng tạo và hội nhập quốc tế – nơi bạn được rèn tư duy khoa học, bản lĩnh toàn cầu và năng lực làm việc bền bỉ để chinh phục những thách thức lớn.
-
-[NỘP HỒ SƠ](http://apply.vgu.edu.vn/)
-
-![VGU_NGÀNH HỌC_tìm hiểu ngay_KỸ THUẬT SX THÔNG MINH.jpg](https://static.wixstatic.com/media/208805_2118eb6ca01042deb21c2e10561f0e02~mv2.jpg/v1/fill/w_685,h_510,fp_0.31_0.37,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/VGU_NG%C3%80NH%20H%E1%BB%8CC_t%C3%ACm%20hi%E1%BB%83u%20ngay_K%E1%BB%B8%20THU%E1%BA%ACT%20SX%20TH%C3%94NG%20MINH.jpg)
-
-### Chương trình đại học
+### ChÆ°Æ¡ng trĂ¬nh Ä‘áº¡i há»c
 
 [MEN](https://tuyensinh.vgu.edu.vn/chuong-trinh-dai-hoc/kt-co-khi)
 
-[Kỹ thuật cơ khí](https://tuyensinh.vgu.edu.vn/chuong-trinh-dai-hoc/kt-co-khi)
+[Ká»¹ thuáº­t cÆ¡ khĂ­](https://tuyensinh.vgu.edu.vn/chuong-trinh-dai-hoc/kt-co-khi)
 
 [SPE](https://tuyensinh.vgu.edu.vn/chuong-trinh-dai-hoc/kt-quy-trinh-moi-truong)
 
-[Kỹ thuật quy trình sản xuất bền vững](https://tuyensinh.vgu.edu.vn/chuong-trinh-dai-hoc/kt-quy-trinh-moi-truong)
+[Ká»¹ thuáº­t quy trĂ¬nh sáº£n xuáº¥t bá»n vá»¯ng](https://tuyensinh.vgu.edu.vn/chuong-trinh-dai-hoc/kt-quy-trinh-moi-truong)
 
 [BME](https://tuyensinh.vgu.edu.vn/chuong-trinh-dai-hoc/ky-thuat-y-sinh)
 
-[Kỹ thuật y sinh](https://tuyensinh.vgu.edu.vn/chuong-trinh-dai-hoc/ky-thuat-y-sinh)
+[Ká»¹ thuáº­t y sinh](https://tuyensinh.vgu.edu.vn/chuong-trinh-dai-hoc/ky-thuat-y-sinh)
 
 [ECE](https://tuyensinh.vgu.edu.vn/chuong-trinh-dai-hoc/kt-dien-va-may-tinh)
 
-[Kỹ thuật điện & máy tính](https://tuyensinh.vgu.edu.vn/chuong-trinh-dai-hoc/kt-dien-va-may-tinh)
+[Ká»¹ thuáº­t Ä‘iá»‡n & mĂ¡y tĂ­nh](https://tuyensinh.vgu.edu.vn/chuong-trinh-dai-hoc/kt-dien-va-may-tinh)
 
 [MEC](https://tuyensinh.vgu.edu.vn/chuong-trinh-dai-hoc/co-dien-tu)
 
-[Kỹ thuật cơ điện tử](https://tuyensinh.vgu.edu.vn/chuong-trinh-dai-hoc/co-dien-tu)
+[Ká»¹ thuáº­t cÆ¡ Ä‘iá»‡n tá»­](https://tuyensinh.vgu.edu.vn/chuong-trinh-dai-hoc/co-dien-tu)
 
-### Chương trình thạc sĩ
+### ChÆ°Æ¡ng trĂ¬nh tháº¡c sÄ©
 
 MST
 
-Cơ điện tử và công nghệ hệ thống cảm biến
+CÆ¡ Ä‘iá»‡n tá»­ vĂ  cĂ´ng nghá»‡ há»‡ thá»‘ng cáº£m biáº¿n
 
 MEE
 
-Thạc sĩ Kỹ thuật điện
+Tháº¡c sÄ© Ká»¹Â thuáº­t Ä‘iá»‡n
 
 GPE
 
-Kỹ thuật và quản lý sản xuất toàn cầu
+Ká»¹ thuáº­t vĂ  quáº£n lĂ½ sáº£n xuáº¥t toĂ n cáº§u
 
 MSI
 
-Khoa học vật liệu
+Khoa há»c váº­t liá»‡u
 
-![VGU_NGÀNH HỌC_tìm hiểu ngay_KỸ THUẬT ĐÔ THỊ.jpg](https://static.wixstatic.com/media/208805_c0ad9ce070864e6aa9be992924ce1345~mv2.jpg/v1/fill/w_685,h_510,fp_0.29_0.31,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/VGU_NG%C3%80NH%20H%E1%BB%8CC_t%C3%ACm%20hi%E1%BB%83u%20ngay_K%E1%BB%B8%20THU%E1%BA%ACT%20%C4%90%C3%94%20TH%E1%BB%8A.jpg)
+![VGU_NGĂ€NH Há»ŒC_tĂ¬m hiá»ƒu ngay_Ká»¸ THUáº¬T ÄĂ” THá».jpg](https://static.wixstatic.com/media/208805_c0ad9ce070864e6aa9be992924ce1345~mv2.jpg/v1/fill/w_685,h_510,fp_0.29_0.31,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/VGU_NG%C3%80NH%20H%E1%BB%8CC_t%C3%ACm%20hi%E1%BB%83u%20ngay_K%E1%BB%B8%20THU%E1%BA%ACT%20%C4%90%C3%94%20TH%E1%BB%8A.jpg)
 
-### Chương trình đại học
+### ChÆ°Æ¡ng trĂ¬nh Ä‘áº¡i há»c
 
 [BCE](https://tuyensinh.vgu.edu.vn/chuong-trinh-dai-hoc/ktql-xay-dung)
 
-[Kỹ thuật &\\
+[Ká»¹ thuáº­t &\\
 \\
-Quản lý xây dựng](https://tuyensinh.vgu.edu.vn/chuong-trinh-dai-hoc/ktql-xay-dung)
+Quáº£n lĂ½ xĂ¢y dá»±ng](https://tuyensinh.vgu.edu.vn/chuong-trinh-dai-hoc/ktql-xay-dung)
 
 [ARC](https://tuyensinh.vgu.edu.vn/chuong-trinh-dai-hoc/architecture-kien-truc)
 
-[Kiến trúc](https://tuyensinh.vgu.edu.vn/chuong-trinh-dai-hoc/architecture-kien-truc)
+[Kiáº¿n trĂºc](https://tuyensinh.vgu.edu.vn/chuong-trinh-dai-hoc/architecture-kien-truc)
 
 [SME](https://tuyensinh.vgu.edu.vn/chuong-trinh-dai-hoc/giao-thong-thong-minh)
 
-[Kỹ thuật giao thông thông minh](https://tuyensinh.vgu.edu.vn/chuong-trinh-dai-hoc/giao-thong-thong-minh)
+[Ká»¹ thuáº­t giao thĂ´ng thĂ´ng minh](https://tuyensinh.vgu.edu.vn/chuong-trinh-dai-hoc/giao-thong-thong-minh)
 
-### Chương trình thạc sĩ
+### ChÆ°Æ¡ng trĂ¬nh tháº¡c sÄ©
 
 SUD
 
-Phát triển đô thị bền vững
+PhĂ¡t triá»ƒn Ä‘Ă´ thá»‹ bá»n vá»¯ng
 
 WTE
 
-Công nghệ, tái sử dụng và quản lý nước
+CĂ´ng nghá»‡, tĂ¡i sá»­ dá»¥ng vĂ  quáº£n lĂ½ nÆ°á»›c
 
-![VGU_NGÀNH HỌC_tìm hiểu ngay_KINH TẾ QUẢN TRỊ.jpg](https://static.wixstatic.com/media/208805_ffbc4c5369ab4142a5b764d0f73e3de7~mv2.jpg/v1/fill/w_685,h_510,fp_0.29_0.33,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/VGU_NG%C3%80NH%20H%E1%BB%8CC_t%C3%ACm%20hi%E1%BB%83u%20ngay_KINH%20T%E1%BA%BE%20QU%E1%BA%A2N%20TR%E1%BB%8A.jpg)
+![VGU_NGĂ€NH Há»ŒC_tĂ¬m hiá»ƒu ngay_KINH Táº¾ QUáº¢N TRá».jpg](https://static.wixstatic.com/media/208805_ffbc4c5369ab4142a5b764d0f73e3de7~mv2.jpg/v1/fill/w_685,h_510,fp_0.29_0.33,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/VGU_NG%C3%80NH%20H%E1%BB%8CC_t%C3%ACm%20hi%E1%BB%83u%20ngay_KINH%20T%E1%BA%BE%20QU%E1%BA%A2N%20TR%E1%BB%8A.jpg)
 
-### Chương trình đại học
+### ChÆ°Æ¡ng trĂ¬nh Ä‘áº¡i há»c
 
 [BBA](https://tuyensinh.vgu.edu.vn/chuong-trinh-dai-hoc/quan-tri-kinh-doanh)
 
-[Quản trị kinh doanh](https://tuyensinh.vgu.edu.vn/chuong-trinh-dai-hoc/quan-tri-kinh-doanh)
+[Quáº£n trá»‹ kinh doanh](https://tuyensinh.vgu.edu.vn/chuong-trinh-dai-hoc/quan-tri-kinh-doanh)
 
 [BSE](https://tuyensinh.vgu.edu.vn/chuong-trinh-dai-hoc/kinh-t%E1%BA%BF-h%E1%BB%8Dc)
 
-[Kinh tế học](https://tuyensinh.vgu.edu.vn/chuong-trinh-dai-hoc/kinh-t%E1%BA%BF-h%E1%BB%8Dc)
+[Kinh táº¿ há»c](https://tuyensinh.vgu.edu.vn/chuong-trinh-dai-hoc/kinh-t%E1%BA%BF-h%E1%BB%8Dc)
 
 [BFA](https://tuyensinh.vgu.edu.vn/chuong-trinh-dai-hoc/tai-chinh-ke-toan)
 
-[Tài chính & kế toán](https://tuyensinh.vgu.edu.vn/chuong-trinh-dai-hoc/tai-chinh-ke-toan)
+[TĂ i chĂ­nh & káº¿ toĂ¡n](https://tuyensinh.vgu.edu.vn/chuong-trinh-dai-hoc/tai-chinh-ke-toan)
 
 [BDE](https://tuyensinh.vgu.edu.vn/chuong-trinh-dai-hoc/qtkd-so-quoc-te)
 
-[Quản trị số & kinh doanh quốc tế](https://tuyensinh.vgu.edu.vn/chuong-trinh-dai-hoc/qtkd-so-quoc-te)
+[Quáº£n trá»‹ sá»‘ & kinh doanh quá»‘c táº¿](https://tuyensinh.vgu.edu.vn/chuong-trinh-dai-hoc/qtkd-so-quoc-te)
 
-### Chương trình thạc sĩ
+### ChÆ°Æ¡ng trĂ¬nh tháº¡c sÄ©
 
 MBA
 
-Thạc sĩ quản trị kinh doanh
+Tháº¡c sÄ© quáº£n trá»‹ kinh doanh
 
 BIS
 
-Hệ thống thông tin doanh nghiệp
+Há»‡ thá»‘ng thĂ´ng tin doanh nghiá»‡p
 
 GFE
 
-Tài chính và kinh tế học toàn cầu
+TĂ i chĂ­nh vĂ  kinh táº¿ há»c toĂ n cáº§u
 
-![VGU_NGÀNH HỌC_tìm hiểu ngay_KHOA HỌC MÁY TÍNH.jpg](https://static.wixstatic.com/media/208805_ff03a48c4a2c4f01af24bc55e0aa9405~mv2.jpg/v1/fill/w_685,h_510,fp_0.25_0.33,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/VGU_NG%C3%80NH%20H%E1%BB%8CC_t%C3%ACm%20hi%E1%BB%83u%20ngay_KHOA%20H%E1%BB%8CC%20M%C3%81Y%20T%C3%8DNH.jpg)
+![VGU_NGĂ€NH Há»ŒC_tĂ¬m hiá»ƒu ngay_KHOA Há»ŒC MĂY TĂNH.jpg](https://static.wixstatic.com/media/208805_ff03a48c4a2c4f01af24bc55e0aa9405~mv2.jpg/v1/fill/w_685,h_510,fp_0.25_0.33,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/VGU_NG%C3%80NH%20H%E1%BB%8CC_t%C3%ACm%20hi%E1%BB%83u%20ngay_KHOA%20H%E1%BB%8CC%20M%C3%81Y%20T%C3%8DNH.jpg)
 
-### Chương trình đại học
+### ChÆ°Æ¡ng trĂ¬nh Ä‘áº¡i há»c
 
 [CSE](https://tuyensinh.vgu.edu.vn/chuong-trinh-dai-hoc/khoa-hoc-may-tinh)
 
-[Khoa học máy tính](https://tuyensinh.vgu.edu.vn/chuong-trinh-dai-hoc/khoa-hoc-may-tinh)
+[Khoa há»c mĂ¡y tĂ­nh](https://tuyensinh.vgu.edu.vn/chuong-trinh-dai-hoc/khoa-hoc-may-tinh)
 
-### Chương trình thạc sĩ
+### ChÆ°Æ¡ng trĂ¬nh tháº¡c sÄ©
 
 MCS
 
-Thạc sĩ khoa học máy tính
+Tháº¡c sÄ© khoa há»c mĂ¡y tĂ­nh
 
-## 6 LÝ DO BẮT ĐẦU HÀNH TRÌNH HỌC TẬP TẠI VGU
+## 6 LĂ DO Báº®T Äáº¦U HĂ€NH TRĂŒNH Há»ŒC Táº¬P Táº I VGU
 
-Tất cả chương trình đào tạo đều được kiểm định quốc tế bởi các tổ chức uy tín, bằng cấp được chấp nhận tại châu Âu cũng như trên toàn thế giới.
+Táº¥t cáº£ chÆ°Æ¡ng trĂ¬nh Ä‘Ă o táº¡o Ä‘á»u Ä‘Æ°á»£c kiá»ƒm Ä‘á»‹nh quá»‘c táº¿ bá»Ÿi cĂ¡c tá»• chá»©c uy tĂ­n, báº±ng cáº¥p Ä‘Æ°á»£c cháº¥p nháº­n táº¡i chĂ¢u Ă‚u cÅ©ng nhÆ° trĂªn toĂ n tháº¿ giá»›i.
 
-- Nhận 2 bằng: VGU + đại học đối tác Đức
+- Nháº­n 2 báº±ng: VGU + Ä‘áº¡i há»c Ä‘á»‘i tĂ¡c Äá»©c
 
-- Kiểm định bởi các tổ chức châu Âu
-
-
-## CHƯƠNG TRÌNH SONG BẰNG
-
-- Chương trình giảng dạy 100% Tiếng Anh
-
-- Được học thêm tiếng Đức tại VGU
+- Kiá»ƒm Ä‘á»‹nh bá»Ÿi cĂ¡c tá»• chá»©c chĂ¢u Ă‚u
 
 
-## HỌC 2 NGÔN NGỮ - LỢI THẾ NHÂN ĐÔI
+## CHÆ¯Æ NG TRĂŒNH SONG Báº°NG
 
-- Giảng viên & sinh viên đến từ 17 quốc gia
+- ChÆ°Æ¡ng trĂ¬nh giáº£ng dáº¡y 100% Tiáº¿ng Anh
 
-- Cơ hội trao đổi 6 tháng tại Đức
-
-
-## MÔI TRƯỜNG HỌC ĐA VĂN HÓA
-
-## Lợi ích tài chính nhân đôi
-
-- Cơ hội nhận học bổng hằng năm
-
-- Cơ hội nhận học bổng trao đổi từ DAAD
+- ÄÆ°á»£c há»c thĂªm tiáº¿ng Äá»©c táº¡i VGU
 
 
-## TRẢI NGHIỆM KHUÔN VIÊN 50.5HA
+## Há»ŒC 2 NGĂ”N NGá»® - Lá»¢I THáº¾ NHĂ‚N ÄĂ”I
 
-- Tích hợp khu học thuật – thư viện – ký túc xá
+- Giáº£ng viĂªn & sinh viĂªn Ä‘áº¿n tá»« 17 quá»‘c gia
 
-- 71 phòng thí nghiệm kỹ thuật & 14 lab máy tính
-
-
-## CƠ HỘI NGHỀ NGHIỆP RỘNG MỞ
-
-- Bằng cấp được công nhận toàn cầu, mở rộng cơ hội học tiếp & làm việc quốc tế
+- CÆ¡ há»™i trao Ä‘á»•i 6 thĂ¡ng táº¡i Äá»©c
 
 
-[ĐĂNG KÝ THAM QUAN VGU](https://tuyensinh.vgu.edu.vn/)
+## MĂ”I TRÆ¯á»œNG Há»ŒC ÄA VÄ‚N HĂ“A
 
-## ĐỘI NGŨ GIẢNG VIÊN TIÊU BIỂU
+## Lá»£i Ă­ch tĂ i chĂ­nh nhĂ¢n Ä‘Ă´i
+
+- CÆ¡ há»™i nháº­n há»c bá»•ng háº±ng nÄƒm
+
+- CÆ¡ há»™i nháº­n há»c bá»•ng trao Ä‘á»•i tá»« DAAD
+
+
+## TRáº¢I NGHIá»†M KHUĂ”N VIĂN 50.5HA
+
+- TĂ­ch há»£p khu há»c thuáº­t â€“ thÆ° viá»‡n â€“ kĂ½ tĂºc xĂ¡
+
+- 71 phĂ²ng thĂ­ nghiá»‡m ká»¹ thuáº­t & 14 lab mĂ¡y tĂ­nh
+
+
+## CÆ  Há»˜I NGHá»€ NGHIá»†P Rá»˜NG Má»
+
+- Báº±ng cáº¥p Ä‘Æ°á»£c cĂ´ng nháº­n toĂ n cáº§u, má»Ÿ rá»™ng cÆ¡ há»™i há»c tiáº¿p & lĂ m viá»‡c quá»‘c táº¿
+
+
+[ÄÄ‚NG KĂ THAM QUAN VGU](https://tuyensinh.vgu.edu.vn/)
+
+## Äá»˜I NGÅ¨ GIáº¢NG VIĂN TIĂU BIá»‚U
 
 ![](https://static.wixstatic.com/media/208805_d45387b8bc064fcd997f3e90d5b133bd~mv2.jpg/v1/fill/w_147,h_147,al_c,q_80,usm_0.66_1.00_0.01,blur_2,enc_avif,quality_auto/WINFIED%20MELCHER_edited.jpg)
 
@@ -208,156 +198,83 @@ Prof. Dr. -Ing. ROLAND SPAN
 
 Professor, Program Director at RUB (MEN)
 
-[Tìm hiểu thêm](https://tuyensinh.vgu.edu.vn/hocbong)
+[TĂ¬m hiá»ƒu thĂªm](https://tuyensinh.vgu.edu.vn/hocbong)
 
-## [HỌC BỔNG\ \ WUS](https://tuyensinh.vgu.edu.vn/hocbong)
+## [Há»ŒC Bá»”NG\ \ WUS](https://tuyensinh.vgu.edu.vn/hocbong)
 
-[Tìm hiểu thêm](https://tuyensinh.vgu.edu.vn/hocbong)
+[TĂ¬m hiá»ƒu thĂªm](https://tuyensinh.vgu.edu.vn/hocbong)
 
-## [HỌC BỔNG\ \ TRAO ĐỔI](https://tuyensinh.vgu.edu.vn/hocbong)
+## [Há»ŒC Bá»”NG\ \ TRAO Äá»”I](https://tuyensinh.vgu.edu.vn/hocbong)
 
-[Tìm hiểu thêm](https://tuyensinh.vgu.edu.vn/hocbong)
+[TĂ¬m hiá»ƒu thĂªm](https://tuyensinh.vgu.edu.vn/hocbong)
 
-## [HỌC BỔNG\ \ TÀI NĂNG](https://tuyensinh.vgu.edu.vn/hocbong)
+## [Há»ŒC Bá»”NG\ \ TĂ€I NÄ‚NG](https://tuyensinh.vgu.edu.vn/hocbong)
 
-## CƠ HỘI HỌC BỔNG
+## CÆ  Há»˜I Há»ŒC Bá»”NG
 
-## Gặp gỡ tài năng VGU
+## Gáº·p gá»¡ tĂ i nÄƒng VGU
 
 SAT 1540 \| Ielts 8.0.
 
-Bạn Vương Gia Kiệt
+Báº¡n VÆ°Æ¡ng Gia Kiá»‡t
 
-![Bạn Vương Gia Kiệt ](https://static.wixstatic.com/media/0a23b3_571557d778e54092a5b3ec77cbf5743d~mv2.jpg/v1/fill/w_147,h_147,al_c,q_80,usm_0.66_1.00_0.01,blur_2,enc_avif,quality_auto/411728696_765053098990753_2962138387555200986_n.jpg)
+![Báº¡n VÆ°Æ¡ng Gia Kiá»‡t ](https://static.wixstatic.com/media/0a23b3_571557d778e54092a5b3ec77cbf5743d~mv2.jpg/v1/fill/w_147,h_147,al_c,q_80,usm_0.66_1.00_0.01,blur_2,enc_avif,quality_auto/411728696_765053098990753_2962138387555200986_n.jpg)
 
 SAT 1530 \| TestAS 130 \| IELTS 8.0
 
-Bạn Đào Gia Hưng
+Báº¡n ÄĂ o Gia HÆ°ng
 
-![Bạn Đào Gia Hưng ](https://static.wixstatic.com/media/0a23b3_e009cdb6947a4e038318d761044eb74e~mv2.jpg/v1/fill/w_147,h_147,al_c,q_80,usm_0.66_1.00_0.01,blur_2,enc_avif,quality_auto/417694697_778696047626458_6602486725224035848_n.jpg)
+![Báº¡n ÄĂ o Gia HÆ°ng ](https://static.wixstatic.com/media/0a23b3_e009cdb6947a4e038318d761044eb74e~mv2.jpg/v1/fill/w_147,h_147,al_c,q_80,usm_0.66_1.00_0.01,blur_2,enc_avif,quality_auto/417694697_778696047626458_6602486725224035848_n.jpg)
 
 TestAS 127.2 \| IELTS 8.5
 
-Bạn Trần Đặng Gia Bảo
+Báº¡n Tráº§n Äáº·ng Gia Báº£o
 
-![Bạn Trần Đặng Gia Bảo](https://static.wixstatic.com/media/0a23b3_8fec2723e6a345289b2087f3f616c3a7~mv2.jpg/v1/fill/w_147,h_147,al_c,q_80,usm_0.66_1.00_0.01,blur_2,enc_avif,quality_auto/416845816_776135074549222_2769057192537212358_n.jpg)
+![Báº¡n Tráº§n Äáº·ng Gia Báº£o](https://static.wixstatic.com/media/0a23b3_8fec2723e6a345289b2087f3f616c3a7~mv2.jpg/v1/fill/w_147,h_147,al_c,q_80,usm_0.66_1.00_0.01,blur_2,enc_avif,quality_auto/416845816_776135074549222_2769057192537212358_n.jpg)
 
 SAT 1270 \| IELTS 8.0
 
-Bạn Đoàn Vũ Nguyệt Ánh
+Báº¡n ÄoĂ n VÅ© Nguyá»‡t Ănh
 
-![Bạn Đoàn Vũ Nguyệt Ánh ](https://static.wixstatic.com/media/0a23b3_acd0276fd96f4afd8ec1f39fd325ab30~mv2.jpg/v1/fill/w_147,h_147,al_c,q_80,usm_0.66_1.00_0.01,blur_2,enc_avif,quality_auto/412394172_766369115525818_5675807911944744006_n.jpg)
+![Báº¡n ÄoĂ n VÅ© Nguyá»‡t Ănh ](https://static.wixstatic.com/media/0a23b3_acd0276fd96f4afd8ec1f39fd325ab30~mv2.jpg/v1/fill/w_147,h_147,al_c,q_80,usm_0.66_1.00_0.01,blur_2,enc_avif,quality_auto/412394172_766369115525818_5675807911944744006_n.jpg)
 
 TestAS 125.8 \| IELTS 8.5
 
-Bạn Nguyễn Thành Đạt
+Báº¡n Nguyá»…n ThĂ nh Äáº¡t
 
-![Bạn Nguyễn Thành Đạt](https://static.wixstatic.com/media/0a23b3_350963e25e144f39ba0c8345a4467ca9~mv2.jpg/v1/fill/w_147,h_147,al_c,q_80,usm_0.66_1.00_0.01,blur_2,enc_avif,quality_auto/410256746_765656355597094_8142704863208113819_n.jpg)
+![Báº¡n Nguyá»…n ThĂ nh Äáº¡t](https://static.wixstatic.com/media/0a23b3_350963e25e144f39ba0c8345a4467ca9~mv2.jpg/v1/fill/w_147,h_147,al_c,q_80,usm_0.66_1.00_0.01,blur_2,enc_avif,quality_auto/410256746_765656355597094_8142704863208113819_n.jpg)
 
 SAT 1520 \| IELTS 8.0
 
-Bạn Đỗ Lương Minh Hoàng
+Báº¡n Äá»— LÆ°Æ¡ng Minh HoĂ ng
 
-![Bạn Đỗ Lương Minh Hoàng](https://static.wixstatic.com/media/0a23b3_bb058fd65e084578bf97aca5b930b74d~mv2.jpg/v1/fill/w_147,h_147,al_c,q_80,usm_0.66_1.00_0.01,blur_2,enc_avif,quality_auto/411778353_765604588935604_1610012044184104466_n.jpg)
+![Báº¡n Äá»— LÆ°Æ¡ng Minh HoĂ ng](https://static.wixstatic.com/media/0a23b3_bb058fd65e084578bf97aca5b930b74d~mv2.jpg/v1/fill/w_147,h_147,al_c,q_80,usm_0.66_1.00_0.01,blur_2,enc_avif,quality_auto/411778353_765604588935604_1610012044184104466_n.jpg)
 
-## Mạng lưới trường đại học đối tác
+## Máº¡ng lÆ°á»›i trÆ°á»ng Ä‘áº¡i há»c Ä‘á»‘i tĂ¡c
 
-VGU Consortium là tổ chức phi lợi nhuận với hơn 40 trường thành viên, chịu trách nhiệm điều phối hợp tác, bảo đảm chất lượng theo chuẩn Đức và hỗ trợ phát triển, quản lý cũng như mở rộng VGU
+VGU Consortium lĂ  tá»• chá»©c phi lá»£i nhuáº­n vá»›i hÆ¡n 40 trÆ°á»ng thĂ nh viĂªn, chá»‹u trĂ¡ch nhiá»‡m Ä‘iá»u phá»‘i há»£p tĂ¡c, báº£o Ä‘áº£m cháº¥t lÆ°á»£ng theo chuáº©n Äá»©c vĂ  há»— trá»£ phĂ¡t triá»ƒn, quáº£n lĂ½ cÅ©ng nhÆ° má»Ÿ rá»™ng VGU
 
 ![Landing page university partner.jpg](https://static.wixstatic.com/media/208805_736845a8b2644b3f8155816b94ff5606~mv2.jpg/v1/fill/w_147,h_82,al_c,q_80,usm_0.66_1.00_0.01,blur_2,enc_avif,quality_auto/Landing%20page%20university%20partner.jpg)
 
-## Đối tác doanh nghiệp
+## Äá»‘i tĂ¡c doanh nghiá»‡p
 
-Thông qua mạng lưới doanh nghiệp đối tác rộng khắp, VGU mang đến cho sinh viên nhiều cơ hội thực tập, trải nghiệm môi trường làm việc thực tế và kết nối sớm với các nhà tuyển dụng tiềm năng.
+ThĂ´ng qua máº¡ng lÆ°á»›i doanh nghiá»‡p Ä‘á»‘i tĂ¡c rá»™ng kháº¯p, VGU mang Ä‘áº¿n cho sinh viĂªn nhiá»u cÆ¡ há»™i thá»±c táº­p, tráº£i nghiá»‡m mĂ´i trÆ°á»ng lĂ m viá»‡c thá»±c táº¿ vĂ  káº¿t ná»‘i sá»›m vá»›i cĂ¡c nhĂ  tuyá»ƒn dá»¥ng tiá»m nÄƒng.
 
 ![business partner](https://static.wixstatic.com/media/208805_c3db753fa12943ee9adc7bb77e5428bb~mv2.jpg/v1/fill/w_131,h_59,al_c,q_80,usm_0.66_1.00_0.01,blur_2,enc_avif,quality_auto/Landing%20page%20business%20partner.jpg)
 
-![Trường Đại học Việt Đức công bố điểm sàn xét tuyển vào các chương trình đào tạo bậc đại học năm 2026](https://static.wixstatic.com/media/05ffb3_e4b01eb550a84ea898c2a575bcb1a747~mv2.jpg/v1/fill/w_333,h_250,fp_0.50_0.50,q_30,blur_30,enc_avif,quality_auto/05ffb3_e4b01eb550a84ea898c2a575bcb1a747~mv2.webp)![Trường Đại học Việt Đức công bố điểm sàn xét tuyển vào các chương trình đào tạo bậc đại học năm 2026](https://static.wixstatic.com/media/05ffb3_e4b01eb550a84ea898c2a575bcb1a747~mv2.jpg/v1/fill/w_305,h_229,fp_0.50_0.50,q_90,enc_avif,quality_auto/05ffb3_e4b01eb550a84ea898c2a575bcb1a747~mv2.webp)
+![TrÆ°á»ng Äáº¡i há»c Viá»‡t Äá»©c cĂ´ng bá»‘ Ä‘iá»ƒm sĂ n xĂ©t tuyá»ƒn vĂ o cĂ¡c chÆ°Æ¡ng trĂ¬nh Ä‘Ă o táº¡o báº­c Ä‘áº¡i há»c nÄƒm 2026](https://static.wixstatic.com/media/05ffb3_e4b01eb550a84ea898c2a575bcb1a747~mv2.jpg/v1/fill/w_333,h_250,fp_0.50_0.50,q_30,blur_30,enc_avif,quality_auto/05ffb3_e4b01eb550a84ea898c2a575bcb1a747~mv2.webp)![TrÆ°á»ng Äáº¡i há»c Viá»‡t Äá»©c cĂ´ng bá»‘ Ä‘iá»ƒm sĂ n xĂ©t tuyá»ƒn vĂ o cĂ¡c chÆ°Æ¡ng trĂ¬nh Ä‘Ă o táº¡o báº­c Ä‘áº¡i há»c nÄƒm 2026](https://static.wixstatic.com/media/05ffb3_e4b01eb550a84ea898c2a575bcb1a747~mv2.jpg/v1/fill/w_305,h_229,fp_0.50_0.50,q_90,enc_avif,quality_auto/05ffb3_e4b01eb550a84ea898c2a575bcb1a747~mv2.webp)
 
-[**Trường Đại học Việt Đức công bố điểm sàn xét tuyển vào các chương trình đào tạo bậc đại học năm 2026**](https://tuyensinh.vgu.edu.vn/post/tr%C6%B0%E1%BB%9Dng-%C4%91%E1%BA%A1i-h%E1%BB%8Dc-vi%E1%BB%87t-%C4%91%E1%BB%A9c-c%C3%B4ng-b%E1%BB%91-%C4%91i%E1%BB%83m-s%C3%A0n-x%C3%A9t-tuy%E1%BB%83n-v%C3%A0o-c%C3%A1c-ch%C6%B0%C6%A1ng-tr%C3%ACnh-%C4%91%C3%A0o-t%E1%BA%A1o-b%E1%BA%ADc-%C4%91%E1%BA%A1i-h%E1%BB%8Dc-n%C4%83m-2026)
+[**TrÆ°á»ng Äáº¡i há»c Viá»‡t Äá»©c cĂ´ng bá»‘ Ä‘iá»ƒm sĂ n xĂ©t tuyá»ƒn vĂ o cĂ¡c chÆ°Æ¡ng trĂ¬nh Ä‘Ă o táº¡o báº­c Ä‘áº¡i há»c nÄƒm 2026**](https://tuyensinh.vgu.edu.vn/post/tr%C6%B0%E1%BB%9Dng-%C4%91%E1%BA%A1i-h%E1%BB%8Dc-vi%E1%BB%87t-%C4%91%E1%BB%A9c-c%C3%B4ng-b%E1%BB%91-%C4%91i%E1%BB%83m-s%C3%A0n-x%C3%A9t-tuy%E1%BB%83n-v%C3%A0o-c%C3%A1c-ch%C6%B0%C6%A1ng-tr%C3%ACnh-%C4%91%C3%A0o-t%E1%BA%A1o-b%E1%BA%ADc-%C4%91%E1%BA%A1i-h%E1%BB%8Dc-n%C4%83m-2026)
 
-TP. Hồ Chí Minh, ngày 9 tháng 7 năm 2026 – Trường Đại học Việt Đức (VGU) chính thức công bố điểm bố mức điểm sàn nhận hồ sơ xét tuyển vào các chương trình đào tạo bậc đại học năm 2026 đối với 05 phương thức tuyển sinh của trường. Việc công bố được thực hiện theo hướng dẫn của Bộ Giáo dục và Đào tạo về công tác tuyển sinh đại học năm 2026, nhằm bảo đảm tính minh bạch, thống nhất và công bằng trong quá trình xét tuyển đối với tất cả thí sinh. Theo Hội đồng Tuyển sinh VGU, đối v
+TP. Há»“ ChĂ­ Minh, ngĂ y 9 thĂ¡ng 7 nÄƒm 2026 â€“ TrÆ°á»ng Äáº¡i há»c Viá»‡t Äá»©c (VGU) chĂ­nh thá»©c cĂ´ng bá»‘ Ä‘iá»ƒm bá»‘ má»©c Ä‘iá»ƒm sĂ n nháº­n há»“ sÆ¡ xĂ©t tuyá»ƒn vĂ o cĂ¡c chÆ°Æ¡ng trĂ¬nh Ä‘Ă o táº¡o báº­c Ä‘áº¡i há»c nÄƒm 2026 Ä‘á»‘i vá»›i 05 phÆ°Æ¡ng thá»©c tuyá»ƒn sinh cá»§a trÆ°á»ng. Viá»‡c cĂ´ng bá»‘ Ä‘Æ°á»£c thá»±c hiá»‡n theo hÆ°á»›ng dáº«n cá»§a Bá»™ GiĂ¡o dá»¥c vĂ  ÄĂ o táº¡o vá» cĂ´ng tĂ¡c tuyá»ƒn sinh Ä‘áº¡i há»c nÄƒm 2026, nháº±m báº£o Ä‘áº£m tĂ­nh minh báº¡ch, thá»‘ng nháº¥t vĂ  cĂ´ng báº±ng trong quĂ¡ trĂ¬nh xĂ©t tuyá»ƒn Ä‘á»‘i vá»›i táº¥t cáº£ thĂ­ sinh. Theo Há»™i Ä‘á»“ng Tuyá»ƒn sinh VGU, Ä‘á»‘i v
 
-1 phút đọc
+1 phĂºt Ä‘á»c
 
-![Trải Nghiệm Ngày VGU EXPERIENCE DAY 2026: Hành Trình Khám Phá Giáo Dục Đột Phá Tại VGU](https://static.wixstatic.com/media/208805_3ec2b3a5aba2454d9578df260ac6f70e~mv2.jpg/v1/fill/w_334,h_250,fp_0.50_0.50,q_30,blur_30,enc_avif,quality_auto/208805_3ec2b3a5aba2454d9578df260ac6f70e~mv2.webp)![Trải Nghiệm Ngày VGU EXPERIENCE DAY 2026: Hành Trình Khám Phá Giáo Dục Đột Phá Tại VGU](https://static.wixstatic.com/media/208805_3ec2b3a5aba2454d9578df260ac6f70e~mv2.jpg/v1/fill/w_306,h_229,fp_0.50_0.50,q_90,enc_avif,quality_auto/208805_3ec2b3a5aba2454d9578df260ac6f70e~mv2.webp)
+![Tráº£i Nghiá»‡m NgĂ y VGU EXPERIENCE DAY 2026: HĂ nh TrĂ¬nh KhĂ¡m PhĂ¡ GiĂ¡o Dá»¥c Äá»™t PhĂ¡ Táº¡i VGU](https://static.wixstatic.com/media/208805_3ec2b3a5aba2454d9578df260ac6f70e~mv2.jpg/v1/fill/w_334,h_250,fp_0.50_0.50,q_30,blur_30,enc_avif,quality_auto/208805_3ec2b3a5aba2454d9578df260ac6f70e~mv2.webp)![Tráº£i Nghiá»‡m NgĂ y VGU EXPERIENCE DAY 2026: HĂ nh TrĂ¬nh KhĂ¡m PhĂ¡ GiĂ¡o Dá»¥c Äá»™t PhĂ¡ Táº¡i VGU](https://static.wixstatic.com/media/208805_3ec2b3a5aba2454d9578df260ac6f70e~mv2.jpg/v1/fill/w_306,h_229,fp_0.50_0.50,q_90,enc_avif,quality_auto/208805_3ec2b3a5aba2454d9578df260ac6f70e~mv2.webp)
 
-[**Trải Nghiệm Ngày VGU EXPERIENCE DAY 2026: Hành Trình Khám Phá Giáo Dục Đột Phá Tại VGU**](https://tuyensinh.vgu.edu.vn/post/tr%E1%BA%A3i-nghi%E1%BB%87m-ng%C3%A0y-vgu-experience-day-2026-h%C3%A0nh-tr%C3%ACnh-kh%C3%A1m-ph%C3%A1-gi%C3%A1o-d%E1%BB%A5c-%C4%91%E1%BB%99t-ph%C3%A1-t%E1%BA%A1i-vgu)
+[**Tráº£i Nghiá»‡m NgĂ y VGU EXPERIENCE DAY 2026: HĂ nh TrĂ¬nh KhĂ¡m PhĂ¡ GiĂ¡o Dá»¥c Äá»™t PhĂ¡ Táº¡i VGU**](https://tuyensinh.vgu.edu.vn/post/tr%E1%BA%A3i-nghi%E1%BB%87m-ng%C3%A0y-vgu-experience-day-2026-h%C3%A0nh-tr%C3%ACnh-kh%C3%A1m-ph%C3%A1-gi%C3%A1o-d%E1%BB%A5c-%C4%91%E1%BB%99t-ph%C3%A1-t%E1%BA%A1i-vgu)
 
-Tham gia Ngày VGU EXPERIENCE DAY 2026 cùng con, tôi đã có cơ hội trực tiếp khám phá môi trường học tập tại trường Đại học Việt Đức (VGU). Đây không chỉ là dịp để tìm hiểu về các ngành học mà còn giúp tôi và con có cái nhìn rõ hơn khi chọn trường Đại học phù hợp, đặc biệt là những ngành nghề hot, có tiềm năng lương cao và chất lượng tốt. Hành trình trải nghiệm này để lại nhiều ấn tượng sâu sắc về cơ sở vật chất hiện đại, phương pháp giảng dạy thân thiện và các hoạt động ngoại
+Tham gia NgĂ y VGU EXPERIENCE DAY 2026 cĂ¹ng con, tĂ´i Ä‘Ă£ cĂ³ cÆ¡ há»™i trá»±c tiáº¿p khĂ¡m phĂ¡ mĂ´i trÆ°á»ng há»c táº­p táº¡i trÆ°á»ng Äáº¡i há»c Viá»‡t Äá»©c (VGU). ÄĂ¢y khĂ´ng chá»‰ lĂ  dá»‹p Ä‘á»ƒ tĂ¬m hiá»ƒu vá» cĂ¡c ngĂ nh há»c mĂ  cĂ²n giĂºp tĂ´i vĂ  con cĂ³ cĂ¡i nhĂ¬n rĂµ hÆ¡n khi chá»n trÆ°á»ng Äáº¡i há»c phĂ¹ há»£p, Ä‘áº·c biá»‡t lĂ  nhá»¯ng ngĂ nh nghá» hot, cĂ³ tiá»m nÄƒng lÆ°Æ¡ng cao vĂ  cháº¥t lÆ°á»£ng tá»‘t. HĂ nh trĂ¬nh tráº£i nghiá»‡m nĂ y Ä‘á»ƒ láº¡i nhiá»u áº¥n tÆ°á»£ng sĂ¢u sáº¯c vá» cÆ¡ sá»Ÿ váº­t cháº¥t hiá»‡n Ä‘áº¡i, phÆ°Æ¡ng phĂ¡p giáº£ng dáº¡y thĂ¢n thiá»‡n vĂ  cĂ¡c hoáº¡t Ä‘á»™ng ngoáº¡i
 
-4 phút đọc
 
-![Khám phá lợi ích học tại đại học Việt Đức](https://static.wixstatic.com/media/208805_1415661db8e3446c9bde7da4e500c923~mv2.jpg/v1/fill/w_333,h_250,fp_0.50_0.50,q_30,blur_30,enc_avif,quality_auto/208805_1415661db8e3446c9bde7da4e500c923~mv2.webp)![Khám phá lợi ích học tại đại học Việt Đức](https://static.wixstatic.com/media/208805_1415661db8e3446c9bde7da4e500c923~mv2.jpg/v1/fill/w_305,h_229,fp_0.50_0.50,q_90,enc_avif,quality_auto/208805_1415661db8e3446c9bde7da4e500c923~mv2.webp)
-
-[**Khám phá lợi ích học tại đại học Việt Đức**](https://tuyensinh.vgu.edu.vn/post/kh%C3%A1m-ph%C3%A1-l%E1%BB%A3i-%C3%ADch-h%E1%BB%8Dc-t%E1%BA%A1i-%C4%91%E1%BA%A1i-h%E1%BB%8Dc-vi%E1%BB%87t-%C4%91%E1%BB%A9c)
-
-Học đại học là bước ngoặt quan trọng trong cuộc đời mỗi người. Việc lựa chọn một trường đại học phù hợp không chỉ giúp phát triển kiến thức mà còn mở ra nhiều cơ hội nghề nghiệp và trải nghiệm quý giá. Trong số các trường đại học công lập chất lượng quốc tế tại Việt Nam, đại học Việt Đức nổi bật với nhiều lợi ích vượt trội. Qua bài viết này, tôi sẽ chia sẻ những điểm mạnh và lợi ích khi học tại trường, giúp bạn có cái nhìn rõ hơn để đưa ra quyết định đúng đắn. Lợi ích học tạ
-
-5 phút đọc
-
-## SỰ KIỆN NỔI BẬT
-
-## CẢM NHẬN VỀ VGU
-
-![](https://static.wixstatic.com/media/05ffb3_8a2d6e527821493dbc06ca33452269ab~mv2.jpg/v1/fill/w_80,h_80,al_c,q_80,usm_0.66_1.00_0.01,blur_2,enc_avif,quality_auto/PH%20l%C3%AA%20n%C4%83ng%20t%C3%A2n_edited.jpg)
-
-Sinh viên Khoa học máy tính, 2019
-
-Phụ huynh bạn Lê Năng Tân
-
-"Gia đình rất biết ơn nhà trường và thầy cô đã tận tình dạy dỗ, giúp con tôi trưởng thành cả trong học tập lẫn cuộc sống. Trong suốt quãng thời gian học xa nhà, con đã học được cách chủ động, chăm sóc bản thân và không ngừng nỗ lực. Sau 4 năm tại VGU, chúng tôi thấy rõ sự trưởng thành và bản lĩnh của con, đồng thời tự hào khi con có cơ hội tham gia học tập 6 tháng tại Đức và tốt nghiệp song bằng ngành Khoa học Máy tính"
-
-![](https://static.wixstatic.com/media/05ffb3_dbdee5c603284cb69a5bc687c13b086b~mv2.jpg/v1/fill/w_147,h_147,al_c,q_80,usm_0.66_1.00_0.01,blur_2,enc_avif,quality_auto/VGU03223_edited_edited.jpg)
-
-Giám đốc phụ trách Trí tuệ Nhân tạo Nền tảng tại VinRobotics
-
-Lê Thái An
-
-"VGU gắn liền với hành trình trưởng thành của mình từ sớm. Năm 17 tuổi, mình có cơ hội tham gia các lớp lắp ráp cánh tay robot, từ đó hình thành niềm đam mê về tự động hóa. Tại VGU, mình được trang bị những kỹ năng cơ bản nhưng rất thiết thực, đặc biệt là kỹ năng tự học – từ cách tìm nguồn tài liệu uy tín, nghiên cứu độc lập cho đến thực hành trong phòng lab. Với chuyên ngành tự động hóa, học thông qua thực hành lab chính là phương pháp hiệu quả và sát với thực tế nhất."
-
-![](https://static.wixstatic.com/media/05ffb3_6a41e6b995fa45e0b55115c52266711d~mv2.jpg/v1/fill/w_147,h_147,al_c,q_80,usm_0.66_1.00_0.01,blur_2,enc_avif,quality_auto/VGU03227_edited.jpg)
-
-Hardware Design Engineer tại Apple Inc, Mỹ
-
-Nguyễn Lê Khôi Nguyên
-
-"Những kiến thức và kỹ năng mình học được tại VGU có giá trị từ năm đại cương đến khi đi làm. Từ kỹ năng thuyết trình, viết báo cáo, học tập bằng tiếng Anh đến các môn chuyên ngành như Radio Frequency Engineering và Digital Design, tất cả đã tạo nền tảng vững chắc để mình làm việc, học lên cao hơn sau này"
-
-![](https://static.wixstatic.com/media/05ffb3_332a5b43ca2d4705b77007b3865ee480~mv2.jpg/v1/fill/w_95,h_95,al_c,q_80,usm_0.66_1.00_0.01,blur_2,enc_avif,quality_auto/h%E1%BB%AFu%20ngh%C4%A9a.jpg)
-
-Thạc sĩ Tính toán kỹ thuật và mô phỏng trên máy tính tại Đại học Ruhr Bochum, Đức
-
-Nguyễn Hữu Nghĩa
-
-"Học tập tại VGU là một hành trình nhiều thử thách nhưng giúp mình trưởng thành rõ rệt. Môi trường học nghiêm túc, yêu cầu cao khiến mình phải nỗ lực liên tục, từ đó cải thiện tư duy, kiến thức và khả năng tự học. Nhờ sự hướng dẫn của thầy cô và các trải nghiệm thực tế, mình tự tin hơn vào con đường mình chọn và sẵn sàng cho tương lai sau tốt nghiệp"
-
-![](https://static.wixstatic.com/media/208805_988e217045da4b719f2e1e888fb600fb~mv2.jpg/v1/fill/w_116,h_113,al_c,q_80,usm_0.66_1.00_0.01,blur_2,enc_avif,quality_auto/Ta%20Duc%20Huy%20ECE_JPG.jpg)
-
-Nghiên cứu viên tại phòng thí nghiệm trí tuệ nhân tạo Cinnamon.
-
-Tạ Đức Huy
-
-“4 năm học tập tại Đại học Việt Đức là một hành trình đáng nhớ và đầy cảm hứng. Mình được học tập trong môi trường nghiên cứu hiện đại, nhận sự hướng dẫn tận tâm từ các giáo sư và tham gia nhiều dự án thực tiễn cùng doanh nghiệp. Sự hỗ trợ từ Chính phủ Việt Nam và Đức đã mở ra nhiều cơ hội nghề nghiệp giá trị, và mình tự hào là cựu sinh viên ECE của VGU.”
-
-![](https://static.wixstatic.com/media/208805_2d098ceb06cc44a69c88c86cd715412b~mv2.jpg/v1/fill/w_141,h_189,al_c,q_80,usm_0.66_1.00_0.01,blur_2,enc_avif,quality_auto/Cai%20Thi%20Quynh%20Giao_JPG.jpg)
-
-Sinh viên Quản trị kinh doanh, 2017
-
-Cái Thị Quỳnh Giao
-
-"Chọn ngành Quản trị Kinh Doanh tại VGU là quyết định đã thay đổi tôi theo cách tích cực nhất. Dù hành trình học tập nhiều thử thách và không ít áp lực, chính môi trường học thuật nghiêm túc ấy đã giúp tôi trưởng thành vượt bậc về tư duy, kiến thức và tính kỷ luật. Từ giảng đường, ký túc xá đến sự đồng hành tận tâm của thầy cô và các phòng ban, VGU đã trang bị cho tôi nền tảng vững chắc để tự tin đưa ra những lựa chọn đúng đắn và sẵn sàng bước vào thị trường lao động toàn cầu"
-
-![](https://static.wixstatic.com/media/208805_613bf3bd35244097b50ceeeb1994626c~mv2.jpg/v1/fill/w_146,h_189,al_c,q_80,usm_0.66_1.00_0.01,blur_2,enc_avif,quality_auto/Eckert%20BBA_JPG.jpg)
-
-Sinh viên Chương trình trao đổi đến từ Goethe Frankfurt.
-
-Alexander Eckert
-
-“Tôi đến từ Đại học Frankfurt theo Chương trình trao đổi sinh viên và theo học 6 tháng tại VGU. Đây là một kỷ niệm rất đặc biệt. Chương trình đào tạo từ Đức kết hợp với sự thân thiện của Việt Nam tạo nên một môi trường học tập tuyệt vời. Quy mô lớp học nhỏ cho phép sinh viên được trao đổi nhiều với giảng viên, tăng cao hiệu quả học tập. Chất lượng bài giảng cũng như thảo luận luôn đạt chuẩn rất cao. Tôi tự hào vì đã được học tại VGU, được là một thành viên của đại gia đình VGU.
-
-[ĐĂNG KÝ TƯ VẤN](https://tuyensinh.vgu.edu.vn/)
-
-Search
-
-bottom of page
+Há»c Ä‘áº¡i há»c lĂ  bÆ°á»›c ngoáº·t quan trá»ng trong cuá»™c Ä‘á»i má»—i ngÆ°á»i. Viá»‡c lá»±a chá»n má»™t trÆ°á»ng Ä‘áº¡i há»c phĂ¹ há»£p khĂ´ng chá»‰ giĂºp phĂ¡t triá»ƒn kiáº¿n thá»©c mĂ  cĂ²n má»Ÿ ra nhiá»u cÆ¡ há»™i nghá» nghiá»‡p vĂ  tráº£i nghiá»‡m quĂ½ giĂ¡. Trong sá»‘ cĂ¡c trÆ°á»ng Ä‘áº¡i há»c cĂ´ng láº­p cháº¥t lÆ°á»£ng quá»‘c táº¿ táº¡i Viá»‡t Nam, Ä‘áº¡i há»c Viá»‡t Äá»©c ná»•i báº­t vá»›i nhiá»u lá»£i Ă­ch vÆ°á»£t trá»™i. Qua bĂ i viáº¿t nĂ y, tĂ´i sáº½ chia sáº» nhá»¯ng Ä‘iá»ƒm máº¡nh vĂ  lá»£i Ă­ch khi há»c táº¡i trÆ°á»ng, giĂºp báº¡n cĂ³ cĂ¡i nhĂ¬n rĂµ hÆ¡n Ä‘á»ƒ Ä‘Æ°a ra quyáº¿t Ä‘á»‹nh Ä‘Ăºng Ä‘áº¯n.

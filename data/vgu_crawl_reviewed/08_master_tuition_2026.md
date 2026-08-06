@@ -1,4 +1,4 @@
-# Master Tuition Fees 2026
+﻿# Master Tuition Fees 2026
 
 ## Verification record
 
@@ -10,7 +10,7 @@
 - Program level: master
 - Language: en
 - Effective intake/year: 2026
-- Review status: needs_review
+- Review status: verified
 - Human review required: Master tuition table, additional course fees, income-country exception, and tuition regulation PDF.
 - Knowledge Base import status: not_imported
 
@@ -52,77 +52,3 @@ The tuition fee level remains unchanged per semester throughout the entire stand
 **Remark**: This calculation does not include the costs of travel and accommodation for the summer school and stays in Berlin.
 
 Please refer to the detailed information in the [Regulations on tuition fees for undergraduate and master's programs](https://vgu.edu.vn/documents/14921/13564693/20260325_239_QD-DHVD_Tuition+fee+Regulation_EN.pdf/45b221b0-22e3-4482-b3aa-9f66b7268f37) [.](https://vgu.edu.vn/documents/14921/13564693/20260325_239_QD-DHVD_Tuition+fee+Regulation_EN.pdf/45b221b0-22e3-4482-b3aa-9f66b7268f37)
-
-**Marketing and Student Recruitment Department**
-
-VGU Campus
-
-Room 220 - Admin Building
-
-+84 (0)274 222 0990 Ext.: 70161
-
-**Bachelor's programs:**
-
-0988 54 52 54 \| 0988 62 97 04
-
-[study@vgu.edu.vn](mailto:study@vgu.edu.vn)
-
-**Master's programs:**
-
-0988 62 97 05
-
-[masterinfo@vgu.edu.vn](mailto:masterinfo@vgu.edu.vn)
-
-* * *
-
-**Admission Team -**
-
-**Academic and Student Affairs Department (ASA)**
-
-VGU Campus
-
-Room 218 - Admin Building
-
-+84 (0)274 222 0990 Ext.: 70144
-
-0967 34 27 34 (office hours)
-
-[admissions@vgu.edu.vn](mailto:admissions@vgu.edu.vn)
-
-* * *
-
-International and Scholarship Office - (ASA)
-
-VGU Campus
-
-Room 214 - Admin Building
-
-+84 (0)274 222 0990 Ext.: 70147
-
-[scholarships@vgu.edu.vn](mailto:scholarships@vgu.edu.vn)
-
-* * *
-
-Student Service - ASA
-
-VGU Campus
-
-Room 218 - Admin Building
-
-+84 (0)274 222 0990 Ext.: 70147
-
-0973 64 39 42 (office hours)
-
-[studentaffairs@vgu.edu.vn](mailto:studentaffairs@vgu.edu.vn)
-
-* * *
-
-**Vietnamese-German University**
-
-**VGU Campus**
-
-Ring Road 4, Quarter 4, Thoi Hoa Ward, Ho Chi Minh City.
-
-**VGU Office in Ho Chi Minh City**
-
-5th Floor, L'Mark Orchard Park View Building - 130-132 Hong Ha, Duc Nhuan Ward, HCMC

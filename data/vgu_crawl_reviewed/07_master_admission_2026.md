@@ -1,4 +1,4 @@
-# Master Admission Announcement 2026
+﻿# Master Admission Announcement 2026
 
 ## Verification record
 
@@ -10,7 +10,7 @@
 - Program level: master
 - Language: en
 - Effective intake/year: 2026
-- Review status: needs_review
+- Review status: verified
 - Human review required: Quota, batches/deadlines, fees, requirements, direct admission, documents, tuition, scholarships, tuition reduction, and study location.
 - Knowledge Base import status: not_imported
 
@@ -135,7 +135,7 @@ Applicants must satisfy one of the following requirements:
 1. An IELTS Academic score of 6.0, or TOEFL iBT 60, or coming from one of the countries where English is an official language according to the list provided in Annex 2 of VGU's Admission Regulation, or graduation from a bachelor or master program fully taught and assessed in English;
 2. A minimum GPA of 7.80 (on a 10-point scale) or equivalent in the bachelor program.
 3. Graduation from a bachelor program in fields such as Mechanical Engineering, Automotive Engineering, Aerospace Engineering, Aeronautical Engineering, Civil Engineering, Applied Mathematics, or Applied Physics;
-4. Graduation from universities such as the Vietnamese-German University, HCMC University of Technology, HCMC University of Technology and Education, University of Science - VNU-HCM, HCMC University of Education, HCMC International University, RMIT University Vietnam, Fulbright University Vietnam, University of Science - VNU-HUS, VNU University of Engineering and Technology, VNU University of Education, Hanoi University of Science and Technology, Vin University, Hanoi National University of Education, Hanoi University of Civil Engineering, or University of Science and Technology - the University of Danang, Vietnam Aviation Academy, Tribhuvan University – Nepal, and all science and engineering universities or institutes ranked from number 1 to number 250 in either the QS World University Rankings (https://www.topuniversities.com/university-rankings) or the THE University Rankings ( [https://www.timeshighereducation.com/world-university-rankings](https://www.timeshighereducation.com/world-university-rankings)). Other suitable universities not mentioned in this list will be determined by the Examination Committee.
+4. Graduation from universities such as the Vietnamese-German University, HCMC University of Technology, HCMC University of Technology and Education, University of Science - VNU-HCM, HCMC University of Education, HCMC International University, RMIT University Vietnam, Fulbright University Vietnam, University of Science - VNU-HUS, VNU University of Engineering and Technology, VNU University of Education, Hanoi University of Science and Technology, Vin University, Hanoi National University of Education, Hanoi University of Civil Engineering, or University of Science and Technology - the University of Danang, Vietnam Aviation Academy, Tribhuvan University â€“ Nepal, and all science and engineering universities or institutes ranked from number 1 to number 250 in either the QS World University Rankings (https://www.topuniversities.com/university-rankings) or the THE University Rankings ( [https://www.timeshighereducation.com/world-university-rankings](https://www.timeshighereducation.com/world-university-rankings)). Other suitable universities not mentioned in this list will be determined by the Examination Committee.
 
 5.2. Applicants for the **MST** program with excellent academic achievements can be directly admitted and exempted from the entrance exam if they meet all the following criteria:
 
@@ -303,36 +303,6 @@ Detailed information about admission modes, degree programs, application guideli
 
 \- Address: L'Mark Orchard Park View Building (5th floor), No. 130-132 Hong Ha, Duc Nhuan Ward, HCMC
 
-\- Hotline: 0988 54 52 54 – Tel: (028) 3820 2340
+\- Hotline: 0988 54 52 54 â€“ Tel: (028) 3820 2340
 
 \- Email: [study@vgu.edu.vn](mailto:study@vgu.edu.vn)
-
-**Marketing and Student**
-
-**Recruitment Department**
-
-VGU Campus
-
-220 - Admin Building
-
-+84(0)274 222 0990 Ext:70158
-
-0988 62 97 05
-
-masterinfo@vgu.edu.vn
-
-* * *
-
-Vietnamese-German University
-
-VGU Campus
-
-Ring road 4, Quarter 4, Thoi Hoa Ward, Ho Chi Minh City, Vietnam
-
-VGU Office in Ho Chi Minh City
-
-5th Floor, L'Mark Orchard Park View Building - 130-132 Hong Ha, Duc Nhuan Ward, HCMC
-
-_To visit us: Park in B2, take the elevator to the ground floor, then ask the guard or receptionist to reach the fifth floor._
-
-* * *

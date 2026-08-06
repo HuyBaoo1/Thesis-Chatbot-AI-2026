@@ -1,13 +1,22 @@
 #!/bin/bash
 # Entrypoint script that runs API, RQ worker, and evaluation
 
-# Start RQ worker in background (required for OCR and async tasks)
-RQ_QUEUE="${RQ_QUEUE_NAME:-default}"
-REDIS="${REDIS_URL:-redis://localhost:6379/0}"
-echo "[entrypoint] Starting RQ worker (queue=$RQ_QUEUE)..."
-python -m rq.cli worker --url "$REDIS" "$RQ_QUEUE" &
-WORKER_PID=$!
-echo "[entrypoint] RQ worker started (PID: $WORKER_PID)"
+# Start an embedded RQ worker for local development. Production/staging should
+# run the dedicated worker service instead.
+if [ "${START_EMBEDDED_WORKER:-true}" != "false" ]; then
+    RQ_QUEUE="${RQ_QUEUE_NAME:-default}"
+    if [ -z "$REDIS_URL" ]; then
+        if [ "$APP_ENV" = "production" ] || [ "$APP_ENV" = "staging" ]; then
+            echo "FATAL: REDIS_URL environment variable is not set"
+            exit 1
+        fi
+        export REDIS_URL="redis://localhost:6379/0"
+    fi
+    echo "[entrypoint] Starting RQ worker (queue=$RQ_QUEUE)..."
+    RQ_QUEUE_NAME="$RQ_QUEUE" python /app/worker/start.py &
+    WORKER_PID=$!
+    echo "[entrypoint] RQ worker started (PID: $WORKER_PID)"
+fi
 
 # Run RAG evaluation in background before starting API
 if [ "$RUN_EVAL_ON_DEPLOY" = "true" ]; then

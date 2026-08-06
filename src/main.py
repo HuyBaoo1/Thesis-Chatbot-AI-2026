@@ -143,7 +143,13 @@ async def _fix_scheme(request: Request, call_next):
     return await call_next(request)
 
 
-app = FastAPI(lifespan=lifespan, redirect_slashes=True)
+app = FastAPI(
+    title="VGU Admissions Intelligence Platform",
+    description="AI admissions platform for Vietnamese-German University.",
+    version="1.0.0",
+    lifespan=lifespan,
+    redirect_slashes=True,
+)
 app.add_middleware(TrustedHostMiddleware, allowed_hosts=settings.trusted_hosts)
 # Trust X-Forwarded-* headers so redirects use https:// when behind Railway proxy
 app.add_middleware(BaseHTTPMiddleware, dispatch=_fix_scheme)

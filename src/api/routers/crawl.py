@@ -7,6 +7,7 @@ from src.core.config import settings
 from src.db import session
 from src.models.enums import StaffRole
 from src.schemas.crawl_page_job import (
+    CrawlManualSourceCreate,
     CrawlPageContentUpdateRequest,
     CrawlPageDownloadResponse,
     CrawlPageJobListOut,
@@ -41,6 +42,19 @@ def create_crawl_session(
         job_timeout=settings.RQ_JOB_TIMEOUT,
     )
     return result
+
+
+@router.post("/manual-sources/", response_model=CrawlPageJobOut, status_code=status.HTTP_201_CREATED)
+def create_manual_source(
+    data: CrawlManualSourceCreate,
+    user: dict = Depends(admin_required),
+    db: session = Depends(session.get_db),
+):
+    return crawl_service.create_manual_source_page_job(
+        data,
+        db,
+        created_by=str(user.get("sub") or ""),
+    )
 
 
 @router.get("/sessions/", response_model=CrawlSessionListOut)

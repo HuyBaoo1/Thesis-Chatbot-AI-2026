@@ -1,13 +1,3 @@
-![](https://vgu.edu.vn/tuition-fees/for-master-programs;jsessionid=A47B0943464A8B59AABF59ADE2C298B4?p_p_id=CmsSlider_WAR_cmsportlet&p_p_lifecycle=2&p_p_state=normal&p_p_mode=view&p_p_cacheability=cacheLevelPage&p_p_col_id=column-1&p_p_col_count=1&_CmsSlider_WAR_cmsportlet_javax.faces.resource=loading%2Floading.gif&_CmsSlider_WAR_cmsportlet_ln=images)
-
-![](https://vgu.edu.vn/tuition-fees/for-master-programs;jsessionid=A47B0943464A8B59AABF59ADE2C298B4?p_p_id=CmsSlider_WAR_cmsportlet&p_p_lifecycle=2&p_p_state=normal&p_p_mode=view&p_p_cacheability=cacheLevelPage&p_p_col_id=column-1&p_p_col_count=1&_CmsSlider_WAR_cmsportlet_javax.faces.resource=error.png&_CmsSlider_WAR_cmsportlet_ln=images)
-
-![2.jpg](https://vgu.edu.vn/cms-portlet/data/upload/slider/90e3732b37aa486bfe6184aa147f1c61.jpg)
-
-![](https://vgu.edu.vn/tuition-fees/for-master-programs;jsessionid=A47B0943464A8B59AABF59ADE2C298B4?p_p_id=CmsHienThiBaiVietTinh_WAR_cmsportlet_INSTANCE_6t4LEjIK9g5E&p_p_lifecycle=2&p_p_state=normal&p_p_mode=view&p_p_cacheability=cacheLevelPage&p_p_col_id=column-ex-4&p_p_col_count=1&_CmsHienThiBaiVietTinh_WAR_cmsportlet_INSTANCE_6t4LEjIK9g5E_javax.faces.resource=loading%2Floading.gif&_CmsHienThiBaiVietTinh_WAR_cmsportlet_INSTANCE_6t4LEjIK9g5E_ln=images)
-
-![](https://vgu.edu.vn/tuition-fees/for-master-programs;jsessionid=A47B0943464A8B59AABF59ADE2C298B4?p_p_id=CmsHienThiBaiVietTinh_WAR_cmsportlet_INSTANCE_6t4LEjIK9g5E&p_p_lifecycle=2&p_p_state=normal&p_p_mode=view&p_p_cacheability=cacheLevelPage&p_p_col_id=column-ex-4&p_p_col_count=1&_CmsHienThiBaiVietTinh_WAR_cmsportlet_INSTANCE_6t4LEjIK9g5E_javax.faces.resource=error.png&_CmsHienThiBaiVietTinh_WAR_cmsportlet_INSTANCE_6t4LEjIK9g5E_ln=images)
-
 The tuition fee applied for students of intake 2026
 
 The tuition fee level remains unchanged per semester throughout the entire standard studying period prescribed for one intake.
@@ -107,51 +97,3 @@ VGU Campus
 ![](https://vgu.edu.vn/documents/10192/2798865/smartphone.png/3fb5fee7-ee93-4ed7-824d-2b3674a60c18?t=1705979569000) 0973 64 39 42 (office hours)
 
 ![](https://vgu.edu.vn/documents/10192/2798865/mail.png/bef2853c-4cb3-45bd-86de-4ba27bb18f03?t=1705979559000)[studentaffairs@vgu.edu.vn](mailto:studentaffairs@vgu.edu.vn)
-
-* * *
-
-**Vietnamese-German University**
-
-**VGU Campus**
-
-![](https://vgu.edu.vn/documents/10192/2798865/location.png/0e98a350-796e-4056-8f5d-6dba3f14c4d1?t=1705979573000) Ring Road 4, Quarter 4, Thoi Hoa Ward, Ho Chi Minh City.
-
-**VGU Office in Ho Chi Minh City**
-
-![](https://vgu.edu.vn/documents/10192/2798865/location.png/0e98a350-796e-4056-8f5d-6dba3f14c4d1?t=1705979573000) 5th Floor, L'Mark Orchard Park View Building - 130-132 Hong Ha, Duc Nhuan Ward, HCMC
-
-#### [Quick Access](https://vgu.edu.vn/career;jsessionid=A47B0943464A8B59AABF59ADE2C298B4)
-
-- [Career](https://vgu.edu.vn/career1;jsessionid=A47B0943464A8B59AABF59ADE2C298B4)
-- [Contact Us](https://vgu.edu.vn/contact-us;jsessionid=A47B0943464A8B59AABF59ADE2C298B4)
-- [Library](https://library.vgu.edu.vn/)
-
-#### [Sign In](https://vgu.edu.vn/c/portal/login?p_l_id=2367353)
-
-VIETNAMESE - GERMAN UNIVERSITY
-
-**VGU Campus**
-
-Ring Road 4, Thoi An Quarter, Thoi Hoa Ward, Ho Chi Minh city
-
-(0274) 222 0990 -  (0274) 222 0980
-
-![](https://vgu.edu.vn/cms-vgu-theme-4/images/cms/map-direction.png)[Get direction](https://www.google.com/maps/place/Vietnamese+-+German+University/@11.0547843,106.6634109,17z/data=!3m1!4b1!4m5!3m4!1s0x3174ce286d98ddc7:0xfa362a1ccda178aa!8m2!3d11.0547843!4d106.6655996)
-
-Confirm
-
-Are you sure you want to delete?
-
-OkCancel
-
-Confirm
-
-Are you sure you want to delete?
-
-OkCancel
-
-Confirm
-
-Are you sure you want to delete?
-
-OkCancel

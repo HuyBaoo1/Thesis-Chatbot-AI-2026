@@ -1,0 +1,82 @@
+services:
+  postgres:
+    container_name: !reset null
+    ports: !reset []
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  qdrant:
+    container_name: !reset null
+    ports: !reset []
+    volumes:
+      - qdrant_data:/qdrant/storage
+    healthcheck:
+      test:
+        [
+          "CMD-SHELL",
+          "python -c \"import urllib.request; urllib.request.urlopen('http://127.0.0.1:6333/readyz', timeout=3)\"",
+        ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  redis:
+    container_name: !reset null
+    ports: !reset []
+    volumes:
+      - redis_data:/data
+
+  api:
+    container_name: !reset null
+    image: vgu-admissions-platform-api:${APP_IMAGE_TAG:-prod}
+    environment:
+      APP_ENV: ${APP_ENV:-production}
+      START_EMBEDDED_WORKER: "false"
+      OCR_TEMP_DIR: /app/data/runtime/admissions-ocr
+    volumes: !reset
+      - crawl_artifacts:/app/data/runtime/admissions-ocr
+    healthcheck:
+      test:
+        [
+          "CMD-SHELL",
+          "python -c \"import urllib.request; urllib.request.urlopen('http://127.0.0.1:8000/health', timeout=3)\"",
+        ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  worker:
+    build: .
+    image: vgu-admissions-platform-worker:${APP_IMAGE_TAG:-prod}
+    restart: unless-stopped
+    working_dir: /app
+    env_file:
+      - path: .env
+        required: false
+    environment:
+      APP_ENV: ${APP_ENV:-production}
+      DATABASE_URL: postgresql+psycopg://${APP_DATABASE_USER}:${APP_DATABASE_PASSWORD}@postgres:5432/${POSTGRES_DB}
+      QDRANT_HOST: qdrant
+      QDRANT_PORT: 6333
+      QDRANT_API_KEY: ${QDRANT_API_KEY}
+      REDIS_URL: redis://redis:6379/0
+      OCR_TEMP_DIR: /app/data/runtime/admissions-ocr
+      PYTHONPATH: /app
+    depends_on:
+      postgres:
+        condition: service_healthy
+      qdrant:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    volumes:
+      - crawl_artifacts:/app/data/runtime/admissions-ocr
+    command: python /app/worker/start.py
+    networks:
+      - app-network
+
+volumes:
+  postgres_data:
+  qdrant_data:
+  redis_data:
+  crawl_artifacts:

@@ -2,7 +2,12 @@
 set -e
 
 echo "=== Worker Starting ==="
-echo "REDIS_URL length: ${#REDIS_URL}"
+if [ -z "$REDIS_URL" ]; then
+    echo "FATAL: REDIS_URL environment variable is not set"
+    exit 1
+fi
+
+echo "REDIS_URL: SET"
 echo "Starting rq worker..."
 
-exec rq worker --url "$REDIS_URL" -v
+exec python /app/worker/start.py

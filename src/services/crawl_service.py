@@ -7,14 +7,25 @@ from uuid import UUID
 
 from fastapi import HTTPException
 from sqlalchemy import or_
+from sqlalchemy.orm.attributes import flag_modified
 from sqlalchemy.orm import Session
 
 from src.models.crawl_page_job import CrawlPageJob, CrawlPageJobStatus
 from src.models.crawl_session import CrawlSession, CrawlStatus
 from src.models.enums import AdmissionCategory
-from src.schemas.crawl_page_job import CrawlPageContentUpdateRequest, CrawlPageSendToKbRequest
+from src.schemas.crawl_page_job import (
+    CrawlManualSourceCreate,
+    CrawlPageContentUpdateRequest,
+    CrawlPageSendToKbRequest,
+)
 from src.schemas.crawl_session import CrawlSessionCreate
-from src.services import firecrawl_service, knowledge_chunk_service, metadata_extraction, r2_service
+from src.services import (
+    firecrawl_service,
+    knowledge_chunk_service,
+    metadata_extraction,
+    r2_service,
+    vgu_crawl_artifact_service,
+)
 
 logger = logging.getLogger(__name__)
 
@@ -50,6 +61,69 @@ def create_crawl_session(data: CrawlSessionCreate, db: Session) -> CrawlSession:
     return crawl_session
 
 
+def create_manual_source_page_job(
+    data: CrawlManualSourceCreate,
+    db: Session,
+    *,
+    created_by: str | None = None,
+) -> CrawlPageJob:
+    md_content = data.reviewed_markdown.replace("\r\n", "\n").replace("\r", "\n").strip()
+    if not md_content:
+        raise HTTPException(status_code=400, detail="Reviewed markdown cannot be empty")
+
+    now = datetime.utcnow()
+    crawl_session = CrawlSession(
+        target_url=data.source_url,
+        limit=1,
+        status=CrawlStatus.COMPLETED,
+        total_pages=1,
+        completed_pages=1,
+        started_at=now,
+        completed_at=now,
+    )
+    db.add(crawl_session)
+    db.flush()
+
+    page_job = CrawlPageJob(
+        crawl_session_id=crawl_session.id,
+        source_url=data.source_url,
+        detected_title=data.source_title,
+        page_index=0,
+        status=CrawlPageJobStatus.COMPLETED.value,
+        suggested_metadata={
+            "category": None,
+            "title": data.source_title,
+            "year": None,
+            "source": data.source_url,
+            "acquisition_method": "manual_verified",
+            "review_status": data.review_status,
+            "source_scope": data.source_scope,
+            "effective_context": data.effective_context,
+        },
+        firecrawl_data={
+            "metadata": {
+                "acquisition_method": "manual_verified",
+                "review_status": data.review_status,
+                "source_url": data.source_url,
+                "source_title": data.source_title,
+                "source_scope": data.source_scope,
+                "effective_context": data.effective_context,
+                "created_by": created_by,
+            },
+            "url": data.source_url,
+        },
+    )
+    db.add(page_job)
+    db.flush()
+
+    persisted_markdown = persist_markdown_artifact(page_job_id=str(page_job.id), md_content=md_content)
+    page_job.md_r2_key = persisted_markdown["key"]
+    page_job.content_hash = _build_content_hash(md_content)
+    db.commit()
+    db.refresh(page_job)
+    return page_job
+
+
 def run_crawl_background(crawl_id: str | UUID) -> None:
     """Background task: crawl pages and persist one editable markdown artifact per page."""
     from src.db.session import SessionLocal
@@ -67,19 +141,21 @@ def run_crawl_background(crawl_id: str | UUID) -> None:
         db.commit()
 
         result = firecrawl_service.crawl_sync(url=crawl_session.target_url, limit=crawl_session.limit)
-        crawl_session.status = CrawlStatus.COMPLETED if result.get("success") else CrawlStatus.FAILED
-        crawl_session.total_pages = result.get("total", 0)
-        crawl_session.completed_pages = result.get("completed", 0)
-        crawl_session.completed_at = datetime.utcnow()
-        db.commit()
-
+        total_pages = result.get("total", 0)
+        completed_pages = 0
         if result.get("success") and result.get("data"):
-            _process_crawl_pages(
+            completed_pages = _process_crawl_pages(
                 crawl_session,
                 result["data"],
                 db,
                 requested_urls=result.get("source_urls"),
             )
+
+        crawl_session.status = CrawlStatus.COMPLETED if completed_pages > 0 else CrawlStatus.FAILED
+        crawl_session.total_pages = total_pages
+        crawl_session.completed_pages = completed_pages
+        crawl_session.completed_at = datetime.utcnow()
+        db.commit()
     except Exception:
         logger.exception("Background crawl failed for session %s", crawl_id)
         if crawl_session:
@@ -140,7 +216,8 @@ def _process_crawl_pages(
     db: Session,
     *,
     requested_urls: list[str] | None = None,
-) -> None:
+) -> int:
+    completed_pages = 0
     for page_index, page in enumerate(pages):
         if not isinstance(page, dict):
             logger.warning("Skipping non-dict crawl page at index %s", page_index)
@@ -172,6 +249,7 @@ def _process_crawl_pages(
                 page_index=page_index,
                 db=db,
             )
+            completed_pages += 1
         except Exception as exc:
             logger.exception("Failed to persist crawled page %s", page_url)
             db.rollback()
@@ -188,6 +266,7 @@ def _process_crawl_pages(
                 )
             )
             db.commit()
+    return completed_pages
 
 
 def _create_page_job_from_firecrawl_page(
@@ -218,6 +297,28 @@ def _create_page_job_from_firecrawl_page(
     persisted_markdown = persist_markdown_artifact(page_job_id=str(page_job.id), md_content=md_content)
     page_job.md_r2_key = persisted_markdown["key"]
     page_job.content_hash = _build_content_hash(md_content)
+    artifact_refs = vgu_crawl_artifact_service.save_successful_crawl_artifacts(
+        source_url=page_url,
+        title=title or None,
+        markdown=md_content,
+        crawl_session_id=str(crawl_session.id),
+        page_job_id=str(page_job.id),
+        page_index=page_index,
+        firecrawl_metadata=page.get("metadata") if isinstance(page.get("metadata"), dict) else {},
+    )
+    if artifact_refs:
+        firecrawl_data = page_job.firecrawl_data if isinstance(page_job.firecrawl_data, dict) else {}
+        metadata = firecrawl_data.get("metadata") if isinstance(firecrawl_data.get("metadata"), dict) else {}
+        metadata.update(
+            {
+                "raw_file": artifact_refs.get("raw_file"),
+                "reviewed_file": artifact_refs.get("reviewed_file"),
+                "review_status": "needs_review",
+            }
+        )
+        firecrawl_data["metadata"] = metadata
+        page_job.firecrawl_data = firecrawl_data
+        flag_modified(page_job, "firecrawl_data")
     db.commit()
     db.refresh(page_job)
     return page_job
@@ -420,11 +521,7 @@ def send_crawl_page_job_to_knowledge_base(
         chunk_size=data.chunk_size,
         chunk_overlap=data.chunk_overlap,
         source=page_job.source_url,
-        extra_metadata={
-            "crawl_page_job_id": str(page_job.id),
-            "crawl_session_id": str(page_job.crawl_session_id),
-            "source_url": page_job.source_url,
-        },
+        extra_metadata=_build_kb_extra_metadata(page_job),
         db=db,
     )
 
@@ -446,6 +543,31 @@ def _apply_final_metadata(
     page_job.year = data.year
     page_job.version_start = data.version_start
     page_job.content_hash = content_hash
+
+
+def _build_kb_extra_metadata(page_job: CrawlPageJob) -> dict:
+    metadata = {
+        "crawl_page_job_id": str(page_job.id),
+        "crawl_session_id": str(page_job.crawl_session_id),
+        "source_url": page_job.source_url,
+    }
+    if page_job.content_hash:
+        metadata["content_hash"] = page_job.content_hash
+
+    firecrawl_data = page_job.firecrawl_data if isinstance(page_job.firecrawl_data, dict) else {}
+    source_metadata = firecrawl_data.get("metadata") if isinstance(firecrawl_data.get("metadata"), dict) else {}
+    for key in (
+        "acquisition_method",
+        "review_status",
+        "source_title",
+        "source_scope",
+        "effective_context",
+        "created_by",
+    ):
+        value = source_metadata.get(key)
+        if value:
+            metadata[key] = value
+    return metadata
 
 
 def _safe_markdown_file_name(title: str, *, fallback: str) -> str:
