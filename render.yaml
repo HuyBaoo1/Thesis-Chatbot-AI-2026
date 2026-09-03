@@ -142,13 +142,13 @@ services:
 
       # ---- Rate Limits ----
       - key: CHAT_QUERY_RATE_LIMIT_PER_MINUTE
-        value: "10000"
+        value: "12"
       - key: CHAT_QUERY_RATE_LIMIT_PER_HOUR
-        value: "100000"
+        value: "120"
       - key: CHAT_QUERY_IP_RATE_LIMIT_PER_MINUTE
-        value: "10000"
+        value: "30"
       - key: CHAT_INIT_RATE_LIMIT_PER_MINUTE
-        value: "10000"
+        value: "10"
 
       # ---- Bootstrap Admin ----
       - key: BOOTSTRAP_ADMIN_ENABLED

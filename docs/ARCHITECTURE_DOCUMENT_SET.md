@@ -15,6 +15,7 @@ Tài liệu này là điểm vào chính cho toàn bộ bộ hồ sơ kiến tr�
   - `docs/SYSTEM_DESIGN_FRONTEND.md`
   - `docs/SYSTEM_DESIGN_INTEGRATIONS.md`
   - `docs/SYSTEM_DESIGN_DEPLOYMENT.md`
+  - `docs/managed-railway-qdrant-cloud-deployment.md`
 
 ## 3. Tech stack
 - `docs/TECHSTACK_STANDARD.md`

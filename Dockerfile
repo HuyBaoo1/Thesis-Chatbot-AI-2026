@@ -34,5 +34,6 @@ USER appuser
 # Port
 EXPOSE 8000
 
-# Run database migrations then start FastAPI
-CMD ["bash", "-c", "alembic upgrade head && uvicorn src.main:app --host 0.0.0.0 --port 8000 --workers 4"]
+# Start FastAPI. Run Alembic as a separate deploy step so a migration issue
+# cannot block the web process from serving health checks on managed platforms.
+CMD ["bash", "-c", "exec uvicorn src.main:app --host 0.0.0.0 --port ${PORT:-8000} --workers ${UVICORN_WORKERS:-1}"]

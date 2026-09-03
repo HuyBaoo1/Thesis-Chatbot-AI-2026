@@ -148,6 +148,9 @@ app = FastAPI(
     description="AI admissions platform for Vietnamese-German University.",
     version="1.0.0",
     lifespan=lifespan,
+    docs_url="/docs" if settings.API_DOCS_ENABLED else None,
+    redoc_url="/redoc" if settings.API_DOCS_ENABLED else None,
+    openapi_url="/openapi.json" if settings.API_DOCS_ENABLED else None,
     redirect_slashes=True,
 )
 app.add_middleware(TrustedHostMiddleware, allowed_hosts=settings.trusted_hosts)

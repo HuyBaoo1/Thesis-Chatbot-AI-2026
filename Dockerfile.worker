@@ -17,3 +17,5 @@ ENV PYTHONPATH=/app
 
 RUN useradd -m appuser
 USER appuser
+
+CMD ["python", "/app/worker/start.py"]

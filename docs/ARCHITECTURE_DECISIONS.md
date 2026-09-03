@@ -100,3 +100,19 @@ Tài liệu này ghi lại các quyết định kiến trúc quan trọng, lý d
 - Tác động mã nguồn:
   - `Dockerfile`, `Dockerfile.worker`, `docker-compose.yml`
   - `docs/SYSTEM_DESIGN_DEPLOYMENT.md`
+
+## ADR-008: Selected managed production target for VGU
+- Status: Selected, pending deployment validation.
+- Decision:
+  - Frontend remains two Vercel builds: `vgu-admissions-public` and `vgu-admissions-admin`.
+  - Backend API and RQ worker run as separate Railway services.
+  - PostgreSQL and Redis use Railway managed services.
+  - Vector search uses Qdrant Cloud, not a Railway-hosted Qdrant container.
+  - VPS Docker Compose + Caddy remains a validated fallback until managed production passes all gates.
+- Reason:
+  - This returns to the original managed deployment direction while keeping the validated FastAPI, worker, PostgreSQL, Redis, Qdrant, and R2 architecture.
+  - Qdrant Cloud avoids operating vector database persistence as a Railway volume.
+  - API web startup should serve health checks directly; Alembic runs as a separate deployment step.
+- Impact:
+  - AI/RAG behavior, knowledge base content, Golden QA, Stage A, and Stage B are unchanged.
+  - Deployment documentation and container defaults are adjusted for managed production.

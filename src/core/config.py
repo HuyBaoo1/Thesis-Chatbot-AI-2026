@@ -1,3 +1,5 @@
+import threading
+
 from pydantic import Field
 from pydantic_settings import BaseSettings
 
@@ -68,7 +70,7 @@ class Settings(BaseSettings):
     R2_PUBLIC_BASE_URL: str = ""
 
     # Firecrawl
-    FIRECRAWL_API_KEY: str
+    FIRECRAWL_API_KEY: str = ""
     FIRECRAWL_PROXY_MODE: str = Field(default="basic", description="Allowed values: basic or enhanced")
     FIRECRAWL_SCRAPE_TIMEOUT_MS: int = Field(default=120000, ge=1000, le=300000)
     FIRECRAWL_SDK_MAX_RETRIES: int = Field(default=0, ge=0, le=5)
@@ -127,6 +129,7 @@ class Settings(BaseSettings):
     
     # App
     API_PORT: int = 8000
+    API_DOCS_ENABLED: bool = True
     TRUSTED_HOSTS: str = "localhost,127.0.0.1,vgu.edu.vn,www.vgu.edu.vn,tuyensinh.vgu.edu.vn"
     CORS_ALLOW_ORIGINS: str
     CORS_ALLOW_CREDENTIALS: bool = True
@@ -186,4 +189,24 @@ class Settings(BaseSettings):
             return f"{name} ({short_name})"
         return name or short_name or "the configured university"
 
-settings = Settings()
+_settings: Settings | None = None
+_settings_lock = threading.Lock()
+
+
+def get_settings() -> Settings:
+    global _settings
+    if _settings is not None:
+        return _settings
+
+    with _settings_lock:
+        if _settings is None:
+            _settings = Settings()
+    return _settings
+
+
+class _LazySettings:
+    def __getattr__(self, name: str):
+        return getattr(get_settings(), name)
+
+
+settings = _LazySettings()

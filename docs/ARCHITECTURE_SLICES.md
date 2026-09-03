@@ -58,6 +58,7 @@ Mục tiêu của tài liệu này là mô tả hệ thống theo các lát cắ
   - Railway/Container chạy RQ workers.
 - Phụ trợ:
   - PostgreSQL, Redis, Qdrant, R2.
+  - Production selected path uses Qdrant Cloud; VPS/Compose Qdrant is retained only as fallback/runtime validation path.
 
 ## 6. Lát cắt bảo mật
 - AuthN/AuthZ:

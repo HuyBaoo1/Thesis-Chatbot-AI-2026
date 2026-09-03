@@ -447,23 +447,38 @@ API đầy đủ được document tại `/docs` (Swagger UI) và `/redoc`. Hỗ
 |------------|-----|----------|
 | **Trang công khai** | `<public-domain>` | Vercel hoặc static host tương đương |
 | **Admin Dashboard** | `<admin-domain>` | Vercel hoặc static host tương đương |
-| **Backend API** | `<backend-domain>` | Railway hoặc container host tương đương |
-| **API Docs (Swagger)** | `<backend-domain>/docs` | FastAPI |
+| **Backend API** | `https://<railway-api-domain>` | Railway FastAPI |
+| **Vector DB** | `<qdrant-cloud-host>` | Qdrant Cloud |
 
 ### Cấu hình Vercel (Frontend)
 
 | Project | Domain | `VITE_APP_MODE` | Routes |
 |---------|--------|------------------|--------|
-| `<public-project>` | `<public-domain>` | `public` | `/`, `/widget` |
-| `<admin-project>` | `<admin-domain>` | `admin` | `/login`, `/admin/*`, `/message` |
+| `vgu-admissions-public` | `<public-vercel-domain>` | `public` | `/`, `/widget` |
+| `vgu-admissions-admin` | `<admin-vercel-domain>` | `admin` | `/login`, `/admin/*`, `/message` |
 
 Cả 2 project build từ cùng repo thesis, root `vite-app`, output `dist`. Khác biệt chỉ ở env var `VITE_APP_MODE` — quyết định router nào được sử dụng lúc build.
 
-### Cấu hình Railway (Backend)
+### Managed Railway + Qdrant Cloud production
+
+Backend production target is Railway for FastAPI/RQ Worker, Railway PostgreSQL,
+Railway Redis, Qdrant Cloud, and Cloudflare R2. Qdrant is not hosted as a
+Railway Qdrant container in the selected production path.
+
+Use [docs/managed-railway-qdrant-cloud-deployment.md](docs/managed-railway-qdrant-cloud-deployment.md)
+for the selected production deployment procedure. Keep the VPS Docker Compose +
+Caddy artifacts as a fallback until Railway production passes health, data
+parity, chat smoke, persistence, and backup/recovery validation.
+
+### Cấu hình VPS Docker Compose + Caddy (fallback)
 
 | Biến | Giá trị |
 |------|--------|
 | `CORS_ALLOW_ORIGINS` | `http://localhost:5173`, `http://127.0.0.1:5173`, `<public-domain>`, `<admin-domain>` |
+| `TRUSTED_HOSTS` | `<api-domain>`; Compose appends internal alias `api` |
+| `CADDY_SITE_ADDRESS` | `<api-domain>` |
+| `CADDY_API_UPSTREAM` | `api:8000` |
+| `COOKIE_SECURE` | `true` |
 
 ---
 

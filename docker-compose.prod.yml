@@ -1,12 +1,17 @@
 services:
   postgres:
     container_name: !reset null
+    env_file: !reset
+      - path: ${APP_ENV_FILE:-.env}
+        required: false
     ports: !reset []
     volumes:
       - postgres_data:/var/lib/postgresql/data
+      - ./deploy/postgres/init-app-role.sh:/docker-entrypoint-initdb.d/10-init-app-role.sh:ro
 
   qdrant:
     container_name: !reset null
+    image: qdrant/qdrant:v1.18.3
     ports: !reset []
     volumes:
       - qdrant_data:/qdrant/storage
@@ -29,10 +34,22 @@ services:
   api:
     container_name: !reset null
     image: vgu-admissions-platform-api:${APP_IMAGE_TAG:-prod}
+    env_file: !reset
+      - path: ${APP_ENV_FILE:-.env}
+        required: false
+    ports: !reset []
+    entrypoint: !reset null
     environment:
       APP_ENV: ${APP_ENV:-production}
       START_EMBEDDED_WORKER: "false"
       OCR_TEMP_DIR: /app/data/runtime/admissions-ocr
+    depends_on:
+      postgres:
+        condition: service_healthy
+      qdrant:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
     volumes: !reset
       - crawl_artifacts:/app/data/runtime/admissions-ocr
     healthcheck:
@@ -44,14 +61,40 @@ services:
       interval: 10s
       timeout: 5s
       retries: 5
+    command:
+      - bash
+      - -lc
+      - |
+        DATABASE_URL="postgresql+psycopg://$${POSTGRES_USER}:$${POSTGRES_PASSWORD}@postgres:5432/$${POSTGRES_DB}" alembic upgrade head &&
+        exec uvicorn src.main:app --host 0.0.0.0 --port 8000 --workers 4
+
+  caddy:
+    image: caddy:2.11.4-alpine
+    restart: unless-stopped
+    environment:
+      CADDY_SITE_ADDRESS: ${CADDY_SITE_ADDRESS:-:80}
+      CADDY_API_UPSTREAM: ${CADDY_API_UPSTREAM:-api:8000}
+    ports:
+      - "${CADDY_HTTP_PORT:-80}:80"
+      - "${CADDY_HTTPS_PORT:-443}:443"
+    volumes:
+      - ./deploy/caddy/Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy_data:/data
+      - caddy_config:/config
+    depends_on:
+      api:
+        condition: service_healthy
+    networks:
+      - app-network
 
   worker:
+    profiles: !reset []
     build: .
     image: vgu-admissions-platform-worker:${APP_IMAGE_TAG:-prod}
     restart: unless-stopped
     working_dir: /app
-    env_file:
-      - path: .env
+    env_file: !reset
+      - path: ${APP_ENV_FILE:-.env}
         required: false
     environment:
       APP_ENV: ${APP_ENV:-production}
@@ -63,13 +106,15 @@ services:
       OCR_TEMP_DIR: /app/data/runtime/admissions-ocr
       PYTHONPATH: /app
     depends_on:
+      api:
+        condition: service_healthy
       postgres:
         condition: service_healthy
       qdrant:
         condition: service_healthy
       redis:
         condition: service_healthy
-    volumes:
+    volumes: !reset
       - crawl_artifacts:/app/data/runtime/admissions-ocr
     command: python /app/worker/start.py
     networks:
@@ -80,3 +125,5 @@ volumes:
   qdrant_data:
   redis_data:
   crawl_artifacts:
+  caddy_data:
+  caddy_config:

@@ -1,11 +1,12 @@
-from src.core.config import settings
-
-
 def _school_label() -> str:
+    from src.core.config import settings
+
     return settings.university_label
 
 
 def _school_short_name() -> str:
+    from src.core.config import settings
+
     return settings.UNIVERSITY_SHORT_NAME.strip() or _school_label()
 
 
@@ -64,11 +65,21 @@ def history_response_system_prompt() -> str:
     )
 
 
-INSUFFICIENT_CONTEXT_ANSWER = (
-    "Tôi chưa tìm thấy thông tin này trong kho dữ liệu chính thức hiện có. "
-    f"Bạn nên kiểm tra website chính thức của {settings.UNIVERSITY_NAME.strip() or settings.UNIVERSITY_SHORT_NAME.strip()} "
-    f"({settings.UNIVERSITY_WEBSITE.strip() or 'DATA_REQUIRED'}) hoặc liên hệ bộ phận phụ trách để được xác nhận."
-)
+def insufficient_context_answer() -> str:
+    from src.core.config import settings
+
+    return (
+        "Tôi chưa tìm thấy thông tin này trong kho dữ liệu chính thức hiện có. "
+        f"Bạn nên kiểm tra website chính thức của {settings.UNIVERSITY_NAME.strip() or settings.UNIVERSITY_SHORT_NAME.strip()} "
+        f"({settings.UNIVERSITY_WEBSITE.strip() or 'DATA_REQUIRED'}) hoặc liên hệ bộ phận phụ trách để được xác nhận."
+    )
+
+
+def __getattr__(name: str):
+    if name == "INSUFFICIENT_CONTEXT_ANSWER":
+        return insufficient_context_answer()
+    raise AttributeError(name)
+
 RELATED_INFO_LABEL = "li\u00ean quan"
 
 
@@ -102,7 +113,7 @@ def synthesis_system_prompt() -> str:
         "When using lists, put each item on a separate line using '1. Item', '2. Item', '3. Item'. "
         "Keep paragraphs short, around 1 to 2 sentences. "
         "If Context cannot answer the exact user question, answer exactly: "
-        f"'{INSUFFICIENT_CONTEXT_ANSWER}' "
+        f"'{insufficient_context_answer()}' "
         "Answer only for the exact program, level, year, or item asked. "
         "Do not substitute another program, level, year, tuition item, scholarship, deadline, or requirement. "
         f"If related information is included, clearly label it as '{RELATED_INFO_LABEL}', not the exact answer. "

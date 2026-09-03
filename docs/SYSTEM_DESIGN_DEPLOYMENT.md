@@ -3,6 +3,8 @@
 - **Frontend:** Vercel (static deployment)
 - **Backend:** Railway (Docker containers)
 - **Workers:** RQ workers for async tasks (OCR, embeddings)
+- **Vector Store:** Qdrant Cloud for selected production deployment
+- **Fallback:** VPS Docker Compose + Caddy remains available until managed production passes validation
 
 ---
 

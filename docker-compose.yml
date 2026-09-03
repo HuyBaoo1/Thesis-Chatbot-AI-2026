@@ -61,9 +61,11 @@ services:
       QDRANT_PORT: 6333
       QDRANT_API_KEY: ${QDRANT_API_KEY}
       REDIS_URL: redis://redis:6379/0
+      TRUSTED_HOSTS: ${TRUSTED_HOSTS:-localhost,127.0.0.1,vgu.edu.vn,www.vgu.edu.vn,tuyensinh.vgu.edu.vn},api
       OCR_TEMP_DIR: ${OCR_TEMP_DIR:-/app/data/runtime/admissions-ocr}
       RUN_EVAL_ON_DEPLOY: "false"
       START_EMBEDDED_WORKER: ${START_EMBEDDED_WORKER:-true}
+      WARMUP_FAQ_CACHE: ${WARMUP_FAQ_CACHE:-false}
     ports:
       - "${API_PORT}:8000"
     depends_on:
