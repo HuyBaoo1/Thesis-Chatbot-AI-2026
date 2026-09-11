@@ -34,6 +34,8 @@ redis_data/
 uploads/
 data/
 outputs/
+backups/
+.deploy_sources/
 
 # Cache
 .cache/

@@ -2,6 +2,7 @@ import hashlib
 import json
 import logging
 import re
+import unicodedata
 from datetime import datetime, timedelta, timezone
 from typing import Any
 from uuid import NAMESPACE_URL, uuid5
@@ -30,6 +31,9 @@ _PAYLOAD_KEY_PREFIX = "semantic_answer_cache:payload:"
 _PROMPT_VERSION = "v1"
 _CACHE_COLLECTION_ENSURED = False
 _YEAR_RE = re.compile(r"\b(20\d{2})\b")
+_ENGLISH_LANGUAGE_NOTE = "- Required response language: English for this answer."
+_LANGUAGE_ENGLISH = "en"
+_LANGUAGE_DEFAULT = "default"
 _NON_CACHEABLE_ANSWER_PREFIXES = (
     "Hiện tại hệ thống gặp lỗi",
     "Hệ thống đang xử lý nhiều câu hỏi cùng lúc.",
@@ -114,8 +118,19 @@ def run_semantic_answer_cache_store(state: PipelineState) -> PipelineState:
         return state
 
     fingerprint_text = _build_fingerprint_text(state)
-    metadata = _build_cache_metadata(state)
+    metadata = _build_cache_metadata(state, answer=state.answer)
     if not fingerprint_text or not metadata.get("evidence_signature"):
+        return state
+    if metadata.get("request_language") != metadata.get("answer_language"):
+        logger.info(
+            "semantic_answer_cache_store_skipped_language_mismatch intent=%s answer_mode=%s request_language=%s answer_language=%s conversation_id=%s lead_id=%s",
+            state.intent,
+            state.answer_mode,
+            metadata.get("request_language"),
+            metadata.get("answer_language"),
+            state.conversation_id,
+            state.lead_id,
+        )
         return state
 
     try:
@@ -137,6 +152,9 @@ def run_semantic_answer_cache_store(state: PipelineState) -> PipelineState:
             "prompt_version": _PROMPT_VERSION,
             "model": settings.OPENAI_CHAT_MODEL,
             "evidence_signature": metadata["evidence_signature"],
+            "request_language": metadata.get("request_language"),
+            "answer_language": metadata.get("answer_language"),
+            "query_semantics": metadata.get("query_semantics"),
         }
         metadata["expires_at"] = expires_at.isoformat()
 
@@ -168,6 +186,7 @@ def _can_lookup(state: PipelineState) -> bool:
         and state.grounded_prompt.strip()
         and state.context_block.strip()
         and state.reranked
+        and _has_semantic_cache_compatible_evidence(state)
     )
 
 
@@ -187,21 +206,61 @@ def _can_store(state: PipelineState) -> bool:
         return False
     if answer.startswith(_NON_CACHEABLE_ANSWER_PREFIXES):
         return False
+    if not _has_semantic_cache_compatible_evidence(state):
+        return False
     return True
+
+
+def _has_semantic_cache_compatible_evidence(state: PipelineState) -> bool:
+    if not _requires_tuition_evidence(state):
+        return True
+    return any(_is_tuition_evidence(item) for item in (state.reranked or [])[:5])
+
+
+def _requires_tuition_evidence(state: PipelineState) -> bool:
+    context = state.resolved_context or {}
+    topic = str(context.get("topic") or "").strip().lower()
+    selected_tools = {str(tool).strip() for tool in state.selected_tools or []}
+    return (
+        state.intent == "tuition_lookup"
+        or topic == "tuition"
+        or "get_tuition_by_major" in selected_tools
+    )
+
+
+def _is_tuition_evidence(item: dict[str, Any]) -> bool:
+    category = str(item.get("category") or "").strip().upper()
+    if category in {"TUITION", "TUITION_POLICY"}:
+        return True
+
+    descriptor = _normalize_scope_text(
+        " ".join(
+            str(item.get(key) or "")
+            for key in ("source", "source_url", "canonical_url", "path", "title")
+        )
+    )
+    return any(
+        token in descriptor
+        for token in ("tuition policy table", "tuition fees", "hoc phi")
+    )
 
 
 def _build_fingerprint_text(state: PipelineState) -> str:
     context = state.resolved_context or {}
+    query_semantics = _query_semantics_scope(state)
     parts = [
         f"intent={state.intent}",
         f"answer_mode={state.answer_mode}",
         f"resolved_query={(state.resolved_query or state.query or '').strip()}",
+        f"request_language={_request_language_scope(state)}",
         f"topic={str(context.get('topic') or '').strip()}",
         f"scope={str(context.get('scope') or '').strip()}",
         f"major_id={str(context.get('major_id') or '').strip()}",
         f"major_name={str(context.get('major_name') or '').strip()}",
         f"level={str(context.get('level') or '').strip()}",
     ]
+    if query_semantics:
+        parts.append(f"query_semantics={query_semantics}")
     year = _extract_year(state)
     if year is not None:
         parts.append(f"year={year}")
@@ -210,7 +269,7 @@ def _build_fingerprint_text(state: PipelineState) -> str:
     return "\n".join(parts)
 
 
-def _build_cache_metadata(state: PipelineState) -> dict[str, Any]:
+def _build_cache_metadata(state: PipelineState, *, answer: str | None = None) -> dict[str, Any]:
     context = state.resolved_context or {}
     topic = str(context.get("topic") or "").strip()
     scope = str(context.get("scope") or "").strip()
@@ -218,6 +277,12 @@ def _build_cache_metadata(state: PipelineState) -> dict[str, Any]:
     year = _extract_year(state)
     evidence_signature = _build_evidence_signature(state)
     prompt_signature = _prompt_signature()
+    request_language = _request_language_scope(state)
+    answer_language = (
+        _answer_language_scope(answer)
+        if answer is not None
+        else request_language
+    )
     return {
         "intent": state.intent,
         "answer_mode": state.answer_mode,
@@ -225,6 +290,9 @@ def _build_cache_metadata(state: PipelineState) -> dict[str, Any]:
         "scope": scope or None,
         "major_id": major_id or None,
         "year": year,
+        "request_language": request_language,
+        "answer_language": answer_language,
+        "query_semantics": _query_semantics_scope(state),
         "evidence_signature": evidence_signature,
         "prompt_signature": prompt_signature,
         "model": settings.OPENAI_CHAT_MODEL,
@@ -242,6 +310,9 @@ def _build_cache_id(*, fingerprint_text: str, metadata: dict[str, Any]) -> str:
         "scope": metadata.get("scope"),
         "major_id": metadata.get("major_id"),
         "year": metadata.get("year"),
+        "request_language": metadata.get("request_language"),
+        "answer_language": metadata.get("answer_language"),
+        "query_semantics": metadata.get("query_semantics"),
         "evidence_signature": metadata["evidence_signature"],
         "prompt_signature": metadata["prompt_signature"],
         "prompt_version": metadata["prompt_version"],
@@ -306,6 +377,130 @@ def _build_evidence_signature(state: PipelineState) -> str:
     return hashlib.sha256(raw.encode("utf-8")).hexdigest() if raw else ""
 
 
+def _request_language_scope(state: PipelineState) -> str:
+    if _ENGLISH_LANGUAGE_NOTE in (state.grounded_prompt or ""):
+        return _LANGUAGE_ENGLISH
+    return _LANGUAGE_ENGLISH if _looks_like_english_request(state.query) else _LANGUAGE_DEFAULT
+
+
+def _answer_language_scope(answer: str | None) -> str:
+    if _looks_like_english_answer(answer or ""):
+        return _LANGUAGE_ENGLISH
+    return _LANGUAGE_DEFAULT
+
+
+def _query_semantics_scope(state: PipelineState) -> str | None:
+    if state.intent not in {"admission_requirement", "timeline_process"}:
+        return None
+
+    normalized = _normalize_scope_text(
+        " ".join(
+            part
+            for part in (state.query, state.resolved_query)
+            if part
+        )
+    )
+    if not normalized:
+        return None
+
+    has_method_focus = _contains_any_scope_phrase(
+        normalized,
+        (
+            "admission method",
+            "admission methods",
+            "method",
+            "methods",
+            "phuong thuc",
+        ),
+    )
+    has_eligibility_focus = _contains_any_scope_phrase(
+        normalized,
+        (
+            "admission requirement",
+            "admission requirements",
+            "eligibility",
+            "eligible",
+            "condition",
+            "conditions",
+            "requirement",
+            "requirements",
+            "dieu kien",
+            "yeu cau",
+        ),
+    )
+
+    if has_method_focus and has_eligibility_focus:
+        return "admission_methods_eligibility"
+    if has_method_focus:
+        return "admission_methods"
+    if has_eligibility_focus:
+        return "admission_eligibility"
+    return None
+
+
+def _looks_like_english_request(value: str | None) -> bool:
+    normalized = _normalize_scope_text(value or "")
+    if not normalized:
+        return False
+    if _contains_any_scope_phrase(
+        normalized,
+        ("toi", "minh", "ban", "khong", "co", "la gi", "nhu the nao"),
+    ):
+        return False
+    return _contains_any_scope_phrase(
+        normalized,
+        ("what", "where", "when", "who", "how", "which", "can i", "do i", "admission"),
+    )
+
+
+def _looks_like_english_answer(value: str) -> bool:
+    normalized = _normalize_scope_text(value)
+    if not normalized:
+        return False
+
+    english_markers = (
+        "there are",
+        "the",
+        "admission",
+        "methods",
+        "method",
+        "applicants",
+        "students",
+        "can",
+        "should",
+        "must",
+        "vgu has",
+    )
+    vietnamese_markers = (
+        "phuong thuc",
+        "tuyen sinh",
+        "dai hoc",
+        "bao gom",
+        "thi sinh",
+        "dieu kien",
+        "xet tuyen",
+        "hoc tap",
+        "tot nghiep",
+    )
+
+    english_score = sum(1 for marker in english_markers if marker in normalized)
+    vietnamese_score = sum(1 for marker in vietnamese_markers if marker in normalized)
+    return english_score >= 3 and english_score >= vietnamese_score
+
+
+def _contains_any_scope_phrase(value: str, phrases: tuple[str, ...]) -> bool:
+    padded = f" {value} "
+    return any(f" {phrase} " in padded for phrase in phrases)
+
+
+def _normalize_scope_text(value: str) -> str:
+    text = unicodedata.normalize("NFKD", value)
+    text = "".join(character for character in text if not unicodedata.combining(character))
+    text = text.replace("đ", "d").replace("Đ", "d").lower()
+    text = re.sub(r"[^a-z0-9]+", " ", text)
+    return " ".join(text.split())
+
+
 def _prompt_signature() -> str:
     return hashlib.sha256(synthesis_system_prompt().encode("utf-8")).hexdigest()
 
@@ -350,6 +545,27 @@ def _build_query_filter(metadata: dict[str, Any]) -> Filter:
         must.append(FieldCondition(key="major_id", match=MatchValue(value=metadata["major_id"])))
     if metadata.get("year") is not None:
         must.append(FieldCondition(key="year", match=MatchValue(value=metadata["year"])))
+    if metadata.get("request_language"):
+        must.append(
+            FieldCondition(
+                key="request_language",
+                match=MatchValue(value=metadata["request_language"]),
+            )
+        )
+    if metadata.get("answer_language"):
+        must.append(
+            FieldCondition(
+                key="answer_language",
+                match=MatchValue(value=metadata["answer_language"]),
+            )
+        )
+    if metadata.get("query_semantics"):
+        must.append(
+            FieldCondition(
+                key="query_semantics",
+                match=MatchValue(value=metadata["query_semantics"]),
+            )
+        )
     return Filter(must=must)
 
 
@@ -445,6 +661,9 @@ def _ensure_payload_indexes(collection_name: str) -> None:
         "prompt_signature",
         "prompt_version",
         "model",
+        "request_language",
+        "answer_language",
+        "query_semantics",
     )
     for field_name in keyword_fields:
         qdrant_client.create_payload_index(

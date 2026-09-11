@@ -3,13 +3,14 @@ import logging
 import re
 import time
 import unicodedata
+from datetime import datetime, timezone
 from typing import Any
 
 from src.core.config import settings
 from src.integrations.openai_client import get_openai_client
 from src.integrations.redis_client import get_redis_client
 from src.services.chat_pipeline.prompts import (
-    INSUFFICIENT_CONTEXT_ANSWER,
+    insufficient_context_answer,
     synthesis_system_prompt,
 )
 from src.services.chat_pipeline.types import PipelineState
@@ -59,7 +60,14 @@ def _release_llm_slot() -> None:
 
 def run_synthesis(state: PipelineState) -> PipelineState:
     if not state.context_block:
-        state.answer = INSUFFICIENT_CONTEXT_ANSWER
+        state.answer = insufficient_context_answer()
+        state.confidence = 0.25
+        state.follow_up_suggestions = _fallback_suggestions(state)
+        return state
+
+    temporal_gap_answer = _build_scholarship_temporal_gap_answer(state)
+    if temporal_gap_answer:
+        state.answer = temporal_gap_answer
         state.confidence = 0.25
         state.follow_up_suggestions = _fallback_suggestions(state)
         return state
@@ -197,6 +205,102 @@ def _build_global_scholarship_answer(state: PipelineState) -> str | None:
     # official context. The old source-specific deterministic shortcut is
     # intentionally disabled to avoid carrying unsupported figures into the configured university.
     return None
+
+
+def _build_scholarship_temporal_gap_answer(state: PipelineState) -> str | None:
+    if state.intent != "scholarship_lookup":
+        return None
+
+    requested_year = _extract_requested_year(state)
+    if requested_year is None:
+        return None
+
+    scholarship_evidence = [
+        item
+        for item in state.reranked or []
+        if _is_scholarship_evidence(item)
+    ]
+    if any(requested_year in _evidence_years(item) for item in scholarship_evidence):
+        return None
+
+    available_years = sorted(
+        {
+            year
+            for item in scholarship_evidence
+            for year in _evidence_years(item)
+            if year != requested_year
+        }
+    )
+    if scholarship_evidence and not available_years and not _is_future_year(requested_year):
+        return None
+
+    year_note = f" cho năm {requested_year}"
+    if available_years:
+        year_note += f"; các bằng chứng học bổng hiện có trong context chỉ nêu năm {', '.join(str(year) for year in available_years)}"
+
+    return (
+        "Tôi chưa tìm thấy thông tin này trong kho dữ liệu chính thức hiện có"
+        f": thông tin học bổng{year_note}. "
+        f"Vì vậy, mình không thể xác nhận điều kiện IELTS, khả năng nhận học bổng, "
+        f"mức/tỷ lệ học bổng hoặc tiêu chí học bổng cho năm {requested_year}. "
+        f"Bạn nên kiểm tra website chính thức của {settings.UNIVERSITY_NAME.strip() or settings.UNIVERSITY_SHORT_NAME.strip()} "
+        f"({settings.UNIVERSITY_WEBSITE.strip() or 'DATA_REQUIRED'}) hoặc liên hệ bộ phận phụ trách để được xác nhận."
+    )
+
+
+def _extract_requested_year(state: PipelineState) -> int | None:
+    for value in (state.query, state.resolved_query):
+        match = re.search(r"\b(20\d{2})\b", str(value or ""))
+        if match:
+            return int(match.group(1))
+    return None
+
+
+def _is_scholarship_evidence(item: dict[str, Any]) -> bool:
+    category = str(item.get("category") or "").strip().upper()
+    if category == "SCHOLARSHIP":
+        return True
+
+    text = _normalize_for_matching(
+        " ".join(
+            str(item.get(field) or "")
+            for field in ("title", "source", "source_url")
+        )
+    )
+    return any(
+        marker in text
+        for marker in (
+            "hoc bong",
+            "scholarship",
+            "full merit",
+            "merit scholarship",
+            "wus",
+            "daad",
+            "clmt",
+        )
+    )
+
+
+def _evidence_years(item: dict[str, Any]) -> set[int]:
+    years: set[int] = set()
+    raw_year = item.get("year")
+    if raw_year not in (None, ""):
+        try:
+            years.add(int(raw_year))
+        except (TypeError, ValueError):
+            pass
+
+    source_fields = " ".join(
+        str(item.get(field) or "")
+        for field in ("title", "source", "source_url")
+    )
+    for match in re.finditer(r"\b(20\d{2})\b", source_fields):
+        years.add(int(match.group(1)))
+    return years
+
+
+def _is_future_year(year: int) -> bool:
+    return year > datetime.now(timezone.utc).year
 
 
 def _combined_candidate_text(state: PipelineState) -> str:

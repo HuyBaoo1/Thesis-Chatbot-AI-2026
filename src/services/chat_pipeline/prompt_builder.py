@@ -1,3 +1,5 @@
+import unicodedata
+
 from src.services.chat_pipeline.types import PipelineState
 from src.services.chat_pipeline.utils import format_chat_history
 
@@ -31,6 +33,7 @@ def build_grounded_prompt(state: PipelineState) -> PipelineState:
             "- The answer should combine the major details and the tuition details when they are relevant to the user question."
         )
     extra_task_rules.extend(_authoritative_db_task_rules(state))
+    extra_task_rules.extend(_scholarship_task_rules(state))
     if _looks_like_detailed_major_query(state.query):
         extra_task_rules.append(
             "- This is a detailed-major question. If tuition information exists in Context, include a short tuition summary after the main program description."
@@ -53,7 +56,11 @@ def build_grounded_prompt(state: PipelineState) -> PipelineState:
         "Answer in the same language as the user; default to Vietnamese if unclear.",
         "Do not include inline source tags in the answer.",
         "Use clear line breaks. For lists, put each item on a new line and prefer numbered format 1. 2. 3.",
+        "For exact count or list questions, include only items explicitly named in Context; do not add an 'other' bucket unless Context names it as a separate item.",
     ]
+    language_note = _response_language_note(state.query)
+    if language_note:
+        task_lines.append(language_note)
     if extra_rules_block:
         task_lines.append(extra_rules_block)
     sections.append("### Task Notes\n" + "\n".join(task_lines))
@@ -74,6 +81,102 @@ def _looks_like_detailed_major_query(query: str) -> bool:
         "detailed information",
     ]
     return any(marker in q for marker in markers)
+
+
+def _scholarship_task_rules(state: PipelineState) -> list[str]:
+    if state.intent != "scholarship_lookup":
+        return []
+
+    rules = [
+        "- Scholarship safety: treat each named scholarship as a separate policy. Do not transfer amount, eligibility, coverage, duration, GPA, IELTS, SAT, ACT, nationality, compatibility, program scope, or year between Merit, Full Merit, CLMT, WUS, DAAD Type 1, and DAAD Type 2 unless Context explicitly links them.",
+        "- For scholarship amount, coverage, eligibility, maintenance, compatibility, or comparison questions, answer only the exact requested scholarship(s), year, and requested dimensions.",
+        "- For yes/no or listing scholarship availability questions, answer only the listed scholarship names or presence from Context. Do not add value, sponsor, criteria, application, or renewal details unless the user asks for them.",
+        "- For scholarship list or overview questions, do not treat program names, program codes, or program allocation tables as scholarship names.",
+        "- For scholarship support or coverage questions, answer only concrete benefits, value, duration, or coverage found in Context. Do not substitute sponsor, purpose, eligibility, or application information for missing support details.",
+        "- If Context supports only part of a scholarship answer, answer the supported part and state that the missing dimension was not found in the current official context. Do not fill missing dimensions from a different scholarship.",
+        "- For scholarship comparisons, compare only dimensions explicitly present for each scholarship and say which requested dimensions are missing instead of inferring them.",
+    ]
+
+    q = _normalize_for_matching(state.query or "")
+    if any(marker in q for marker in ["bao nhieu", "gia tri", "tri gia", "amount", "value", "eur", "vnd", "%"]):
+        rules.append(
+            "- For scholarship value questions, do not add eligibility, GPA, IELTS, SAT, ACT, application, or renewal details unless the user asks for them."
+        )
+
+    return rules
+
+
+def _normalize_for_matching(value: str | None) -> str:
+    normalized = unicodedata.normalize("NFKD", str(value or ""))
+    normalized = "".join(ch for ch in normalized if not unicodedata.combining(ch))
+    normalized = normalized.replace("đ", "d").replace("Đ", "D").lower()
+    return " ".join(normalized.split())
+
+
+def _response_language_note(query: str | None) -> str | None:
+    if _is_english_dominant_query(query):
+        return (
+            "- Required response language: English for this answer. "
+            "Use English explanatory prose and keep official names/titles from Context unchanged. "
+            "For admission methods, copy the name after the dash/colon verbatim; do not translate those official names."
+        )
+    return None
+
+
+def _is_english_dominant_query(query: str | None) -> bool:
+    text = str(query or "").strip()
+    if not text:
+        return False
+
+    accent_count = sum(
+        1
+        for ch in text
+        if ch in "ăâđêôơưáàảãạấầẩẫậắằẳẵặéèẻẽẹếềểễệíìỉĩịóòỏõọốồổỗộớờởỡợúùủũụứừửữựýỳỷỹỵ"
+    )
+    normalized = unicodedata.normalize("NFKD", text)
+    normalized = "".join(ch for ch in normalized if not unicodedata.combining(ch))
+    normalized = normalized.replace("đ", "d").replace("Đ", "D").lower()
+    normalized = " ".join(normalized.split())
+    tokens = set(normalized.replace("?", " ").replace(",", " ").split())
+
+    vi_markers = {
+        "bao",
+        "bn",
+        "can",
+        "co",
+        "con",
+        "duoc",
+        "hoc",
+        "khong",
+        "ko",
+        "k",
+        "la",
+        "nganh",
+        "nhieu",
+        "phi",
+        "thi",
+        "tuyen",
+        "yeu",
+    }
+    if accent_count or tokens & vi_markers:
+        return False
+
+    en_markers = {
+        "application",
+        "apply",
+        "deadline",
+        "how",
+        "master",
+        "portal",
+        "requirement",
+        "requirements",
+        "scholarship",
+        "tuition",
+        "what",
+        "when",
+        "where",
+    }
+    return bool(tokens & en_markers)
 
 
 def _authoritative_db_task_rules(state: PipelineState) -> list[str]:

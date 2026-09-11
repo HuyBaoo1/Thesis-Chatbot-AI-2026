@@ -131,5 +131,122 @@ def run_rerank(state: PipelineState, keep: int = 5) -> PipelineState:
         rescored.append(new_item)
 
     rescored.sort(key=lambda x: float(x.get("score", 0.0)), reverse=True)
-    state.reranked = rescored[:keep]
+    state.reranked = _select_final_context_evidence(
+        query_text=query_text,
+        rescored=rescored,
+        keep=keep,
+    )
     return state
+
+
+def _select_final_context_evidence(
+    *,
+    query_text: str,
+    rescored: list[dict[str, Any]],
+    keep: int,
+) -> list[dict[str, Any]]:
+    selected = rescored[:keep]
+    if not _is_admission_methods_list_query(query_text):
+        return selected
+    if any(_has_compact_admission_methods_evidence(item) for item in selected):
+        return selected
+
+    support = next(
+        (item for item in rescored if _has_compact_admission_methods_evidence(item)),
+        None,
+    )
+    if support is None:
+        return selected
+
+    support_key = _candidate_key(support)
+    remaining = [
+        item
+        for item in selected
+        if _candidate_key(item) != support_key
+    ]
+    return [support, *remaining][:keep]
+
+
+def _is_admission_methods_list_query(value: str) -> bool:
+    normalized = _normalize_for_scope(value)
+    if not normalized:
+        return False
+
+    method_list_markers = (
+        "admission method",
+        "admission methods",
+        "admission mode",
+        "admission modes",
+        "cac phuong thuc",
+        "phuong thuc tuyen sinh",
+        "co may phuong thuc",
+        "liet ke",
+    )
+    has_method_list_signal = any(marker in normalized for marker in method_list_markers)
+    if not has_method_list_signal:
+        return False
+
+    detailed_condition_markers = (
+        "testas",
+        "dieu kien",
+        "yeu cau",
+        "eligibility",
+        "condition",
+        "conditions",
+        "requirement",
+        "requirements",
+    )
+    broad_list_markers = (
+        "admission methods",
+        "admission modes",
+        "cac phuong thuc",
+        "co may phuong thuc",
+        "liet ke",
+        "what are the",
+        "la gi",
+    )
+    if any(marker in normalized for marker in detailed_condition_markers) and not any(
+        marker in normalized for marker in broad_list_markers
+    ):
+        return False
+
+    return True
+
+
+def _has_compact_admission_methods_evidence(item: dict[str, Any]) -> bool:
+    category = str(item.get("category") or "").upper()
+    if category != "REQUIREMENT":
+        return False
+
+    content = _normalize_for_scope(item.get("content"))
+    if not content:
+        return False
+    if "phuong thuc" not in content and "admission method" not in content and "admission mode" not in content:
+        return False
+    if "5 phuong thuc" not in content and "five admission" not in content:
+        return False
+
+    numbered_method_markers = (
+        "phuong thuc 1",
+        "phuong thuc 2",
+        "phuong thuc 3",
+        "phuong thuc 4",
+        "phuong thuc 5",
+    )
+    return all(marker in content for marker in numbered_method_markers)
+
+
+def _candidate_key(item: dict[str, Any]) -> str:
+    chunk_id = item.get("chunk_id")
+    if chunk_id is not None:
+        return f"chunk:{chunk_id}"
+    return f"object:{id(item)}"
+
+
+def _normalize_for_scope(value: Any) -> str:
+    text = unicodedata.normalize("NFKD", str(value or ""))
+    text = "".join(ch for ch in text if not unicodedata.combining(ch))
+    text = text.replace("đ", "d").replace("Đ", "d")
+    text = text.replace("_", " ").replace("-", " ").replace("/", " ")
+    text = re.sub(r"[^\w\s]", " ", text, flags=re.UNICODE)
+    return " ".join(text.lower().split())

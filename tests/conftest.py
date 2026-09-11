@@ -4,6 +4,7 @@ import os
 
 
 DEFAULT_BACKEND_TEST_API_URL = "http://127.0.0.1:8000"
+DEFAULT_BACKEND_TEST_HEALTH_TIMEOUT = 10.0
 
 
 def pytest_configure(config):
@@ -32,8 +33,11 @@ def api_url():
     running.
     """
     url = os.getenv("BACKEND_TEST_API_URL", DEFAULT_BACKEND_TEST_API_URL).rstrip("/")
+    health_timeout = float(
+        os.getenv("BACKEND_TEST_HEALTH_TIMEOUT", DEFAULT_BACKEND_TEST_HEALTH_TIMEOUT)
+    )
     try:
-        response = httpx.get(f"{url}/health", timeout=3)
+        response = httpx.get(f"{url}/health", timeout=health_timeout)
     except httpx.HTTPError as exc:
         pytest.skip(
             f"Backend test API is not reachable at {url}. "

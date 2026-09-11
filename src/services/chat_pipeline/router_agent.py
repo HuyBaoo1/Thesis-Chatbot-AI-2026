@@ -43,6 +43,14 @@ def run_router_agent(state: PipelineState) -> PipelineState:
         state.resolved_query = ""
         return state
 
+    if _looks_like_named_scholarship_query(original_query):
+        _route_to_retrieve(state, intent="scholarship_lookup", query=original_query, rewrite=False)
+        _log_deterministic_route(state)
+        return state
+
+    if _deterministic_material_ambiguity_route(state, original_query=original_query):
+        return state
+
     return run_router_llm(state)
 
 
@@ -307,6 +315,58 @@ def _deterministic_route(
     return False
 
 
+def _deterministic_material_ambiguity_route(
+    state: PipelineState,
+    *,
+    original_query: str,
+) -> bool:
+    normalized = _normalize_for_matching(original_query)
+    if _recent_context_may_resolve_scope(state):
+        return False
+
+    if _should_clarify_tuition_query(
+        original_normalized=normalized,
+        effective_normalized=normalized,
+        has_resolved_context=bool(state.rewrite_query and state.resolved_query),
+    ):
+        _route_to_clarify(
+            state,
+            original_query,
+            "Bạn muốn xem học phí cho bậc học, chương trình hoặc ngành nào?",
+        )
+        _log_deterministic_route(state)
+        return True
+
+    if _should_clarify_scholarship_amount_query(normalized):
+        _route_to_clarify(
+            state,
+            original_query,
+            "Bạn muốn hỏi giá trị của học bổng nào hoặc cho bậc/chương trình nào?",
+        )
+        _log_deterministic_route(state)
+        return True
+
+    if _should_clarify_english_requirement_query(normalized):
+        _route_to_clarify(
+            state,
+            original_query,
+            "Bạn đang hỏi yêu cầu tiếng Anh cho bậc cử nhân, thạc sĩ, GFE hay đăng ký luận văn?",
+        )
+        _log_deterministic_route(state)
+        return True
+
+    if _should_clarify_application_process_query(normalized):
+        _route_to_clarify(
+            state,
+            original_query,
+            "Bạn muốn hỏi quy trình ứng tuyển bậc cử nhân hay thạc sĩ, hoặc theo phương thức/chương trình nào?",
+        )
+        _log_deterministic_route(state)
+        return True
+
+    return False
+
+
 def _log_deterministic_route(state: PipelineState) -> None:
     logger.info(
         "router_agent_deterministic_route intent=%s answer_mode=%s resolved_query=%s conversation_id=%s lead_id=%s",
@@ -445,6 +505,9 @@ def _should_clarify_tuition_query(
     if original_normalized in topic_only_queries or effective_normalized in topic_only_queries:
         return True
 
+    if _has_scope_marker(effective_normalized):
+        return False
+
     has_program_marker = any(
         token in effective_normalized
         for token in [
@@ -462,6 +525,144 @@ def _should_clarify_tuition_query(
         ]
     )
     return not has_program_marker
+
+
+def _should_clarify_scholarship_amount_query(normalized: str) -> bool:
+    if not any(token in normalized for token in ["hoc bong", "scholarship"]):
+        return False
+    if not any(token in normalized for token in ["bao nhieu", "gia tri", "tri gia", "amount", "value", "percent", "%"]):
+        return False
+    return not (_has_scope_marker(normalized) or _has_scholarship_scope_marker(normalized))
+
+
+def _looks_like_named_scholarship_query(query: str | None) -> bool:
+    normalized = _normalize_for_matching(query)
+    if not _has_scholarship_scope_marker(normalized):
+        return False
+    scholarship_context_markers = [
+        "hoc bong",
+        "scholarship",
+        "bao nhieu",
+        "gia tri",
+        "tri gia",
+        "eur",
+        "vnd",
+        "ho tro",
+        "cover",
+        "eligible",
+        "eligibility",
+        "apply",
+        "duoc",
+        "nhan",
+        "giu",
+        "gpa",
+        "ielts",
+    ]
+    return any(marker in normalized for marker in scholarship_context_markers)
+
+
+def _has_scholarship_scope_marker(normalized: str) -> bool:
+    scholarship_markers = [
+        "wus",
+        "daad",
+        "sur place",
+        "sur-place",
+        "type 1",
+        "type i",
+        "type 2",
+        "type ii",
+        "merit scholarship",
+        "full merit",
+        "clmt",
+        "cambodia",
+        "laos",
+        "myanmar",
+        "thailand",
+    ]
+    return any(marker in normalized for marker in scholarship_markers)
+
+
+def _should_clarify_english_requirement_query(normalized: str) -> bool:
+    has_english_requirement = any(
+        token in normalized
+        for token in [
+            "yeu cau tieng anh",
+            "tieng anh bao nhieu",
+            "english requirement",
+            "ielts bao nhieu",
+            "toefl bao nhieu",
+        ]
+    )
+    if not has_english_requirement:
+        return False
+    return not _has_scope_marker(normalized)
+
+
+def _should_clarify_application_process_query(normalized: str) -> bool:
+    if not any(token in normalized for token in ["apply", "ung tuyen", "nop ho so", "application process"]):
+        return False
+    if any(token in normalized for token in ["portal", "cong thong tin", "link", "url"]):
+        return False
+    return not _has_scope_marker(normalized)
+
+
+def _has_scope_marker(normalized: str) -> bool:
+    phrase_markers = [
+        "cu nhan",
+        "dai hoc",
+        "undergraduate",
+        "bachelor",
+        "thac si",
+        "sau dai hoc",
+        "graduate",
+        "master",
+        "tien si",
+        "nganh",
+        "chuong trinh",
+        "program",
+        "major",
+        "testas",
+        "gfe",
+        "luan van",
+        "thesis",
+    ]
+    if any(marker in normalized for marker in phrase_markers):
+        return True
+
+    tokens = set(normalized.replace("?", " ").replace(",", " ").split())
+    code_markers = {
+        "mba",
+        "msc",
+        "phd",
+        "cse",
+        "bce",
+        "ece",
+        "men",
+        "mec",
+        "arc",
+        "gpe",
+        "2026",
+        "2027",
+        "2028",
+        "2029",
+        "2030",
+    }
+    return bool(tokens & code_markers)
+
+
+def _recent_context_may_resolve_scope(state: PipelineState) -> bool:
+    if state.rewrite_query and state.resolved_query:
+        return True
+    history_text = format_chat_history(state.chat_history, limit=4) if state.chat_history else ""
+    memory_text = (state.memory_context or "").strip()
+    if memory_text == "No lead memory available.":
+        memory_text = ""
+    if not history_text and not memory_text:
+        return False
+    normalized = _normalize_for_matching(f"{history_text}\n{memory_text}")
+    if not normalized:
+        return False
+    return _has_scope_marker(normalized)
 
 
 def _safe_load_json(raw: str) -> dict[str, Any]:

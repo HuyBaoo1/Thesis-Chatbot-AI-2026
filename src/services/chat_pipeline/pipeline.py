@@ -1,39 +1,15 @@
+from __future__ import annotations
+
 import json
 import logging
 import unicodedata
 from datetime import datetime, timezone
 from time import perf_counter
 
-from fastapi import HTTPException
+from starlette.exceptions import HTTPException
 
-from src.models.enums import ConversationStatus
-from src.schemas.chat_pipeline import ChatQueryRequest
-from src.services.chat_pipeline.prompts import INSUFFICIENT_CONTEXT_ANSWER
-from src.services.chat_pipeline.graph import build_chat_graph
-from src.services.chat_pipeline.jobs import enqueue_chat_turn_side_effects
+from src.services.chat_pipeline.prompts import insufficient_context_answer
 from src.services.chat_pipeline.types import PipelineState
-from src.services.conversation_service import (
-    ensure_conversation,
-    schedule_conversation_ai_fallback,
-)
-from src.services.daily_analytic_service import increment_fallbacks
-from src.services.lead_activity_service import (
-    create_lead_activity,
-    record_chat_turn_activity,
-)
-from src.services.lead_service import (
-    apply_lead_updates,
-    extract_lead_updates_from_text,
-    next_missing_profile_question,
-    recompute_lead_scoring,
-)
-from src.services.message_chunk_usage_service import create_message_chunk_usages
-from src.services.message_service import (
-    build_message_citations_from_chunks,
-    create_assistant_message,
-    create_user_message,
-    get_recent_conversation_messages,
-)
 
 logger = logging.getLogger(__name__)
 
@@ -42,7 +18,31 @@ def _now_utc():
     return datetime.now(timezone.utc)
 
 
-def run_chat_pipeline(request: ChatQueryRequest, db):
+def run_chat_pipeline(request, db):
+    from src.models.enums import ConversationStatus
+    from src.services.chat_pipeline.graph import build_chat_graph
+    from src.services.chat_pipeline.jobs import enqueue_chat_turn_side_effects
+    from src.services.conversation_service import (
+        ensure_conversation,
+        schedule_conversation_ai_fallback,
+    )
+    from src.services.daily_analytic_service import increment_fallbacks
+    from src.services.lead_activity_service import (
+        create_lead_activity,
+        record_chat_turn_activity,
+    )
+    from src.services.lead_service import (
+        apply_lead_updates,
+        extract_lead_updates_from_text,
+        next_missing_profile_question,
+        recompute_lead_scoring,
+    )
+    from src.services.message_chunk_usage_service import create_message_chunk_usages
+    from src.services.message_service import (
+        create_assistant_message,
+        create_user_message,
+    )
+
     request_started_at = perf_counter()
     state = PipelineState(
         query=request.query.strip(),
@@ -292,6 +292,12 @@ def run_chat_pipeline(request: ChatQueryRequest, db):
 
 
 def _handle_handoff_conversation(db, *, conversation, user_message, state: PipelineState) -> dict:
+    from src.services.lead_service import (
+        apply_lead_updates,
+        extract_lead_updates_from_text,
+        recompute_lead_scoring,
+    )
+
     updates = extract_lead_updates_from_text(state.query)
     apply_lead_updates(
         db,
@@ -339,11 +345,13 @@ def _build_sources(state: PipelineState) -> list[dict]:
 def _build_user_visible_citations(answer: str | None, chunks: list[dict]) -> list[dict[str, str]]:
     if _is_insufficient_context_answer(answer):
         return []
+    from src.services.message_service import build_message_citations_from_chunks
+
     return build_message_citations_from_chunks(chunks)
 
 
 def _is_insufficient_context_answer(answer: str | None) -> bool:
-    expected = _normalize_for_matching(INSUFFICIENT_CONTEXT_ANSWER)
+    expected = _normalize_for_matching(insufficient_context_answer())
     actual = _normalize_for_matching(answer)
     if not expected or not actual:
         return False
@@ -377,6 +385,8 @@ def _log_pipeline_timing_summary(
 
 
 def _load_chat_history(db, *, conversation_id, limit: int, exclude_message_id=None) -> list[dict]:
+    from src.services.message_service import get_recent_conversation_messages
+
     fetch_limit = limit + 1 if exclude_message_id is not None else limit
     messages = get_recent_conversation_messages(
         db,

@@ -5,23 +5,78 @@ from uuid import uuid4
 from tests.config import invalid_origin, origin_headers, test_origin as configured_origin
 
 
-class TestRouterIntentClassification:
-    """Tests for router intent classification."""
+LEAD_SETUP_TIMEOUT_SECONDS = 15.0
 
-    @pytest.fixture
-    def api_url_and_lead(self, api_url):
-        # Create lead
+
+def _response_body_prefix(response: httpx.Response, limit: int = 300) -> str:
+    return response.text[:limit].replace("\n", "\\n")
+
+
+def _create_test_lead(api_url: str, *, full_name: str, email_prefix: str) -> str:
+    try:
         response = httpx.post(
             f"{api_url}/api/chat/init-lead",
             json={
-                "full_name": "Router Test User",
-                "email": f"router_{uuid4()}@example.com",
-                "phone": f"0{uuid4().hex[:9]}"
+                "full_name": full_name,
+                "email": f"{email_prefix}_{uuid4()}@example.com",
+                "phone": f"0{uuid4().hex[:9]}",
             },
-            headers=origin_headers()
+            headers=origin_headers(),
+            timeout=LEAD_SETUP_TIMEOUT_SECONDS,
         )
-        lead_id = response.json()["lead_id"]
-        return api_url, lead_id
+    except httpx.HTTPError as exc:
+        pytest.fail(
+            "Lead setup request failed: "
+            f"endpoint={api_url}/api/chat/init-lead, "
+            f"error={exc.__class__.__name__}: {exc}"
+        )
+
+    if not response.is_success:
+        pytest.fail(
+            "Lead setup failed: "
+            f"status={response.status_code}, "
+            f"content_type={response.headers.get('content-type')}, "
+            f"body_prefix={_response_body_prefix(response)!r}"
+        )
+
+    content_type = response.headers.get("content-type", "")
+    if "application/json" not in content_type.lower():
+        pytest.fail(
+            "Lead setup returned non-JSON response: "
+            f"status={response.status_code}, "
+            f"content_type={content_type}, "
+            f"body_prefix={_response_body_prefix(response)!r}"
+        )
+
+    payload = response.json()
+    if "lead_id" not in payload:
+        pytest.fail("Lead setup JSON does not contain lead_id")
+
+    return payload["lead_id"]
+
+
+@pytest.fixture(scope="class")
+def api_url_and_lead(request, api_url):
+    lead_specs = {
+        "TestRouterIntentClassification": ("Router Test User", "router"),
+        "TestClarifyMode": ("Clarify Test User", "clarify"),
+        "TestFallbackBehavior": ("Fallback Test User", "fallback"),
+        "TestRetrievalModes": ("Retrieval Test User", "retrieval"),
+    }
+    full_name, email_prefix = lead_specs.get(
+        request.cls.__name__ if request.cls else "",
+        ("Chat Pipeline Test User", "chat_pipeline"),
+    )
+    lead_id = _create_test_lead(
+        api_url,
+        full_name=full_name,
+        email_prefix=email_prefix,
+    )
+    return api_url, lead_id
+
+
+class TestRouterIntentClassification:
+    """Tests for router intent classification."""
 
     def test_intent_tuition_lookup(self, api_url_and_lead):
         """Test router correctly identifies tuition_lookup intent."""
@@ -79,20 +134,6 @@ class TestRouterIntentClassification:
 class TestClarifyMode:
     """Tests for clarify mode triggering."""
 
-    @pytest.fixture
-    def api_url_and_lead(self, api_url):
-        response = httpx.post(
-            f"{api_url}/api/chat/init-lead",
-            json={
-                "full_name": "Clarify Test User",
-                "email": f"clarify_{uuid4()}@example.com",
-                "phone": f"0{uuid4().hex[:9]}"
-            },
-            headers=origin_headers()
-        )
-        lead_id = response.json()["lead_id"]
-        return api_url, lead_id
-
     def test_clarify_ambiguous_tuition(self, api_url_and_lead):
         """Test router asks for clarification on ambiguous tuition query."""
         api_url, lead_id = api_url_and_lead
@@ -136,20 +177,6 @@ class TestClarifyMode:
 class TestFallbackBehavior:
     """Tests for fallback when context not found."""
 
-    @pytest.fixture
-    def api_url_and_lead(self, api_url):
-        response = httpx.post(
-            f"{api_url}/api/chat/init-lead",
-            json={
-                "full_name": "Fallback Test User",
-                "email": f"fallback_{uuid4()}@example.com",
-                "phone": f"0{uuid4().hex[:9]}"
-            },
-            headers=origin_headers()
-        )
-        lead_id = response.json()["lead_id"]
-        return api_url, lead_id
-
     def test_fallback_out_of_domain(self, api_url_and_lead):
         """Test response when query is completely out of domain."""
         api_url, lead_id = api_url_and_lead
@@ -190,20 +217,6 @@ class TestFallbackBehavior:
 class TestRetrievalModes:
     """Tests for different retrieval modes."""
 
-    @pytest.fixture
-    def api_url_and_lead(self, api_url):
-        response = httpx.post(
-            f"{api_url}/api/chat/init-lead",
-            json={
-                "full_name": "Retrieval Test User",
-                "email": f"retrieval_{uuid4()}@example.com",
-                "phone": f"0{uuid4().hex[:9]}"
-            },
-            headers=origin_headers()
-        )
-        lead_id = response.json()["lead_id"]
-        return api_url, lead_id
-
     def test_hybrid_retrieval(self, api_url_and_lead):
         """Test hybrid retrieval mode for specific queries."""
         api_url, lead_id = api_url_and_lead
@@ -211,7 +224,7 @@ class TestRetrievalModes:
         response = httpx.post(
             f"{api_url}/api/chat/query",
             json={
-                "query": "Học bổng 100% yêu cầu gpa bao nhiêu?",
+                "query": "Điều kiện tuyển sinh đại học VGU 2026 theo phương thức TestAS là gì?",
                 "lead_id": lead_id
             },
             headers=origin_headers(),

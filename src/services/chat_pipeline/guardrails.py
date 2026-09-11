@@ -1,8 +1,10 @@
-from src.services.chat_pipeline.prompts import INSUFFICIENT_CONTEXT_ANSWER
+import re
+
+from src.services.chat_pipeline.prompts import insufficient_context_answer
 from src.services.chat_pipeline.types import PipelineState
 
 
-_BLOCKED_PATTERNS = {
+_BLOCKED_PATTERNS = (
     "self-harm",
     "suicide",
     "suicide method",
@@ -46,6 +48,8 @@ _BLOCKED_PATTERNS = {
     "buy drugs",
     "make drugs",
     "meth",
+    "methamphetamine",
+    "methamphetamines",
     "ma túy",
     "chất kích thích",
     "rape",
@@ -53,13 +57,29 @@ _BLOCKED_PATTERNS = {
     "sex with minor",
     "hiếp dâm",
     "ấu dâm",
-}
+)
+
+
+def _matches_blocked_pattern(pattern: str, text: str) -> bool:
+    normalized_pattern = " ".join(pattern.lower().split())
+    if not normalized_pattern:
+        return False
+
+    pattern_parts = [re.escape(part) for part in normalized_pattern.split()]
+    expression = r"\s+".join(pattern_parts)
+
+    if normalized_pattern[0].isalnum():
+        expression = r"(?<![A-Za-z0-9])" + expression
+    if normalized_pattern[-1].isalnum():
+        expression = expression + r"(?![A-Za-z0-9])"
+
+    return re.search(expression, text) is not None
 
 
 def run_input_guardrails(state: PipelineState) -> PipelineState:
     q = state.query.lower()
     for pattern in _BLOCKED_PATTERNS:
-        if pattern in q:
+        if _matches_blocked_pattern(pattern, q):
             state.blocked = True
             state.block_reason = f"Blocked by safety policy: {pattern}"
             return state
@@ -80,6 +100,6 @@ def run_output_guardrails(state: PipelineState) -> PipelineState:
         return state
 
     if not state.reranked:
-        state.answer = INSUFFICIENT_CONTEXT_ANSWER
+        state.answer = insufficient_context_answer()
         state.confidence = min(state.confidence, 0.35)
     return state

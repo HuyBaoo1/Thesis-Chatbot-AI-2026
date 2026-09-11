@@ -11,6 +11,7 @@ from src.services.major_cache_service import (
     set_cached_active_majors,
 )
 from src.services.major_matcher import (
+    COMMON_MAJOR_ALIASES_BY_CODE,
     find_best_major_in_text,
     find_mentioned_majors,
     normalize_text,
@@ -41,6 +42,11 @@ def resolve_query_context(state: PipelineState, db) -> PipelineState:
 
     is_global_program_list = _is_global_program_list_query(normalized_query)
     current_major = None if is_global_program_list else find_best_major_in_text(normalized_query, majors)
+    current_program_code = (
+        None
+        if current_major or is_global_program_list
+        else _find_program_code_mention(normalized_query)
+    )
     history_focus = _recent_history_focus(state.chat_history, majors)
     history_major = history_focus["major"]
     history_text = history_focus["text"]
@@ -82,6 +88,7 @@ def resolve_query_context(state: PipelineState, db) -> PipelineState:
         normalized_query=normalized_query,
         topic=topic,
         target_major=target_major,
+        target_program_code=current_program_code,
         target_level=target_level,
         history_major=history_major,
         history_level=history_level,
@@ -94,7 +101,7 @@ def resolve_query_context(state: PipelineState, db) -> PipelineState:
     state.resolved_context = {
         "topic": topic,
         "major_id": str(target_major.id) if target_major else None,
-        "major_code": target_major.code if target_major else None,
+        "major_code": target_major.code if target_major else current_program_code,
         "major_name": target_major.name if target_major else None,
         "major_type": target_major.major_type.value if target_major and target_major.major_type else None,
         "level": target_level,
@@ -102,6 +109,7 @@ def resolve_query_context(state: PipelineState, db) -> PipelineState:
             normalized_query,
             has_global_scholarship_context=has_global_scholarship_context,
             target_major=target_major,
+            target_program_code=current_program_code,
         ),
     }
     return state
@@ -218,11 +226,15 @@ def _build_resolved_query(
     normalized_query: str,
     topic: str | None,
     target_major: Major | None,
+    target_program_code: str | None,
     target_level: str | None,
     history_major: Major | None,
     history_level: str | None,
     has_global_scholarship_context: bool,
 ) -> str | None:
+    if _has_source_page_signal(normalized_query):
+        return None
+
     if _is_grad_program_list_query(normalized_query):
         return f"cac nganh sau dai hoc thac si tien si {_institution_name_for_query()}"
 
@@ -233,10 +245,18 @@ def _build_resolved_query(
         return f"tat ca cac nganh chuong trinh {_institution_name_for_query()}"
 
     if _is_global_scholarship_query(normalized_query) and not target_major:
-        return f"tat ca cac loai hoc bong {_institution_name_for_query()}"
+        if _has_specific_scholarship_signal(normalized_query):
+            if _is_scholarship_overview_query(normalized_query):
+                return _scholarship_overview_query(normalized_query, target_level)
+            return None
+        return _scholarship_overview_query(normalized_query, target_level)
 
     if _is_generic_institution_scholarship_query(normalized_query) and not target_major:
-        return f"tat ca cac loai hoc bong {_institution_name_for_query()}"
+        if _has_specific_scholarship_signal(normalized_query):
+            if _is_scholarship_overview_query(normalized_query):
+                return _scholarship_overview_query(normalized_query, target_level)
+            return None
+        return _scholarship_overview_query(normalized_query, target_level)
 
     if (
         _is_scholarship_follow_up_query(normalized_query)
@@ -249,24 +269,33 @@ def _build_resolved_query(
     is_level_only = _is_level_only(normalized_query)
     is_topic_only = _is_topic_only(normalized_query)
     has_current_major = bool(target_major and target_major is not history_major)
+    has_current_program_code = bool(target_program_code and not target_major)
 
     if is_level_only and history_major:
         target_major = history_major
         target_level = target_level or history_level
 
-    if not target_major:
+    if not target_major and not target_program_code:
         return None
 
-    if not (is_follow_up or is_level_only or is_topic_only or topic or has_current_major):
+    if not (
+        is_follow_up
+        or is_level_only
+        or is_topic_only
+        or topic
+        or has_current_major
+        or has_current_program_code
+    ):
         return None
 
     parts: list[str] = []
     if topic:
         parts.append(_topic_to_phrase(topic))
-    major_name_norm = normalize_text(target_major.name)
-    if target_level and target_level not in major_name_norm:
+    program_label = target_major.name if target_major else target_program_code
+    program_label_norm = normalize_text(program_label)
+    if target_level and target_level not in program_label_norm:
         parts.append(target_level)
-    parts.append(target_major.name)
+    parts.append(program_label)
 
     resolved = " ".join(part for part in parts if part).strip()
     if not resolved or normalize_text(resolved) == normalized_query:
@@ -275,6 +304,25 @@ def _build_resolved_query(
 
 
 def _infer_topic(value: str) -> str | None:
+    if any(token in value for token in ["hoc phi", "tuition", "chi phi", "phi dao tao"]):
+        return "tuition"
+    if any(token in value for token in ["hoc bong", "scholarship", "ho tro tai chinh"]):
+        return "scholarship"
+    requirement_tokens = [
+        "dieu kien",
+        "yeu cau",
+        "requirement",
+        "diem dau vao",
+        "dau vao",
+        "nhap hoc",
+        "ho so ung tuyen",
+        "ho so tuyen sinh",
+    ]
+    if any(token in value for token in requirement_tokens):
+        return "requirement"
+    if any(token in value for token in ["deadline", "thoi han", "lich tuyen sinh"]):
+        return "deadline"
+
     curriculum_tokens = [
         "mon hoc",
         "cac mon",
@@ -296,24 +344,6 @@ def _infer_topic(value: str) -> str | None:
         return "course_credits"
     if any(token in value for token in curriculum_tokens):
         return "curriculum"
-    if any(token in value for token in ["hoc phi", "tuition", "chi phi", "phi dao tao"]):
-        return "tuition"
-    if any(token in value for token in ["hoc bong", "scholarship", "ho tro tai chinh"]):
-        return "scholarship"
-    requirement_tokens = [
-        "dieu kien",
-        "yeu cau",
-        "requirement",
-        "diem dau vao",
-        "dau vao",
-        "nhap hoc",
-        "ho so ung tuyen",
-        "ho so tuyen sinh",
-    ]
-    if any(token in value for token in requirement_tokens):
-        return "requirement"
-    if any(token in value for token in ["deadline", "thoi han", "lich tuyen sinh"]):
-        return "deadline"
     if "ung tuyen" in value and any(token in value for token in ["chuan bi", "can gi", "can phai", "ho so"]):
         return "requirement"
     if any(token in value for token in ["nganh", "chuong trinh", "program", "major"]):
@@ -417,6 +447,79 @@ def _is_undergrad_program_list_query(value: str) -> bool:
     has_program_list = any(token in value for token in ["cac nganh", "tat ca nganh", "chuong trinh"])
     has_undergrad = any(token in value for token in ["dai hoc", "cu nhan", "undergraduate", "bachelor"])
     return has_program_list and has_undergrad
+
+
+def _find_program_code_mention(value: str) -> str | None:
+    for code in sorted(COMMON_MAJOR_ALIASES_BY_CODE.keys(), key=len, reverse=True):
+        normalized_code = normalize_text(code)
+        if len(normalized_code.replace(" ", "")) < 3:
+            continue
+        if re.search(rf"(?<!\w){re.escape(normalized_code)}(?!\w)", value):
+            return normalized_code.upper()
+    return None
+
+
+def _has_source_page_signal(value: str) -> bool:
+    source_page_markers = [
+        "admission overview",
+        "admissions overview",
+        "application portal",
+        "apply link",
+        "link apply",
+        "portal",
+        "trang admissions",
+        "trang admission",
+    ]
+    return any(marker in value for marker in source_page_markers)
+
+
+def _has_specific_scholarship_signal(value: str) -> bool:
+    return bool(_specific_scholarship_terms(value))
+
+
+def _specific_scholarship_terms(value: str) -> list[str]:
+    named_scholarship_markers = [
+        "wus",
+        "daad",
+        "clmt",
+        "full merit",
+        "merit scholarship",
+        "toan phan",
+        "sur place",
+        "type 1",
+        "type 2",
+        "cambodia",
+        "laos",
+        "myanmar",
+        "thailand",
+    ]
+    return [marker for marker in named_scholarship_markers if marker in value]
+
+
+def _is_scholarship_overview_query(value: str) -> bool:
+    overview_markers = [
+        "danh sach",
+        "liet ke",
+        "trang hoc bong",
+        "cac loai",
+        "nhung loai",
+        "hoc bong nao",
+        "cac hoc bong",
+        "nhung hoc bong",
+    ]
+    if any(marker in value for marker in overview_markers):
+        return True
+
+    return " co " in f" {value} " and " khong" in value
+
+
+def _scholarship_overview_query(value: str, target_level: str | None) -> str:
+    parts = ["danh sach cac loai hoc bong"]
+    if target_level:
+        parts.append(target_level)
+    parts.append(_institution_name_for_query())
+    parts.extend(_specific_scholarship_terms(value))
+    return " ".join(parts)
 
 
 def _should_use_history_major(
@@ -607,8 +710,9 @@ def _infer_scope(
     *,
     has_global_scholarship_context: bool,
     target_major: Major | None,
+    target_program_code: str | None = None,
 ) -> str | None:
-    if target_major:
+    if target_major or target_program_code:
         return "major"
     if _is_global_program_list_query(value):
         return "global_program_list"

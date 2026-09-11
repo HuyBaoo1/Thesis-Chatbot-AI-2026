@@ -3,7 +3,7 @@ from typing import Any
 
 from src.models.enums import MajorType
 from src.models.major import Major
-from src.services.chat_pipeline import retrieval_paths
+import src.services.chat_pipeline.retrieval_paths as retrieval_paths
 from src.services.major_cache_service import (
     build_major_list_cache_key,
     build_major_info_cache_key,

@@ -1,10 +1,5 @@
 import { useEffect, useRef, useState } from "react"
-import {
-  Bot,
-  Headset,
-  SendHorizonal,
-  Sparkles,
-} from "lucide-react"
+import { Bot, Headset, SendHorizonal, Sparkles } from "lucide-react"
 import { useMutation } from "@tanstack/react-query"
 import { useTranslation } from "react-i18next"
 import { toast } from "sonner"
@@ -640,7 +635,10 @@ const HomeChatShell = () => {
                           {message.content}
                         </p>
                         {isAssistant ? (
-                          <ChatCitations citations={message.citations} tone="light" />
+                          <ChatCitations
+                            citations={message.citations}
+                            tone="light"
+                          />
                         ) : null}
                       </>
                     ) : isAssistant ? (
@@ -683,15 +681,20 @@ const HomeChatShell = () => {
             <div className="rounded-xl border border-[#d6ae4e]/20 bg-[#fdf9ef] px-3 py-2.5">
               <div className="space-y-1.5">
                 {leadFollowUpQuestions.map((question, index) => (
-                  <div
+                  <button
                     key={question}
-                    className="rounded-lg bg-white px-3 py-1.5 text-[12px] leading-snug text-slate-600 ring-1 ring-slate-200/80"
+                    type="button"
+                    disabled={chatPending || initLeadPending}
+                    onClick={() => {
+                      void handleSend(question)
+                    }}
+                    className="w-full cursor-pointer rounded-lg bg-white px-3 py-1.5 text-left text-[12px] leading-snug text-slate-600 ring-1 ring-slate-200/80 transition hover:bg-slate-50 focus-visible:ring-2 focus-visible:ring-[#d6ae4e]/60 focus-visible:outline-none disabled:cursor-not-allowed disabled:opacity-60"
                   >
                     <span className="mr-2 font-semibold text-[#d6ae4e]">
                       {index + 1}.
                     </span>
                     {question}
-                  </div>
+                  </button>
                 ))}
               </div>
             </div>

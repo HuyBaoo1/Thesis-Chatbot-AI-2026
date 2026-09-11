@@ -24,7 +24,6 @@ from src.schemas.chat_pipeline import (
     MessageSourcesOut,
     StaffChatMessageCreate,
 )
-from src.services.chat_pipeline import run_chat_pipeline
 from src.services import notification_service
 from src.services.conversation_service import (
     can_access_conversation,
@@ -93,6 +92,8 @@ def _run_pipeline_in_thread(data: ChatQueryRequest) -> dict:
     """
     db = SessionLocal()
     try:
+        from src.services.chat_pipeline.pipeline import run_chat_pipeline
+
         result = run_chat_pipeline(data, db)
         return result
     finally:
