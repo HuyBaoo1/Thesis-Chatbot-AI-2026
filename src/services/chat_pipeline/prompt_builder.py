@@ -16,9 +16,13 @@ def build_grounded_prompt(state: PipelineState) -> PipelineState:
         )
     else:
         user_block = state.query
-    history_block = format_chat_history(
-        state.chat_history,
-        limit=MAX_SYNTHESIS_HISTORY_MESSAGES,
+    history_block = (
+        format_chat_history(
+            state.chat_history,
+            limit=MAX_SYNTHESIS_HISTORY_MESSAGES,
+        )
+        if _should_include_recent_conversation(state)
+        else "No recent history."
     )
     memory_block = _compact_block(
         state.memory_context or "No lead memory available.",
@@ -81,6 +85,79 @@ def _looks_like_detailed_major_query(query: str) -> bool:
         "detailed information",
     ]
     return any(marker in q for marker in markers)
+
+
+def _should_include_recent_conversation(state: PipelineState) -> bool:
+    if not state.chat_history:
+        return False
+    if not (state.rewrite_query and (state.resolved_query or "").strip()):
+        return False
+    return _looks_like_context_dependent_query(state.query)
+
+
+def _looks_like_context_dependent_query(query: str | None) -> bool:
+    q = _normalize_for_matching(query or "")
+    if not q:
+        return False
+
+    contextual_markers = [
+        "thi sao",
+        "con sao",
+        "vay sao",
+        "the sao",
+        "nganh nay",
+        "nganh do",
+        "nganh tren",
+        "nganh vua noi",
+        "chuong trinh nay",
+        "chuong trinh do",
+        "chuong trinh tren",
+        "chuong trinh vua noi",
+        "major nay",
+        "major do",
+        "that major",
+        "this major",
+        "program nay",
+        "program do",
+        "that program",
+        "this program",
+        "what about",
+        "how about",
+    ]
+    if any(marker in q for marker in contextual_markers):
+        return True
+
+    topic_only_queries = {
+        "hoc phi",
+        "hoc bong",
+        "dieu kien",
+        "dieu kien dau vao",
+        "yeu cau",
+        "yeu cau dau vao",
+        "ho so ung tuyen",
+        "quy trinh ung tuyen",
+        "deadline",
+        "thoi han",
+        "cac mon hoc",
+        "mon hoc",
+        "khoa hoc",
+        "chuong trinh hoc",
+        "cau truc chuong trinh",
+        "tin chi",
+        "bao nhieu tin chi",
+    }
+    level_only_queries = {
+        "dai hoc",
+        "cu nhan",
+        "undergraduate",
+        "bachelor",
+        "thac si",
+        "master",
+        "tien si",
+        "phd",
+        "sau dai hoc",
+    }
+    return q in topic_only_queries or q in level_only_queries
 
 
 def _scholarship_task_rules(state: PipelineState) -> list[str]:

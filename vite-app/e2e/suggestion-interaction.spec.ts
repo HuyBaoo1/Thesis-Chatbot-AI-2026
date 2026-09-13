@@ -2,10 +2,77 @@ import "dotenv/config"
 import { expect, test } from "@playwright/test"
 
 const API_BASE = process.env.VITE_API_URL!
+const TELEGRAM_BOT_URL = process.env.VITE_TELEGRAM_BOT_URL ?? ""
 
 const FIRST_SUGGESTION = "Tell me about tuition"
 const SECOND_SUGGESTION = "Tell me about scholarships"
 const THIRD_SUGGESTION = "Tell me about the application process"
+
+const isDarkReadableColor = (color: string) => {
+  if (color.startsWith("oklch(")) {
+    const lightness = Number(color.match(/oklch\(([\d.]+)/)?.[1])
+
+    return Number.isFinite(lightness) && lightness < 0.55
+  }
+
+  const channels = color.match(/\d+/g)?.map(Number) ?? []
+
+  if (channels.length < 3) {
+    return false
+  }
+
+  const [red, green, blue] = channels
+  const luminance = 0.2126 * red + 0.7152 * green + 0.0722 * blue
+
+  return luminance < 140
+}
+
+const isNearBlackColor = (color: string) => {
+  if (color.startsWith("oklch(")) {
+    const lightness = Number(color.match(/oklch\(([\d.]+)/)?.[1])
+
+    return Number.isFinite(lightness) && lightness <= 0.25
+  }
+
+  const channels = color.match(/\d+/g)?.map(Number) ?? []
+
+  if (channels.length < 3) {
+    return false
+  }
+
+  const [red, green, blue] = channels
+
+  return red <= 40 && green <= 40 && blue <= 40
+}
+
+const isReadableOnWhiteColor = (color: string) => {
+  if (color.startsWith("oklch(")) {
+    const lightness = Number(color.match(/oklch\(([\d.]+)/)?.[1])
+
+    return Number.isFinite(lightness) && lightness < 0.75
+  }
+
+  const channels = color.match(/\d+/g)?.map(Number) ?? []
+
+  if (channels.length < 3) {
+    return false
+  }
+
+  const [red, green, blue] = channels
+  const relative = [red, green, blue].map((value) => {
+    const normalized = value / 255
+
+    return normalized <= 0.03928
+      ? normalized / 12.92
+      : ((normalized + 0.055) / 1.055) ** 2.4
+  })
+  const [relativeRed, relativeGreen, relativeBlue] = relative
+  const luminance =
+    0.2126 * relativeRed + 0.7152 * relativeGreen + 0.0722 * relativeBlue
+  const whiteContrast = 1.05 / (luminance + 0.05)
+
+  return whiteContrast >= 4.5
+}
 
 type ChatRequest = {
   lead_id: string
@@ -159,6 +226,88 @@ test.describe("public chat follow-up suggestions", () => {
     await page.context().clearCookies()
     await page.goto("/")
     await page.evaluate(() => localStorage.clear())
+  })
+
+  test("shows the configured Telegram CTA with the provided icon", async ({
+    page,
+  }) => {
+    test.skip(!TELEGRAM_BOT_URL, "VITE_TELEGRAM_BOT_URL is required")
+
+    const telegramLink = page.getByRole("link", { name: /telegram/i })
+
+    await expect(telegramLink).toBeVisible()
+    await expect(telegramLink).toBeEnabled()
+    await expect(telegramLink).toHaveAttribute("href", TELEGRAM_BOT_URL)
+    await expect(telegramLink).toHaveAttribute("target", "_blank")
+    await expect(telegramLink).toHaveAttribute("rel", /noopener/)
+    const telegramIcon = telegramLink.locator(
+      '[data-testid="telegram-cta-icon"]'
+    )
+
+    await expect(telegramIcon).toBeVisible()
+    await expect(telegramIcon).toHaveAttribute("src", "/telegram-icon.webp")
+  })
+
+  test("keeps the lead form readable on its white surface", async ({
+    page,
+  }) => {
+    await page.evaluate(() => localStorage.setItem("theme", "dark"))
+    await page.reload()
+    await setupChatMocks(page)
+
+    await page.locator("textarea").fill("Initial question")
+    await page.getByRole("button", { name: /send/i }).last().click()
+
+    const dialog = page.getByTestId("home-lead-form-dialog")
+    await expect(dialog).toBeVisible()
+
+    const dialogStyle = await dialog.evaluate((element) => {
+      const style = window.getComputedStyle(element)
+
+      return {
+        backgroundColor: style.backgroundColor,
+        color: style.color,
+      }
+    })
+
+    expect(dialogStyle.backgroundColor).toBe("rgb(255, 255, 255)")
+    expect(isDarkReadableColor(dialogStyle.color)).toBe(true)
+
+    const labelColor = await page
+      .locator("label[for='lead-full-name']")
+      .evaluate((element) => window.getComputedStyle(element).color)
+    expect(isNearBlackColor(labelColor)).toBe(true)
+
+    const nameInput = page.locator("#lead-full-name")
+    await expect(nameInput).toHaveClass(/text-black/)
+    await expect(nameInput).toHaveClass(/caret-black/)
+    await expect(nameInput).toHaveClass(/placeholder:text-slate-500/)
+    await expect(nameInput).toHaveClass(/\[-webkit-text-fill-color:#000000\]/)
+
+    await page.locator("form button[type='submit']").click()
+    const validationError = page.locator("[data-slot='field-error']").first()
+    await expect(validationError).toBeVisible()
+    const validationErrorColor = await validationError.evaluate(
+      (element) => window.getComputedStyle(element).color
+    )
+    expect(isReadableOnWhiteColor(validationErrorColor)).toBe(true)
+
+    await nameInput.fill("Suggestion Test")
+    await expect(nameInput).toHaveValue("Suggestion Test")
+
+    const inputColor = await nameInput.evaluate(
+      (element) => window.getComputedStyle(element).color
+    )
+    expect(isNearBlackColor(inputColor)).toBe(true)
+    const caretColor = await nameInput.evaluate(
+      (element) => window.getComputedStyle(element).caretColor
+    )
+    expect(isNearBlackColor(caretColor)).toBe(true)
+
+    await page.locator("#lead-email").fill("suggestion@example.com")
+    await page.locator("form button[type='submit']").click()
+
+    await expect(page.getByText("Answer for: Initial question")).toBeVisible()
   })
 
   test("render as interactive buttons and submit through the existing chat flow", async ({

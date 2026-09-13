@@ -8,6 +8,7 @@ SYNONYM_GROUPS = [
     {"hoc bong", "scholarship", "financial aid", "ho tro tai chinh"},
     {"nganh", "chuong trinh", "program", "major"},
     {"tuyen sinh", "admission", "apply", "ung tuyen"},
+    {"dia chi", "address", "campus", "contact", "location", "o dau", "where"},
     {"lien he", "contact", "email", "hotline", "so dien thoai", "phone", "tu van"},
     {"overview", "portal", "link", "website", "page", "trang"},
     {"dieu kien", "yeu cau", "requirement", "diem dau vao", "dau vao", "nhap hoc"},

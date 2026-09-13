@@ -77,7 +77,11 @@ type DetailFormState = {
 }
 
 const textareaClassName =
-  "min-h-28 w-full resize-y rounded-xl border border-slate-200 bg-slate-50/80 px-3 py-3 text-[13px] text-slate-700 outline-none transition-colors placeholder:text-slate-400 focus:border-slate-300 focus:bg-white"
+  "min-h-28 w-full resize-y rounded-xl border border-slate-200 bg-slate-50/80 px-3 py-3 text-[13px] text-black caret-black outline-none transition-colors placeholder:text-slate-500 focus:border-slate-300 focus:bg-white"
+const inputClassName =
+  "h-10 rounded-xl border-slate-200 bg-slate-50/80 text-[13px] text-black caret-black shadow-none transition-colors placeholder:text-slate-500 focus:border-slate-300 focus:bg-white focus-visible:ring-0"
+const selectTriggerClassName =
+  "h-10 w-full rounded-xl border-slate-200 bg-slate-50/80 text-[13px] text-black shadow-none transition-colors focus:border-slate-300 focus:ring-0"
 
 const emptyFormState: DetailFormState = {
   full_name: "",
@@ -398,7 +402,7 @@ const LeadDetailPanel = ({
                 </p>
                 <Input
                   value={formState.full_name}
-                  className="h-10 rounded-xl border-slate-200 bg-slate-50/80 text-[13px] shadow-none transition-colors focus:border-slate-300 focus:bg-white focus-visible:ring-0"
+                  className={inputClassName}
                   onChange={(event) =>
                     handleFieldChange("full_name", event.target.value)
                   }
@@ -410,7 +414,7 @@ const LeadDetailPanel = ({
                 </p>
                 <Input
                   value={formState.email}
-                  className="h-10 rounded-xl border-slate-200 bg-slate-50/80 text-[13px] shadow-none transition-colors focus:border-slate-300 focus:bg-white focus-visible:ring-0"
+                  className={inputClassName}
                   onChange={(event) =>
                     handleFieldChange("email", event.target.value)
                   }
@@ -422,7 +426,7 @@ const LeadDetailPanel = ({
                 </p>
                 <Input
                   value={formState.phone}
-                  className="h-10 rounded-xl border-slate-200 bg-slate-50/80 text-[13px] shadow-none transition-colors focus:border-slate-300 focus:bg-white focus-visible:ring-0"
+                  className={inputClassName}
                   onChange={(event) =>
                     handleFieldChange("phone", event.target.value)
                   }
@@ -434,7 +438,7 @@ const LeadDetailPanel = ({
                 </p>
                 <Input
                   value={formState.province}
-                  className="h-10 rounded-xl border-slate-200 bg-slate-50/80 text-[13px] shadow-none transition-colors focus:border-slate-300 focus:bg-white focus-visible:ring-0"
+                  className={inputClassName}
                   onChange={(event) =>
                     handleFieldChange("province", event.target.value)
                   }
@@ -446,7 +450,7 @@ const LeadDetailPanel = ({
                 </p>
                 <Input
                   value={formState.high_school}
-                  className="h-10 rounded-xl border-slate-200 bg-slate-50/80 text-[13px] shadow-none transition-colors focus:border-slate-300 focus:bg-white focus-visible:ring-0"
+                  className={inputClassName}
                   onChange={(event) =>
                     handleFieldChange("high_school", event.target.value)
                   }
@@ -469,7 +473,7 @@ const LeadDetailPanel = ({
                 value={statusDraft}
                 onValueChange={(value) => setStatusDraft(value as LeadStatus)}
               >
-                <SelectTrigger className="h-10 w-full rounded-xl border-slate-200 bg-slate-50/80 text-[13px] shadow-none transition-colors focus:border-slate-300 focus:ring-0">
+                <SelectTrigger className={selectTriggerClassName}>
                   <SelectValue placeholder={t("selectStatus")} />
                 </SelectTrigger>
                 <SelectContent>
@@ -506,7 +510,7 @@ const LeadDetailPanel = ({
                     )
                   }
                 >
-                  <SelectTrigger className="h-10 w-full rounded-xl border-slate-200 bg-slate-50/80 text-[13px] shadow-none transition-colors focus:border-slate-300 focus:ring-0">
+                  <SelectTrigger className={selectTriggerClassName}>
                     <SelectValue placeholder={t("noTemperature")} />
                   </SelectTrigger>
                   <SelectContent>
@@ -525,7 +529,7 @@ const LeadDetailPanel = ({
                   value={formState.gpa}
                   type="number"
                   step="0.01"
-                  className="h-10 rounded-xl border-slate-200 bg-slate-50/80 text-[13px] shadow-none transition-colors focus:border-slate-300 focus:bg-white focus-visible:ring-0"
+                  className={inputClassName}
                   onChange={(event) =>
                     handleFieldChange("gpa", event.target.value)
                   }
@@ -539,7 +543,7 @@ const LeadDetailPanel = ({
                   value={formState.ielts}
                   type="number"
                   step="0.1"
-                  className="h-10 rounded-xl border-slate-200 bg-slate-50/80 text-[13px] shadow-none transition-colors focus:border-slate-300 focus:bg-white focus-visible:ring-0"
+                  className={inputClassName}
                   onChange={(event) =>
                     handleFieldChange("ielts", event.target.value)
                   }
@@ -550,7 +554,7 @@ const LeadDetailPanel = ({
                 <Input
                   value={formState.sat}
                   type="number"
-                  className="h-10 rounded-xl border-slate-200 bg-slate-50/80 text-[13px] shadow-none transition-colors focus:border-slate-300 focus:bg-white focus-visible:ring-0"
+                  className={inputClassName}
                   onChange={(event) =>
                     handleFieldChange("sat", event.target.value)
                   }
@@ -561,7 +565,7 @@ const LeadDetailPanel = ({
                 <Input
                   value={formState.act}
                   type="number"
-                  className="h-10 rounded-xl border-slate-200 bg-slate-50/80 text-[13px] shadow-none transition-colors focus:border-slate-300 focus:bg-white focus-visible:ring-0"
+                  className={inputClassName}
                   onChange={(event) =>
                     handleFieldChange("act", event.target.value)
                   }
@@ -583,7 +587,7 @@ const LeadDetailPanel = ({
                 </p>
                 <Input
                   value={formState.cv_url}
-                  className="h-10 rounded-xl border-slate-200 bg-slate-50/80 text-[13px] shadow-none transition-colors focus:border-slate-300 focus:bg-white focus-visible:ring-0"
+                  className={inputClassName}
                   onChange={(event) =>
                     handleFieldChange("cv_url", event.target.value)
                   }
@@ -595,7 +599,7 @@ const LeadDetailPanel = ({
                 </p>
                 <Input
                   value={formState.essay_url}
-                  className="h-10 rounded-xl border-slate-200 bg-slate-50/80 text-[13px] shadow-none transition-colors focus:border-slate-300 focus:bg-white focus-visible:ring-0"
+                  className={inputClassName}
                   onChange={(event) =>
                     handleFieldChange("essay_url", event.target.value)
                   }
@@ -607,7 +611,7 @@ const LeadDetailPanel = ({
                 </p>
                 <Input
                   value={formState.transcript_url}
-                  className="h-10 rounded-xl border-slate-200 bg-slate-50/80 text-[13px] shadow-none transition-colors focus:border-slate-300 focus:bg-white focus-visible:ring-0"
+                  className={inputClassName}
                   onChange={(event) =>
                     handleFieldChange("transcript_url", event.target.value)
                   }
@@ -631,7 +635,7 @@ const LeadDetailPanel = ({
                   value={formState.ability_score}
                   type="number"
                   step="0.01"
-                  className="h-10 rounded-xl border-slate-200 bg-slate-50/80 text-[13px] shadow-none transition-colors focus:border-slate-300 focus:bg-white focus-visible:ring-0"
+                  className={inputClassName}
                   onChange={(event) =>
                     handleFieldChange("ability_score", event.target.value)
                   }
@@ -645,7 +649,7 @@ const LeadDetailPanel = ({
                   value={formState.aspiration_score}
                   type="number"
                   step="0.01"
-                  className="h-10 rounded-xl border-slate-200 bg-slate-50/80 text-[13px] shadow-none transition-colors focus:border-slate-300 focus:bg-white focus-visible:ring-0"
+                  className={inputClassName}
                   onChange={(event) =>
                     handleFieldChange("aspiration_score", event.target.value)
                   }
@@ -659,7 +663,7 @@ const LeadDetailPanel = ({
                   value={formState.creativity_score}
                   type="number"
                   step="0.01"
-                  className="h-10 rounded-xl border-slate-200 bg-slate-50/80 text-[13px] shadow-none transition-colors focus:border-slate-300 focus:bg-white focus-visible:ring-0"
+                  className={inputClassName}
                   onChange={(event) =>
                     handleFieldChange("creativity_score", event.target.value)
                   }
@@ -673,7 +677,7 @@ const LeadDetailPanel = ({
                   value={formState.commitment_score}
                   type="number"
                   step="0.01"
-                  className="h-10 rounded-xl border-slate-200 bg-slate-50/80 text-[13px] shadow-none transition-colors focus:border-slate-300 focus:bg-white focus-visible:ring-0"
+                  className={inputClassName}
                   onChange={(event) =>
                     handleFieldChange("commitment_score", event.target.value)
                   }
@@ -687,7 +691,7 @@ const LeadDetailPanel = ({
                   value={formState.fit_score}
                   type="number"
                   step="0.01"
-                  className="h-10 rounded-xl border-slate-200 bg-slate-50/80 text-[13px] shadow-none transition-colors focus:border-slate-300 focus:bg-white focus-visible:ring-0"
+                  className={inputClassName}
                   onChange={(event) =>
                     handleFieldChange("fit_score", event.target.value)
                   }

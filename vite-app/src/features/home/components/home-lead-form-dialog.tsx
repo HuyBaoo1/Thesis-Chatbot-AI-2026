@@ -29,7 +29,8 @@ type HomeLeadFormDialogProps = {
 }
 
 const inputClassName =
-  "h-11 w-full rounded-xl border border-slate-200 bg-slate-50/50 px-3.5 text-[14px] text-slate-800 outline-none transition-all placeholder:text-slate-400 focus:border-slate-400 focus:bg-white focus:shadow-[0_0_0_3px_rgba(15,23,42,0.06)]"
+  "h-11 w-full rounded-xl border border-slate-200 bg-slate-50/50 px-3.5 text-[14px] text-black caret-black outline-none transition-all placeholder:text-slate-500 focus:border-slate-400 focus:bg-white focus:shadow-[0_0_0_3px_rgba(15,23,42,0.06)] [&:-webkit-autofill]:[-webkit-text-fill-color:#000000] [&:-webkit-autofill]:caret-black [&:-webkit-autofill]:shadow-[0_0_0_1000px_rgba(248,250,252,0.95)_inset]"
+const fieldErrorClassName = "text-[12px] text-red-600"
 
 const HomeLeadFormDialog = ({
   open,
@@ -65,7 +66,10 @@ const HomeLeadFormDialog = ({
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="max-w-[calc(100%-1.5rem)] gap-0 overflow-hidden rounded-[1.75rem] border border-slate-200/80 bg-white p-0 shadow-[0_32px_80px_-20px_rgba(15,23,42,0.2)] sm:max-w-lg">
+      <DialogContent
+        data-testid="home-lead-form-dialog"
+        className="max-w-[calc(100%-1.5rem)] gap-0 overflow-hidden rounded-[1.75rem] border border-slate-200/80 bg-white p-0 text-slate-900 shadow-[0_32px_80px_-20px_rgba(15,23,42,0.2)] sm:max-w-lg"
+      >
         {/* Gold accent top bar */}
         <div className="h-0.75 bg-linear-to-r from-[#d6ae4e] via-[#e8c96a] to-[#d6ae4e]/40" />
 
@@ -91,7 +95,7 @@ const HomeLeadFormDialog = ({
             <Field>
               <FieldLabel
                 htmlFor="lead-full-name"
-                className="text-[13px] font-medium text-slate-700"
+                className="text-[13px] font-medium text-slate-900"
               >
                 {t("leadForm.fullName")} <span className="text-red-400">*</span>
               </FieldLabel>
@@ -102,7 +106,10 @@ const HomeLeadFormDialog = ({
                   placeholder={t("leadForm.fullNamePlaceholder")}
                   {...form.register("full_name")}
                 />
-                <FieldError errors={[form.formState.errors.full_name]} />
+                <FieldError
+                  className={fieldErrorClassName}
+                  errors={[form.formState.errors.full_name]}
+                />
               </FieldContent>
             </Field>
 
@@ -111,7 +118,7 @@ const HomeLeadFormDialog = ({
               <Field>
                 <FieldLabel
                   htmlFor="lead-email"
-                  className="text-[13px] font-medium text-slate-700"
+                  className="text-[13px] font-medium text-slate-900"
                 >
                   {t("leadForm.email")}
 </FieldLabel>
@@ -123,14 +130,17 @@ const HomeLeadFormDialog = ({
                     placeholder={t("leadForm.emailPlaceholder")}
                     {...form.register("email")}
                   />
-                  <FieldError errors={[form.formState.errors.email]} />
+                  <FieldError
+                    className={fieldErrorClassName}
+                    errors={[form.formState.errors.email]}
+                  />
                 </FieldContent>
               </Field>
 
               <Field>
                 <FieldLabel
                   htmlFor="lead-phone"
-                  className="text-[13px] font-medium text-slate-700"
+                  className="text-[13px] font-medium text-slate-900"
                 >
                   {t("leadForm.phone")}
                 </FieldLabel>
@@ -141,7 +151,10 @@ const HomeLeadFormDialog = ({
                     placeholder={t("leadForm.phonePlaceholder")}
                     {...form.register("phone")}
                   />
-                  <FieldError errors={[form.formState.errors.phone]} />
+                  <FieldError
+                    className={fieldErrorClassName}
+                    errors={[form.formState.errors.phone]}
+                  />
                 </FieldContent>
               </Field>
             </div>

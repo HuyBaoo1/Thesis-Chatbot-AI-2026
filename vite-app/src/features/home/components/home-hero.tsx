@@ -1,8 +1,9 @@
-import { Sparkles, Send } from "lucide-react"
+import { Sparkles } from "lucide-react"
 import { useTranslation } from "react-i18next"
 import { Button } from "@/components/ui/button"
 
 const TELEGRAM_BOT_URL = import.meta.env.VITE_TELEGRAM_BOT_URL || ""
+const TELEGRAM_ICON_SRC = "/telegram-icon.webp"
 
 type HomeHighlight = {
   label: string
@@ -80,7 +81,13 @@ const HomeHero = () => {
             className="group h-auto gap-2.5 rounded-full border border-slate-200 bg-white/90 px-5 py-2.5 text-[13px] font-medium text-slate-600 shadow-sm hover:border-slate-300 hover:bg-white hover:text-slate-800"
           >
             <a href={TELEGRAM_BOT_URL} target="_blank" rel="noopener noreferrer">
-              <Send className="h-3.5 w-3.5 transition-transform duration-150 group-hover:translate-x-0.5" />
+              <img
+                src={TELEGRAM_ICON_SRC}
+                alt=""
+                aria-hidden="true"
+                data-testid="telegram-cta-icon"
+                className="h-5 w-5 shrink-0 rounded-full object-contain transition-transform duration-150 group-hover:translate-x-0.5"
+              />
               {t("hero.telegramButton")}
             </a>
           </Button>
