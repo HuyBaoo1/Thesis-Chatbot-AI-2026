@@ -131,6 +131,18 @@ const emptyConversation = {
   updated_at: "2026-09-11T00:00:00Z",
 }
 
+const oldPersistedLeadStorage = {
+  state: {
+    leadData: {
+      lead_id: "old-lead",
+      conversation_id: "old-conversation",
+      conversation_token: "old-token",
+      full_name: "Old Visitor",
+    },
+  },
+  version: 0,
+}
+
 async function setupChatMocks(
   page: import("@playwright/test").Page,
   options: { delaySuggestionResponse?: boolean } = {}
@@ -308,6 +320,90 @@ test.describe("public chat follow-up suggestions", () => {
     await page.locator("form button[type='submit']").click()
 
     await expect(page.getByText("Answer for: Initial question")).toBeVisible()
+  })
+
+  test("starts a fresh visit instead of restoring a persisted public conversation", async ({
+    page,
+  }) => {
+    let oldConversationRequests = 0
+
+    await page.route(
+      `${API_BASE}chat/conversations/old-conversation**`,
+      async (route) => {
+        oldConversationRequests += 1
+
+        if (route.request().url().includes("/messages")) {
+          await route.fulfill({
+            status: 200,
+            contentType: "application/json",
+            body: JSON.stringify({
+              conversation_id: "old-conversation",
+              items: [
+                {
+                  id: "old-message-1",
+                  conversation_id: "old-conversation",
+                  role: "ASSISTANT",
+                  content: "Old conversation message",
+                  intent: null,
+                  is_fallback: false,
+                  citations: [],
+                  created_at: "2026-09-10T00:00:00Z",
+                },
+              ],
+              total: 1,
+              limit: 10,
+              before: null,
+              next_before: null,
+              has_more: false,
+            }),
+          })
+          return
+        }
+
+        await route.fulfill({
+          status: 200,
+          contentType: "application/json",
+          body: JSON.stringify({
+            ...emptyConversation,
+            id: "old-conversation",
+            conversation_token: "old-token",
+            lead_id: "old-lead",
+            lead_full_name: "Old Visitor",
+          }),
+        })
+      }
+    )
+
+    await page.addInitScript((storageValue) => {
+      localStorage.setItem("lead-storage", JSON.stringify(storageValue))
+    }, oldPersistedLeadStorage)
+
+    await page.goto("/")
+    await page.waitForTimeout(250)
+
+    expect(oldConversationRequests).toBe(0)
+    await expect(page.getByText("Old conversation message")).toHaveCount(0)
+    await expect(page.getByText("Old Visitor")).toHaveCount(0)
+    expect(
+      await page.evaluate(() => localStorage.getItem("lead-storage"))
+    ).toBe(null)
+
+    const chatRequests = await setupChatMocks(page)
+
+    await page.locator("textarea").fill("Fresh visit question")
+    await page.getByRole("button", { name: /send/i }).last().click()
+    await expect(page.getByTestId("home-lead-form-dialog")).toBeVisible()
+
+    await page.locator("#lead-full-name").fill("Fresh Visitor")
+    await page.locator("#lead-email").fill("fresh@example.com")
+    await page.locator("form button[type='submit']").click()
+
+    await expect(
+      page.getByText("Answer for: Fresh visit question")
+    ).toBeVisible()
+    expect(chatRequests).toHaveLength(1)
+    expect(chatRequests[0].lead_id).toBe("lead-1")
+    expect(chatRequests[0].conversation_id ?? null).toBeNull()
   })
 
   test("render as interactive buttons and submit through the existing chat flow", async ({
