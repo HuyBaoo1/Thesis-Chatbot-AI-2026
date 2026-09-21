@@ -26,6 +26,7 @@ import useNotification from "@/hooks/use-notification"
 import useRealtime from "@/hooks/use-realtime"
 import useAuthStore from "@/stores/auth-store"
 import { formatDateTime } from "@/lib/date"
+import { cn } from "@/lib/utils"
 import type {
   NotificationItem,
   NotificationTarget,
@@ -34,6 +35,10 @@ import type {
 import LanguageSwitcher from "@/components/common/language-switcher"
 import { Separator } from "../ui/separator"
 import { SidebarTrigger } from "../ui/sidebar"
+
+// The white header and its portalled menus need the same local light palette.
+const headerSurfaceClassName =
+  "bg-white text-slate-900 [--background:var(--color-white)] [--foreground:var(--color-slate-900)] [--muted:var(--color-slate-100)] [--muted-foreground:var(--color-slate-600)] [--accent:var(--color-slate-100)] [--accent-foreground:var(--color-slate-900)] [--input:var(--color-slate-300)] [--border:var(--color-slate-200)] [--ring:var(--color-slate-600)]"
 
 const HeaderAdmin = () => {
   const navigate = useNavigate()
@@ -133,7 +138,12 @@ const HeaderAdmin = () => {
   }
 
   return (
-    <header className="sticky top-0 z-10 flex h-18 shrink-0 items-center justify-between gap-2 border-b bg-white px-4">
+    <header
+      className={cn(
+        "sticky top-0 z-10 flex h-18 shrink-0 items-center justify-between gap-2 border-b px-4",
+        headerSurfaceClassName
+      )}
+    >
       <div className="flex items-center gap-2">
         <SidebarTrigger className="-ml-1" />
         <Separator
@@ -143,7 +153,7 @@ const HeaderAdmin = () => {
       </div>
 
       <div className="flex items-center gap-3">
-        <LanguageSwitcher />
+        <LanguageSwitcher contentClassName={headerSurfaceClassName} />
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <Button variant="ghost" size="icon" className="relative h-8 w-8">
@@ -156,7 +166,10 @@ const HeaderAdmin = () => {
             </Button>
           </DropdownMenuTrigger>
 
-          <DropdownMenuContent align="end" className="w-96">
+          <DropdownMenuContent
+            align="end"
+            className={cn("w-96", headerSurfaceClassName)}
+          >
             <div className="flex items-center justify-between px-2 py-1.5">
               <div>
                 <p className="text-sm font-semibold text-slate-900">
@@ -271,7 +284,10 @@ const HeaderAdmin = () => {
             </Button>
           </DropdownMenuTrigger>
 
-          <DropdownMenuContent align="end" className="w-52">
+          <DropdownMenuContent
+            align="end"
+            className={cn("w-52", headerSurfaceClassName)}
+          >
             <DropdownMenuLabel className="font-normal">
               <div className="flex items-center justify-between gap-0.5">
                 <p className="text-sm font-semibold">{user?.name || "Admin"}</p>
@@ -296,7 +312,7 @@ const HeaderAdmin = () => {
             <DropdownMenuSeparator />
 
             <DropdownMenuItem
-              className="text-red-600 focus:text-red-600"
+              className="text-red-700 focus:text-red-700"
               disabled={logoutPending}
               onClick={() => {
                 void handleLogout()

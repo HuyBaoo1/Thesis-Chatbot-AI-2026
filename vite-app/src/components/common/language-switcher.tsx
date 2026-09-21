@@ -8,7 +8,11 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 
-const LanguageSwitcher = () => {
+const LanguageSwitcher = ({
+  contentClassName,
+}: {
+  contentClassName?: string
+}) => {
   const { i18n } = useTranslation()
 
   const languages = [
@@ -23,7 +27,7 @@ const LanguageSwitcher = () => {
           <Globe className="h-4 w-4" />
         </Button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent align="end">
+      <DropdownMenuContent align="end" className={contentClassName}>
         {languages.map((lang) => (
           <DropdownMenuItem
             key={lang.code}
