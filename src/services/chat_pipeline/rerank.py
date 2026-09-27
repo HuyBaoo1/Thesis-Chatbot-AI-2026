@@ -145,6 +145,14 @@ def _select_final_context_evidence(
     rescored: list[dict[str, Any]],
     keep: int,
 ) -> list[dict[str, Any]]:
+    explicit_source_evidence = _select_explicit_legal_document_evidence(
+        query_text=query_text,
+        rescored=rescored,
+        keep=keep,
+    )
+    if explicit_source_evidence:
+        return explicit_source_evidence
+
     selected = rescored[:keep]
     if not _is_admission_methods_list_query(query_text):
         return selected
@@ -165,6 +173,78 @@ def _select_final_context_evidence(
         if _candidate_key(item) != support_key
     ]
     return [support, *remaining][:keep]
+
+
+def _select_explicit_legal_document_evidence(
+    *,
+    query_text: str,
+    rescored: list[dict[str, Any]],
+    keep: int,
+) -> list[dict[str, Any]]:
+    reference = _extract_legal_document_reference(query_text)
+    if reference is None:
+        return []
+
+    matched_sources = {
+        _candidate_source_key(item)
+        for item in rescored
+        if _candidate_declares_legal_document(item, reference)
+    }
+    matched_sources.discard("")
+    if not matched_sources:
+        return []
+
+    return [
+        item
+        for item in rescored
+        if _candidate_source_key(item) in matched_sources
+    ][:keep]
+
+
+def _extract_legal_document_reference(value: str) -> tuple[str, int, int] | None:
+    normalized = _normalize_for_scope(value)
+    match = re.search(
+        r"\b(thong tu|quyet dinh|nghi dinh)\s+(?:so\s+)?0*(\d{1,4})\s+(\d{4})\b",
+        normalized,
+    )
+    if match is None:
+        return None
+    return match.group(1), int(match.group(2)), int(match.group(3))
+
+
+def _candidate_declares_legal_document(
+    item: dict[str, Any],
+    reference: tuple[str, int, int],
+) -> bool:
+    document_type, number, year = reference
+    metadata = _normalize_for_scope(
+        " ".join(
+            str(item.get(field) or "")
+            for field in ("title", "source", "source_url", "canonical_url")
+        )
+    )
+    opening = _normalize_for_scope(str(item.get("content") or "")[:800])
+    number_year = rf"0*{number}\s+{year}"
+
+    if document_type in metadata and re.search(rf"\b{number_year}\b", metadata):
+        return True
+    if document_type not in opening:
+        return False
+    return bool(
+        re.search(rf"\bso\s+{number_year}\b", opening)
+        or re.search(
+            rf"\b{number_year}\b.{{0,240}}\b{re.escape(document_type)}\b",
+            opening,
+        )
+    )
+
+
+def _candidate_source_key(item: dict[str, Any]) -> str:
+    for field in ("source", "canonical_url", "source_url", "title"):
+        value = _normalize_for_scope(item.get(field))
+        if value:
+            return value
+    return ""
 
 
 def _is_admission_methods_list_query(value: str) -> bool:
