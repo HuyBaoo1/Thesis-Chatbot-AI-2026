@@ -204,11 +204,20 @@ def _can_store(state: PipelineState) -> bool:
         return False
     if state.confidence < 0.55:
         return False
+    if _is_insufficient_context_answer(answer):
+        return False
     if answer.startswith(_NON_CACHEABLE_ANSWER_PREFIXES):
         return False
     if not _has_semantic_cache_compatible_evidence(state):
         return False
     return True
+
+
+def _is_insufficient_context_answer(answer: str) -> bool:
+    normalized = _normalize_scope_text(answer)
+    return normalized.startswith(
+        "toi chua tim thay thong tin nay trong kho du lieu chinh thuc"
+    )
 
 
 def _has_semantic_cache_compatible_evidence(state: PipelineState) -> bool:

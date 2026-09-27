@@ -20,6 +20,21 @@ SYNONYM_GROUPS = [
     {"tin chi", "credit"},
     {"diem", "gpa", "score", "grade"},
     {"tieng anh", "english", "ielts", "toefl"},
+    {
+        "xe bus",
+        "xe buyt",
+        "xe dua don",
+        "bus fee",
+        "bus fees",
+        "bus service",
+        "bus service fees",
+        "daily bus",
+        "weekly bus",
+        "one-way ticket",
+        "round-trip ticket",
+        "weekend bus",
+        "shuttle bus",
+    },
 ]
 
 

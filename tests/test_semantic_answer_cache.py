@@ -4,6 +4,7 @@ from types import SimpleNamespace
 import pytest
 
 from src.services.chat_pipeline import semantic_answer_cache as cache
+from src.services.chat_pipeline.prompts import insufficient_context_answer
 from src.services.chat_pipeline.types import PipelineState
 
 
@@ -254,6 +255,15 @@ def test_language_compatible_answer_is_stored_with_cache_scope_metadata(cache_en
     assert stored_payload["answer_language"] == "en"
     assert stored_payload["query_semantics"] == "admission_methods"
     assert len(cache_env.redis.store) == 1
+
+
+def test_insufficient_context_fallback_is_not_stored(cache_env):
+    state = _tuition_state(answer=insufficient_context_answer())
+
+    cache.run_semantic_answer_cache_store(state)
+
+    assert cache_env.qdrant.upserts == []
+    assert cache_env.redis.store == {}
 
 
 def _methods_state(answer: str = "") -> PipelineState:
