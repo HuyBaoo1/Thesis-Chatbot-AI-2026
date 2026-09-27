@@ -3,6 +3,8 @@ import unicodedata
 from src.services.chat_pipeline.types import PipelineState
 
 
+SCORE_SYNONYM_GROUP = {"diem", "gpa", "score", "grade"}
+
 SYNONYM_GROUPS = [
     {"hoc phi", "tuition", "chi phi dao tao", "fee"},
     {"hoc bong", "scholarship", "financial aid", "ho tro tai chinh"},
@@ -18,7 +20,7 @@ SYNONYM_GROUPS = [
     {"thac si", "master", "msc", "mba"},
     {"tien si", "phd", "doctorate"},
     {"tin chi", "credit"},
-    {"diem", "gpa", "score", "grade"},
+    SCORE_SYNONYM_GROUP,
     {"tieng anh", "english", "ielts", "toefl"},
 ]
 
@@ -50,8 +52,13 @@ def expand_query(query: str) -> str:
     normalized = _normalize_for_matching(query)
     expanded_terms: set[str] = set()
     bus_service_terms = _bus_service_expansion_terms(normalized)
+    has_bonus_points_term = any(
+        term in normalized for term in ["diem cong", "bonus point", "bonus points"]
+    )
 
     for group in SYNONYM_GROUPS:
+        if group is SCORE_SYNONYM_GROUP and has_bonus_points_term:
+            continue
         if any(term in normalized for term in group):
             expanded_terms.update(group)
 

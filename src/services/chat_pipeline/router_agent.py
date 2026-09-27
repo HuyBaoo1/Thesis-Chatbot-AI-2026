@@ -737,11 +737,18 @@ def _should_clarify_english_requirement_query(normalized: str) -> bool:
 
 
 def _should_clarify_application_process_query(normalized: str) -> bool:
-    if not any(token in normalized for token in ["apply", "ung tuyen", "nop ho so", "application process"]):
+    if not any(
+        _contains_phrase(normalized, phrase)
+        for phrase in ["apply", "ung tuyen", "nop ho so", "application process"]
+    ):
         return False
     if any(token in normalized for token in ["portal", "cong thong tin", "link", "url"]):
         return False
     return not _has_scope_marker(normalized)
+
+
+def _contains_phrase(normalized: str, phrase: str) -> bool:
+    return re.search(rf"(?<!\w){re.escape(phrase)}(?!\w)", normalized) is not None
 
 
 def _has_scope_marker(normalized: str) -> bool:
