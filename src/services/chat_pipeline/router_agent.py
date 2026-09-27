@@ -1,5 +1,6 @@
 import json
 import logging
+import re
 import unicodedata
 from typing import Any
 
@@ -41,6 +42,9 @@ def run_router_agent(state: PipelineState) -> PipelineState:
         state.clarification_question = "Bạn muốn hỏi thông tin tuyển sinh gì?"
         state.rewrite_query = False
         state.resolved_query = ""
+        return state
+
+    if _deterministic_bus_service_route(state, original_query=original_query):
         return state
 
     if _looks_like_named_scholarship_query(original_query):
@@ -365,6 +369,140 @@ def _deterministic_material_ambiguity_route(
         return True
 
     return False
+
+
+def _deterministic_bus_service_route(
+    state: PipelineState,
+    *,
+    original_query: str,
+) -> bool:
+    normalized = _normalize_for_matching(original_query)
+    recent_bus_query = _recent_bus_service_query(state.chat_history)
+
+    if not _has_bus_service_topic(normalized):
+        if not (recent_bus_query and _has_bus_service_scope(normalized)):
+            return False
+
+        state.resolved_query = _normalize_query(f"{recent_bus_query} {original_query}")
+        _route_to_retrieve(
+            state,
+            intent="general_question",
+            query=state.resolved_query,
+            rewrite=True,
+        )
+        _log_deterministic_route(state)
+        return True
+
+    if _has_bus_service_scope(normalized) or _has_bus_service_detail(normalized):
+        return False
+
+    _route_to_clarify(
+        state,
+        original_query,
+        _bus_service_clarification_question(normalized),
+    )
+    _log_deterministic_route(state)
+    return True
+
+
+def _has_bus_service_topic(normalized: str) -> bool:
+    phrase_markers = [
+        "xe bus",
+        "xe buyt",
+        "xe dua don",
+        "ve xe",
+        "phi xe",
+        "dich vu xe",
+        "bus fee",
+        "bus service",
+        "shuttle bus",
+    ]
+    return any(marker in normalized for marker in phrase_markers) or bool(
+        re.search(r"(?<!\w)bus(?!\w)", normalized)
+    )
+
+
+def _has_bus_service_scope(normalized: str) -> bool:
+    scope_markers = [
+        "hang ngay",
+        "moi ngay",
+        "daily",
+        "hang tuan",
+        "theo tuan",
+        "weekly",
+        "mot chieu",
+        "one way",
+        "one-way",
+        "khu hoi",
+        "round trip",
+        "round-trip",
+        "cuoi tuan",
+        "weekend",
+        "thac si",
+        "master",
+        "mba",
+        "msc",
+    ]
+    return any(marker in normalized for marker in scope_markers)
+
+
+def _has_bus_service_detail(normalized: str) -> bool:
+    detail_markers = [
+        "thanh toan",
+        "chuyen khoan",
+        "payment",
+        "pay",
+        "hoan phi",
+        "hoan tien",
+        "refund",
+        "lien he",
+        "contact",
+        "email",
+        "hotline",
+        "dang ky",
+        "register",
+        "registration",
+        "lich chay",
+        "gio chay",
+        "schedule",
+        "lo trinh",
+        "route",
+        "tat ca",
+        "toan bo",
+        "day du",
+        "all fares",
+        "all bus",
+        "list of",
+    ]
+    return any(marker in normalized for marker in detail_markers)
+
+
+def _recent_bus_service_query(history: list[dict[str, Any]]) -> str | None:
+    for item in reversed(history[-6:]):
+        if str(item.get("role") or "").lower() != "user":
+            continue
+        content = str(item.get("content") or "").strip()
+        if _has_bus_service_topic(_normalize_for_matching(content)):
+            return content
+    return None
+
+
+def _bus_service_clarification_question(normalized: str) -> str:
+    english_markers = ["what", "which", "how", "bus fee", "bus service", "ticket"]
+    vietnamese_markers = ["xe", "phi", "ve", "cho toi", "cho minh", "bao nhieu"]
+    use_english = (
+        sum(marker in normalized for marker in english_markers)
+        > sum(marker in normalized for marker in vietnamese_markers)
+    )
+    if use_english:
+        return (
+            "Would you like information about daily or weekly student bus service, "
+            "one-way/round-trip tickets, or weekend bus service for master's students?"
+        )
+    return (
+        "Bạn muốn hỏi về dịch vụ xe cho sinh viên (hằng ngày, hằng tuần hoặc vé một chiều/khứ hồi) "
+        "hay xe cuối tuần dành cho học viên thạc sĩ?"
+    )
 
 
 def _log_deterministic_route(state: PipelineState) -> None:

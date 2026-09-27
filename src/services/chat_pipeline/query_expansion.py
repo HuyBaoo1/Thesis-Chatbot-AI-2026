@@ -20,21 +20,26 @@ SYNONYM_GROUPS = [
     {"tin chi", "credit"},
     {"diem", "gpa", "score", "grade"},
     {"tieng anh", "english", "ielts", "toefl"},
-    {
-        "xe bus",
-        "xe buyt",
-        "xe dua don",
-        "bus fee",
-        "bus fees",
-        "bus service",
-        "bus service fees",
-        "daily bus",
-        "weekly bus",
-        "one-way ticket",
-        "round-trip ticket",
-        "weekend bus",
-        "shuttle bus",
-    },
+]
+
+BUS_SERVICE_CORE_TERMS = {
+    "bus service fees",
+    "xe bus",
+    "xe buyt",
+    "xe dua don",
+}
+
+BUS_SERVICE_SCOPE_GROUPS = [
+    ({"hang ngay", "moi ngay", "daily"}, {"daily bus"}),
+    ({"hang tuan", "theo tuan", "weekly"}, {"weekly bus"}),
+    (
+        {"mot chieu", "one way", "khu hoi", "round trip"},
+        {"one-way ticket", "round-trip ticket"},
+    ),
+    (
+        {"cuoi tuan", "weekend", "thac si", "master", "mba", "msc"},
+        {"weekend bus", "master bus service"},
+    ),
 ]
 
 
@@ -44,16 +49,19 @@ def expand_query(query: str) -> str:
 
     normalized = _normalize_for_matching(query)
     expanded_terms: set[str] = set()
+    bus_service_terms = _bus_service_expansion_terms(normalized)
 
     for group in SYNONYM_GROUPS:
         if any(term in normalized for term in group):
             expanded_terms.update(group)
 
+    expanded_terms.update(bus_service_terms)
     expanded_terms.difference_update(set(normalized.split()))
     if not expanded_terms:
         return query
 
-    return f"{query} | {' '.join(sorted(expanded_terms)[:8])}"
+    ordered_terms = sorted(bus_service_terms) + sorted(expanded_terms - bus_service_terms)
+    return f"{query} | {' '.join(ordered_terms[:8])}"
 
 
 def expand_query_state(state: PipelineState) -> PipelineState:
@@ -82,3 +90,45 @@ def _normalize_for_matching(value: str | None) -> str:
     normalized = normalized.replace("_", " ").replace("-", " ").replace("/", " ")
     normalized = normalized.lower().strip()
     return " ".join(normalized.split())
+
+
+def _bus_service_expansion_terms(normalized: str) -> set[str]:
+    topic_phrases = ["xe bus", "xe buyt", "xe dua don", "ve xe", "phi xe", "dich vu xe"]
+    has_bus_topic = "bus" in normalized.split() or any(
+        phrase in normalized for phrase in topic_phrases
+    )
+    if not has_bus_topic:
+        return set()
+
+    scoped_terms: set[str] = set()
+    for markers, aliases in BUS_SERVICE_SCOPE_GROUPS:
+        if any(marker in normalized for marker in markers):
+            scoped_terms.update(aliases)
+
+    if scoped_terms:
+        return BUS_SERVICE_CORE_TERMS | scoped_terms
+
+    detail_markers = [
+        "thanh toan",
+        "payment",
+        "hoan phi",
+        "refund",
+        "lien he",
+        "contact",
+        "dang ky",
+        "register",
+        "lich chay",
+        "schedule",
+        "lo trinh",
+        "route",
+    ]
+    if any(marker in normalized for marker in detail_markers):
+        return set(BUS_SERVICE_CORE_TERMS)
+
+    all_scope_terms = {
+        alias
+        for _, aliases in BUS_SERVICE_SCOPE_GROUPS
+        for alias in aliases
+        if alias != "master bus service"
+    }
+    return BUS_SERVICE_CORE_TERMS | all_scope_terms
