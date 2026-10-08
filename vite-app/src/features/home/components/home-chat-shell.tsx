@@ -8,6 +8,7 @@ import { requestConversationStaffContact } from "@/api/chat-api"
 import { Button } from "@/components/ui/button"
 import ChatCitations from "@/features/chat/components/chat-citations"
 import HomeLeadFormDialog from "@/features/home/components/home-lead-form-dialog"
+import HomeVoiceInputButton from "@/features/home/components/home-voice-input-button"
 import useChat from "@/hooks/use-chat"
 import { formatDateTime } from "@/lib/date"
 import type { InitLeadSchema } from "@/schemas/chat-schema"
@@ -43,6 +44,7 @@ const HomeChatShell = () => {
 
   const messagesContainerRef = useRef<HTMLDivElement | null>(null)
   const messagesEndRef = useRef<HTMLDivElement | null>(null)
+  const composerRef = useRef<HTMLTextAreaElement | null>(null)
   const previousScrollHeightRef = useRef<number | null>(null)
   const shouldPreserveScrollRef = useRef(false)
   const hasInitializedScrollRef = useRef(false)
@@ -365,6 +367,18 @@ const HomeChatShell = () => {
       leadData.conversation_id,
       leadData.conversation_token
     )
+  }
+
+  const handleVoiceTranscript = (transcript: string) => {
+    setDraftMessage(transcript)
+
+    requestAnimationFrame(() => {
+      composerRef.current?.focus()
+      composerRef.current?.setSelectionRange(
+        transcript.length,
+        transcript.length
+      )
+    })
   }
 
   const handleLeadSubmit = async (values: InitLeadSchema) => {
@@ -707,6 +721,7 @@ const HomeChatShell = () => {
         <div className="border-t border-slate-100 bg-white/95 px-4 py-4 sm:px-5">
           <div className="overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-[0_4px_16px_-6px_rgba(15,23,42,0.1),0_0_0_1px_rgba(255,255,255,0.9)_inset] transition-shadow focus-within:border-slate-300 focus-within:shadow-[0_6px_20px_-6px_rgba(15,23,42,0.14)]">
             <textarea
+              ref={composerRef}
               rows={2}
               value={draftMessage}
               placeholder={t("chat.placeholder")}
@@ -755,6 +770,11 @@ const HomeChatShell = () => {
                           : t("chat.requestCounselor")}
                   </Button>
                 ) : null}
+
+                <HomeVoiceInputButton
+                  disabled={chatPending || initLeadPending}
+                  onTranscript={handleVoiceTranscript}
+                />
 
                 <Button
                   type="button"
