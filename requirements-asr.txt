@@ -1,0 +1,8 @@
+-r requirements.txt
+
+# Optional local speech-to-text runtime. The converted model is configured
+# separately with ASR_MODEL_PATH and is not stored in the repository.
+faster-whisper==1.2.1
+ctranslate2==4.8.2
+# faster-whisper 1.2.1 passes metadata_errors to av.open; PyAV 19 removed it.
+av==18.1.0

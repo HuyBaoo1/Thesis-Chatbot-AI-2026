@@ -37,6 +37,14 @@ class Settings(BaseSettings):
     OCR_TEMP_DIR: str = Field(default="/app/data/runtime/admissions-ocr", description="Temp directory for OCR files")
     OCR_TESSERACT_LANG: str = Field(default="vie+eng", description="Tesseract language pack order for local OCR")
 
+    # Speech-to-text (optional prototype)
+    ASR_ENABLED: bool = False
+    ASR_MODEL_PATH: str = ""
+    ASR_MAX_UPLOAD_BYTES: int = Field(default=5 * 1024 * 1024, ge=1024)
+    ASR_MAX_DURATION_SECONDS: float = Field(default=15.0, gt=0, le=60)
+    ASR_CPU_THREADS: int = Field(default=4, ge=1, le=16)
+    ASR_RATE_LIMIT_PER_MINUTE: int = Field(default=6, ge=0, le=60)
+
     EMBEDDING_MODEL: str = "text-embedding-3-small"
     EMBEDDING_DIMENSION: int = 1536
     OPENAI_CHAT_MODEL: str = "gpt-4o-mini"

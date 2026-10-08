@@ -3,6 +3,7 @@ from fastapi import APIRouter
 from src.api.routers import (
     admin_analytics,
     application,
+    asr,
     auth,
     chat,
     knowledge_chunk,
@@ -21,6 +22,7 @@ from src.api.routers import (
 
 api_router = APIRouter(prefix="/api")
 api_router.include_router(auth.router)
+api_router.include_router(asr.router)
 api_router.include_router(chat.router)
 api_router.include_router(admin_analytics.router)
 api_router.include_router(lead.router)
